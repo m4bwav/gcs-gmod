@@ -19,8 +19,10 @@ Updated: 2026-11-23
 - Surfaces v2 (stock HL2 only): walls stone/stonewall024a (cream ashlar), floor tile/tilefloor010a (warm marble squares), vault plaster/plasterwall041a (pale green-blue stand-in until the zodiac texture), trim stone/stonewall033a. Lights halved again. shots/20261123-1716 reads as Grand Central. tools/texsheet.py makes contact sheets of stock materials (`python tools/texsheet.py out.jpg <regex>`, needs pip srctools); sheets in shots/tex/.
 
 ## Next
-1. Measured references: HABS drawings for the vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py constants.
-3. Chandeliers, ticket-window departure board, flags; then the zodiac ceiling texture (comfyui-gen, no Krea 2).
+1. Per Mark's directive: gather licensed/public-domain photos of the Main Concourse (Wikimedia Commons, HABS) into refs/ with sources; shoot the matching viewpoints and build side-by-side sheets; replace the stock stand-ins with photo-derived textures (comfyui-gen allowed, no Krea 2).
+2. Window openings render flat grey (TEX_GLOW panel): mullion grid and sky-blue glow. Clock block is a grey box.
+3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
+4. Chandeliers (polywright), ticket-window departure board, flags; then the zodiac ceiling.
 5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
