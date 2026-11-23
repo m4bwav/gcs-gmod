@@ -24,8 +24,10 @@ Updated: 2026-11-23
 
 - Geometry v3: end windows tall (top SPRING+16 ft) with arched heads (triangle-fan spandrels), dark glass; great end arch soffit (6 ft deep, gold inner edge) following the vault; pilasters 14 ft wide x 5 ft deep; floor texture scale 0.15. shots/20261123-1743 (compare.jpg).
 
+- Marble floor: tools/make_floor.py writes a procedural 512 px VTF (2x2 rose-grey slabs, veins, joints; colour from the GCT_east_windows floor) to src/materials/gcs/floor_marble.vtf, gcs/floor uses it with a faint cubemap sheen; scale 0.1875 = 4 ft slabs. Checkering gone: shots/20261123-1747.
+
 ## Next
-1. Floor still too checkered (needs a photo-derived marble texture). Then photo-derived textures proper (marble floor, ashlar, zodiac ceiling; comfyui-gen, no Krea 2) and recompare.
+1. Photo-derived textures for walls (ashlar with joints and warmer honey tone) and the zodiac ceiling (comfyui-gen, no Krea 2; or procedural like make_floor.py), then recompare.
 2. Clock block is a grey box (booth clock model, polywright).
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
 4. Chandeliers (polywright), ticket-window departure board, flags; then the zodiac ceiling.

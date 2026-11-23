@@ -43,7 +43,7 @@ def dot(a, b): return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]
 
 
 # Texture scale per material (default 0.25); smaller floor tiles read closer to the photos.
-SCALE = {TEX_FLOOR: 0.15}
+SCALE = {TEX_FLOOR: 0.1875}   # 512 px texture = 2x2 slabs of 4 ft
 
 
 def axes_for(n, s=0.25):
