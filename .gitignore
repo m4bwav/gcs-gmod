@@ -1,0 +1,5 @@
+src/*.bsp
+src/*.log
+src/*.prt
+src/*.lin
+src/*.vmx
