@@ -1,0 +1,10 @@
+materials/gcs/floor.vmt
+D:\m4bwa\Claude\Projects\Ai\gcs-gmod-refs\src\materials\gcs\floor.vmt
+materials/gcs/trim.vmt
+D:\m4bwa\Claude\Projects\Ai\gcs-gmod-refs\src\materials\gcs\trim.vmt
+materials/gcs/vault.vmt
+D:\m4bwa\Claude\Projects\Ai\gcs-gmod-refs\src\materials\gcs\vault.vmt
+materials/gcs/wall.vmt
+D:\m4bwa\Claude\Projects\Ai\gcs-gmod-refs\src\materials\gcs\wall.vmt
+materials/gcs/window_glow.vmt
+D:\m4bwa\Claude\Projects\Ai\gcs-gmod-refs\src\materials\gcs\window_glow.vmt

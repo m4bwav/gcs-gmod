@@ -9,7 +9,7 @@ echo 4000 > "$G/steam_appid.txt"
 cp tools/lua/gcs_shots.lua "$G/garrysmod/lua/autorun/client/gcs_shots.lua"
 mkdir -p "$D"; rm -rf "$D/gcs_shots"; echo go > "$D/gcs_shots_go.txt"
 "$G/gmod.exe" -windowed -w 1600 -h 900 -novid -nojoy -condebug +map gm_grand_central &
-for n in $(seq 1 30); do [ -f "$D/gcs_shots/done.txt" ] && break; sleep 5; done
+for n in $(seq 1 60); do [ -f "$D/gcs_shots/done.txt" ] && break; sleep 5; done
 sleep 5
 PID=$(python "$QW" pid gmod.exe 2>/dev/null | python -c "import json,sys; m=json.load(sys.stdin)[\"matches\"]; print(m[0].get(\"pid\",\"\") if m else \"\")")
 [ -n "$PID" ] && taskkill //PID "$PID" //F

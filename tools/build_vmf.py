@@ -16,11 +16,12 @@ WALL = 64
 BALC_Z = 26 * FT                            # balcony floor height
 BALC_D = 22 * FT                            # balcony depth from the end wall
 
-TEX_FLOOR = "tile/tilefloor010a"
-TEX_WALL = "stone/stonewall024a"
-TEX_VAULT = "plaster/plasterwall041a"
-TEX_TRIM = "stone/stonewall033a"
-TEX_GLOW = "lights/white001"
+# src/materials/gcs: stock HL2 textures tinted to colours sampled from refs/photos.
+TEX_FLOOR = "gcs/floor"
+TEX_WALL = "gcs/wall"
+TEX_VAULT = "gcs/vault"
+TEX_TRIM = "gcs/trim"
+TEX_GLOW = "gcs/window_glow"
 NODRAW = "tools/toolsnodraw"
 
 _id = [0]

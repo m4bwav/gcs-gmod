@@ -18,9 +18,11 @@ Updated: 2026-11-23
 
 - Surfaces v2 (stock HL2 only): walls stone/stonewall024a (cream ashlar), floor tile/tilefloor010a (warm marble squares), vault plaster/plasterwall041a (pale green-blue stand-in until the zodiac texture), trim stone/stonewall033a. Lights halved again. shots/20261123-1716 reads as Grand Central. tools/texsheet.py makes contact sheets of stock materials (`python tools/texsheet.py out.jpg <regex>`, needs pip srctools); sheets in shots/tex/.
 
+- Photo matching: 10 Commons photos in refs/photos (tools/fetch_refs.py, credits in refs/SOURCES.md, CC BY/BY-SA need Workshop attribution). Custom materials src/materials/gcs/*.vmt tint stock HL2 textures to photo-sampled colours; compile.sh copies them to garrysmod/materials and packs them into the BSP with bspzip. tools/compare.py <shotdir> writes compare.jpg (shot beside photo per viewpoint). shots/20261123-1731/compare.jpg: colours now read alike (teal vault, honey walls, pale floor, sky-blue windows).
+
 ## Next
-1. Per Mark's directive: gather licensed/public-domain photos of the Main Concourse (Wikimedia Commons, HABS) into refs/ with sources; shoot the matching viewpoints and build side-by-side sheets; replace the stock stand-ins with photo-derived textures (comfyui-gen allowed, no Krea 2).
-2. Window openings render flat grey (TEX_GLOW panel): mullion grid and sky-blue glow. Clock block is a grey box.
+1. Geometry gaps the compare sheet shows: wall pilasters and deep window bays along the long walls, gilded cornice band at vault springline, lunette (half-moon) clerestory windows cut into the vault, mullion grid in the end windows, flatter vault. Then photo-derived textures proper (marble floor, ashlar, zodiac ceiling; comfyui-gen, no Krea 2) and recompare.
+2. Clock block is a grey box (booth clock model, polywright).
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
 4. Chandeliers (polywright), ticket-window departure board, flags; then the zodiac ceiling.
 5. Hammer++ for hand checks (optional).
