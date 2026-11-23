@@ -55,13 +55,13 @@ def axes_for(n, s=0.25):
     return "[1 0 0 0] %g" % s, "[0 0 -1 0] %g" % s
 
 
-def side(pts, n, tex):
+def side(pts, n, tex, uv=None):
     p1, p2, p3 = pts[0], pts[1], pts[2]
     # Source plane winding: outward normal = (p3-p1) x (p2-p1)
     if dot(cross(sub(p3, p1), sub(p2, p1)), n) < 0:
         p2, p3 = p3, p2
     f = lambda p: "(%g %g %g)" % p
-    u, v = axes_for(n, SCALE.get(tex, 0.25))
+    u, v = uv or axes_for(n, SCALE.get(tex, 0.25))
     return ('\tside\n\t{\n\t\t"id" "%d"\n\t\t"plane" "%s %s %s"\n\t\t"material" "%s"\n'
             '\t\t"uaxis" "%s"\n\t\t"vaxis" "%s"\n\t\t"rotation" "0"\n\t\t"lightmapscale" "16"\n'
             '\t\t"smoothing_groups" "0"\n\t}\n') % (nid(), f(p1), f(p2), f(p3), tex, u, v)
@@ -79,14 +79,15 @@ def prism(poly, z0, z1, tex, caps=None):
     return "solid\n{\n\t\"id\" \"%d\"\n%s}\n" % (nid(), s)
 
 
-def xprism(poly, x0, x1, tex):
-    """Convex polygon in yz (counter-clockwise seen from +x), extruded x0..x1."""
+def xprism(poly, x0, x1, tex, uvs=None):
+    """Convex polygon in yz (counter-clockwise seen from +x), extruded x0..x1.
+    uvs: optional {edge index: (uaxis, vaxis)} for the face on that edge."""
     s = side([(x1, y, z) for y, z in poly], (1, 0, 0), tex)
     s += side([(x0, y, z) for y, z in poly], (-1, 0, 0), tex)
     for i in range(len(poly)):
         a, b = poly[i], poly[(i+1) % len(poly)]
         n = (0, b[1]-a[1], -(b[0]-a[0]))
-        s += side([(x0, a[0], a[1]), (x0, b[0], b[1]), (x1, b[0], b[1])], n, tex)
+        s += side([(x0, a[0], a[1]), (x0, b[0], b[1]), (x1, b[0], b[1])], n, tex, (uvs or {}).get(i))
     return "solid\n{\n\t\"id\" \"%d\"\n%s}\n" % (nid(), s)
 
 
@@ -146,13 +147,23 @@ def build():
     W(box(-HX, HY, -WALL, HX, HY+WALL, SPRING, TEX_WALL))
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
+    # The inner faces carry the zodiac mural (2048x1024) once: u along x, v along the arc.
     N = 20
+    r0, r1 = 0, WALL
+    p = lambda r, a: (round((HY+r)*math.cos(a)), round(SPRING + (VRISE+r)*math.sin(a)))
+    arc = [p(r0, math.pi*i/N) for i in range(N+1)]
+    seg = [math.dist(arc[i], arc[i+1]) for i in range(N)]
+    su, sv = 2*HX/2048, sum(seg)/1024
+    s0 = 0
     for i in range(N):
         a0, a1 = math.pi*i/N, math.pi*(i+1)/N
-        r0, r1 = 0, WALL
-        p = lambda r, a: (round((HY+r)*math.cos(a)), round(SPRING + (VRISE+r)*math.sin(a)))
         poly = [p(r1, a0), p(r1, a1), p(r0, a1), p(r0, a0)]
-        W(xprism(poly, -HX, HX, TEX_VAULT))
+        q0, q1 = arc[i], arc[i+1]
+        ty, tz = (q1[0]-q0[0])/seg[i], (q1[1]-q0[1])/seg[i]
+        uv = ("[1 0 0 %g] %g" % (HX/su, su),
+              "[0 %g %g %g] %g" % (ty, tz, (s0 - (q0[0]*ty + q0[1]*tz))/sv, sv))
+        W(xprism(poly, -HX, HX, TEX_VAULT, {2: uv}))
+        s0 += seg[i]
     # Corners behind the vault so the wall tops are solid.
     W(box(-HX, -HY-WALL, SPRING, HX, -HY, SPRING+8, TEX_TRIM))
     W(box(-HX, HY, SPRING, HX, HY+WALL, SPRING+8, TEX_TRIM))

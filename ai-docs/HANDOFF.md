@@ -28,14 +28,17 @@ Updated: 2026-11-23
 
 - Walls and vault: tools/make_walls.py writes procedural wall_ashlar.vtf (honey-cream limestone, 8 staggered courses x 3 blocks, light joints) and vault_sky.vtf (dark teal, gold stars); gcs/wall and gcs/vault use them. shots/20261123-1753 compare: walls and vault now read like the photos.
 
+- Zodiac vault: tools/make_vault.py writes vault_mural.vtf (2048x1024, green field, Milky Way, ecliptic and equator as double gold lines with ticks, 12 stick-figure constellations); build_vmf.py maps it once over the vault's inner faces with per-segment UVs (xprism uvs=). gcs/vault uses it. shots/20261123-1757: vault reads like the photo.
+
 ## Next
-1. Zodiac constellation figures and the gold band lines on the vault (comfyui-gen line art, no Krea 2, or procedural); lunettes need sculpted look; the 3-block ashlar has a 2 px seam at the tile wrap (512/3), switch to 4 blocks if visible.
+1. Lunettes need the cream sculpted surround (photo: Flag_Ceiling); the 3-block ashlar has a 2 px seam at the tile wrap (512/3), switch to 4 blocks if visible; zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines).
 2. Clock block is a grey box (booth clock model, polywright).
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
 4. Chandeliers (polywright), ticket-window departure board, flags; then the zodiac ceiling.
 5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
+- Zodiac constellations are simplified stick figures, not the real ceiling's figure drawings; band curves are stylised sinusoids.
 - Vault rise 40 ft, estimated from photos (check against the HABS section).
 - Stairs placed at both ends with 12 u risers / 18 u treads.
 - Light levels (after surfaces v2): window point 45, window spot 225, booth 25, chandeliers 18, vault fill 10.
