@@ -1,6 +1,5 @@
 "LightmappedGeneric"
 {
-	"$basetexture" "stone/stonewall024a"
-	"$color" "[1 0.92 0.95]"
+	"$basetexture" "gcs/wall_ashlar"
 	"$surfaceprop" "stone"
 }

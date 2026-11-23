@@ -10,3 +10,4 @@
 - 2026-11-23: Geometry v2 (flat vault, bays, pilasters, cornice, lunettes, mullions) compiled clean; shots/20261123-1737. Lunettes are vertical half-discs standing on the cornice and poking through the vault, so no CSG cut is needed. Python patches containing backslash-n must be written with the Write tool (Bash heredoc hook refuses them).
 - 2026-11-23: Geometry v3 (arched end windows, end arch soffit, deeper pilasters, smaller floor tiles) compiled clean; shots/20261123-1743. Repo has no origin: worktree from local main.
 - 2026-11-23: Custom VTFs work: srctools.vtf.VTF(fmt=RGB888), copy_from RGBA8888 bytes, compute_mipmaps, save; compile.sh packs it with the VMTs. Procedural marble floor (tools/make_floor.py) replaced the checkered HL2 tile; shots/20261123-1747.
+- 2026-11-23: Procedural ashlar walls + starry teal vault (tools/make_walls.py); first try (4 courses, orange) too saturated and blocky, 8x3 cream-honey matches photos (shots/20261123-1753).

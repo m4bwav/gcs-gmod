@@ -1,6 +1,5 @@
 "LightmappedGeneric"
 {
-	"$basetexture" "plaster/plasterwall041a"
-	"$color" "[0.3 0.62 0.52]"
+	"$basetexture" "gcs/vault_sky"
 	"$surfaceprop" "plaster"
 }

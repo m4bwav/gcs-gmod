@@ -26,8 +26,10 @@ Updated: 2026-11-23
 
 - Marble floor: tools/make_floor.py writes a procedural 512 px VTF (2x2 rose-grey slabs, veins, joints; colour from the GCT_east_windows floor) to src/materials/gcs/floor_marble.vtf, gcs/floor uses it with a faint cubemap sheen; scale 0.1875 = 4 ft slabs. Checkering gone: shots/20261123-1747.
 
+- Walls and vault: tools/make_walls.py writes procedural wall_ashlar.vtf (honey-cream limestone, 8 staggered courses x 3 blocks, light joints) and vault_sky.vtf (dark teal, gold stars); gcs/wall and gcs/vault use them. shots/20261123-1753 compare: walls and vault now read like the photos.
+
 ## Next
-1. Photo-derived textures for walls (ashlar with joints and warmer honey tone) and the zodiac ceiling (comfyui-gen, no Krea 2; or procedural like make_floor.py), then recompare.
+1. Zodiac constellation figures and the gold band lines on the vault (comfyui-gen line art, no Krea 2, or procedural); lunettes need sculpted look; the 3-block ashlar has a 2 px seam at the tile wrap (512/3), switch to 4 blocks if visible.
 2. Clock block is a grey box (booth clock model, polywright).
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
 4. Chandeliers (polywright), ticket-window departure board, flags; then the zodiac ceiling.
