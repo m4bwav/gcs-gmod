@@ -22,8 +22,10 @@ Updated: 2026-11-23
 
 - Geometry v2: vault is a flattened half-ellipse (VRISE 40 ft), 5 bays per long wall with pilasters, dark gridded bay windows (gcs/window_dim, gcs/mullion), gold cornice (gcs/gold) over a trim band at the springline, a framed lunette per bay, mullion grids in the end windows. shots/20261123-1737/compare.jpg and pair.jpg.
 
+- Geometry v3: end windows tall (top SPRING+16 ft) with arched heads (triangle-fan spandrels), dark glass; great end arch soffit (6 ft deep, gold inner edge) following the vault; pilasters 14 ft wide x 5 ft deep; floor texture scale 0.15. shots/20261123-1743 (compare.jpg).
+
 ## Next
-1. Remaining geometry gaps (pair.jpg): arched heads on the three end windows and the big end arch framing them, end-window glass darker like the bays, deeper pilasters and bay recesses, smaller and less checkered floor tiles. Then photo-derived textures proper (marble floor, ashlar, zodiac ceiling; comfyui-gen, no Krea 2) and recompare.
+1. Floor still too checkered (needs a photo-derived marble texture). Then photo-derived textures proper (marble floor, ashlar, zodiac ceiling; comfyui-gen, no Krea 2) and recompare.
 2. Clock block is a grey box (booth clock model, polywright).
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
 4. Chandeliers (polywright), ticket-window departure board, flags; then the zodiac ceiling.
