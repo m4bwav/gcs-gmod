@@ -1,0 +1,39 @@
+-- gm_grand_central screenshot rig. Runs only when data/gcs_shots_go.txt exists
+-- (tools/shots.sh writes it); captures each camera to data/gcs_shots/, then quits.
+if SERVER then return end
+if not file.Exists("gcs_shots_go.txt", "DATA") then return end
+if game.GetMap() ~= "gm_grand_central" then return end
+file.Delete("gcs_shots_go.txt")
+file.CreateDir("gcs_shots")
+
+local CAMS = {
+  { "west_balcony", Vector(-1500, 0, 400), Angle(5, 0, 0) },
+  { "floor_east",   Vector(-1200, -500, 72), Angle(-15, 20, 0) },
+  { "booth",        Vector(-500, 300, 120), Angle(0, -30, 0) },
+  { "vault_up",     Vector(0, 0, 72), Angle(-80, 0, 0) },
+  { "east_balcony", Vector(1500, 0, 400), Angle(5, 180, 0) },
+  { "stairs_west",  Vector(-700, -300, 72), Angle(-5, 160, 0) },
+}
+local i, cam, frames = 0, nil, 0
+
+hook.Add("CalcView", "gcs_shots", function()
+  if cam then return { origin = cam[2], angles = cam[3], fov = 90, drawviewer = false } end
+end)
+hook.Add("HUDShouldDraw", "gcs_shots", function() if cam then return false end end)
+hook.Add("PostRender", "gcs_shots", function()
+  if not cam then return end
+  frames = frames + 1
+  if frames < 90 then return end
+  local data = render.Capture({ format = "jpg", quality = 92, x = 0, y = 0, w = ScrW(), h = ScrH() })
+  file.Write("gcs_shots/" .. cam[1] .. ".jpg", data)
+  i, frames = i + 1, 0
+  cam = CAMS[i]
+  if not cam then
+    file.Write("gcs_shots/done.txt", "done")
+    timer.Simple(1, function() RunConsoleCommand("quit") end)
+  end
+end)
+timer.Simple(8, function()
+  RunConsoleCommand("mat_autoexposure_max", "1.5")
+  i = 1; cam = CAMS[1]
+end)

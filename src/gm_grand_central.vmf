@@ -8,7 +8,7 @@ versioninfo
 }
 world
 {
-	"id" "1382"
+	"id" "1383"
 	"mapversion" "1"
 	"classname" "worldspawn"
 	"skyname" "sky_day01_01"
@@ -3167,7 +3167,7 @@ entity
 {
 	"id" "267"
 	"classname" "light"
-	"_light" "255 240 215 900"
+	"_light" "255 240 215 260"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -3180,7 +3180,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 0 0"
 	"pitch" "-38"
-	"_light" "255 235 200 4000"
+	"_light" "255 235 200 1400"
 	"_inner_cone" "12"
 	"_cone" "22"
 	"_exponent" "1"
@@ -3193,7 +3193,7 @@ entity
 {
 	"id" "269"
 	"classname" "light"
-	"_light" "255 240 215 900"
+	"_light" "255 240 215 260"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -3206,7 +3206,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 0 0"
 	"pitch" "-38"
-	"_light" "255 235 200 4000"
+	"_light" "255 235 200 1400"
 	"_inner_cone" "12"
 	"_cone" "22"
 	"_exponent" "1"
@@ -3219,7 +3219,7 @@ entity
 {
 	"id" "271"
 	"classname" "light"
-	"_light" "255 240 215 900"
+	"_light" "255 240 215 260"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -3232,7 +3232,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 0 0"
 	"pitch" "-38"
-	"_light" "255 235 200 4000"
+	"_light" "255 235 200 1400"
 	"_inner_cone" "12"
 	"_cone" "22"
 	"_exponent" "1"
@@ -3245,7 +3245,7 @@ entity
 {
 	"id" "322"
 	"classname" "light"
-	"_light" "255 240 215 900"
+	"_light" "255 240 215 260"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -3258,7 +3258,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 180 0"
 	"pitch" "-38"
-	"_light" "255 235 200 4000"
+	"_light" "255 235 200 1400"
 	"_inner_cone" "12"
 	"_cone" "22"
 	"_exponent" "1"
@@ -3271,7 +3271,7 @@ entity
 {
 	"id" "324"
 	"classname" "light"
-	"_light" "255 240 215 900"
+	"_light" "255 240 215 260"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -3284,7 +3284,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 180 0"
 	"pitch" "-38"
-	"_light" "255 235 200 4000"
+	"_light" "255 235 200 1400"
 	"_inner_cone" "12"
 	"_cone" "22"
 	"_exponent" "1"
@@ -3297,7 +3297,7 @@ entity
 {
 	"id" "326"
 	"classname" "light"
-	"_light" "255 240 215 900"
+	"_light" "255 240 215 260"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -3310,7 +3310,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 180 0"
 	"pitch" "-38"
-	"_light" "255 235 200 4000"
+	"_light" "255 235 200 1400"
 	"_inner_cone" "12"
 	"_cone" "22"
 	"_exponent" "1"
@@ -11930,7 +11930,7 @@ entity
 {
 	"id" "1244"
 	"classname" "light"
-	"_light" "255 225 170 300"
+	"_light" "255 225 170 120"
 	"origin" "0 0 240"
 }
 entity
@@ -12987,172 +12987,179 @@ entity
 {
 	"id" "1357"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "-1350 -600 384"
 }
 entity
 {
 	"id" "1358"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "-1350 600 384"
 }
 entity
 {
 	"id" "1359"
 	"classname" "light"
-	"_light" "160 200 210 220"
+	"_light" "160 200 210 60"
 	"origin" "-1350 0 1080"
 }
 entity
 {
 	"id" "1360"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "-900 -600 384"
 }
 entity
 {
 	"id" "1361"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "-900 600 384"
 }
 entity
 {
 	"id" "1362"
 	"classname" "light"
-	"_light" "160 200 210 220"
+	"_light" "160 200 210 60"
 	"origin" "-900 0 1080"
 }
 entity
 {
 	"id" "1363"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "-450 -600 384"
 }
 entity
 {
 	"id" "1364"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "-450 600 384"
 }
 entity
 {
 	"id" "1365"
 	"classname" "light"
-	"_light" "160 200 210 220"
+	"_light" "160 200 210 60"
 	"origin" "-450 0 1080"
 }
 entity
 {
 	"id" "1366"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "0 -600 384"
 }
 entity
 {
 	"id" "1367"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "0 600 384"
 }
 entity
 {
 	"id" "1368"
 	"classname" "light"
-	"_light" "160 200 210 220"
+	"_light" "160 200 210 60"
 	"origin" "0 0 1080"
 }
 entity
 {
 	"id" "1369"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "450 -600 384"
 }
 entity
 {
 	"id" "1370"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "450 600 384"
 }
 entity
 {
 	"id" "1371"
 	"classname" "light"
-	"_light" "160 200 210 220"
+	"_light" "160 200 210 60"
 	"origin" "450 0 1080"
 }
 entity
 {
 	"id" "1372"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "900 -600 384"
 }
 entity
 {
 	"id" "1373"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "900 600 384"
 }
 entity
 {
 	"id" "1374"
 	"classname" "light"
-	"_light" "160 200 210 220"
+	"_light" "160 200 210 60"
 	"origin" "900 0 1080"
 }
 entity
 {
 	"id" "1375"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "1350 -600 384"
 }
 entity
 {
 	"id" "1376"
 	"classname" "light"
-	"_light" "255 214 160 260"
+	"_light" "255 214 160 90"
 	"origin" "1350 600 384"
 }
 entity
 {
 	"id" "1377"
 	"classname" "light"
-	"_light" "160 200 210 220"
+	"_light" "160 200 210 60"
 	"origin" "1350 0 1080"
 }
 entity
 {
 	"id" "1378"
+	"classname" "env_tonemap_controller"
+	"targetname" "tonemap"
+	"origin" "0 0 64"
+}
+entity
+{
+	"id" "1379"
 	"classname" "info_player_start"
 	"angles" "0 0 0"
 	"origin" "-1518 0 320"
 }
 entity
 {
-	"id" "1379"
+	"id" "1380"
 	"classname" "info_player_start"
 	"angles" "0 90 0"
 	"origin" "0 -400 8"
 }
 entity
 {
-	"id" "1380"
+	"id" "1381"
 	"classname" "env_cubemap"
 	"origin" "0 0 200"
 }
 entity
 {
-	"id" "1381"
+	"id" "1382"
 	"classname" "env_cubemap"
 	"origin" "-1518 0 412"
 }

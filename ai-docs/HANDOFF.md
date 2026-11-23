@@ -10,16 +10,21 @@ Updated: 2026-11-23
 ## Done
 - tools/build_vmf.py writes src/gm_grand_central.vmf: concourse at true scale, 20-segment barrel vault, end walls with three window openings and lit alcoves, balconies, two double staircases per end, octagonal information booth with clock block, ticket-window frames, lights, two spawns, cubemaps. Dev textures.
 - tools/compile.sh: full vbsp/vvis/vrad (FAST=1 for quick), copies the BSP into garrysmod/maps. First compile: no leak, no missing materials.
-- Screenshot rig (Lua render.Capture at set camera points, plus tools/shots.sh) was designed but not written: the command that wrote and ran it was refused.
+- Screenshot rig works: tools/shots.sh copies tools/lua/gcs_shots.lua into garrysmod/lua/autorun/client, writes data/gcs_shots_go.txt, launches gmod.exe; the Lua shows 6 fixed cameras, render.Capture to data/gcs_shots/, then quits. Fallback kill is by PID (quirkwright qw.py pid), never by name. Output: shots/<stamp>/ plus contact.jpg.
+- Launching gmod.exe directly needs steam_appid.txt (4000) in the GarrysMod folder, else a "Failed to initialize Steamworks API" dialog hangs it. shots.sh writes it.
+- Lights cut about 3x and an env_tonemap_controller added: shots/20261123-1135 reads as the concourse, still bright because of the yellow dev textures.
 
 ## Next
-1. In-game screenshots. Auto mode refused the launch-and-capture command (install the Lua rig into garrysmod/lua/autorun, launch gmod.exe, then `taskkill /IM gmod.exe`). Either Mark allows it, or rewrite tools/shots.sh to kill by PID (quirkwright `qw.py pid`) and ask him first. Until then the map is compiled but unseen.
-2. Measured references: find the HABS drawings for the vault section and the window/balcony heights; update refs/concourse-dimensions.md and the constants in build_vmf.py.
-3. Hammer++ for hand checks (optional).
+1. Real surfaces: swap dev textures for stock HL2/GMod stone and plaster (warm marble floor, Botticino-like walls), dark green-blue vault. Recompile, reshoot, compare.
+2. Measured references: HABS drawings for the vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py constants.
+3. Chandeliers, ticket-window departure board, flags; then the zodiac ceiling texture (comfyui-gen, no Krea 2).
+4. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
 - Half-circle vault for now (real one is flatter).
 - Stairs placed at both ends with 12 u risers / 18 u treads.
+- Light levels: windows 260 + spot 1400, chandeliers 90, vault fill 60.
+- An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.
 
 ## Waiting on Mark
-- Permission for the screenshot run (Next 1).
+- Nothing yet. Look-and-feel sign-off comes once the concourse has real surfaces.
