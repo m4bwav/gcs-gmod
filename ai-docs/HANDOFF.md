@@ -30,3 +30,7 @@ Updated: 2026-11-23
 
 ## Waiting on Mark
 - Nothing yet. Look-and-feel sign-off comes once the concourse has real surfaces.
+
+## Directive from Mark (2026-11-23)
+- Use and improve every plugin involved (polywright, modwright, photowright, artwright, comfyui-gen...); fix gaps in the plugins' own repos.
+- Get textures right from real photos (licensed/public domain, sources in refs/); after each compile, put screenshots beside photos from matching viewpoints and iterate until they match. This comes before item 1 below.

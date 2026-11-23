@@ -4,3 +4,4 @@
 - 2026-11-23: Blockout v1 compiled (no leak). Auto mode refused the GMod launch + taskkill-by-name screenshot run; rig not written.
 - 2026-11-23: Screenshot rig written and working (Lua captures and quits; PID-only fallback). Direct gmod.exe launch needs steam_appid.txt=4000. Lights cut ~3x plus tonemap controller; first readable shots in shots/20261123-1135.
 - 2026-11-23: Stock HL2 stone/plaster swapped in; first try blew out to white (light levels tuned for dark dev textures). Lights cut ~3x more plus tonemap clamp via logic_auto fixed it (shots/20261123-1444). Bash-tool heredocs can't hold doubled backslashes; edit generator with Edit tool.
+2026-11-23 Mark: use+improve all plugins (polywright, modwright...); textures from photos; match screenshots to photos. Added to continue prompt and HANDOFF.
