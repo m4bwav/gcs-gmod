@@ -16,10 +16,10 @@ WALL = 64
 BALC_Z = 26 * FT                            # balcony floor height
 BALC_D = 22 * FT                            # balcony depth from the end wall
 
-TEX_FLOOR = "stone/marblefloor001c"
-TEX_WALL = "plaster/plasterwall005a"
-TEX_VAULT = "plaster/plasterceiling005a"
-TEX_TRIM = "plaster/plasterwall003a"
+TEX_FLOOR = "tile/tilefloor010a"
+TEX_WALL = "stone/stonewall024a"
+TEX_VAULT = "plaster/plasterwall041a"
+TEX_TRIM = "stone/stonewall033a"
 TEX_GLOW = "lights/white001"
 NODRAW = "tools/toolsnodraw"
 
@@ -143,10 +143,10 @@ def build():
         W(box(xg0, -HY, win_z0-32, xg1, HY, win_z1+32, TEX_GLOW))
         for c in centres:
             ents.append(ent("light", (sgn*(HX+WALL+96), c, (win_z0+win_z1)/2),
-                            _light="255 240 215 90", _quadratic_attn="0", _linear_attn="1", _fifty_percent_distance="900", _zero_percent_distance="2400"))
+                            _light="255 240 215 45", _quadratic_attn="0", _linear_attn="1", _fifty_percent_distance="900", _zero_percent_distance="2400"))
             ents.append(ent("light_spot", (sgn*(HX+WALL+150), c, win_z1-40),
                             angles="-38 %d 0" % (180 if sgn > 0 else 0), pitch="-38",
-                            _light="255 235 200 450", _inner_cone="12", _cone="22", _exponent="1",
+                            _light="255 235 200 225", _inner_cone="12", _cone="22", _exponent="1",
                             _distance="0", _fifty_percent_distance="2600", _zero_percent_distance="5200"))
 
     # Balconies at both ends with a parapet.
@@ -174,7 +174,7 @@ def build():
     ents.append(ent("func_detail", solids=prism(W_booth, 0, 10*FT, TEX_TRIM)))
     ents.append(ent("func_detail", solids=prism(ngon(0, 0, 2*FT, 8, math.pi/8), 10*FT, 13*FT, TEX_TRIM)))
     ents.append(ent("func_detail", solids=prism(ngon(0, 0, 3*FT, 8, math.pi/8), 13*FT, 17*FT, TEX_GLOW)))
-    ents.append(ent("light", (0, 0, 20*FT), _light="255 225 170 50"))
+    ents.append(ent("light", (0, 0, 20*FT), _light="255 225 170 25"))
 
     # Ticket windows along the south wall: a row of recess frames.
     for k in range(-6, 7):
@@ -185,8 +185,8 @@ def build():
     # Chandelier lights down both long sides, and soft fill under the vault.
     for x in range(-HX+300, HX-299, 450):
         for y in (-HY+120, HY-120):
-            ents.append(ent("light", (x, y, 32*FT), _light="255 214 160 35"))
-        ents.append(ent("light", (x, 0, SPRING+300), _light="160 200 210 20"))
+            ents.append(ent("light", (x, y, 32*FT), _light="255 214 160 18"))
+        ents.append(ent("light", (x, 0, SPRING+300), _light="160 200 210 10"))
 
     ents.append(ent("env_tonemap_controller", (0, 0, 64), targetname="tonemap"))
     # Clamp auto exposure and bloom so the pale stone doesn't blow out.

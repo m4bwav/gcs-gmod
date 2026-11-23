@@ -16,16 +16,17 @@ Updated: 2026-11-23
 
 - Stock HL2 surfaces in (floor stone/marblefloor001c, walls plaster/plasterwall005a, vault plaster/plasterceiling005a, trim plaster/plasterwall003a); lights cut ~3x again; logic_auto clamps tonemap exposure 0.5-1.2, bloom 0.25. shots/20261123-1444/contact.jpg reads as a stone hall, exposure good.
 
+- Surfaces v2 (stock HL2 only): walls stone/stonewall024a (cream ashlar), floor tile/tilefloor010a (warm marble squares), vault plaster/plasterwall041a (pale green-blue stand-in until the zodiac texture), trim stone/stonewall033a. Lights halved again. shots/20261123-1716 reads as Grand Central. tools/texsheet.py makes contact sheets of stock materials (`python tools/texsheet.py out.jpg <regex>`, needs pip srctools); sheets in shots/tex/.
+
 ## Next
-1. Surface tuning: walls too flat yellow (want paler Botticino cream), floor too dark and grimy (want light warm marble), vault is beige coffers (real: green-blue, comes with the zodiac texture). Candidate list: `bin/vpk.exe l sourceengine/hl2_misc_dir.vpk | grep materials/stone`. Only HL2 content (not content_cstrike) since players may not own CSS.
-2. Measured references: HABS drawings for the vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py constants.
+1. Measured references: HABS drawings for the vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py constants.
 3. Chandeliers, ticket-window departure board, flags; then the zodiac ceiling texture (comfyui-gen, no Krea 2).
-4. Hammer++ for hand checks (optional).
+5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
 - Half-circle vault for now (real one is flatter).
 - Stairs placed at both ends with 12 u risers / 18 u treads.
-- Light levels: windows 260 + spot 1400, chandeliers 90, vault fill 60.
+- Light levels (after surfaces v2): window point 45, window spot 225, booth 25, chandeliers 18, vault fill 10.
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.
 
 ## Waiting on Mark
