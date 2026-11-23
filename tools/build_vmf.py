@@ -11,7 +11,9 @@ OUT = Path(__file__).resolve().parent.parent / "src" / "gm_grand_central.vmf"
 # Main Concourse: 275 x 120 ft floor, vault crown ~125 ft. Long axis = x (east +x).
 HX, HY = 275 * FT // 2, 120 * FT // 2      # 1650, 720
 CROWN = 125 * FT                            # 1500
-SPRING = CROWN - HY                         # vault springs where a half-circle reaches the crown
+VRISE = 40 * FT                             # vault rise: a flattened half-ellipse, half-width HY
+SPRING = CROWN - VRISE                      # springline (cornice) height
+BAYS = 5                                    # bays along each long wall, one lunette each
 WALL = 64
 BALC_Z = 26 * FT                            # balcony floor height
 BALC_D = 22 * FT                            # balcony depth from the end wall
@@ -22,6 +24,9 @@ TEX_WALL = "gcs/wall"
 TEX_VAULT = "gcs/vault"
 TEX_TRIM = "gcs/trim"
 TEX_GLOW = "gcs/window_glow"
+TEX_GOLD = "gcs/gold"
+TEX_GRID = "gcs/mullion"
+TEX_DIM = "gcs/window_dim"
 NODRAW = "tools/toolsnodraw"
 
 _id = [0]
@@ -81,6 +86,21 @@ def xprism(poly, x0, x1, tex):
     return "solid\n{\n\t\"id\" \"%d\"\n%s}\n" % (nid(), s)
 
 
+def yprism(poly, y0, y1, tex):
+    """Convex polygon in xz (counter-clockwise seen from -y), extruded y0..y1."""
+    s = side([(x, y0, z) for x, z in poly], (0, -1, 0), tex)
+    s += side([(x, y1, z) for x, z in poly], (0, 1, 0), tex)
+    for i in range(len(poly)):
+        a, b = poly[i], poly[(i+1) % len(poly)]
+        n = (b[1]-a[1], 0, -(b[0]-a[0]))
+        s += side([(a[0], y0, a[1]), (b[0], y0, b[1]), (b[0], y1, b[1])], n, tex)
+    return "solid\n{\n\t\"id\" \"%d\"\n%s}\n" % (nid(), s)
+
+
+def halfdisc(cx, z0, r, n=10):
+    return [(round(cx + r*math.cos(math.pi*i/n)), round(z0 + r*math.sin(math.pi*i/n))) for i in range(n+1)]
+
+
 def box(x0, y0, z0, x1, y1, z1, tex):
     return prism([(x0, y0), (x1, y0), (x1, y1), (x0, y1)], z0, z1, tex)
 
@@ -116,12 +136,12 @@ def build():
     W(box(-HX, -HY-WALL, -WALL, HX, -HY, SPRING, TEX_WALL))
     W(box(-HX, HY, -WALL, HX, HY+WALL, SPRING, TEX_WALL))
 
-    # Barrel vault, segmented half-circle around the x axis.
+    # Barrel vault, segmented flattened half-ellipse around the x axis.
     N = 20
     for i in range(N):
         a0, a1 = math.pi*i/N, math.pi*(i+1)/N
-        r0, r1 = HY, HY+WALL
-        p = lambda r, a: (round(r*math.cos(a)), round(SPRING + r*math.sin(a)))
+        r0, r1 = 0, WALL
+        p = lambda r, a: (round((HY+r)*math.cos(a)), round(SPRING + (VRISE+r)*math.sin(a)))
         poly = [p(r1, a0), p(r1, a1), p(r0, a1), p(r0, a0)]
         W(xprism(poly, -HX, HX, TEX_VAULT))
     # Corners behind the vault so the wall tops are solid.
@@ -129,7 +149,7 @@ def build():
     W(box(-HX, HY, SPRING, HX, HY+WALL, SPRING+8, TEX_TRIM))
 
     # End walls with three tall arched windows (blockout: rectangular openings into glowing alcoves).
-    win_w, win_z0, win_z1 = 22*FT, BALC_Z + 8*FT, SPRING + 30*FT
+    win_w, win_z0, win_z1 = 22*FT, BALC_Z + 8*FT, SPRING - 4*FT
     centres = [-36*FT, 0, 36*FT]
     for sgn in (-1, 1):
         xin, xout = sgn*HX, sgn*(HX+WALL)
@@ -149,6 +169,57 @@ def build():
                             angles="-38 %d 0" % (180 if sgn > 0 else 0), pitch="-38",
                             _light="255 235 200 225", _inner_cone="12", _cone="22", _exponent="1",
                             _distance="0", _fifty_percent_distance="2600", _zero_percent_distance="5200"))
+
+    # Mullion grid in the end windows, gilded band across each end at the springline.
+    for sgn in (-1, 1):
+        xm0, xm1 = sorted((sgn*(HX+WALL//2), sgn*(HX+WALL//2+4)))
+        for c in centres:
+            for k in range(1, 6):
+                y = c - win_w//2 + k*win_w//6
+                ents.append(ent("func_detail", solids=box(xm0, y-3, win_z0, xm1, y+3, win_z1, TEX_GRID)))
+            for z in range(win_z0 + 48, win_z1, 96):
+                ents.append(ent("func_detail", solids=box(xm0, c-win_w//2, z-3, xm1, c+win_w//2, z+3, TEX_GRID)))
+        xa, xb = sorted((sgn*HX, sgn*(HX-24)))
+        ents.append(ent("func_detail", solids=box(xa, -HY, SPRING-40, xb, HY, SPRING, TEX_GOLD)))
+
+    # Long walls: pilasters between bays, a tall dark window grid in each bay, the
+    # gilded cornice at the springline and a lunette window cut into the vault above.
+    bay = 2*HX // BAYS
+    for sgn in (-1, 1):
+        yw = sgn*HY
+        inset = lambda d0, d1: sorted((yw - sgn*d0, yw - sgn*d1))
+        for k in range(BAYS + 1):
+            x = -HX + k*bay
+            ya, yb = inset(0, 36)
+            ents.append(ent("func_detail", solids=box(max(x-5*FT, -HX), ya, 0, min(x+5*FT, HX), yb, SPRING-72, TEX_WALL)))
+            ya, yb = inset(0, 48)
+            ents.append(ent("func_detail", solids=box(max(x-6*FT, -HX), ya, 0, min(x+6*FT, HX), yb, 3*FT, TEX_TRIM)))
+        for k in range(BAYS):
+            cx = -HX + k*bay + bay//2
+            w = bay//2 - 10*FT
+            ga, gb = inset(0, 2)
+            ents.append(ent("func_detail", solids=box(cx-w, ga, 30*FT, cx+w, gb, SPRING-8*FT, TEX_DIM)))
+            ma, mb = inset(2, 6)
+            for j in range(-3, 4):
+                ents.append(ent("func_detail", solids=box(cx + j*w//4 - 3, ma, 30*FT, cx + j*w//4 + 3, mb, SPRING-8*FT, TEX_GRID)))
+            for z in range(30*FT, SPRING-8*FT+1, 96):
+                ents.append(ent("func_detail", solids=box(cx-w, ma, z-3, cx+w, mb, z+3, TEX_GRID)))
+            # Lunette: half-disc glass standing on the cornice, poking through the vault.
+            la, lb = inset(72, 76)
+            ents.append(ent("func_detail", solids=yprism(halfdisc(cx, SPRING, 16*FT), la, lb, TEX_GLOW)))
+            fa, fb = inset(76, 92)
+            outer, inner = halfdisc(cx, SPRING, 19*FT), halfdisc(cx, SPRING, 16*FT)
+            for i in range(len(outer)-1):
+                ents.append(ent("func_detail", solids=yprism([outer[i], outer[i+1], inner[i+1], inner[i]], fa, fb, TEX_TRIM)))
+            ra, rb = inset(76, 80)
+            for j in (-2, -1, 0, 1, 2):
+                top = SPRING + int(16*FT*math.sqrt(1 - (j*6/16)**2)) - 4
+                ents.append(ent("func_detail", solids=box(cx + j*6*FT - 3, ra, SPRING, cx + j*6*FT + 3, rb, top, TEX_GRID)))
+            ents.append(ent("light", (cx, yw - sgn*200, SPRING + 80), _light="200 220 240 8"))
+        ca, cb = inset(0, 72)
+        ents.append(ent("func_detail", solids=box(-HX, ca, SPRING-40, HX, cb, SPRING, TEX_GOLD)))
+        ca, cb = inset(0, 56)
+        ents.append(ent("func_detail", solids=box(-HX, ca, SPRING-72, HX, cb, SPRING-40, TEX_TRIM)))
 
     # Balconies at both ends with a parapet.
     for sgn in (-1, 1):

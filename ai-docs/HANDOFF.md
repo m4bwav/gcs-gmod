@@ -20,15 +20,17 @@ Updated: 2026-11-23
 
 - Photo matching: 10 Commons photos in refs/photos (tools/fetch_refs.py, credits in refs/SOURCES.md, CC BY/BY-SA need Workshop attribution). Custom materials src/materials/gcs/*.vmt tint stock HL2 textures to photo-sampled colours; compile.sh copies them to garrysmod/materials and packs them into the BSP with bspzip. tools/compare.py <shotdir> writes compare.jpg (shot beside photo per viewpoint). shots/20261123-1731/compare.jpg: colours now read alike (teal vault, honey walls, pale floor, sky-blue windows).
 
+- Geometry v2: vault is a flattened half-ellipse (VRISE 40 ft), 5 bays per long wall with pilasters, dark gridded bay windows (gcs/window_dim, gcs/mullion), gold cornice (gcs/gold) over a trim band at the springline, a framed lunette per bay, mullion grids in the end windows. shots/20261123-1737/compare.jpg and pair.jpg.
+
 ## Next
-1. Geometry gaps the compare sheet shows: wall pilasters and deep window bays along the long walls, gilded cornice band at vault springline, lunette (half-moon) clerestory windows cut into the vault, mullion grid in the end windows, flatter vault. Then photo-derived textures proper (marble floor, ashlar, zodiac ceiling; comfyui-gen, no Krea 2) and recompare.
+1. Remaining geometry gaps (pair.jpg): arched heads on the three end windows and the big end arch framing them, end-window glass darker like the bays, deeper pilasters and bay recesses, smaller and less checkered floor tiles. Then photo-derived textures proper (marble floor, ashlar, zodiac ceiling; comfyui-gen, no Krea 2) and recompare.
 2. Clock block is a grey box (booth clock model, polywright).
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
 4. Chandeliers (polywright), ticket-window departure board, flags; then the zodiac ceiling.
 5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
-- Half-circle vault for now (real one is flatter).
+- Vault rise 40 ft, estimated from photos (check against the HABS section).
 - Stairs placed at both ends with 12 u risers / 18 u treads.
 - Light levels (after surfaces v2): window point 45, window spot 225, booth 25, chandeliers 18, vault fill 10.
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.
