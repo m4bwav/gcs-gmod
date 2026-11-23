@@ -14,8 +14,10 @@ Updated: 2026-11-23
 - Launching gmod.exe directly needs steam_appid.txt (4000) in the GarrysMod folder, else a "Failed to initialize Steamworks API" dialog hangs it. shots.sh writes it.
 - Lights cut about 3x and an env_tonemap_controller added: shots/20261123-1135 reads as the concourse, still bright because of the yellow dev textures.
 
+- Stock HL2 surfaces in (floor stone/marblefloor001c, walls plaster/plasterwall005a, vault plaster/plasterceiling005a, trim plaster/plasterwall003a); lights cut ~3x again; logic_auto clamps tonemap exposure 0.5-1.2, bloom 0.25. shots/20261123-1444/contact.jpg reads as a stone hall, exposure good.
+
 ## Next
-1. Real surfaces: swap dev textures for stock HL2/GMod stone and plaster (warm marble floor, Botticino-like walls), dark green-blue vault. Recompile, reshoot, compare.
+1. Surface tuning: walls too flat yellow (want paler Botticino cream), floor too dark and grimy (want light warm marble), vault is beige coffers (real: green-blue, comes with the zodiac texture). Candidate list: `bin/vpk.exe l sourceengine/hl2_misc_dir.vpk | grep materials/stone`. Only HL2 content (not content_cstrike) since players may not own CSS.
 2. Measured references: HABS drawings for the vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py constants.
 3. Chandeliers, ticket-window departure board, flags; then the zodiac ceiling texture (comfyui-gen, no Krea 2).
 4. Hammer++ for hand checks (optional).
