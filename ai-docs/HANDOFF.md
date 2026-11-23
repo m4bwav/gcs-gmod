@@ -10,7 +10,7 @@ Updated: 2026-11-23
 ## Done
 - tools/build_vmf.py writes src/gm_grand_central.vmf: concourse at true scale, 20-segment barrel vault, end walls with three window openings and lit alcoves, balconies, two double staircases per end, octagonal information booth with clock block, ticket-window frames, lights, two spawns, cubemaps. Dev textures.
 - tools/compile.sh: full vbsp/vvis/vrad (FAST=1 for quick), copies the BSP into garrysmod/maps. First compile: no leak, no missing materials.
-- tools/lua/gcs_shots.lua: screenshot rig (render.Capture at set camera points, only when data/gcs_shots/go.txt exists). Not installed and never run: see below.
+- Screenshot rig (Lua render.Capture at set camera points, plus tools/shots.sh) was designed but not written: the command that wrote and ran it was refused.
 
 ## Next
 1. In-game screenshots. Auto mode refused the launch-and-capture command (install the Lua rig into garrysmod/lua/autorun, launch gmod.exe, then `taskkill /IM gmod.exe`). Either Mark allows it, or rewrite tools/shots.sh to kill by PID (quirkwright `qw.py pid`) and ask him first. Until then the map is compiled but unseen.
