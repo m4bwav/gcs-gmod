@@ -1,7 +1,7 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.1.0 released: Workshop 3845077025 public, GitHub v0.1.0)
-Updated: 2026-11-23
+Updated: 2026-11-23 (late)
 
 - Prompt: plans/2026-11-23-gcs-gmod-continue-prompt.md
 - Plan: plans/gcs-gmod-plan.md
@@ -112,7 +112,8 @@ Updated: 2026-11-23
 
 ## Next
 - groin() in build_vmf.py builds a cloister vault, not a groin: the two barrels' solid haunches overlap, so the wall arches are filled and the gallery reads as a shallow dome; its rib bands are hidden except at the springing. A true groin needs each quadrant split along the diagonals (solid = intersection of the barrels' solids, convex per triangle). Fix this for the gallery and the Oyster Bar next.
-- Then: east ramps by the east stair; dining booth with a clock and brass top like the photo; Oyster Bar entrance arch with a lettered band and wood-framed glass doors (refs/photos/Grand_Central_Oyster_Bar_...); Oyster Bar counters along the walls; README/wiki/Workshop update and release 0.2.0 once area 2 is done.
+- Area 2 detail pass 2 (2026-11-23): dining booth has a brass column and four-faced opal clock (gcs/clock, z -150..-120 so the dial tiles align); Oyster Bar entrance has a bronze OYSTER BAR band in the opening head (oysterbar.vtf from make_board.py, FACEUV _oysterbar_uv), oak posts, transom and amber side lights; oak-topped cream counters with stools along both Oyster Bar long walls. Anything at the gallery wall above Z+120 sits inside the groin's springing; keep wall details below it. New cameras ob_entry, dining_clock, ob_counter. Clean full compile, shots/20261123-2259.
+- Then: east ramps by the east stair; README/wiki/Workshop update and release 0.2.0 once area 2 is done.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
 - Update the wiki Changelog/Home with the Workshop link.

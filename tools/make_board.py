@@ -125,6 +125,27 @@ def tickets():
     save(img, "tickets")
 
 
+def oysterbar():
+    # 1024x64 bronze band over the Oyster Bar entrance, raised gold OYSTER BAR lettering.
+    W, H = 1024, 64
+    img = Image.new("RGB", (W, H), (40, 30, 20))
+    d = ImageDraw.Draw(img)
+    d.rectangle([0, 0, W-1, H-1], outline=(196, 156, 72), width=4)
+    p, word = 6, "OYSTER BAR"
+    x0 = 512 - (len(word)*6 - 1)*p*1.5/2
+    for k, ch in enumerate(word):
+        if ch == " ":
+            continue
+        rows = [int(b, 16) for b in FONT[ch].split()]
+        for cy, bits in enumerate(rows):
+            for cx in range(5):
+                if bits >> (4 - cx) & 1:
+                    px, py = x0 + (k*6 + cx)*p*1.5, 11 + cy*p
+                    d.rectangle([px, py, px + p*1.5 - 1, py + p - 1], fill=(230, 190, 96))
+    save(img, "oysterbar")
+
+
 board()
 flag()
 tickets()
+oysterbar()

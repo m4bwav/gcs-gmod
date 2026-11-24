@@ -23,6 +23,9 @@ local CAMS = {
   { "whisper",      Vector(-2720, -300, -200), Angle(-12, 155, 0) },
   { "oyster",       Vector(-3420, -380, -200), Angle(-4, 170, 0) },
   { "dining",       Vector(-960, -400, -200), Angle(-4, 20, 0) },
+  { "ob_entry",     Vector(-2780, 0, -210), Angle(-6, 180, 0) },
+  { "dining_clock", Vector(-220, -160, -190), Angle(4, 35, 0) },
+  { "ob_counter",   Vector(-3600, 300, -200), Angle(-6, 200, 0) },
 }
 local i, cam, frames = 0, nil, 0
 local ft, fpslog = 0, {}  -- frame time summed over frames 31-89, one fps line per camera
