@@ -479,7 +479,7 @@ def build():
     # Ticket windows along the south wall: a row of recess frames.
     for k in range(-6, 7):
         x = k*16*FT
-        ents.append(ent("func_detail", solids=box(x-6*FT, -HY+0, 0, x-5*FT, -HY+3*FT, 14*FT, TEX_TRIM)))
+        ents.append(ent("func_detail", solids=box(x-6*FT, -HY+0, 0, x-5*FT, -HY+3*FT, 14*FT, TEX_CREAM)))
         # Brass bracket lamp on each pier: wall plate, arm, cup and a glowing globe.
         lx, ly = x-5.5*FT, -HY+3*FT
         det(ngon(lx, ly+2, 4, 6), 10.5*FT, 12*FT, TEX_GOLD)
@@ -512,7 +512,9 @@ def build():
             # Bronze TICKETS plaque centred on the lintel.
             det([(x, -HY+18), (x+6*FT, -HY+18), (x+6*FT, -HY+20), (x, -HY+20)],
                 11.75*FT, 13.25*FT, "gcs/tickets", TEX_GOLD)
-    ents.append(ent("func_detail", solids=box(-100*FT, -HY, 14*FT, 100*FT, -HY+4*FT, 16*FT, TEX_TRIM)))
+    # Cream marble cornice over the ticket windows with a thin gold lower edge.
+    ents.append(ent("func_detail", solids=box(-100*FT, -HY, 14*FT, 100*FT, -HY+4*FT-2, 14*FT+2, TEX_GOLD)))
+    ents.append(ent("func_detail", solids=box(-100*FT, -HY, 14*FT+2, 100*FT, -HY+4*FT, 16*FT, TEX_CREAM)))
     bx0, bx1, bz0, bz1 = BOARD
     det([(bx0, -HY), (bx1, -HY), (bx1, -HY+16), (bx0, -HY+16)], bz0, bz1, "gcs/board", TEX_GOLD)
 

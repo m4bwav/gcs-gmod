@@ -52,3 +52,4 @@
 - 2026-11-23: Sign-off set still unanswered, wiki repo still missing. Arcade passages vaulted in cream. Clean full compile, shots/20261123-2052. Stash pop again conflicted on generated vmf/packlist; took HEAD.
 - 2026-11-23: Sign-off set still unanswered, wiki repo still missing. arcade_west camera re-aimed down the centre passage (black left strip gone). Clean full compile, shots/20261123-2056.
 - 2026-11-23: Under-balcony ceiling lamps. Clean full compile, shots/20261123-2102. A parallel session made the same arcade_west camera fix (490a1a6); kept theirs. Two sessions are working the shared clone on main at once.
+- 2026-11-23: Sign-off set still unanswered, wiki repo still missing. Ticket-wall piers and cornice cream with gold edge (grey trim was the main mismatch in floor_east). Clean full compile, shots/20261123-2116. Worked in worktree ../gcs-gmod-ticketwall. First shots.sh run returned only 2 of 11 shots; rerun was complete.
