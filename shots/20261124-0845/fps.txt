@@ -1,0 +1,5 @@
+west_balcony    147 fps
+floor_east      146 fps
+chand           147 fps
+vault_up        146 fps
+east_balcony    146 fps

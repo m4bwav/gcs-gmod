@@ -1291,16 +1291,8 @@ def build():
     for x in range(-HX+300, HX-299, 450):
         for y in (-HY+120, HY-120):
             zc = 32*FT
-            det(ngon(x, y, 2, 6), zc+48, SPRING, TEX_GOLD)
-            det(ngon(x, y, 22, 8, math.pi/8), zc-6, zc+6, TEX_GOLD)
-            det(ngon(x, y, 12, 8, math.pi/8), zc+6, zc+48, TEX_GOLD)
-            det(ngon(x, y, 8, 8, math.pi/8), zc-30, zc-6, TEX_GOLD)
-            det(ngon(x, y, 5, 4), zc-36, zc-30, TEX_GOLD)
-            for tier, (r, z0) in enumerate(((30, zc+6), (18, zc+30))):
-                for a in range(8):
-                    t = 2*math.pi*(a + 0.5*tier)/8
-                    globe(x + r*math.cos(t), y + r*math.sin(t), z0+5, 5)
-            globe(x, y, zc-46, 10)
+            # Model (tools/make_models.py): rod, drum, two tiers of globes, finial; no brush vertices.
+            ents.append(ent("prop_static", (x, y, zc), model="models/gcs/chandelier.mdl", angles="0 0 0", solid="0"))
             ents.append(ent("light", (x, y, zc-64), _light="255 214 160 18"))
         ents.append(ent("light", (x, 0, SPRING+300), _light="160 200 210 10"))
 
