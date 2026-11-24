@@ -17,6 +17,25 @@ DEST = ["STAMFORD", "NEW HAVEN", "WHITE PLAINS", "POUGHKEEPSIE", "CROTON-HARMON"
 LINE = ["NEW HAVEN", "HARLEM", "HUDSON"]
 
 
+# 5x7 dot-matrix font: each glyph is 7 rows of 5 bits (MSB = left column).
+FONT = {
+    "A": "0E 11 11 1F 11 11 11", "B": "1E 11 11 1E 11 11 1E", "C": "0E 11 10 10 10 11 0E",
+    "D": "1E 11 11 11 11 11 1E", "E": "1F 10 10 1E 10 10 1F", "F": "1F 10 10 1E 10 10 10",
+    "G": "0E 11 10 17 11 11 0F", "H": "11 11 11 1F 11 11 11", "I": "0E 04 04 04 04 04 0E",
+    "J": "07 02 02 02 02 12 0C", "K": "11 12 14 18 14 12 11", "L": "10 10 10 10 10 10 1F",
+    "M": "11 1B 15 15 11 11 11", "N": "11 11 19 15 13 11 11", "O": "0E 11 11 11 11 11 0E",
+    "P": "1E 11 11 1E 10 10 10", "Q": "0E 11 11 11 15 12 0D", "R": "1E 11 11 1E 14 12 11",
+    "S": "0F 10 10 0E 01 01 1E", "T": "1F 04 04 04 04 04 04", "U": "11 11 11 11 11 11 0E",
+    "V": "11 11 11 11 11 0A 04", "W": "11 11 11 15 15 15 0A", "X": "11 11 0A 04 0A 11 11",
+    "Y": "11 11 11 0A 04 04 04", "Z": "1F 01 02 04 08 10 1F",
+    "0": "0E 11 13 15 19 11 0E", "1": "04 0C 04 04 04 04 0E", "2": "0E 11 01 02 04 08 1F",
+    "3": "1F 02 04 02 01 11 0E", "4": "02 06 0A 12 1F 02 02", "5": "1F 10 1E 01 01 11 0E",
+    "6": "06 08 10 1E 11 11 0E", "7": "1F 01 02 04 08 08 08", "8": "0E 11 11 0E 11 11 0E",
+    "9": "0E 11 11 0F 01 02 0C", ":": "00 0C 0C 00 0C 0C 00", "-": "00 00 00 1F 00 00 00",
+    ".": "00 00 00 00 00 0C 0C",
+}
+
+
 def save(img, name):
     img.save("shots/tex/%s.png" % name)
     rgb = np.asarray(img.convert("RGB"))
@@ -36,20 +55,19 @@ def board():
     d = ImageDraw.Draw(img)
     d.rectangle([0, 0, W-1, H-1], outline=(150, 112, 50), width=6*S)            # brass frame
     d.rectangle([6*S, 6*S, W-6*S, 30*S], fill=(20, 40, 90))                      # header band
-    cols = [16, 120, 330, 760, 900]                                              # time, line, dest, track, status
+    cols = [16, 120, 330, 730, 860]                                              # time, line, dest, track, status
     def text(x, y, s, col, h):
-        """Dot-matrix stand-in: each glyph a cluster of lit cells."""
-        cw = h * 0.62
+        """5x7 dot-matrix lettering: one round LED per lit cell, unlit cells faintly visible."""
+        p = h / 7.0
+        dim = tuple(int(v*0.10) + 10 for v in col)
         for k, ch in enumerate(s):
-            if ch == " ":
-                continue
-            gx = x + k*cw
-            rnd = random.Random(ord(ch))
-            for cy in range(5):
-                for cx in range(3):
-                    if rnd.random() < 0.62:
-                        px, py = gx + cx*cw/4, y + cy*h/6
-                        d.rectangle([px, py, px + cw/4.6, py + h/7], fill=col)
+            gx = x + k*6*p
+            rows = [int(b, 16) for b in FONT.get(ch, "00 00 00 00 00 00 00").split()]
+            for cy, bits in enumerate(rows):
+                for cx in range(5):
+                    lit = bits >> (4 - cx) & 1
+                    px, py = gx + cx*p, y + cy*p
+                    d.ellipse([px, py, px + p*0.8, py + p*0.8], fill=col if lit else dim)
     for c, label in zip(cols, ["TIME", "LINE", "DESTINATION", "TRACK", "STATUS"]):
         text(c*S, 11*S, label, WHITE, 14*S)
     t = 7*60 + 2
