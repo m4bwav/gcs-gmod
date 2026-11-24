@@ -1,6 +1,6 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (Main Concourse blockout)
+Status: in progress (Main Concourse detail; sign-off page waiting on Mark)
 Updated: 2026-11-23
 
 - Prompt: plans/2026-11-23-gcs-gmod-continue-prompt.md
@@ -62,8 +62,10 @@ Updated: 2026-11-23
 
 - Window glass: tools/make_window.py writes window_glass.vtf (4x4 pale panes, dark muntins, tiles at scale 0.25); gcs/window_glass (UnlitGeneric, $color 1.15) on end and long-wall bay windows; booth keeps gcs/window_dim. Windows now read pale and gridded like the photos. shots/20261123-1911.
 
+- Sun shafts: tools/make_shaft.py writes shaft.vtf (soft-edged streaky beam, fades in past the balcony and out toward the floor); gcs/shaft is additive UnlitGeneric $color 2.4. One func_illusionary yprism beam per end window at the spotlight pitch (38 deg), 0.55 x window width, y faces nodraw. shots/20261123-1931 (compare.jpg).
+
 ## Next
-0. Concourse now has real surfaces on every done-bar item: put a west_balcony/compare sign-off askwright page in front of Mark (look-and-feel gate before the first Workshop upload), then keep detailing while it waits. Light shafts through the end windows are still missing from the done bar.
+0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
 2. Booth glass is still flat blue-grey behind the new grille; could get ticket-window openings or a lit interior.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
@@ -71,6 +73,7 @@ Updated: 2026-11-23
 5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
+- Sun shafts are fake volumetrics (additive brushes); a camera inside one sees haze, so they fade in only past the balcony edge.
 - Zodiac constellations are simplified stick figures, not the real ceiling's figure drawings; band curves are stylised sinusoids.
 - Vault rise 40 ft, estimated from photos (check against the HABS section).
 - Bay window bottom 42 ft estimated from photo.
@@ -81,7 +84,7 @@ Updated: 2026-11-23
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.
 
 ## Waiting on Mark
-- Nothing yet. Look-and-feel sign-off comes once the concourse has real surfaces.
+- askwright set ask/concourse-signoff (2 questions: upload now or keep detailing; which gaps first). Served at http://127.0.0.1:62012/ on 2026-11-23; `ask.py serve ask/concourse-signoff --detach` restarts it.
 
 ## Directive from Mark (2026-11-23)
 - Use and improve every plugin involved (polywright, modwright, photowright, artwright, comfyui-gen...); fix gaps in the plugins' own repos.

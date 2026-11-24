@@ -1,0 +1,123 @@
+{
+ "askwright": 1,
+ "id": "concourse-signoff",
+ "title": "Main Concourse look-and-feel sign-off",
+ "context": "",
+ "asked_by": "map builder",
+ "product": "Claude Code",
+ "session": "",
+ "working_dir": "D:\\m4bwa\\Claude\\Projects\\Ai\\gcs-gmod",
+ "media_roots": [
+  "../../shots/20261123-1931"
+ ],
+ "questions": [
+  {
+   "id": "overall",
+   "kind": "choice",
+   "title": "Concourse overall",
+   "question": "Does the Main Concourse read as Grand Central well enough to make the first Workshop upload?",
+   "why": "Your yes unlocks the first public Workshop upload; a no keeps me detailing the concourse first.",
+   "look_for": [
+    "compare.jpg: each shot beside a real photo from the same viewpoint",
+    "Vault colour, windows, walls, floor, booth."
+   ],
+   "media": [
+    {
+     "src": "compare.jpg",
+     "alt": "Screenshot compare"
+    },
+    {
+     "src": "west_balcony.jpg",
+     "alt": "Screenshot west balcony"
+    },
+    {
+     "src": "east_balcony.jpg",
+     "alt": "Screenshot east balcony"
+    },
+    {
+     "src": "floor_east.jpg",
+     "alt": "Screenshot floor east"
+    }
+   ],
+   "options": [
+    {
+     "id": "ship",
+     "label": "Upload it now and keep detailing after"
+    },
+    {
+     "id": "more",
+     "label": "Keep detailing before any upload (say what in the note)"
+    }
+   ],
+   "guess": {
+    "option": "ship",
+    "why": "Every done-bar item is in now, sun shafts included; the rest is polish.",
+    "confidence": "low"
+   }
+  },
+  {
+   "id": "priority",
+   "kind": "multi",
+   "title": "What to fix first",
+   "question": "Which of these gaps bother you most?",
+   "why": "I work the ticked ones first.",
+   "look_for": [
+    "vault_up.jpg (zodiac), booth.jpg and clock.jpg, board.jpg, west_balcony.jpg (end windows, no light shafts)."
+   ],
+   "media": [
+    {
+     "src": "vault_up.jpg",
+     "alt": "Screenshot vault up"
+    },
+    {
+     "src": "booth.jpg",
+     "alt": "Screenshot booth"
+    },
+    {
+     "src": "board.jpg",
+     "alt": "Screenshot board"
+    },
+    {
+     "src": "clock.jpg",
+     "alt": "Screenshot clock"
+    }
+   ],
+   "options": [
+    {
+     "id": "shafts",
+     "label": "Sun shafts through the end windows"
+    },
+    {
+     "id": "zodiac",
+     "label": "Zodiac figures drawn instead of stick lines"
+    },
+    {
+     "id": "booth",
+     "label": "Information booth interior and ticket windows"
+    },
+    {
+     "id": "board",
+     "label": "Departure board with real letters"
+    },
+    {
+     "id": "chandeliers",
+     "label": "Chandeliers as proper globe models"
+    }
+   ],
+   "guess": {
+    "options": [
+     "shafts",
+     "zodiac"
+    ],
+    "why": "Those are the two most iconic missing looks.",
+    "confidence": "low"
+   }
+  }
+ ],
+ "created": "2026-11-23T19:12:29-06:00",
+ "updated": "2026-11-23T19:12:29-06:00",
+ "project": {
+  "name": "gcs-gmod",
+  "path": "D:/m4bwa/Claude/Projects/Ai/gcs-gmod"
+ }
+}
