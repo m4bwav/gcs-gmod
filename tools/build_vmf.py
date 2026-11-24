@@ -247,17 +247,43 @@ TEX_LOWF = "gcs/floor_low"         # darker mauve-grey tile floor of the lower l
 
 
 def groin(W, x0, x1, y0, y1, zs, rise, tex, n=8):
-    """Groin vault over x0..x1, y0..y1 springing at zs: two crossing barrels whose solid
-    haunches overlap, leaving their intersection open. World brushes, so it seals."""
+    """Groin vault over x0..x1, y0..y1 springing at zs: the solid is the intersection of two
+    crossing barrels' solids, so the plan splits along the diagonals into four triangles and
+    each triangle follows the barrel whose arch stands on its wall. n even. World brushes."""
     top = zs + rise + 16
     yc, hy, xc, hx = (y0+y1)/2, (y1-y0)/2, (x0+x1)/2, (x1-x0)/2
     a = [math.pi*i/n for i in range(n+1)]
-    py = [(round(yc + hy*math.cos(t)), round(zs + rise*math.sin(t))) for t in a]
-    px = [(round(xc + hx*math.cos(t)), round(zs + rise*math.sin(t))) for t in a]
-    for i in range(n):
-        W(xprism(ccw([py[i], py[i+1], (py[i+1][0], top), (py[i][0], top)]), x0, x1, tex))
-        W(yprism(ccw([px[i], px[i+1], (px[i+1][0], top), (px[i][0], top)]), y0, y1, tex))
+    for axis in (0, 1):                      # 0: triangles on the x walls, profile across y
+        c, h, oc, oh = (yc, hy, xc, hx) if axis == 0 else (xc, hx, yc, hy)
+        prof = [(c + h*math.cos(t), zs + rise*math.sin(t)) for t in a]
+        for sgn in (-1, 1):                  # wall at oc + sgn*oh
+            for i in range(n):
+                (u0, z0), (u1, z1) = prof[i], prof[i+1]
+                # Diagonal: |v - oc|/oh = |u - c|/h; the strip runs from the wall to it.
+                d0, d1 = oh*abs(u0 - c)/h, oh*abs(u1 - c)/h
+                uv = [(u0, oc + sgn*oh), (u1, oc + sgn*oh), (u1, oc + sgn*d1), (u0, oc + sgn*d0)]
+                if abs(d0 - oh) < 1e-6:
+                    uv.pop(3)
+                elif abs(d1 - oh) < 1e-6:
+                    uv.pop(2)
+                poly =ccw([(v, u) for u, v in uv]) if axis == 0 else ccw(list(uv))
+                s = (z1 - z0) / (u1 - u0)
+                zf = (lambda x, y, u0=u0, z0=z0, s=s: z0 + s*((y if axis == 0 else x) - u0))
+                nb = (0, s, -1) if axis == 0 else (s, 0, -1)
+                W(_slab(poly, zf, nb, top, tex))
     W(box(x0, y0, top, x1, y1, top + WALL, tex))
+
+
+def _slab(poly, zf, nb, top, tex):
+    """Convex xy polygon (ccw) from the plane z = zf(x, y) (outward normal nb) up to top."""
+    r = lambda v: round(v, 2)
+    s = side([(r(x), r(y), top) for x, y in poly], (0, 0, 1), tex)
+    s += side([(r(x), r(y), r(zf(x, y))) for x, y in poly], nb, tex)
+    for i in range(len(poly)):
+        a, b = poly[i], poly[(i+1) % len(poly)]
+        n = (b[1]-a[1], -(b[0]-a[0]), 0)
+        s += side([(r(a[0]), r(a[1]), r(zf(*a))), (r(b[0]), r(b[1]), r(zf(*b))), (r(b[0]), r(b[1]), top)], n, tex)
+    return "solid\n{\n\t\"id\" \"%d\"\n%s}\n" % (nid(), s)
 
 
 def lower_level(W, ents):
