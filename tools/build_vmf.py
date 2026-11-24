@@ -240,6 +240,7 @@ GAL_X0 = RAMP_XF - 50 * FT          # Whispering Gallery, 50 ft square
 OB_X1 = GAL_X0 - WALL
 OB_X0 = OB_X1 - 4 * 288             # Oyster Bar, four 24 ft bays by four
 DIN_X0, DIN_X1, DIN_Y = -1000, 1000, 600   # dining concourse under the main floor
+EAST_D = 40 * FT                    # east ramp landing hall depth
 TEX_TILE = "gcs/guastavino"
 TEX_WOOD = "gcs/wood"
 TEX_PALE = "gcs/guastavino_pale"   # Whispering Gallery glaze
@@ -291,28 +292,57 @@ def lower_level(W, ents):
     Z, H = LOW_Z, 216
     # Ramps, one each side: a sloped floor slab, walls, rails round the well in the
     # concourse, and past the end wall a sloping Guastavino-tiled soffit.
-    for s in (-1, 1):
+    for e, s in ((e, s) for e in (1, -1) for s in (-1, 1)):   # e=-1 mirrors to the east end
+        X = lambda x: e*x
+        B = lambda x0, y0, z0, x1, y1, z1, t: box(min(X(x0), X(x1)), y0, z0, max(X(x0), X(x1)), y1, z1, t)
+        P = lambda poly: ccw([(X(x), z) for x, z in poly])
         ya, yb = sorted((s*RAMP_Y0, s*RAMP_Y1))
-        slope = [(RAMP_X0, 0), (RAMP_XF, Z), (RAMP_XF, Z - WALL), (RAMP_X0, -WALL)]
-        W(yprism(ccw(slope), ya, yb, TEX_FLOOR))
+        W(yprism(P([(RAMP_X0, 0), (RAMP_XF, Z), (RAMP_XF, Z - WALL), (RAMP_X0, -WALL)]), ya, yb, TEX_FLOOR))
         ia, ib = sorted((s*COR_Y, s*RAMP_Y0))
         oa, ob = sorted((s*RAMP_Y1, s*(RAMP_Y1 + WALL)))
         for wa, wb in ((ia, ib), (oa, ob)):
-            W(box(-HX, wa, Z - WALL, RAMP_X0, wb, 0, TEX_CREAM))
-            W(box(RAMP_XF, wa, Z - WALL, -HX, wb, ARCH_TOP, TEX_CREAM))
+            W(B(-HX, wa, Z - WALL, RAMP_X0, wb, 0, TEX_CREAM))
+            W(B(RAMP_XF, wa, Z - WALL, -HX, wb, ARCH_TOP, TEX_CREAM))
         x1 = -HX - WALL
-        soffit = [(x1, ARCH_TOP), (RAMP_XF, Z + H), (RAMP_XF, Z + H + WALL), (x1, ARCH_TOP + WALL)]
-        W(yprism(ccw(soffit), ya, yb, TEX_TILE))
+        W(yprism(P([(x1, ARCH_TOP), (RAMP_XF, Z + H), (RAMP_XF, Z + H + WALL), (x1, ARCH_TOP + WALL)]), ya, yb, TEX_TILE))
         # Cream parapets with brass rails on the floor round the well.
         for ra, rb in (sorted((s*(RAMP_Y0 - 16), s*RAMP_Y0)), sorted((s*RAMP_Y1, s*(RAMP_Y1 + 16)))):
-            det(box(-HX, ra, 0, RAMP_X0, rb, 42, TEX_CREAM))
-            det(box(-HX, ra - 2, 42, RAMP_X0, rb + 2, 46, TEX_GOLD))
-        det(box(RAMP_X0, ya, 0, RAMP_X0 + 16, yb, 42, TEX_CREAM))
-        det(box(RAMP_X0 - 2, ya, 42, RAMP_X0 + 18, yb, 46, TEX_GOLD))
+            det(B(-HX, ra, 0, RAMP_X0, rb, 42, TEX_CREAM))
+            det(B(-HX, ra - 2, 42, RAMP_X0, rb + 2, 46, TEX_GOLD))
+        det(B(RAMP_X0, ya, 0, RAMP_X0 + 16, yb, 42, TEX_CREAM))
+        det(B(RAMP_X0 - 2, ya, 42, RAMP_X0 + 18, yb, 46, TEX_GOLD))
         for k in range(4):
             x = round(-HX - WALL - 100 - k*(-HX - WALL - 100 - RAMP_XF)/3.5)
             t = (x - RAMP_X0) / (RAMP_XF - RAMP_X0)
-            ents.append(ent("light", (x, s*(RAMP_Y0+RAMP_Y1)//2, Z*t + 150), _light="255 205 150 30"))
+            ents.append(ent("light", (X(x), s*(RAMP_Y0+RAMP_Y1)//2, Z*t + 150), _light="255 205 150 30"))
+    # East ramp foot: a cream landing hall (EAST_D deep) with a flat coffered ceiling; its
+    # west side opens on a corridor back to the dining concourse, as the west ramps do.
+    ex0, ex1, ey = -RAMP_XF, -RAMP_XF + EAST_D, RAMP_Y1
+    W(box(ex0, -ey, Z - WALL, ex1, ey, Z, TEX_LOWF))
+    W(box(ex0, -ey, Z + H, ex1, ey, Z + H + WALL, TEX_COFFER))
+    W(box(ex1, -ey, Z - WALL, ex1 + WALL, ey, Z + H + WALL, TEX_CREAM))
+    for s in (-1, 1):
+        ya, yb = sorted((s*ey, s*(ey + WALL)))
+        W(box(ex0, ya, Z - WALL, ex1 + WALL, yb, Z + H + WALL, TEX_CREAM))
+        # Wall between ramp foot and corridor, up to the landing ceiling.
+        wa, wb = sorted((s*COR_Y, s*RAMP_Y0))
+        W(box(ex0 - WALL, wa, Z + H - 8, ex0, wb, Z + H + WALL, TEX_CREAM))
+    W(box(ex0 - WALL, -COR_Y, Z + H - 8, ex0, COR_Y, Z + H + WALL, TEX_CREAM))
+    # Brass-framed lit doors to the platforms (sealed until area 4) on the landing's east wall.
+    for c in (-200, 0, 200):
+        det(box(ex1 - 6, c - 60, Z, ex1, c + 60, Z + 132, TEX_GRID))
+        det(box(ex1 - 8, c - 52, Z, ex1 - 6, c + 52, Z + 124, TEX_DOOR))
+    for y in (-240, 0, 240):
+        det(box(ex0 + EAST_D//2 - 8, y - 8, Z + H - 30, ex0 + EAST_D//2 + 8, y + 8, Z + H - 14, TEX_BULB))
+        ents.append(ent("light", (ex0 + EAST_D//2, y, Z + H - 60), _light="255 210 160 40"))
+    ents.append(ent("env_cubemap", (ex0 + EAST_D//2, 0, Z + 72)))
+    W(box(DIN_X1 + WALL, -COR_Y, Z - WALL, ex0, COR_Y, Z, TEX_LOWF))
+    W(box(DIN_X1 + WALL, -COR_Y, -WALL - 16, ex0 - WALL, COR_Y, 0, TEX_CREAM))
+    for s in (-1, 1):
+        wa, wb = sorted((s*COR_Y, s*RAMP_Y0))
+        W(box(DIN_X1 + WALL, wa, Z - WALL, HX, wb, -WALL, TEX_CREAM))
+    for x in range(DIN_X1 + 160, ex0, 320):
+        ents.append(ent("light", (x, 0, -110), _light="255 210 160 25"))
     # Corridor between the ramps from the gallery east to the dining concourse.
     W(box(RAMP_XF, -COR_Y, Z - WALL, DIN_X0, COR_Y, Z, TEX_LOWF))
     W(box(RAMP_XF, -COR_Y, -WALL - 16, DIN_X0, COR_Y, 0, TEX_CREAM))
@@ -428,7 +458,8 @@ def lower_level(W, ents):
     for s in (-1, 1):
         ya, yb = sorted((s*DIN_Y, s*(DIN_Y + WALL)))
         W(box(DIN_X0 - WALL, ya, Z - WALL, DIN_X1 + WALL, yb, 0, TEX_CREAM))
-    W(box(DIN_X1, -DIN_Y, Z - WALL, DIN_X1 + WALL, DIN_Y, 0, TEX_CREAM))
+    for y0, y1 in ((-DIN_Y, -COR_Y), (COR_Y, DIN_Y)):
+        W(box(DIN_X1, y0, Z - WALL, DIN_X1 + WALL, y1, 0, TEX_CREAM))
     for y0, y1 in ((-DIN_Y, -COR_Y), (COR_Y, DIN_Y)):
         W(box(DIN_X0 - WALL, y0, Z - WALL, DIN_X0, y1, 0, TEX_CREAM))
     for x in range(DIN_X0 + 160, DIN_X1 - 100, 240):
@@ -466,7 +497,7 @@ def build():
 
     # Sealed outer hull (nodraw) so the interior can't leak while geometry is rough.
     O = 256
-    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, HX+O+WALL, -HY-WALL-64, HY+WALL+64, CROWN+WALL+64
+    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, -HY-WALL-64, HY+WALL+64, CROWN+WALL+64
     ZB = LOW_Z - 2*WALL - 64
     W(box(X0, Y0, ZB, X1, Y1, ZB+64, NODRAW))
     W(box(X0, Y0, Z1, X1, Y1, Z1+64, NODRAW))
@@ -476,9 +507,10 @@ def build():
     W(box(X1, Y0-64, ZB, X1+64, Y1+64, Z1+64, NODRAW))
 
     # Floor (cut by the two west ramp wells) and long walls.
-    W(box(RAMP_X0, -HY, -WALL, HX, HY, 0, TEX_FLOOR))
+    W(box(RAMP_X0, -HY, -WALL, -RAMP_X0, HY, 0, TEX_FLOOR))
     for y0, y1 in ((-HY, -RAMP_Y1), (-RAMP_Y0, RAMP_Y0), (RAMP_Y1, HY)):
         W(box(-HX, y0, -WALL, RAMP_X0, y1, 0, TEX_FLOOR))
+        W(box(-RAMP_X0, y0, -WALL, HX, y1, 0, TEX_FLOOR))
     lower_level(W, ents)
     W(box(-HX, -HY-WALL, -WALL, HX, -HY, SPRING, TEX_WALL))
     W(box(-HX, HY, -WALL, HX, HY+WALL, SPRING, TEX_WALL))
@@ -514,11 +546,8 @@ def build():
         xa, xb = min(xin, xout), max(xin, xout)
         # Arcades: three arched openings under the balcony and three behind it, each into a
         # short sealed passage. Wall bands between them are solid.
-        if sgn < 0:   # ramps pass under the west wall's side arches
-            for y0, y1 in ((-HY, -RAMP_Y1), (-RAMP_Y0, RAMP_Y0), (RAMP_Y1, HY)):
-                W(box(xa, y0, -WALL, xb, y1, 0, TEX_WALL))
-        else:
-            W(box(xa, -HY, -WALL, xb, HY, 0, TEX_WALL))
+        for y0, y1 in ((-HY, -RAMP_Y1), (-RAMP_Y0, RAMP_Y0), (RAMP_Y1, HY)):   # ramps pass under the side arches
+            W(box(xa, y0, -WALL, xb, y1, 0, TEX_WALL))
         W(box(xa, -HY, ARCH_TOP, xb, HY, BALC_Z, TEX_WALL))
         W(box(xa, -HY, BALC_Z + BARCH_H, xb, HY, win_z0, TEX_WALL))
         for z0, aw, ah in ((0, ARCH_W, ARCH_TOP), (BALC_Z, BARCH_W, BARCH_H)):
@@ -528,7 +557,7 @@ def build():
                 W(box(xa, aedges[j], z0, xb, aedges[j+1], top, TEX_WALL))
             for c in centres:
                 arcade_bay(W, ents, sgn, xin, xout, c, z0, aw//2, top, min(WALL, BALC_Z - ARCH_TOP) if z0 == 0 else WALL,
-                           ramp=(sgn < 0 and z0 == 0 and c != 0))
+                           ramp=(z0 == 0 and c != 0))
         W(box(xa, -HY, win_zc, xb, HY, CROWN+WALL, TEX_WALL))
         W(box(xa, -HY, win_z1, xb, -win_w//2, win_zc, TEX_WALL))
         W(box(xa, win_w//2, win_z1, xb, HY, win_zc, TEX_WALL))
