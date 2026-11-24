@@ -61,12 +61,13 @@ def panel(top, polys, faint, title, labels, spawns=()):
     for lbl, x, y in labels:
         cx, cy = P(x, y); w = d.textlength(lbl, font=f); d.rectangle((cx-w/2-6, cy-16, cx+w/2+6, cy+14), fill=(255, 255, 255)); d.text((cx-w/2, cy-13), lbl, fill=(30, 30, 30), font=f)
 
-d.text((60, 30), "gm_grand_central: Main Concourse and lower level (rough plan)", fill=(40, 30, 20), font=fb)
+d.text((60, 30), "gm_grand_central: Main Concourse, Vanderbilt Hall and lower level (rough plan)", fill=(40, 30, 20), font=fb)
 d.text((60, 78), f"dark = walls and fixtures at chest height, light = balcony level   |   grid 50 ft   |   {round((x1-x0)/FT)} x {round((y1-y0)/FT)} ft   |   N up", fill=(80, 70, 60), font=f)
 cx0 = -1650  # concourse west wall
 panel(130, floor, balc, "Main Concourse level (0 ft)",
       (("Information booth", 0, 0), ("Ticket windows (south)", 0, -600), ("Flag (north centre bay)", 0, 600),
-       ("West balcony + stairs", cx0 + 360, 0), ("East balcony + stairs", -cx0 - 360, 0), ("Ramp wells", -1300, 390), ("Ramp wells", 1300, 390)), spawn)
+       ("West balcony + stairs", cx0 + 360, 0), ("East balcony + stairs", -cx0 - 360, 0), ("Ramp wells", -1300, 390), ("Ramp wells", 1300, 390),
+       ("Vanderbilt Hall", -360, -1456), ("Passage", -1302, -930), ("42nd St doors", -360, -2050)), spawn)
 panel(130 + PH, low, (), "Lower level (-22 ft): ramps, Whispering Gallery, Oyster Bar, dining concourse, east landing hall",
       (("Dining concourse", 0, 0), ("Ramps", -2000, 390), ("Ramps", -2000, -390), ("Corridor", -1700, 0),
        ("Ramps", 2000, 390), ("Ramps", 2000, -390), ("Corridor", 1850, 0), ("East landing hall", 2924, 0),

@@ -19,3 +19,6 @@ Wikimedia Commons, downloaded at 1600 px for colour, tone and pattern sampling. 
 | Whispering_Gallery.jpg | Ɱ | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Whispering_Gallery.jpg |
 | Grand_Central_Oyster_Bar_Grand_Central_Station_NYC.jpg | Tim Evanson | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Grand_Central_Oyster_Bar_-_Grand_Central_Station_NYC.jpg |
 | Oyster_Bar_Restaurant_Grand_Central_Terminal.jpg | Detroit Publishing Co. | Public domain | https://commons.wikimedia.org/wiki/File:Oyster_Bar_Restaurant,_Grand_Central_Terminal.jpg |
+| Grand_Central_Terminal_Vanderbilt_hall_chandeliers_NYC_2013_.jpg | Ponor | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Grand_Central_Terminal_-_Vanderbilt_hall_chandeliers_-_NYC_2013-11-05_-_DSC00546.jpg |
+| Vanderbilt_Hall_Grand_Central_Terminal_New_York_City_NY.jpg | Warren LeMay | CC0 | https://commons.wikimedia.org/wiki/File:Vanderbilt_Hall,_Grand_Central_Terminal,_New_York_City,_NY.jpg |
+| Vanderbilt_Hall_Grand_Central_Terminal_New_York_City_NY_4804.jpg | Warren LeMay | CC0 | https://commons.wikimedia.org/wiki/File:Vanderbilt_Hall,_Grand_Central_Terminal,_New_York_City,_NY_-_48046207521.jpg |

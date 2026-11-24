@@ -28,6 +28,10 @@ local CAMS = {
   { "dining",       Vector(-960, -400, -200), Angle(-4, 20, 0) },
   { "ob_entry",     Vector(-2780, 0, -210), Angle(-6, 180, 0) },
   { "dining_clock", Vector(-220, -160, -190), Angle(4, 35, 0) },
+  { "vh_door",      Vector(-1302, -400, 90), Angle(0, -90, 0) },
+  { "vanderbilt",   Vector(-1480, -1180, 90), Angle(-12, -15, 0) },
+  { "vh_east",      Vector(700, -1450, 90), Angle(-8, 180, 0) },
+  { "vh_42nd",      Vector(-360, -1150, 90), Angle(-2, -90, 0) },
   { "ob_counter",   Vector(-3600, 300, -200), Angle(-6, 200, 0) },
 }
 local i, cam, frames = 0, nil, 0
