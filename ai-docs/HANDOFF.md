@@ -64,10 +64,12 @@ Updated: 2026-11-23
 
 - Sun shafts: tools/make_shaft.py writes shaft.vtf (soft-edged streaky beam, fades in past the balcony and out toward the floor); gcs/shaft is additive UnlitGeneric $color 2.4. One func_illusionary yprism beam per end window at the spotlight pitch (38 deg), 0.55 x window width, y faces nodraw. shots/20261123-1931 (compare.jpg).
 
+- Booth interior: glass is a thin translucent ring (gcs/booth_glass, UnlitGeneric alpha 0.28); inside a cream counter with brass top under the glass, a cream cabinet core under the clock column, two warm lights. Reads see-through like the photos. shots/20261123-1935.
+
 ## Next
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
-2. Booth glass is still flat blue-grey behind the new grille; could get ticket-window openings or a lit interior.
+2. Booth interior is in; could add clerks' props or brighter interior light.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
 4. Board glyphs are stand-in dot clusters, not letters; chandeliers could become a polywright model with globes later.
 5. Hammer++ for hand checks (optional).
