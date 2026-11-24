@@ -1,7 +1,7 @@
 #!/bin/sh
 # Launch GMod on gm_grand_central, let tools/lua/gcs_shots.lua capture the cameras,
 # copy the JPGs into shots/. The Lua quits the game; fallback kill is by PID only.
-G="D:/SteamLibrary/steamapps/common/GarrysMod"
+G="${GMOD:-D:/SteamLibrary/steamapps/common/GarrysMod}"
 QW="C:/Users/m4bwa/.claude/plugins/cache/mark-local/quirkwright/0.2.1/skills/quirkwright/scripts/qw.py"
 cd "$(dirname "$0")/.."
 D="$G/garrysmod/data"

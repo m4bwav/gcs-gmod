@@ -3,3 +3,7 @@ src/*.log
 src/*.prt
 src/*.lin
 src/*.vmx
+ai-docs/chain-loop*.log
+ai-docs/chain-loop*.out
+ask/*/server.json
+ask/*/server.log

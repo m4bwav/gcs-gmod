@@ -1,7 +1,7 @@
 #!/bin/sh
 # Full compile of src/gm_grand_central.vmf, pack src/materials into the BSP, copy into Garry's Mod maps.
 set -e
-G="D:/SteamLibrary/steamapps/common/GarrysMod"
+G="${GMOD:-D:/SteamLibrary/steamapps/common/GarrysMod}"
 cd "$(dirname "$0")/.."
 python tools/build_vmf.py
 mkdir -p "$G/garrysmod/materials/gcs"
