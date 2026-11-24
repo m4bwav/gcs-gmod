@@ -384,6 +384,16 @@ def build():
                 xs = sgn*(HX-BALC_D) - sgn*(steps-k)*run
                 xa, xb = sorted((xs, xs+sgn*run))
                 ents.append(ent("func_detail", solids=box(xa, y0, 0, xb, y1, (k+1)*rise, TEX_TRIM)))
+            # Solid cream balustrades on both sides with a brass handrail, newel at the foot.
+            xf, xt = sgn*(HX-BALC_D) - sgn*steps*run, sgn*(HX-BALC_D)
+            for ya, yb in ((y0-18, y0), (y1, y1+18)):
+                wall = [(xf, 0), (xt, 0), (xt, BALC_Z+42), (xf, 42)]
+                rail = [(xf, 42), (xt, BALC_Z+42), (xt, BALC_Z+46), (xf, 46)]
+                ents.append(ent("func_detail", solids=yprism(ccw(wall), ya, yb, TEX_CREAM)))
+                ents.append(ent("func_detail", solids=yprism(ccw(rail), ya-2, yb+2, TEX_GOLD)))
+                na, nb = sorted((xf, xf-sgn*24))
+                ents.append(ent("func_detail", solids=box(na, ya-3, 0, nb, yb+3, 54, TEX_CREAM)))
+                ents.append(ent("func_detail", solids=box(na+4, ya+1, 54, nb-4, yb-1, 66, TEX_GOLD)))
 
     # Information booth with the four-faced clock above it.
     # Booth: cream marble base, dark glass with brass posts, gold cornice; the clock sits
@@ -394,6 +404,15 @@ def build():
     det(oct8(12.5*FT), 3*FT, 8*FT, TEX_DIM)
     for x, y in oct8(13*FT):
         det(ngon(x, y, 6, 4, math.pi/4), 3*FT, 8*FT, TEX_GOLD)
+    # Brass grille on the glass: two mullions per face, a counter ledge and a top rail.
+    out, inn = oct8(12.75*FT), oct8(12.55*FT)
+    for i in range(8):
+        a, b, ai, bi = out[i], out[(i+1) % 8], inn[i], inn[(i+1) % 8]
+        for t in (1/3, 2/3):
+            px, py = a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t
+            det(ngon(px, py, 3, 4, math.pi/4), 3*FT, 8*FT, TEX_GOLD)
+        det(ccw([a, b, bi, ai]), 4*FT, 4*FT+3, TEX_GOLD)
+        det(ccw([a, b, bi, ai]), 7*FT, 7*FT+2, TEX_GOLD)
     det(oct8(13.5*FT), 8*FT, 9*FT, TEX_GOLD)
     det(oct8(12*FT), 9*FT, 10*FT, TEX_CREAM)
     det(oct8(2.5*FT), 10*FT, 11*FT, TEX_GOLD)
