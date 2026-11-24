@@ -86,3 +86,25 @@ d = np.hypot(u - cell/2, w - cell/2)
 a = np.clip((34 - d) / 4, 0, 1)[..., None]
 img = img * (1 - a) + GOLD * (0.85 + 0.15*np.cos(d/2))[..., None] * a
 save(np.clip(img, 0, 255).astype(np.uint8), "coffer")
+
+
+def fbm_tile(n, octaves=5):
+    # Seamless fbm: tile each random grid 3x3, resize, keep the middle tile.
+    out = np.zeros((n, n))
+    for o in range(octaves):
+        k = 3 * 2**o
+        g = np.tile(rng.random((k, k)), (3, 3))
+        img = Image.fromarray((g * 255).astype(np.uint8)).resize((3*n, 3*n), Image.BICUBIC)
+        out += (np.asarray(img, float)[n:2*n, n:2*n] / 255 - .5) / 2**o
+    return out
+
+
+# Cream marble for balustrades, parapets, booth base and plinths: smooth pale field,
+# soft cloudy tone and a few thin warm-grey veins (sin of warped coordinates), no joints.
+CREAM = np.array([236, 222, 194], float)
+yy, xx = np.mgrid[0:N, 0:N] / N
+warp = fbm_tile(N, 5)
+vein = np.abs(np.sin(2*np.pi*(xx + yy) * 2 + warp * 9))
+img = CREAM * (1 + fbm_tile(N, 4) * 0.08)[..., None]
+img *= (1 - 0.16 * np.clip(1 - vein / 0.06, 0, 1))[..., None]
+save(np.clip(img, 0, 255).astype(np.uint8), "cream_marble")

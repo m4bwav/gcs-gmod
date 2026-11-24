@@ -355,7 +355,7 @@ def build():
             ya, yb = inset(0, 60)
             ents.append(ent("func_detail", solids=box(max(x-7*FT, -HX), ya, 0, min(x+7*FT, HX), yb, SPRING-72, TEX_WALL)))
             ya, yb = inset(0, 72)
-            ents.append(ent("func_detail", solids=box(max(x-8*FT, -HX), ya, 0, min(x+8*FT, HX), yb, 3*FT, TEX_TRIM)))
+            ents.append(ent("func_detail", solids=box(max(x-8*FT, -HX), ya, 0, min(x+8*FT, HX), yb, 3*FT, TEX_CREAM)))
         for k in range(BAYS):
             cx = -HX + k*bay + bay//2
             w = bay//2 - 10*FT
