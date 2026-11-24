@@ -468,6 +468,13 @@ def build():
     for k in range(-6, 7):
         x = k*16*FT
         ents.append(ent("func_detail", solids=box(x-6*FT, -HY+0, 0, x-5*FT, -HY+3*FT, 14*FT, TEX_TRIM)))
+        # Brass bracket lamp on each pier: wall plate, arm, cup and a glowing globe.
+        lx, ly = x-5.5*FT, -HY+3*FT
+        det(ngon(lx, ly+2, 4, 6), 10.5*FT, 12*FT, TEX_GOLD)
+        ents.append(ent("func_detail", solids=box(lx-1, ly, 11*FT, lx+1, ly+16, 11*FT+2, TEX_GOLD)))
+        det(ngon(lx, ly+18, 5, 8, math.pi/8), 11*FT-4, 11*FT, TEX_GOLD)
+        det(ngon(lx, ly+18, 6, 8, math.pi/8), 11*FT, 11*FT+10, TEX_BULB)
+        ents.append(ent("light", (lx, ly+30, 11*FT+4), _light="255 210 150 8"))
         if k < 6:
             # Each window: cream marble counter with a brass top, brass-grilled dim glass, cream lintel.
             w0, w1 = x-5*FT, x+11*FT
