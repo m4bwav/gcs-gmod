@@ -45,6 +45,7 @@ The exterior, added in 0.5.0 (shots/20261124-0837):
 | | |
 |---|---|
 | ![42nd Street facade](docs/ext_street.jpg) | ![Glory of Commerce and the clock from the viaduct](docs/ext_clock.jpg) |
+| ![Biltmore Room](docs/biltmore.jpg) | ![Doorway to the Biltmore Room](docs/bilt_door.jpg) |
 | ![Out through the vestibule doors](docs/vest_out.jpg) | ![Looking west along 42nd Street](docs/ext_west.jpg) |
 
 ### Level map
@@ -64,6 +65,7 @@ Drawn from the map source by `tools/make_map.py`: walls and fixtures at chest he
 - Vanderbilt Hall (0.3.0): through a passage in the west bay of the south wall, a 200 x 64 ft hall with a coffered ceiling and gilded cornice, tall grilled windows, five tiered chandeliers, a pedimented east doorway and the 42nd Street vestibule with lit brass doors
 - Track platforms (0.4.0): three brass-framed gates (Tracks 29, 30, 31) in the north wall lead to a low train shed with three island platforms in rose tile with yellow edges, riveted steel columns, fluorescent strips, a brass railing round the track ends, and three Metro-North cars; one stands open to walk through
 - The exterior (0.5.0): out through the Vanderbilt vestibule onto 42nd Street: the facade with three great arched windows between paired columns, oval windows, the GRAND CENTRAL TERMINAL attic inscription, the clock under the Glory of Commerce group, a balustraded terrace with a stair, the Park Avenue Viaduct across the street, office towers, the MetLife tower behind, and open sky
+- The Biltmore Room (0.6.0): through a marble doorway in the northwest of the concourse, the old arrival room with a beamed ceiling, dentil cornice, brass sconces, the old arrivals board in its brass frame and a railed escalator well
 - The lower level (0.2.0): ramps from both ends of the concourse, the Whispering Gallery under a Guastavino tile groin vault, the Oyster Bar with its tiled vaults, counters and stools, the dining concourse with a coffered ceiling and a small clock booth, and an east landing hall
 
 ## Building

@@ -72,7 +72,7 @@ panel(130, ya1, PH1, floor, balc, "Main Concourse level (0 ft)",
        ("West balcony + stairs", cx0 + 360, 0), ("East balcony + stairs", -cx0 - 360, 0), ("Ramp wells", -1300, 390), ("Ramp wells", 1300, 390),
        ("Vanderbilt Hall", -360, -1456), ("Passage", -1302, -930), ("42nd St doors", -360, -2050),
        ("Track gates", 0, 830), ("Track platforms (shed)", 0, 2600), ("Metro-North cars", -186, 1900),
-       ("42nd Street facade", -360, -2400), ("42nd Street", 600, -2900), ("Park Ave Viaduct", -2076, -3000), ("Terrace stair", 1300, -2500)), spawn)
+       ("42nd Street facade", -360, -2400), ("42nd Street", 600, -2900), ("Park Ave Viaduct", -2076, -3000), ("Terrace stair", 1300, -2500), ("Biltmore Room", -1360, 1500)), spawn)
 panel(130 + PH1, yb1, PH2, low, (), "Lower level (-22 ft): ramps, Whispering Gallery, Oyster Bar, dining concourse, east landing hall",
       (("Dining concourse", 0, 0), ("Ramps", -2000, 390), ("Ramps", -2000, -390), ("Corridor", -1700, 0),
        ("Ramps", 2000, 390), ("Ramps", 2000, -390), ("Corridor", 1850, 0), ("East landing hall", 2924, 0),
