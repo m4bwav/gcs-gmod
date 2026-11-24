@@ -17,6 +17,7 @@ BAYS = 5                                    # bays along each long wall, one lun
 WALL = 64
 BALC_Z = 26 * FT                            # balcony floor height
 BALC_D = 22 * FT                            # balcony depth from the end wall
+BAY_Z0 = 42 * FT                            # bottom of the long-wall bay windows (photo estimate)
 ARCH_W, ARCH_TOP, ARCH_D = 18 * FT, 21 * FT, 16 * FT   # floor arcade under each balcony
 BARCH_W, BARCH_H = 14 * FT, 16 * FT        # balcony-level arcade behind each balcony
 
@@ -329,11 +330,11 @@ def build():
             cx = -HX + k*bay + bay//2
             w = bay//2 - 10*FT
             ga, gb = inset(0, 2)
-            ents.append(ent("func_detail", solids=box(cx-w, ga, 30*FT, cx+w, gb, SPRING-8*FT, TEX_DIM)))
+            ents.append(ent("func_detail", solids=box(cx-w, ga, BAY_Z0, cx+w, gb, SPRING-8*FT, TEX_DIM)))
             ma, mb = inset(2, 6)
             for j in range(-3, 4):
-                ents.append(ent("func_detail", solids=box(cx + j*w//4 - 3, ma, 30*FT, cx + j*w//4 + 3, mb, SPRING-8*FT, TEX_GRID)))
-            for z in range(30*FT, SPRING-8*FT+1, 96):
+                ents.append(ent("func_detail", solids=box(cx + j*w//4 - 3, ma, BAY_Z0, cx + j*w//4 + 3, mb, SPRING-8*FT, TEX_GRID)))
+            for z in range(BAY_Z0, SPRING-8*FT+1, 96):
                 ents.append(ent("func_detail", solids=box(cx-w, ma, z-3, cx+w, mb, z+3, TEX_GRID)))
             # Lunette: half-disc glass standing on the cornice, poking through the vault.
             la, lb = inset(88, 92)
