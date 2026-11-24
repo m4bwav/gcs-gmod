@@ -107,6 +107,7 @@ Updated: 2026-11-23
 - Release 0.1.0 (2026-11-23): Mark signed off in chat. Chandelier globes (shots/20261123-2134). Workshop https://steamcommunity.com/sharedfiles/filedetails/?id=3845077025 public with description (workshop/description.txt: modwright link, Z-Image Turbo banner note, Commons photo authors), 5 previews. Update an upload: gmad create -folder build/addon, gmpublish update -id 3845077025 -addon build/gm_grand_central.gma, then python tools/workshop_update.py 3845077025 --desc workshop/description.txt. GitHub release v0.1.0 carries the .gma.
 
 ## Next
+- 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
 - Update the wiki Changelog/Home with the Workshop link.
 - Wiki is live (notes/2026-11-23-github-wiki.md); update it from docs/wiki/ when the map changes.
