@@ -27,6 +27,7 @@ TEX_GLOW = "gcs/window_glow"
 TEX_GOLD = "gcs/gold"
 TEX_GRID = "gcs/mullion"
 TEX_DIM = "gcs/window_dim"
+TEX_CREAM = "gcs/cream"
 NODRAW = "tools/toolsnodraw"
 
 _id = [0]
@@ -243,10 +244,12 @@ def build():
             # Lunette: half-disc glass standing on the cornice, poking through the vault.
             la, lb = inset(88, 92)
             ents.append(ent("func_detail", solids=yprism(halfdisc(cx, SPRING, 16*FT), la, lb, TEX_GLOW)))
-            fa, fb = inset(92, 108)
-            outer, inner = halfdisc(cx, SPRING, 19*FT), halfdisc(cx, SPRING, 16*FT)
-            for i in range(len(outer)-1):
-                ents.append(ent("func_detail", solids=yprism([outer[i], outer[i+1], inner[i+1], inner[i]], fa, fb, TEX_TRIM)))
+            # Sculpted cream surround (Flag_Ceiling photo): a wide stepped hood, gold-edged.
+            for r0, r1, d0, d1, tex in ((16, 19, 92, 112, TEX_CREAM), (19, 23, 92, 104, TEX_CREAM), (23, 24, 92, 100, TEX_GOLD)):
+                fa, fb = inset(d0, d1)
+                outer, inner = halfdisc(cx, SPRING, r1*FT), halfdisc(cx, SPRING, r0*FT)
+                for i in range(len(outer)-1):
+                    ents.append(ent("func_detail", solids=yprism([outer[i], outer[i+1], inner[i+1], inner[i]], fa, fb, tex)))
             ra, rb = inset(92, 96)
             for j in (-2, -1, 0, 1, 2):
                 top = SPRING + int(16*FT*math.sqrt(1 - (j*6/16)**2)) - 4

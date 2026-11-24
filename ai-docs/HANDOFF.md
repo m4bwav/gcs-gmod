@@ -30,8 +30,10 @@ Updated: 2026-11-23
 
 - Zodiac vault: tools/make_vault.py writes vault_mural.vtf (2048x1024, green field, Milky Way, ecliptic and equator as double gold lines with ticks, 12 stick-figure constellations); build_vmf.py maps it once over the vault's inner faces with per-segment UVs (xprism uvs=). gcs/vault uses it. shots/20261123-1757: vault reads like the photo.
 
+- Lunettes: stepped cream hood (gcs/cream, tinted plaster003a, r 16-23 ft) with a gold outer edge; ashlar now 8x4 blocks (no wrap seam). shots/20261123-1803.
+
 ## Next
-1. Lunettes need the cream sculpted surround (photo: Flag_Ceiling); the 3-block ashlar has a 2 px seam at the tile wrap (512/3), switch to 4 blocks if visible; zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines).
+1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
 2. Clock block is a grey box (booth clock model, polywright).
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
 4. Chandeliers (polywright), ticket-window departure board, flags; then the zodiac ceiling.

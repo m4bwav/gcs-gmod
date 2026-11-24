@@ -12,3 +12,4 @@
 - 2026-11-23: Custom VTFs work: srctools.vtf.VTF(fmt=RGB888), copy_from RGBA8888 bytes, compute_mipmaps, save; compile.sh packs it with the VMTs. Procedural marble floor (tools/make_floor.py) replaced the checkered HL2 tile; shots/20261123-1747.
 - 2026-11-23: Procedural ashlar walls + starry teal vault (tools/make_walls.py); first try (4 courses, orange) too saturated and blocky, 8x3 cream-honey matches photos (shots/20261123-1753).
 - 2026-11-23: Zodiac vault mural (tools/make_vault.py) mapped once over the vault via per-face uaxis/vaxis with shift = (s0 - dot(p0,t))/scale; continuous across 20 segments, shots/20261123-1757.
+- 2026-11-23: Lunette cream hoods + 4-block ashlar; first cream tint [1.05 .98 .86] on plaster003a read grey-brown, [1.35 1.22 .98] reads cream (shots/20261123-1803).
