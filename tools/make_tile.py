@@ -28,23 +28,31 @@ edge_u = np.where(horiz, ((k % 2 == 0) & (fu < .06)) | ((k % 2 == 1) & (fu > .94
 edge_v = np.where(horiz, (fv < .06) | (fv > .94), (((uf - vf) % 2 == 0) & (fv > .94)) | (((uf - vf) % 2 == 1) & (fv < .06)))
 joint = edge_u | edge_v
 
-# Per-tile tone: hash the id into a brightness and warmth jitter.
-h = (np.sin(tile_id * 12.9898) * 43758.5453) % 1
-h2 = (np.sin(tile_id * 78.233) * 12543.123) % 1
-tone = BUFF * (0.88 + 0.2 * h[..., None])
-tone[..., 0] += (h2 - .5) * 14
-tone[..., 2] -= (h2 - .5) * 10
-grain = rng.normal(0, 4, (N, N, 1))
-img = np.where(joint[..., None], JOINT, tone + grain)
-img = np.clip(img, 0, 255).astype(np.uint8)
+def write_tile(name, buff, joint_col):
+    """Tone each herringbone tile around buff, joints joint_col; write gcs/<name>.vtf."""
+    # Per-tile tone: hash the id into a brightness and warmth jitter.
+    h = (np.sin(tile_id * 12.9898) * 43758.5453) % 1
+    h2 = (np.sin(tile_id * 78.233) * 12543.123) % 1
+    tone = buff * (0.88 + 0.2 * h[..., None])
+    tone[..., 0] += (h2 - .5) * 14
+    tone[..., 2] -= (h2 - .5) * 10
+    grain = rng.normal(0, 4, (N, N, 1))
+    img = np.where(joint[..., None], joint_col, tone + grain)
+    img = np.clip(img, 0, 255).astype(np.uint8)
 
-Image.fromarray(img).save("shots/tex/guastavino.png")
-tex = vtf.VTF(N, N, fmt=vtf.ImageFormats.RGB888)
-tex.get().copy_from(np.dstack([img, np.full((N, N), 255, np.uint8)]).tobytes(), vtf.ImageFormats.RGBA8888)
-tex.compute_mipmaps()
-with open("src/materials/gcs/guastavino.vtf", "wb") as f:
-    tex.save(f)
-print("wrote src/materials/gcs/guastavino.vtf")
+    Image.fromarray(img).save(f"shots/tex/{name}.png")
+    tex = vtf.VTF(N, N, fmt=vtf.ImageFormats.RGB888)
+    tex.get().copy_from(np.dstack([img, np.full((N, N), 255, np.uint8)]).tobytes(), vtf.ImageFormats.RGBA8888)
+    tex.compute_mipmaps()
+    with open(f"src/materials/gcs/{name}.vtf", "wb") as f:
+        tex.save(f)
+    print(f"wrote src/materials/gcs/{name}.vtf")
+
+
+write_tile("guastavino", BUFF, JOINT)
+# Whispering Gallery: paler, pinker glaze (Commons Whispering_Gallery.jpg vault ~ 191 152 121 under warm light).
+write_tile("guastavino_pale", np.array([226, 200, 168], float), np.array([236, 228, 212], float))
+
 
 # Dark oak for the Oyster Bar counters: long brown streaks along u.
 g = np.cumsum(rng.normal(0, 1, (N, 1)), 0) * 0.6 + rng.normal(0, 3, (N, N))
