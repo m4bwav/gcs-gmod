@@ -1,6 +1,6 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (repo public, wiki live; sign-off page waiting on Mark)
+Status: in progress (0.1.0 released: Workshop 3845077025 public, GitHub v0.1.0)
 Updated: 2026-11-23
 
 - Prompt: plans/2026-11-23-gcs-gmod-continue-prompt.md
@@ -104,9 +104,12 @@ Updated: 2026-11-23
 
 - Uncapped fps: `UNCAP=1 sh tools/shots.sh` adds +fps_max 0 +mat_vsync 0. shots/20261123-2124: 676-896 fps (worst floor_east), so even a GPU at a fifth of the 5060 Ti clears 100 fps. Budget is not a concern at this detail level.
 
+- Release 0.1.0 (2026-11-23): Mark signed off in chat. Chandelier globes (shots/20261123-2134). Workshop https://steamcommunity.com/sharedfiles/filedetails/?id=3845077025 public with description (workshop/description.txt: modwright link, Z-Image Turbo banner note, Commons photo authors), 5 previews. Update an upload: gmad create -folder build/addon, gmpublish update -id 3845077025 -addon build/gm_grand_central.gma, then python tools/workshop_update.py 3845077025 --desc workshop/description.txt. GitHub release v0.1.0 carries the .gma.
+
 ## Next
+- Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
+- Update the wiki Changelog/Home with the Workshop link.
 - Wiki is live (notes/2026-11-23-github-wiki.md); update it from docs/wiki/ when the map changes.
-0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
 1. Zodiac figures are recognisable silhouettes now; finer line drawings inside them (eyes, fur, folds) could follow. Lunette hoods have voussoirs and keystones; garland carving would be a normal map.
 2. Booth interior is in and brighter; clerks' props could follow. Ticket windows have TICKETS plaques and marble reveals and segmental arched heads and bracket lamps; clerks could follow.
 3. Measured references: secondary-source check done (refs/concourse-dimensions.md, 2026-11-23): vault springline/rise agree with the build. Still open: a real HABS NY-5450 section or LPC report for balcony, sill and lunette heights; end windows maybe 33x60 ft (ours 26 ft wide, taller).
@@ -126,7 +129,7 @@ Updated: 2026-11-23
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.
 
 ## Waiting on Mark
-- askwright set ask/concourse-signoff (2 questions: upload now or keep detailing; which gaps first). Served at http://127.0.0.1:62012/ on 2026-11-23; `ask.py serve ask/concourse-signoff --detach` restarts it.
+- Nothing.
 
 ## Directive from Mark (2026-11-23)
 - Use and improve every plugin involved (polywright, modwright, photowright, artwright, comfyui-gen...); fix gaps in the plugins' own repos.
