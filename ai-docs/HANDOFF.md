@@ -95,3 +95,13 @@ Updated: 2026-11-23
 ## Directive from Mark (2026-11-23)
 - Use and improve every plugin involved (polywright, modwright, photowright, artwright, comfyui-gen...); fix gaps in the plugins' own repos.
 - Get textures right from real photos (licensed/public domain, sources in refs/); after each compile, put screenshots beside photos from matching viewpoints and iterate until they match. This comes before item 1 below.
+
+- Remote: private github.com/m4bwav/gcs-gmod (created 2026-11-23). Push main after every merge.
+
+## Directive from Mark (2026-11-23, later): make the repo public
+Mark approved making m4bwav/gcs-gmod public. Do it as one milestone, before more detail work:
+1. Audit what would go public: refs/photos are Wikimedia images (licences in refs/SOURCES.md). Keep each only if its licence allows redistribution, with attribution in refs/SOURCES.md and the README; otherwise untrack it (gitignore) and keep it local. No game-ripped or paid content, no secrets, no personal paths that matter. If history holds something that must not go public, ask on an askwright page instead of rewriting history.
+2. README with a ComfyUI hero banner (comfyui-gen, no Krea 2; the readme-banner rule), screenshots, how to build (tools/compile.sh) and play, credits/licences, a LICENSE file (pick one, flag the ruling).
+3. Flip to public (`gh repo edit m4bwav/gcs-gmod --visibility public --accept-visibility-change-consequences`), add SECURITY.md, topics and a description.
+4. GitHub wiki with wikiwright: Home, Building the map, Tools, Reference photos and accuracy, Roadmap (area order from the plan), Changelog. Check every page is live.
+Push main after every merge.
