@@ -1,0 +1,4 @@
+ext_street      146 fps
+ext_clock       147 fps
+statue          146 fps
+ext_terrace     146 fps

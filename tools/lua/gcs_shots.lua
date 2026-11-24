@@ -46,6 +46,7 @@ local CAMS = {
   { "ext_door",     Vector(-360, -2616, 64), Angle(-8, 90, 0) },
   { "ext_street",   Vector(-360, -3516, 72), Angle(-28, 90, 0) },
   { "ext_clock",    Vector(-2076, -3100, 352), Angle(-37, 25, 0) },
+  { "statue",       Vector(-360, -3200, 1900), Angle(-4, 90, 0) },
   { "ext_viaduct",  Vector(-2076, -3400, 352), Angle(-5, 90, 0) },
   { "ext_west",     Vector(2200, -2900, 72), Angle(-10, 180, 0) },
   { "ext_terrace",  Vector(1300, -2316, 352), Angle(0, 180, 0) },

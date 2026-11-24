@@ -736,32 +736,15 @@ def exterior(W, ents):
     det(box(FX0, YF - 2 * FT, 104 * FT, FX1, YF, 126 * FT, STONE))
     det(box(FCX - 40 * FT, YF - 2 * FT - 4, 110 * FT, FCX + 40 * FT, YF - 2 * FT, 120 * FT, "gcs/inscription"))
     det(box(FX0, YF - 4 * FT, 126 * FT, FX1, YF, RZ, STONE))
-    # Glory of Commerce: pedestal, clock in a stone surround, Mercury standing with spread
-    # wings, Hercules seated to the left, Minerva to the right (blocky masses, ~48 ft group).
-    S = "gcs/statue"
+    # Glory of Commerce: pedestal and the clock in a stone surround; the figures are a model.
     det(box(FCX - 34 * FT, YF - 4 * FT, RZ, FCX + 34 * FT, YF + 24 * FT, RZ + 8 * FT, STONE))
     det(yprism(ccw([(FCX - 11 * FT, RZ + 8 * FT), (FCX + 11 * FT, RZ + 8 * FT)] + halfdisc(FCX, RZ + 16 * FT, 11 * FT, 10)[:-1]
                    + [(FCX - 11 * FT, RZ + 16 * FT)]), YF - 3 * FT, YF + 10 * FT, STONE))
     det(yprism(ngon_xz(FCX, CLK_Z, CLK_R + 6, 20), YF - 3 * FT - 4, YF - 3 * FT, "gcs/gold"))
     det(yprism(ngon_xz(FCX, CLK_Z, CLK_R, 20), YF - 3 * FT - 8, YF - 3 * FT - 4, "gcs/clock_out"))
-    mz = RZ + 26 * FT
-    for dx in (-1, 1):
-        det(prism(ngon(FCX + dx * 14, YF + 3 * FT, 10, 8), mz, mz + 12 * FT, S))                 # legs
-    det(prism(ngon(FCX, YF + 3 * FT, 22, 8), mz + 12 * FT, mz + 21 * FT, S))                     # torso
-    det(prism(ngon(FCX, YF + 3 * FT, 12, 8), mz + 21 * FT, mz + 24 * FT, S))                     # head
-    det(prism(ngon(FCX, YF + 3 * FT, 14, 8), mz + 24 * FT, mz + 25 * FT, S))                     # winged hat
-    det(box(FCX - 14 * FT, YF + 3 * FT - 6, mz + 19 * FT, FCX - 20, YF + 3 * FT + 6, mz + 20 * FT, S))   # outstretched arm
-    det(box(FCX + 20, YF + 3 * FT - 5, mz + 17 * FT, FCX + 6 * FT, YF + 3 * FT + 5, mz + 18 * FT, S))
-    det(prism(ngon(FCX + 6 * FT, YF + 3 * FT, 4, 6), mz + 14 * FT, mz + 23 * FT, "gcs/gold"))       # caduceus
-    for s in (-1, 1):
-        wing = [(FCX + s * 10, mz + 18 * FT), (FCX + s * 20 * FT, mz + 22 * FT), (FCX + s * 17 * FT, mz + 15 * FT),
-                (FCX + s * 6 * FT, mz + 12 * FT)]
-        det(yprism(ccw(wing), YF + 5 * FT, YF + 5 * FT + 10, S))
-        cx = FCX + s * 22 * FT                                                                    # Hercules / Minerva
-        det(box(cx - 6 * FT, YF - 2 * FT, RZ + 8 * FT, cx + 6 * FT, YF + 8 * FT, RZ + 14 * FT, S))   # seat and legs
-        det(prism(ngon(cx, YF + 3 * FT, 26, 8), RZ + 14 * FT, RZ + 24 * FT, S))
-        det(prism(ngon(cx - s * 2 * FT, YF + 3 * FT, 13, 8), RZ + 24 * FT, RZ + 27 * FT, S))
-    det(yprism(ngon_xz(FCX + 30 * FT, RZ + 16 * FT, 4 * FT, 12), YF - 2 * FT, YF, S))           # Minerva's shield
+    # Figures as one model (make_models.py statue_group): brushes cost too many vertices.
+    ents.append(ent("prop_static", (FCX, YF + 3 * FT, RZ + 8 * FT), model="models/gcs/statue_group.mdl",
+                    angles="0 -90 0", solid="0", disableshadows="1"))   # studiomdl turns SMD +x to model +y
     # Park Avenue Viaduct crossing 42nd Street: deck at terrace level, arched steel fascias,
     # bronze railings, a lit portal into the building across the street.
     W(box(VIA_X0, YS, TER_Z - 4 * FT, VIA_X1, YF - TER_D, TER_Z, "gcs/sidewalk"))

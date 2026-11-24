@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "gcs/facade_stone"
+	"$color2" "[0.8 0.76 0.7]"
+	"$nocull" "1"
+	"$surfaceprop" "stone"
+}
