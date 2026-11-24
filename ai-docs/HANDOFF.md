@@ -60,7 +60,10 @@ Updated: 2026-11-23
 
 - End windows fill the great arch: centre head SPRING+29.5 ft (inner arch edge is +30), sides SPRING+22 ft. shots/20261123-1905.
 
+- Window glass: tools/make_window.py writes window_glass.vtf (4x4 pale panes, dark muntins, tiles at scale 0.25); gcs/window_glass (UnlitGeneric, $color 1.15) on end and long-wall bay windows; booth keeps gcs/window_dim. Windows now read pale and gridded like the photos. shots/20261123-1911.
+
 ## Next
+0. Concourse now has real surfaces on every done-bar item: put a west_balcony/compare sign-off askwright page in front of Mark (look-and-feel gate before the first Workshop upload), then keep detailing while it waits. Light shafts through the end windows are still missing from the done bar.
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
 2. Booth glass is still flat blue-grey behind the new grille; could get ticket-window openings or a lit interior.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
