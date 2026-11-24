@@ -476,6 +476,9 @@ def build():
             ents.append(ent("func_detail", solids=box(w0, -HY, 3.5*FT+2, w1, -HY+4, 10*FT, TEX_DIM)))
             for gx in range(int(w0)+12, int(w1)-11, 12):
                 ents.append(ent("func_detail", solids=box(gx-1, -HY+4, 3.5*FT+2, gx+1, -HY+7, 10*FT, TEX_GOLD)))
+            # Cream marble reveals frame the glass on both sides.
+            for j0, j1 in ((w0, w0+10), (w1-10, w1)):
+                ents.append(ent("func_detail", solids=box(j0, -HY, 3.5*FT+2, j1, -HY+2*FT, 10*FT, TEX_CREAM)))
             ents.append(ent("func_detail", solids=box(w0, -HY, 10*FT, w1, -HY+2*FT, 11*FT, TEX_GOLD)))
             ents.append(ent("func_detail", solids=box(w0, -HY, 11*FT, w1, -HY+18, 14*FT, TEX_CREAM)))
             # Bronze TICKETS plaque centred on the lintel.
