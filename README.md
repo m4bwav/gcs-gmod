@@ -4,7 +4,7 @@
 
 **Play it:** [Steam Workshop: Grand Central Terminal (gm_grand_central)](https://steamcommunity.com/sharedfiles/filedetails/?id=3845077025)
 
-A Garry's Mod map of the Main Concourse of Grand Central Terminal in New York, built at true scale (1 ft = 12 units). It's a work in progress. The concourse comes first; the dining concourse, Vanderbilt Hall, the platforms and the 42nd Street facade come after it (see the [plan](ai-docs/plans/gcs-gmod-plan.md)).
+A Garry's Mod map of the Main Concourse and the lower level of Grand Central Terminal in New York, built at true scale (1 ft = 12 units). It's a work in progress. The concourse and the dining level are in; Vanderbilt Hall, the platforms and the 42nd Street facade come after it (see the [plan](ai-docs/plans/gcs-gmod-plan.md)).
 
 The map is written as VMF text by a Python script, not drawn in Hammer. Every custom texture (the zodiac vault, the marble floor, the ashlar, the clock face, the departure board) is drawn procedurally by a script in `tools/`, with colours sampled from openly licensed photos of the real building.
 
@@ -18,9 +18,17 @@ Screenshots from release 0.1.0 (shots/20261123-2134):
 | ![Departure board](docs/board.jpg) | ![Flag](docs/flag.jpg) |
 | ![West stairs](docs/stairs_west.jpg) | ![West arcade](docs/arcade_west.jpg) |
 
+Lower level, added in 0.2.0 (shots/20261124-0749):
+
+| | |
+|---|---|
+| ![Ramp down](docs/ramp_down.jpg) | ![Whispering Gallery](docs/whisper.jpg) |
+| ![Oyster Bar](docs/oyster.jpg) | ![Dining concourse](docs/dining.jpg) |
+| ![Dining concourse booth](docs/dining_clock.jpg) | ![East ramp](docs/east_down.jpg) |
+
 ### Level map
 
-![Rough plan of the Main Concourse](docs/level-map.png)
+![Rough plan of the Main Concourse and the lower level](docs/level-map.png)
 
 Drawn from the map source by `tools/make_map.py`: walls and fixtures at chest height, balconies in light tone, red dots for the two spawns.
 
@@ -32,6 +40,7 @@ Drawn from the map source by `tools/make_map.py`: walls and fixtures at chest he
 - The information booth, with its four-faced opal clock
 - Double staircases at both ends, balconies, and arcades at floor and balcony level
 - Ticket windows, a dot-matrix departure board, 16 chandeliers, and the flag
+- The lower level (0.2.0): ramps from both ends of the concourse, the Whispering Gallery under a Guastavino tile groin vault, the Oyster Bar with its tiled vaults, counters and stools, the dining concourse with a coffered ceiling and a small clock booth, and an east landing hall
 
 ## Building
 

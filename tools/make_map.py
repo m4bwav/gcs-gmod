@@ -66,9 +66,10 @@ d.text((60, 78), f"dark = walls and fixtures at chest height, light = balcony le
 cx0 = -1650  # concourse west wall
 panel(130, floor, balc, "Main Concourse level (0 ft)",
       (("Information booth", 0, 0), ("Ticket windows (south)", 0, -600), ("Flag (north centre bay)", 0, 600),
-       ("West balcony + stairs", cx0 + 360, 0), ("East balcony + stairs", -cx0 - 360, 0), ("Ramp wells", -1300, 390)), spawn)
-panel(130 + PH, low, (), "Lower level (-22 ft): ramps, Whispering Gallery, Oyster Bar, dining concourse",
+       ("West balcony + stairs", cx0 + 360, 0), ("East balcony + stairs", -cx0 - 360, 0), ("Ramp wells", -1300, 390), ("Ramp wells", 1300, 390)), spawn)
+panel(130 + PH, low, (), "Lower level (-22 ft): ramps, Whispering Gallery, Oyster Bar, dining concourse, east landing hall",
       (("Dining concourse", 0, 0), ("Ramps", -2000, 390), ("Ramps", -2000, -390), ("Corridor", -1700, 0),
+       ("Ramps", 2000, 390), ("Ramps", 2000, -390), ("Corridor", 1850, 0), ("East landing hall", 2924, 0),
        ("Whispering Gallery", -2984, 0), ("Oyster Bar", -3950, 0)))
 d.text((60, H-45), "Generated from src/gm_grand_central.vmf by tools/make_map.py", fill=(120, 110, 100), font=f)
 OUT.parent.mkdir(parents=True, exist_ok=True); img.save(OUT); print("wrote", OUT, len(floor), "+", len(low), "brushes")
