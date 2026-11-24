@@ -60,7 +60,7 @@ USHIFT = {TEX_CLOCK: 128}      # centre the dial on faces spanning -15..15
 # Departure board over the ticket windows (faces +y) and the flag hung from the crown
 # (faces +-x); both map their texture once over the front faces, the rest gets black/gold.
 BOARD = (-20*FT, 20*FT, 17*FT, 27*FT)         # x0, x1, z0, z1: 40 x 10 ft, inside the centre bay
-FLAG = (-10*FT, 10*FT, HY - 8*FT, HY - 8*FT + 2, SPRING - 46*FT, SPRING - 8*FT)   # x0, x1, y0, y1 (thin), z0, z1: north centre bay
+FLAG = (-19*FT, 19*FT, HY - 8*FT, HY - 8*FT + 2, SPRING - 28*FT, SPRING - 8*FT)   # x0, x1, y0, y1 (thin), z0, z1: north centre bay
 
 
 def _board_uv(n):
@@ -72,7 +72,7 @@ def _board_uv(n):
 
 def _flag_uv(n):
     x0, x1, _, _, z0, z1 = FLAG
-    su, sv = (x1-x0)/256, (z1-z0)/512
+    su, sv = (x1-x0)/512, (z1-z0)/256
     if abs(n[1]) > 0.5:
         s = -1 if n[1] > 0 else 1
         return "[%d 0 0 %g] %g" % (s, -s*(x0 if s > 0 else x1)/su, su), "[0 0 -1 %g] %g" % (z1/sv, sv)

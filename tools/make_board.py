@@ -1,7 +1,7 @@
 """Procedural departure board over the ticket windows and the hanging US flag.
 board.vtf (1024x256): black LED board, header row, amber/white rows of train times,
-destinations and track numbers in a blocky dot-matrix hand. flag.vtf (256x512): the
-US flag hung vertically (union at the viewer's upper left), public-domain design.
+destinations and track numbers in a blocky dot-matrix hand. flag.vtf (512x256): the
+US flag hung horizontally (union at the viewer's upper left), public-domain design.
 Writes src/materials/gcs/{board,flag}.vtf and previews in shots/tex/.
 Needs pip srctools pillow numpy."""
 import random
@@ -66,7 +66,7 @@ def board():
 
 
 def flag():
-    # Horizontal flag 1.9:1, then transposed so the union is at the top left, stripes vertical.
+    # Horizontal flag 1.9:1, hung flat like the concourse flag: stripes run across.
     W, H = 760, 400
     img = Image.new("RGB", (W, H), (255, 255, 255))
     d = ImageDraw.Draw(img)
@@ -84,7 +84,7 @@ def flag():
             r = sh*0.3
             d.polygon([(x + r*np.cos(a), y + r*np.sin(a)) for a in
                        [np.pi/2*3 + i*np.pi*4/5 for i in range(5)]], fill=(255, 255, 255))
-    save(img.transpose(Image.TRANSPOSE).resize((256, 512), Image.LANCZOS), "flag")
+    save(img.resize((512, 256), Image.LANCZOS), "flag")
 
 
 board()
