@@ -1,5 +1,5 @@
 """Side-by-side sheet: each screenshot beside the reference photo from about the same viewpoint.
-Usage: python tools/compare.py shots/<stamp> [lower]  -> shots/<stamp>/compare.jpg (compare_lower.jpg)"""
+Usage: python tools/compare.py shots/<stamp> [lower|plat]  -> shots/<stamp>/compare.jpg (compare_<set>.jpg)"""
 import sys
 from PIL import Image, ImageDraw
 
@@ -16,10 +16,14 @@ LOWER = {  # area 2, under the concourse
     "whisper": "Whispering_Gallery.jpg",
     "oyster": "Grand_Central_Oyster_Bar_Grand_Central_Station_NYC.jpg",
 }
+PLAT = {  # area 4, track platforms
+    "plat_head": "Grand_Central_Station_tracks.jpg",
+    "car_door": "Metro_North_M7a_Rainbow_Heart_Sticker_Grand_Central.jpg",
+}
 d, W, H = sys.argv[1], 640, 400
-lower = sys.argv[2:] == ["lower"]
+lower = sys.argv[2:3] and sys.argv[2]
 if lower:
-    PAIRS = LOWER
+    PAIRS = {"lower": LOWER, "plat": PLAT}[lower]
 sheet = Image.new("RGB", (W * 2, (H + 18) * len(PAIRS)))
 draw = ImageDraw.Draw(sheet)
 for i, (shot, ref) in enumerate(PAIRS.items()):
@@ -28,6 +32,6 @@ for i, (shot, ref) in enumerate(PAIRS.items()):
         im.thumbnail((W, H))
         sheet.paste(im, (j * W, i * (H + 18)))
         draw.text((j * W + 4, i * (H + 18) + H + 3), path, fill="white")
-out = f"{d}/compare_lower.jpg" if lower else f"{d}/compare.jpg"
+out = f"{d}/compare_{lower}.jpg" if lower else f"{d}/compare.jpg"
 sheet.save(out, quality=85)
 print(out)

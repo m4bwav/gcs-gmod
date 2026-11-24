@@ -34,6 +34,11 @@ local CAMS = {
   { "vh_east",      Vector(700, -1450, 90), Angle(-8, 180, 0) },
   { "vh_42nd",      Vector(-360, -1150, 90), Angle(-2, -90, 0) },
   { "ob_counter",   Vector(-3600, 300, -200), Angle(-6, 200, 0) },
+  { "gate",         Vector(0, 200, 72), Angle(-6, 90, 0) },
+  { "plat_head",    Vector(-40, 960, 64), Angle(0, 100, 0) },
+  { "plat_long",    Vector(-700, 1200, 64), Angle(0, 90, 0) },
+  { "car_door",     Vector(90, 1250, 64), Angle(0, 140, 0) },
+  { "car_in",       Vector(-186, 1200, 60), Angle(0, 90, 0) },
 }
 local i, cam, frames = 0, nil, 0
 local ft, fpslog = 0, {}  -- frame time summed over frames 31-89, one fps line per camera

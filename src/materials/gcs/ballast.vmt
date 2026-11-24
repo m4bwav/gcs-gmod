@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "nature/gravelfloor002a"
+	"$color" "[0.45 0.42 0.4]"
+	"$surfaceprop" "gravel"
+}
