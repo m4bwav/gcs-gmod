@@ -33,7 +33,7 @@ def save(rgb, name):
 
 
 # Ashlar: 8 courses, 3 blocks per course, alternate courses offset by half a block.
-HONEY = np.array([222, 194, 150], float)
+HONEY = np.array([228, 208, 172], float)
 COURSES, BLOCKS = 8, 4
 img = np.zeros((N, N, 3))
 ch, bw = N // COURSES, N // BLOCKS
