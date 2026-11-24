@@ -8,3 +8,4 @@ ai-docs/chain-loop*.out
 ask/*/server.json
 ask/*/server.log
 build/
+src/modelsrc/
