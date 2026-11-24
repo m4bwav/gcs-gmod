@@ -98,10 +98,12 @@ Updated: 2026-11-23
 
 - Ticket wall: piers and the long cornice over the ticket windows are cream marble with a thin gold lower edge (were grey stock trim). shots/20261123-2116/floor_east.jpg.
 
+- Zodiac figure drawings: tools/make_vault.py SHAPES draws a silhouette per sign (ram with curled horn, bull, twins, crab, lion with mane, robed virgin, scales, curled scorpion, centaur archer, goat-fish, water bearer with urn, two fish on a cord), gold outline and faint wash under the constellation. shots/20261123-2120/vault_up.jpg.
+
 ## Next
 - FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
-1. Zodiac figures have outlines now; real animal/human drawings would be the next step. Lunette hoods have voussoirs and keystones; garland carving would be a normal map.
+1. Zodiac figures are recognisable silhouettes now; finer line drawings inside them (eyes, fur, folds) could follow. Lunette hoods have voussoirs and keystones; garland carving would be a normal map.
 2. Booth interior is in and brighter; clerks' props could follow. Ticket windows have TICKETS plaques and marble reveals and segmental arched heads and bracket lamps; clerks could follow.
 3. Measured references: secondary-source check done (refs/concourse-dimensions.md, 2026-11-23): vault springline/rise agree with the build. Still open: a real HABS NY-5450 section or LPC report for balcony, sill and lunette heights; end windows maybe 33x60 ft (ours 26 ft wide, taller).
 4. Chandeliers could become a polywright model with globes later.
@@ -110,7 +112,7 @@ Updated: 2026-11-23
 ## Small rulings (flagged)
 - Licence: code in tools/ is MIT; map source, generated textures and screenshots are CC BY-SA 4.0 (matches the BY-SA reference photos). README banner is Z-Image Turbo seed 11, labelled as AI art, not an in-game shot.
 - Sun shafts are fake volumetrics (additive brushes); a camera inside one sees haze, so they fade in only past the balcony edge.
-- Zodiac constellations are simplified stick figures over abstract limb silhouettes, not the real ceiling's figure drawings; band curves are stylised sinusoids.
+- Zodiac constellations are simplified stick figures over simple silhouettes of each sign of each sign, not the real ceiling's figure drawings; band curves are stylised sinusoids.
 - Vault rise 40 ft, estimated from photos (check against the HABS section).
 - Bay window bottom 42 ft estimated from photo.
 - Balcony arcade 14x14 ft openings, window sill BALC_Z+16 ft, centre end window head SPRING+29.5 ft are estimated from photos.

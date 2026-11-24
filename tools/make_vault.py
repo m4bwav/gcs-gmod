@@ -3,7 +3,7 @@
 Colours sampled from refs/photos/Grand_Central_Station_Flag_Ceiling.jpg: deep green field,
 gold stars, gold band lines. Layout after the real ceiling: the ecliptic and the equator as
 two gold arcs crossing the length, twelve zodiac constellations as stick figures along the
-ecliptic, a faint Milky Way. Figures are simplified: stick constellations over gold-outlined limb silhouettes
+ecliptic, a faint Milky Way. Figures are simplified: stick constellations over gold-outlined silhouettes of each sign
 (small creative ruling, see HANDOFF).
 Writes src/materials/gcs/vault_mural.vtf and shots/tex/vault_mural.png. Needs srctools pillow numpy."""
 import numpy as np
@@ -79,20 +79,63 @@ FIGS = [
 SC = 0.075 * h
 
 
-def figure(pts, lines):
-    """Figure drawing behind a constellation: the stick figure thickened into limbs and
-    rounded, with a faint lighter wash and a thin gold outline (the real ceiling shows
-    gold-line figures; these suggest them at concourse distance)."""
+# Figure silhouettes per sign, in SC units relative to the constellation origin: each is a list
+# of ("e", x0, y0, x1, y1) ellipses, ("p", [(x, y), ...]) polygons and ("l", [(x, y), ...], width) strokes.
+def _arc(cx, cy, r, a0, a1, n=10):
+    return [(cx + r*np.cos(np.radians(a)), cy + r*np.sin(np.radians(a))) for a in np.linspace(a0, a1, n)]
+
+
+def _fish(x, y, d):
+    return [("e", x-.45, y-.2, x+.45, y+.2), ("p", [(x+.4*d, y), (x+.75*d, y-.25), (x+.75*d, y+.25)])]
+
+
+def _person(x, y, s=1.):
+    return [("e", x-.13*s, y-.95*s, x+.13*s, y-.68*s), ("p", [(x-.15*s, y-.66*s), (x+.15*s, y-.66*s), (x+.32*s, y+.3*s), (x-.32*s, y+.3*s)])]
+
+
+SHAPES = [
+    [("e", -.1, -.45, 1.0, .1), ("e", .9, -.65, 1.35, -.3), ("l", _arc(1.05, -.6, .22, 180, 470), .12),
+     ("l", [(.05, 0), (.0, .45)], .1), ("l", [(.85, 0), (.9, .45)], .1)],                       # aries: ram with curled horn
+    [("e", -.1, -.35, 1.0, .35), ("e", .9, -.55, 1.45, -.05), ("l", [(1.0, -.5), (.85, -.85)], .1),
+     ("l", [(1.35, -.5), (1.5, -.85)], .1), ("l", [(.1, .3), (.05, .7)], .12), ("l", [(.8, .3), (.85, .7)], .12)],  # taurus
+    _person(0, .9, .9) + _person(.5, .9, .9) + [("l", [(.1, .3), (.4, .3)], .08)],                # gemini: twins holding hands
+    [("e", .05, .15, .75, .65), ("l", _arc(.0, .1, .2, 90, 320), .1), ("l", _arc(.8, .1, .2, -140, 90), .1)]
+    + [("l", [(.15 + .15*i, .6), (.05 + .2*i, .85)], .06) for i in range(4)],                     # cancer: crab with claws
+    [("e", .1, -.4, 1.4, .25), ("e", -.15, -.7, .55, .05), ("l", [(1.35, -.1), (1.75, .2), (1.8, .6)], .08),
+     ("l", [(.25, .2), (.2, .65)], .12), ("l", [(1.2, .2), (1.25, .65)], .12)],                   # leo: lion with mane
+    _person(.6, .55, 1.1) + [("p", [(.3, .0), (.95, .0), (1.25, .9), (.0, .9)]), ("l", [(.75, -.2), (1.3, -.05)], .07)],  # virgo: robed woman with sheaf
+    [("l", [(.6, -.4), (.6, .6)], .08), ("l", [(-.05, -.25), (1.25, -.25)], .08),
+     ("p", [(-.25, .25), (.15, .25), (-.05, .4)]), ("p", [(1.05, .25), (1.45, .25), (1.25, .4)]),
+     ("l", [(-.05, -.25), (-.25, .25)], .04), ("l", [(-.05, -.25), (.15, .25)], .04),
+     ("l", [(1.25, -.25), (1.05, .25)], .04), ("l", [(1.25, -.25), (1.45, .25)], .04)],           # libra: scales
+    [("e", -.15, -.15, .6, .3), ("l", [(.5, .1), (.9, .4), (1.2, .8), (1.5, 1.15), (1.8, 1.1), (1.9, .85)], .16),
+     ("l", _arc(-.25, -.15, .18, 90, 300), .08), ("l", _arc(-.25, .3, .18, 60, 270), .08)],       # scorpio: curled tail
+    [("e", .0, .0, 1.0, .45), ("l", [(.1, .4), (.05, .8)], .1), ("l", [(.9, .4), (.95, .8)], .1)]
+    + _person(.95, .1, .8) + [("l", _arc(1.25, -.35, .45, -70, 70), .06), ("l", [(.95, -.35), (1.55, -.35)], .04)],  # sagittarius: centaur archer
+    [("e", .0, -.2, .8, .3), ("e", .6, -.5, 1.0, -.15), ("l", [(.7, -.45), (.55, -.8)], .08),
+     ("l", [(.8, .25), (1.2, .45), (1.5, .3)], .18), ("p", [(1.45, .3), (1.7, .05), (1.75, .5)])],  # capricorn: goat-fish
+    _person(.4, .5, 1.1) + [("e", .55, -.2, .95, .15), ("l", [(.9, .1), (1.1, .4), (1.3, .2), (1.5, .5), (1.7, .3)], .1)],  # aquarius: urn and stream
+    _fish(.2, -.1, -1) + _fish(1.9, .1, 1) + [("l", [(.3, .1), (1.0, .55), (1.8, .25)], .04)],     # pisces: two fish on a cord
+]
+
+
+def figure(ox, oy, shape):
+    """Gold-outlined figure silhouette with a faint lighter wash behind a constellation: a
+    simplified stand-in for the real ceiling's gold-line figure drawings."""
     m = Image.new("L", img.size, 0)
     md = ImageDraw.Draw(m)
-    for a, b in lines:
-        md.line([pts[a], pts[b]], fill=255, width=int(.5*SC))
-    for px, py in pts:
-        r = .3*SC * (.8 + .5*rng.random())
-        md.ellipse([px-r, py-r, px+r, py+r], fill=255)
-    m = m.filter(ImageFilter.GaussianBlur(.18*SC)).point(lambda v: 255 if v > 90 else 0)
+    P = lambda x, y: (ox + x*SC, oy + y*SC)
+    for part in shape:
+        if part[0] == "e":
+            (x0, y0), (x1, y1) = P(*part[1:3]), P(*part[3:5])
+            md.ellipse([x0, y0, x1, y1], fill=255)
+        elif part[0] == "p":
+            md.polygon([P(*q) for q in part[1]], fill=255)
+        else:
+            md.line([P(*q) for q in part[1]], fill=255, width=max(2, int(part[2]*SC)), joint="curve")
+    m = m.filter(ImageFilter.GaussianBlur(.04*SC)).point(lambda v: 255 if v > 110 else 0)
     img.paste(Image.new("RGB", img.size, (66, 136, 100)),
-              (0, 0), m.filter(ImageFilter.GaussianBlur(4*S)).point(lambda v: v*45//255))
+              (0, 0), m.filter(ImageFilter.GaussianBlur(3*S)).point(lambda v: v*60//255))
     a = np.asarray(m) > 0
     grow = a.copy()
     for dx, dy in ((-2, 0), (2, 0), (0, -2), (0, 2), (-1, -1), (1, 1), (-1, 1), (1, -1)):
@@ -105,10 +148,10 @@ for i, (stars, lines) in enumerate(FIGS):
     t = (i + .5) / 12
     cx = t * w - .8*SC
     cy = ecl(t) * h + (-1.6 if i % 2 else .6) * SC     # alternate above and below the band
+    figure(cx, cy, SHAPES[i])
     pts = [(cx + sx*SC, cy + sy*SC) for sx, sy in stars]
-    figure(pts, lines)
     for a, b in lines:
-        dr.line([pts[a], pts[b]], fill=(200, 170, 100), width=2*S)
+        dr.line([pts[a], pts[b]], fill=(200, 170, 100), width=S)
     for px, py in pts:
         r = rng.choice([4, 5.5, 7]) * S
         dr.ellipse([px-r, py-r, px+r, py+r], fill=(255, 226, 150))
