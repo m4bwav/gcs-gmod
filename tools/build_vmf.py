@@ -94,7 +94,8 @@ def _oysterbar_uv(n):
         return "[0 1 0 %g] %g" % (120/su, su), "[0 0 -1 %g] %g" % ((LOW_Z + 120)/sv, sv)
 
 
-FACEUV = {"gcs/oysterbar": _oysterbar_uv, "gcs/board": _board_uv, "gcs/flag": _flag_uv, "gcs/tickets": _tickets_uv}
+FACEUV = {"gcs/facade_win": lambda n: ("[1 0 0 0] 0.375", "[0 0 -1 0] 0.5625"), "gcs/inscription": lambda n: _ext_uv(n, "ins"), "gcs/clock_out": lambda n: _ext_uv(n, "clock"),
+          "gcs/oysterbar": _oysterbar_uv, "gcs/board": _board_uv, "gcs/flag": _flag_uv, "gcs/tickets": _tickets_uv}
 
 
 def axes_for(n, s=0.25):
@@ -539,11 +540,10 @@ def vanderbilt(W, ents):
     W(box(VS_X0 - WALL, vy0 - WALL, -WALL, VS_X0, vy1, 20 * FT + WALL, TEX_CREAM))
     W(box(VS_X1, vy0 - WALL, -WALL, VS_X1 + WALL, vy1, 20 * FT + WALL, TEX_CREAM))
     W(box(VS_X0, vy0, 20 * FT, VS_X1, vy1, 20 * FT + WALL, TEX_CREAM))
-    W(box(VS_X0, vy0 - WALL, -WALL, VS_X1, vy0, 20 * FT, TEX_CREAM))
+    # The vestibule's south wall is the 42nd Street facade (exterior()); its three doorways stand open.
     dw = (VS_X1 - VS_X0) // 3
     for k in range(3):
         x0 = VS_X0 + k * dw
-        det(box(x0 + 12, vy0, 0, x0 + dw - 12, vy0 + 4, 12 * FT, TEX_DOOR))
         det(box(x0, vy0, 0, x0 + 12, vy0 + 8, 13 * FT, TEX_GOLD))
     det(box(VS_X1 - 12, vy0, 0, VS_X1, vy0 + 8, 13 * FT, TEX_GOLD))
     det(box(VS_X0, vy0, 12 * FT, VS_X1, vy0 + 8, 13 * FT, TEX_GOLD))
@@ -627,6 +627,195 @@ def vanderbilt(W, ents):
     ents.append(ent("env_cubemap", (pc, (py0 + py1) // 2, 100)))
     ents.append(ent("func_brush", solids="".join(decor), targetname="vh_decor", Solidity="2",
                     disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
+# The exterior (area 5): the 42nd Street facade through the Vanderbilt vestibule doors
+# (photo: 42nd_Street_Facade_Grand_Central_Terminal_October_2025). Three great arched windows
+# between paired columns, oval windows over the narrow bays, entablature, attic with the
+# GRAND CENTRAL TERMINAL inscription, the Tiffany clock under the Glory of Commerce group
+# (Mercury, Hercules, Minerva) on top; a balustraded terrace with a stair at the east end;
+# the Park Avenue Viaduct crossing 42nd Street at the west end; office towers round the
+# street and the MetLife tower behind; sky above (toolsskybox, light_environment).
+VEST_Y0 = VH_Y0 - WALL - VS_D               # vestibule inner south face
+YF = VEST_Y0 - WALL                         # facade face (faces -y)
+FCX = (VS_X0 + VS_X1) // 2                  # facade axis = vestibule axis = hall centre
+FHW = 160 * FT                              # facade half-width (estimate)
+FX0, FX1 = FCX - FHW, FCX + FHW
+RZ = 134 * FT                               # attic top / roof
+SKYZ = 320 * FT
+SW = 30 * FT                                # sidewalk depth
+YS = YF - 110 * FT                          # face of the towers across 42nd Street
+EX0, EX1 = FCX - 230 * FT, FCX + 230 * FT   # street ends
+RN = 120 * FT                               # roof behind the facade, north of YF
+TER_Z, TER_D = 24 * FT, 10 * FT             # terrace top and depth
+WIN = (-80 * FT, 0, 80 * FT)                # great windows (x offsets), 33 ft wide
+WIN_HW, WIN_Z0 = 198, 28 * FT
+WIN_SP = WIN_Z0 + 60 * FT - WIN_HW          # arch springline: windows 60 ft tall
+PAIRS = (-116 * FT, -40 * FT, 40 * FT, 116 * FT)
+VIA_X0, VIA_X1 = FX0, FX0 + 34 * FT         # Park Avenue Viaduct deck
+CLK_R, CLK_Z = 78, RZ + 15 * FT             # 13 ft clock
+
+
+def _ext_uv(n, which):
+    if n[1] > -0.5:
+        return None
+    if which == "ins":
+        x0, x1, z1, w, h = FCX - 40 * FT, FCX + 40 * FT, 120 * FT, 1024, 128
+        su, sv = (x1 - x0) / w, 10 * FT / h
+    else:
+        x0, z1, su = FCX - CLK_R, CLK_Z + CLK_R, 2 * CLK_R / 512
+        sv = su
+    return "[1 0 0 %g] %g" % (-x0 / su, su), "[0 0 -1 %g] %g" % (z1 / sv, sv)
+
+
+def _arch_ring(cx, zs, r0, r1, y0, y1, tex, n=12):
+    out = []
+    for i in range(n):
+        a, b = math.pi * i / n, math.pi * (i + 1) / n
+        q = [(cx + r1 * math.cos(a), zs + r1 * math.sin(a)), (cx + r1 * math.cos(b), zs + r1 * math.sin(b)),
+             (cx + r0 * math.cos(b), zs + r0 * math.sin(b)), (cx + r0 * math.cos(a), zs + r0 * math.sin(a))]
+        out.append(yprism(ccw([(round(x), round(z)) for x, z in q]), y0, y1, tex))
+    return out
+
+
+def exterior(W, ents):
+    decor = []
+    det = decor.append
+    STONE, GRILLE, GLASS, WINTEX = "gcs/facade_stone", "gcs/vh_grille", "gcs/vh_glass", "gcs/facade_win"
+    # Facade wall with the vestibule doorway; roof slab behind the attic.
+    W(box(FX0, YF, -WALL, VS_X0, VEST_Y0, RZ - WALL, STONE))
+    W(box(VS_X1, YF, -WALL, FX1, VEST_Y0, RZ - WALL, STONE))
+    W(box(VS_X0, YF, 20 * FT, VS_X1, VEST_Y0, RZ - WALL, STONE))
+    W(box(VS_X0, YF, -WALL, VS_X1, VEST_Y0, 0, TEX_FLOOR))
+    W(box(FX0, YF, RZ - WALL, FX1, YF + RN, RZ, STONE))
+    W(box(FX0, YF + RN, RZ - WALL, FX1, YF + RN + WALL, SKYZ, "tools/toolsskybox"))
+    # Street: sidewalks either side of the roadway, a double yellow centre line.
+    W(box(EX0, YF - SW, -WALL, EX1, YF, 0, "gcs/sidewalk"))
+    W(box(EX0, YS, -WALL, EX1, YS + 20 * FT, 0, "gcs/sidewalk"))
+    W(box(EX0, YS + 20 * FT, -WALL, EX1, YF - SW, -8, "gcs/asphalt"))
+    ym = (YS + 20 * FT + YF - SW) // 2
+    for y in (ym - 8, ym + 4):
+        det(box(EX0, y, -8, EX1, y + 4, -7, "gcs/plat_edge"))
+    # Towers: across the street (glass, pale precast, glass), at both street ends, beside the terminal.
+    for x0, x1, tex in ((EX0, FCX - 70 * FT, "gcs/office"), (FCX - 70 * FT, FCX + 60 * FT, "gcs/metlife"),
+                        (FCX + 60 * FT, EX1, "gcs/office")):
+        W(box(x0, YS - WALL, -WALL, x1, YS, SKYZ, tex))
+    W(box(EX0 - WALL, YS - WALL, -WALL, EX0, YF + RN + WALL, SKYZ, "gcs/office"))
+    W(box(EX1, YS - WALL, -WALL, EX1 + WALL, YF + RN + WALL, SKYZ, "gcs/office"))
+    W(box(EX0, YF, -WALL, FX0, YF + RN + WALL, SKYZ, "gcs/office"))
+    W(box(FX1, YF, -WALL, EX1, YF + RN + WALL, SKYZ, "gcs/metlife"))
+    W(box(EX0 - WALL, YS - WALL, SKYZ, EX1 + WALL, YF + RN + WALL, SKYZ + WALL, "tools/toolsskybox"))
+    W(box(FCX - 100 * FT, YF + 60 * FT, RZ, FCX + 100 * FT, YF + 110 * FT, SKYZ, "gcs/metlife"))   # MetLife
+    # Terrace along the facade at the windows' foot, with a stair down to the sidewalk at the east end.
+    W(box(FX0, YF - TER_D, TER_Z - 2 * FT, FX1, YF, TER_Z, STONE))
+    W(box(FX0, YF - TER_D, 0, VS_X0, YF, TER_Z - 2 * FT, STONE))          # solid under the terrace, open at the door
+    W(box(VS_X1, YF - TER_D, 0, FX1 - 32 * FT, YF, TER_Z - 2 * FT, STONE))
+    sx = FX1 - 4
+    for k in range(24):
+        W(box(sx - (k + 1) * 14, YF - TER_D - 8 * FT, 0, sx - k * 14, YF - TER_D, (k + 1) * 12, STONE))
+    W(box(sx - 24 * 14, YF - TER_D, 0, sx, YF, TER_Z - 2 * FT, STONE))
+    by0, by1 = YF - TER_D, YF - TER_D + 8
+    for x0, x1 in ((FX0, VIA_X0), (VIA_X1, sx - 24 * 14 - 8)):
+        if x1 <= x0:
+            continue
+        det(box(x0, by0, TER_Z, x1, by1, TER_Z + 6, STONE))
+        det(box(x0, by0 - 2, TER_Z + 36, x1, by1 + 2, TER_Z + 42, STONE))
+        det(box(x0, by0 + 2, TER_Z + 6, x1, by1 - 2, TER_Z + 36, STONE))   # solid balustrade: the BSP is near its vertex cap
+    det(box(FX0, YF - TER_D - 4, TER_Z - 2 * FT, FX1, YF - TER_D, TER_Z, STONE))   # terrace fascia
+    det(box(FX0, YF - 12, 0, FX1, YF, 3 * FT, STONE))                              # plinth
+    # Great arched windows: dark glass, green iron grid, stone archivolt, jambs and keystone.
+    for dx in WIN:
+        cx = FCX + dx
+        hw, z0, zs = WIN_HW, WIN_Z0, WIN_SP
+        det(yprism(ccw([(cx - hw, z0), (cx + hw, z0)] + halfdisc(cx, zs, hw, 8)[:-1] + [(cx - hw, zs)]), YF - 2, YF, WINTEX))
+        for d in _arch_ring(cx, zs, hw, hw + 30, YF - 12, YF, STONE, 8):
+            det(d)
+        for x0, x1 in ((cx - hw - 30, cx - hw), (cx + hw, cx + hw + 30)):
+            det(box(x0, YF - 12, z0, x1, YF, zs, STONE))
+        det(box(cx - hw - 36, YF - 16, z0 - 18, cx + hw + 36, YF, z0, STONE))         # sill
+        det(box(cx - 20, YF - 18, zs + hw - 6, cx + 20, YF, zs + hw + 40, STONE))      # keystone
+    # Paired fluted columns (12-sided) on bases, capitals under the entablature; oval and
+    # tall windows between the inner pairs.
+    for px in PAIRS:
+        for dx in (-6 * FT, 6 * FT):
+            x, y = FCX + px + dx, YF - 30
+            det(box(x - 38, y - 38, TER_Z, x + 38, YF, TER_Z + 18, STONE))
+            det(prism(ngon(x, y, 30, 8, math.pi / 8), TER_Z + 18, 86 * FT, STONE))
+            det(box(x - 40, y - 40, 86 * FT, x + 40, YF, 90 * FT, STONE))
+        if abs(px) < 60 * FT:
+            cx = FCX + px
+            ell = [(round(cx + 48 * math.cos(2 * math.pi * i / 10)), round(70 * FT + 66 * math.sin(2 * math.pi * i / 10))) for i in range(10)]
+            rim = [(round(cx + 62 * math.cos(2 * math.pi * i / 10)), round(70 * FT + 80 * math.sin(2 * math.pi * i / 10))) for i in range(10)]
+            det(yprism(ccw(rim), YF - 6, YF, STONE))
+            det(yprism(ccw(ell), YF - 8, YF - 6, GLASS))
+            det(box(cx - 48, YF - 2, 32 * FT, cx + 48, YF, 58 * FT, WINTEX))
+            det(box(cx - 60, YF - 10, 58 * FT, cx + 60, YF, 59 * FT, STONE))
+    # Entablature, cornice, attic band, inscription panel, top cornice.
+    det(box(FX0, YF - 4 * FT, 90 * FT, FX1, YF, 100 * FT, STONE))
+    det(box(FX0, YF - 7 * FT, 100 * FT, FX1, YF, 104 * FT, STONE))
+    det(box(FX0, YF - 2 * FT, 104 * FT, FX1, YF, 126 * FT, STONE))
+    det(box(FCX - 40 * FT, YF - 2 * FT - 4, 110 * FT, FCX + 40 * FT, YF - 2 * FT, 120 * FT, "gcs/inscription"))
+    det(box(FX0, YF - 4 * FT, 126 * FT, FX1, YF, RZ, STONE))
+    # Glory of Commerce: pedestal, clock in a stone surround, Mercury standing with spread
+    # wings, Hercules seated to the left, Minerva to the right (blocky masses, ~48 ft group).
+    S = "gcs/statue"
+    det(box(FCX - 34 * FT, YF - 4 * FT, RZ, FCX + 34 * FT, YF + 24 * FT, RZ + 8 * FT, STONE))
+    det(yprism(ccw([(FCX - 11 * FT, RZ + 8 * FT), (FCX + 11 * FT, RZ + 8 * FT)] + halfdisc(FCX, RZ + 16 * FT, 11 * FT, 10)[:-1]
+                   + [(FCX - 11 * FT, RZ + 16 * FT)]), YF - 3 * FT, YF + 10 * FT, STONE))
+    det(yprism(ngon_xz(FCX, CLK_Z, CLK_R + 6, 20), YF - 3 * FT - 4, YF - 3 * FT, "gcs/gold"))
+    det(yprism(ngon_xz(FCX, CLK_Z, CLK_R, 20), YF - 3 * FT - 8, YF - 3 * FT - 4, "gcs/clock_out"))
+    mz = RZ + 26 * FT
+    for dx in (-1, 1):
+        det(prism(ngon(FCX + dx * 14, YF + 3 * FT, 10, 8), mz, mz + 12 * FT, S))                 # legs
+    det(prism(ngon(FCX, YF + 3 * FT, 22, 8), mz + 12 * FT, mz + 21 * FT, S))                     # torso
+    det(prism(ngon(FCX, YF + 3 * FT, 12, 8), mz + 21 * FT, mz + 24 * FT, S))                     # head
+    det(prism(ngon(FCX, YF + 3 * FT, 14, 8), mz + 24 * FT, mz + 25 * FT, S))                     # winged hat
+    det(box(FCX - 14 * FT, YF + 3 * FT - 6, mz + 19 * FT, FCX - 20, YF + 3 * FT + 6, mz + 20 * FT, S))   # outstretched arm
+    det(box(FCX + 20, YF + 3 * FT - 5, mz + 17 * FT, FCX + 6 * FT, YF + 3 * FT + 5, mz + 18 * FT, S))
+    det(prism(ngon(FCX + 6 * FT, YF + 3 * FT, 4, 6), mz + 14 * FT, mz + 23 * FT, "gcs/gold"))       # caduceus
+    for s in (-1, 1):
+        wing = [(FCX + s * 10, mz + 18 * FT), (FCX + s * 20 * FT, mz + 22 * FT), (FCX + s * 17 * FT, mz + 15 * FT),
+                (FCX + s * 6 * FT, mz + 12 * FT)]
+        det(yprism(ccw(wing), YF + 5 * FT, YF + 5 * FT + 10, S))
+        cx = FCX + s * 22 * FT                                                                    # Hercules / Minerva
+        det(box(cx - 6 * FT, YF - 2 * FT, RZ + 8 * FT, cx + 6 * FT, YF + 8 * FT, RZ + 14 * FT, S))   # seat and legs
+        det(prism(ngon(cx, YF + 3 * FT, 26, 8), RZ + 14 * FT, RZ + 24 * FT, S))
+        det(prism(ngon(cx - s * 2 * FT, YF + 3 * FT, 13, 8), RZ + 24 * FT, RZ + 27 * FT, S))
+    det(yprism(ngon_xz(FCX + 30 * FT, RZ + 16 * FT, 4 * FT, 12), YF - 2 * FT, YF, S))           # Minerva's shield
+    # Park Avenue Viaduct crossing 42nd Street: deck at terrace level, arched steel fascias,
+    # bronze railings, a lit portal into the building across the street.
+    W(box(VIA_X0, YS, TER_Z - 4 * FT, VIA_X1, YF - TER_D, TER_Z, "gcs/sidewalk"))
+    n, ya, yb = 10, YS, YF - TER_D
+    for x0, x1 in ((VIA_X0 - 10, VIA_X0), (VIA_X1, VIA_X1 + 10)):
+        for i in range(n):
+            y0, y1 = ya + (yb - ya) * i // n, ya + (yb - ya) * (i + 1) // n
+            zb = lambda y: round(TER_Z - 4 * FT - 6 * FT * math.sin(math.pi * (y - ya) / (yb - ya)))
+            det(xprism(ccw([(y0, zb(y0)), (y1, zb(y1)), (y1, TER_Z - 2 * FT), (y0, TER_Z - 2 * FT)]), x0, x1, "gcs/steel"))
+        det(box(x0, ya, TER_Z - 2 * FT, x1, yb, TER_Z, "gcs/gold"))
+    for x in (VIA_X0 + 4, VIA_X1 - 4):
+        det(box(x - 3, ya, TER_Z + 38, x + 3, yb, TER_Z + 42, "gcs/bronze"))
+        det(box(x - 1, ya, TER_Z, x + 1, yb, TER_Z + 38, "gcs/vh_grille"))
+    det(box(VIA_X0 + 16, YS, TER_Z, VIA_X1 - 16, YS + 2, TER_Z + 12 * FT, TEX_DOOR))
+    ents.append(ent("light", ((VIA_X0 + VIA_X1) // 2, YS + 100, TER_Z + 8 * FT), _light="255 215 160 60"))
+    # Street lamps along the north kerb.
+    for k in range(-3, 4):
+        x, y = FCX + k * 60 * FT + 30 * FT, YF - SW + 24
+        if not (FX0 - 10 * FT < x < EX1 - 10 * FT) or VIA_X0 - 4 * FT < x < VIA_X1 + 4 * FT:
+            continue
+        det(prism(ngon(x, y, 5, 8), 0, 20 * FT, GRILLE))
+        det(prism(ngon(x, y, 12, 8), 20 * FT, 21 * FT, GRILLE))
+        det(prism(ngon(x, y, 9, 8), 19 * FT - 10, 20 * FT, TEX_BULB))
+        ents.append(ent("light", (x, y, 18 * FT), _light="255 235 200 40"))
+    ents.append(ent("light_environment", (FCX, YS + 40 * FT, 60 * FT), angles="0 75 0", pitch="-42",
+                    _light="255 248 236 420", _ambient="160 180 215 220"))
+    ents.append(ent("env_cubemap", (FCX, YF - 50 * FT, 6 * FT)))
+    ents.append(ent("env_cubemap", ((VIA_X0 + VIA_X1) // 2, YF - 50 * FT, TER_Z + 6 * FT)))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="ext_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
+def ngon_xz(cx, cz, r, n):
+    return ccw([(round(cx + r * math.cos(2 * math.pi * i / n)), round(cz + r * math.sin(2 * math.pi * i / n))) for i in range(n)])
 
 
 # Upper-level track platforms (area 4). Three gates in the concourse north wall (bay centres)
@@ -770,7 +959,8 @@ def build():
 
     # Sealed outer hull (nodraw) so the interior can't leak while geometry is rough.
     O = 256
-    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, VH_Y0-2*WALL-VS_D-128, SH_Y1+WALL+64, CROWN+WALL+64
+    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, YS - 2*WALL - 128, SH_Y1+WALL+64, SKYZ+WALL+64
+    X0, X1 = min(X0, EX0 - 2*WALL - 128), max(X1, EX1 + 2*WALL + 128)
     ZB = LOW_Z - 2*WALL - 64
     W(box(X0, Y0, ZB, X1, Y1, ZB+64, NODRAW))
     W(box(X0, Y0, Z1, X1, Y1, Z1+64, NODRAW))
@@ -791,6 +981,7 @@ def build():
     W(box(VH_PX0, -HY-WALL, VH_PH, VH_PX1, -HY, SPRING, TEX_WALL))
     W(box(VH_PX0, -HY-WALL, -WALL, VH_PX1, -HY, 0, TEX_FLOOR))
     vanderbilt(W, ents)
+    exterior(W, ents)
     # North wall, cut by the three track gates.
     gedges = [-HX] + [e for gx, _ in GATES for e in (gx - GATE_W//2, gx + GATE_W//2)] + [HX]
     for j in range(0, len(gedges), 2):

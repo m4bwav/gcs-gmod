@@ -1,3 +1,10 @@
+## 0.5.0 (2026-11-24)
+
+- The exterior: the Vanderbilt Hall vestibule doors now open onto 42nd Street under open sky.
+- The 42nd Street facade: three great arched windows with iron grids between paired columns, oval and tall windows in the narrow bays, entablature and cornice, the GRAND CENTRAL TERMINAL attic inscription, and the clock under a blocky Glory of Commerce group (Mercury, Hercules, Minerva).
+- A balustraded terrace at the windows' foot with a stair at the east end, the Park Avenue Viaduct crossing the street at the west end, street lamps, office towers round the street and the MetLife tower behind.
+- The level map labels the facade, street and viaduct.
+
 ## 0.4.0 (2026-11-24)
 
 - Upper-level track platforms, north of the concourse, through three brass-framed gates in the north wall signed TRACK 29, 30 and 31.

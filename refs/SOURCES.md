@@ -24,3 +24,5 @@ Wikimedia Commons, downloaded at 1600 px for colour, tone and pattern sampling. 
 | Vanderbilt_Hall_Grand_Central_Terminal_New_York_City_NY_4804.jpg | Warren LeMay | CC0 | https://commons.wikimedia.org/wiki/File:Vanderbilt_Hall,_Grand_Central_Terminal,_New_York_City,_NY_-_48046207521.jpg |
 | Grand_Central_Station_tracks.jpg | Chris Light | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Grand_Central_Station_-_tracks.jpg |
 | Metro_North_M7a_Rainbow_Heart_Sticker_Grand_Central.jpg | Lexcie | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Metro-North_M7a_Rainbow_Heart_Sticker_Grand_Central.jpg |
+| 42nd_Street_Facade_Grand_Central_Terminal_October_2025.jpg | TheCatalyst31 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:42nd_Street_Facade,_Grand_Central_Terminal,_October_2025.jpg |
+| Glory_of_Commence.jpg | NicoARicoA | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Glory_of_Commence_.jpg |
