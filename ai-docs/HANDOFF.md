@@ -1,6 +1,6 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (Main Concourse detail; sign-off page waiting on Mark)
+Status: in progress (repo public; wiki waits on Mark's first-page click; sign-off page waiting on Mark)
 Updated: 2026-11-23
 
 - Prompt: plans/2026-11-23-gcs-gmod-continue-prompt.md
@@ -73,7 +73,7 @@ Updated: 2026-11-23
 - Lunette relief: alternate voussoirs of the middle hood ring stand 6 u proud, cream keystone at each crown. shots/20261123-1949.
 
 ## Next
-- FIRST: the public-repo milestone (Directive below, steps 1-4), unless the sign-off set is answered.
+- FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
 1. Zodiac figures have outlines now; real animal/human drawings would be the next step. Lunette hoods have voussoirs and keystones; garland carving would be a normal map.
 2. Booth interior is in; could add clerks' props or brighter interior light.
@@ -82,6 +82,7 @@ Updated: 2026-11-23
 5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
+- Licence: code in tools/ is MIT; map source, generated textures and screenshots are CC BY-SA 4.0 (matches the BY-SA reference photos). README banner is Z-Image Turbo seed 11, labelled as AI art, not an in-game shot.
 - Sun shafts are fake volumetrics (additive brushes); a camera inside one sees haze, so they fade in only past the balcony edge.
 - Zodiac constellations are simplified stick figures over abstract limb silhouettes, not the real ceiling's figure drawings; band curves are stylised sinusoids.
 - Vault rise 40 ft, estimated from photos (check against the HABS section).
@@ -93,13 +94,14 @@ Updated: 2026-11-23
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.
 
 ## Waiting on Mark
+- One click: save any first page at https://github.com/m4bwav/gcs-gmod/wiki/_new (GitHub has no API to create a wiki repo). Then: `wikiwright.py preflight m4bwav/gcs-gmod --clone ../gcs-gmod.wiki`, copy docs/wiki/*.md into the clone (replace the placeholder Home), commit, push, `wikiwright.py live m4bwav/gcs-gmod ../gcs-gmod.wiki`, write ai-docs/notes/<date>-github-wiki.md.
 - askwright set ask/concourse-signoff (2 questions: upload now or keep detailing; which gaps first). Served at http://127.0.0.1:62012/ on 2026-11-23; `ask.py serve ask/concourse-signoff --detach` restarts it.
 
 ## Directive from Mark (2026-11-23)
 - Use and improve every plugin involved (polywright, modwright, photowright, artwright, comfyui-gen...); fix gaps in the plugins' own repos.
 - Get textures right from real photos (licensed/public domain, sources in refs/); after each compile, put screenshots beside photos from matching viewpoints and iterate until they match. This comes before item 1 below.
 
-- Remote: private github.com/m4bwav/gcs-gmod (created 2026-11-23). Push main after every merge.
+- Remote: github.com/m4bwav/gcs-gmod, PUBLIC since 2026-11-23 (was private, (created 2026-11-23). Push main after every merge.
 
 ## Directive from Mark (2026-11-23, later): make the repo public
 Mark approved making m4bwav/gcs-gmod public. Do it as one milestone, before more detail work:
@@ -108,3 +110,5 @@ Mark approved making m4bwav/gcs-gmod public. Do it as one milestone, before more
 3. Flip to public (`gh repo edit m4bwav/gcs-gmod --visibility public --accept-visibility-change-consequences`), add SECURITY.md, topics and a description.
 4. GitHub wiki with wikiwright: Home, Building the map, Tools, Reference photos and accuracy, Roadmap (area order from the plan), Changelog. Check every page is live.
 Push main after every merge.
+
+Public-repo milestone steps 1-3 done 2026-11-23 (audit, README+banner+LICENSE+SECURITY, flipped public with topics and description). Step 4 (wiki) drafted in docs/wiki/, passes wikiwright check and everwrite; push waits on the first-page click.
