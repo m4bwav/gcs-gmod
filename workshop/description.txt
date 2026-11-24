@@ -1,7 +1,9 @@
 [h1]Grand Central Terminal[/h1]
 The Main Concourse of New York's Grand Central Terminal at true scale: the green zodiac vault, the end windows with light shafts, the double staircases and balconies, the four-faced clock on the information booth, the ticket windows, the departure board, the flag and the chandeliers.
 
-Update 0.2.0 adds the lower level: walk down the ramps from the concourse to the Whispering Gallery with its tiled vault, the Oyster Bar with its counters and stools, and the dining concourse with its clock booth. Vanderbilt Hall, the platforms and the facade will follow in updates.
+Update 0.3.0 adds Vanderbilt Hall: walk through the passage beside the ticket windows into the old waiting room with its five tiered chandeliers, gilded cornice and tall windows, and the 42nd Street doors.
+
+Update 0.2.0 added the lower level: walk down the ramps from the concourse to the Whispering Gallery with its tiled vault, the Oyster Bar with its counters and stools, and the dining concourse with its clock booth. The platforms and the facade will follow in updates.
 
 [h2]Details[/h2]
 [list]

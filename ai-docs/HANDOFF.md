@@ -1,6 +1,6 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.2.0 released 2026-11-24: lower level; Workshop 3845077025, GitHub v0.2.0)
+Status: in progress (0.3.0 released 2026-11-24: Vanderbilt Hall; Workshop 3845077025, GitHub v0.3.0)
 Updated: 2026-11-24
 
 - Prompt: plans/2026-11-23-gcs-gmod-continue-prompt.md
@@ -115,8 +115,10 @@ Updated: 2026-11-24
 - Area 2 detail pass 2 (2026-11-23): dining booth has a brass column and four-faced opal clock (gcs/clock, z -150..-120 so the dial tiles align); Oyster Bar entrance has a bronze OYSTER BAR band in the opening head (oysterbar.vtf from make_board.py, FACEUV _oysterbar_uv), oak posts, transom and amber side lights; oak-topped cream counters with stools along both Oyster Bar long walls. Anything at the gallery wall above Z+120 sits inside the groin's springing; keep wall details below it. New cameras ob_entry, dining_clock, ob_counter. Clean full compile, shots/20261123-2259.
 - East ramps (2026-11-23): the ramp loop in lower_level() mirrors to the east end (e=-1); east ramps descend under the east wall's side arches to a coffered landing hall (EAST_D 40 ft) with three lit brass doors on its east wall (sealed until the platforms, area 4), and a corridor runs west into the dining concourse through a new opening in its east wall. Cameras east_ramp, east_down, east_land. Clean full compile, shots/20261123-2308.
 - Release 0.2.0 (2026-11-24): level map labels both levels incl. east ramps/landing hall; README lower-level shots (shots/20261124-0749), wiki Changelog/Roadmap, Workshop gma + description + 5 new previews (the old 0.1.0 map preview is still there: AddItemPreviewFile appends; remove it by hand or add a RemoveItemPreview call to workshop_update.py), tag v0.2.0 with the .gma. The build/ folder must be recreated per worktree: build/addon/addon.json + maps/gm_grand_central.bsp, then gmad create.
-- NEXT: area 3, Vanderbilt Hall and the 42nd Street passage (refs and a plan first; join it through a real opening on the concourse south side).
-- Saver for each area release (wrap-up 2026-11-24): write tools/package.sh (build/addon/addon.json type map + bsp, gmad create, gmpublish update, workshop_update.py) so a release is one command; today it took five hand-typed steps.
+- Release 0.3.0 (2026-11-24): Vanderbilt Hall (area 3). Passage through the concourse south wall's west bay (x -115..-102 ft, 16 ft high, 24 ft long) into a 200x64x56 ft hall (build_vmf.py vanderbilt(), VH_* constants): coffered ceiling, gold cornice + cream frieze, dado, grilled windows both long walls, five tiered chandeliers, pedimented east door, 42nd St vestibule with lit brass doors (sealed until area 5). Cameras vh_door, vanderbilt, vh_east, vh_42nd. shots/20261124-0759 (vh.jpg). Refs: 3 Commons photos (2 CC0, 1 CC BY-SA).
+- vbsp limit hit: the world model is at the t-junction index cap ("Too many t-junctions", 65536). New areas put their decor in ONE func_brush per area (vanderbilt(): decor list -> func_brush vh_decor), not func_detail. Do the same for every later area.
+- tools/package.sh: one-command release (`sh tools/package.sh "note" [previews...]`, DRY=1 builds the .gma only) after tools/compile.sh.
+- NEXT: Vanderbilt Hall detail (windows read blue, photo is dark green grilles; the vanderbilt camera clips the passage wall; real chandeliers have a tall bronze cage above the rings), then area 4, the track platforms through the east landing hall doors.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
 - Wiki is live (notes/2026-11-23-github-wiki.md); update it from docs/wiki/ when the map changes.
@@ -127,6 +129,7 @@ Updated: 2026-11-24
 5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
+- Vanderbilt Hall size 200x64x56 ft, passage in the concourse's west bay, hall floor level with the concourse (real one slightly higher, reached by a slope): estimates.
 - Lower level at -22 ft, ramps 1:6 (real ones gentler and longer), gallery 50 ft square, Oyster Bar 96x80 ft, dining hall 167x100 ft: estimates, no measured plan yet. Only the west ramps so far.
 - Licence: code in tools/ is MIT; map source, generated textures and screenshots are CC BY-SA 4.0 (matches the BY-SA reference photos). README banner is Z-Image Turbo seed 11, labelled as AI art, not an in-game shot.
 - Sun shafts are fake volumetrics (additive brushes); a camera inside one sees haze, so they fade in only past the balcony edge.

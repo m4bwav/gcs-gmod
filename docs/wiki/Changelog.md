@@ -1,3 +1,11 @@
+## 0.3.0 (2026-11-24)
+
+- Vanderbilt Hall, south of the concourse, reached by a passage through the west bay of the south wall.
+- A 200 x 64 ft hall, 56 ft high: coffered ceiling, gilded cornice and cream frieze, marble dado, tall grilled windows on both long walls.
+- Five tiered chandeliers with glowing bulb rings down the centre, a pedimented doorway at the east end.
+- The 42nd Street vestibule with three lit brass doors (they will open onto the facade in a later update).
+- The level map labels Vanderbilt Hall.
+
 ## 0.2.0 (2026-11-24)
 
 - The lower level, 22 ft below the concourse: ramps from the concourse floor at both ends, under the balconies' side arches.

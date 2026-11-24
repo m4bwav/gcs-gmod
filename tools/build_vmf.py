@@ -491,13 +491,126 @@ def lower_level(W, ents):
     ents.append(ent("env_cubemap", (0, -300, Z + 72)))
 
 
+# Vanderbilt Hall (area 3): the old main waiting room south of the concourse, reached
+# through a passage in the west bay of the south wall. Flat gilded-cornice ceiling, ashlar
+# walls, tall grilled windows, five tiered chandeliers; the 42nd Street vestibule opens
+# off its south wall and ends in lit doors (sealed until the exterior, area 5).
+VH_PX0, VH_PX1 = -115 * FT, -102 * FT     # passage through the concourse south wall
+VH_PH = 16 * FT                           # passage height
+VH_Y1 = -HY - WALL - 24 * FT              # hall's inner north face
+VH_Y0 = VH_Y1 - 64 * FT                   # hall 200 x 64 ft (estimate)
+VH_X0, VH_X1 = -130 * FT, 70 * FT
+VH_H = 56 * FT
+VS_X0, VS_X1, VS_D = -40 * FT, -20 * FT, 24 * FT   # 42nd Street vestibule
+
+
+def vanderbilt(W, ents):
+    # Decor goes into one func_brush: the world model is at vbsp's t-junction index cap (65536).
+    decor = []
+    det = decor.append
+    # Hall shell.
+    W(box(VH_X0, VH_Y0, -WALL, VH_X1, VH_Y1, 0, TEX_FLOOR))
+    W(box(VH_X0, VH_Y0, VH_H, VH_X1, VH_Y1, VH_H + WALL, TEX_COFFER))
+    W(box(VH_X0 - WALL, VH_Y0 - WALL, -WALL, VH_X0, VH_Y1 + WALL, VH_H + WALL, TEX_WALL))
+    W(box(VH_X1, VH_Y0 - WALL, -WALL, VH_X1 + WALL, VH_Y1 + WALL, VH_H + WALL, TEX_WALL))
+    for (y0, y1), (g0, g1, gh) in (((VH_Y1, VH_Y1 + WALL), (VH_PX0, VH_PX1, VH_PH)),
+                                   ((VH_Y0 - WALL, VH_Y0), (VS_X0, VS_X1, 20 * FT))):
+        W(box(VH_X0, y0, -WALL, g0, y1, VH_H, TEX_WALL))
+        W(box(g1, y0, -WALL, VH_X1, y1, VH_H, TEX_WALL))
+        W(box(g0, y0, gh, g1, y1, VH_H, TEX_WALL))
+        W(box(g0, y0, -WALL, g1, y1, 0, TEX_FLOOR))
+    # Passage from the concourse: cream walls and ceiling, a lamp.
+    py0, py1 = VH_Y1 + WALL, -HY - WALL
+    W(box(VH_PX0, py0, -WALL, VH_PX1, py1, 0, TEX_FLOOR))
+    W(box(VH_PX0 - WALL, py0, -WALL, VH_PX0, py1, VH_PH + WALL, TEX_CREAM))
+    W(box(VH_PX1, py0, -WALL, VH_PX1 + WALL, py1, VH_PH + WALL, TEX_CREAM))
+    W(box(VH_PX0, py0, VH_PH, VH_PX1, py1, VH_PH + WALL, TEX_CREAM))
+    pc = (VH_PX0 + VH_PX1) // 2
+    ents.append(ent("light", (pc, (py0 + py1) // 2, VH_PH - 40), _light="255 210 150 30"))
+    # Cream jambs, lintel and gold edge framing both ends of the passage.
+    for ya, yb in ((-HY, -HY + 12), (VH_Y1 - 12, VH_Y1)):
+        for x0, x1 in ((VH_PX0 - 24, VH_PX0), (VH_PX1, VH_PX1 + 24)):
+            det(box(x0, ya, 0, x1, yb, VH_PH, TEX_CREAM))
+        det(box(VH_PX0 - 24, ya, VH_PH, VH_PX1 + 24, yb, VH_PH + 24, TEX_CREAM))
+        det(box(VH_PX0 - 24, ya, VH_PH + 24, VH_PX1 + 24, yb, VH_PH + 30, TEX_GOLD))
+    # Vestibule to 42nd Street with lit brass doors.
+    vy1, vy0 = VH_Y0 - WALL, VH_Y0 - WALL - VS_D
+    W(box(VS_X0, vy0, -WALL, VS_X1, vy1, 0, TEX_FLOOR))
+    W(box(VS_X0 - WALL, vy0 - WALL, -WALL, VS_X0, vy1, 20 * FT + WALL, TEX_CREAM))
+    W(box(VS_X1, vy0 - WALL, -WALL, VS_X1 + WALL, vy1, 20 * FT + WALL, TEX_CREAM))
+    W(box(VS_X0, vy0, 20 * FT, VS_X1, vy1, 20 * FT + WALL, TEX_CREAM))
+    W(box(VS_X0, vy0 - WALL, -WALL, VS_X1, vy0, 20 * FT, TEX_CREAM))
+    dw = (VS_X1 - VS_X0) // 3
+    for k in range(3):
+        x0 = VS_X0 + k * dw
+        det(box(x0 + 12, vy0, 0, x0 + dw - 12, vy0 + 4, 12 * FT, TEX_DOOR))
+        det(box(x0, vy0, 0, x0 + 12, vy0 + 8, 13 * FT, TEX_GOLD))
+    det(box(VS_X1 - 12, vy0, 0, VS_X1, vy0 + 8, 13 * FT, TEX_GOLD))
+    det(box(VS_X0, vy0, 12 * FT, VS_X1, vy0 + 8, 13 * FT, TEX_GOLD))
+    det(box(VS_X0 + 12, vy0, 13 * FT, VS_X1 - 12, vy0 + 4, 19 * FT, TEX_DOOR))
+    ents.append(ent("light", ((VS_X0 + VS_X1) // 2, vy0 + 120, 16 * FT), _light="255 215 160 40"))
+    # Tall dark-green grilled windows on both long walls, cream sills.
+    for yw, s in ((VH_Y1, -1), (VH_Y0, 1)):
+        for cx in range(VH_X0 + 30 * FT, VH_X1 - 20 * FT + 1, 40 * FT):
+            if VH_PX0 - 10 * FT < cx < VH_PX1 + 10 * FT or VS_X0 - 10 * FT < cx < VS_X1 + 10 * FT:
+                continue
+            ga, gb = sorted((yw, yw + s * 2))
+            det(box(cx - 7 * FT, ga, 20 * FT, cx + 7 * FT, gb, 48 * FT, TEX_DIM))
+            ma, mb = sorted((yw + s * 2, yw + s * 6))
+            for j in range(-3, 4):
+                det(box(cx + j * 24 - 2, ma, 20 * FT, cx + j * 24 + 2, mb, 48 * FT, TEX_GRID))
+            for z in range(20 * FT, 48 * FT + 1, 48):
+                det(box(cx - 7 * FT, ma, z - 2, cx + 7 * FT, mb, z + 2, TEX_GRID))
+            sa, sb = sorted((yw, yw + s * 18))
+            det(box(cx - 8 * FT, sa, 19 * FT, cx + 8 * FT, sb, 20 * FT, TEX_CREAM))
+    # Gilded cornice and cream frieze round the ceiling; marble dado at the foot of the walls.
+    for d, z0, z1, tex in ((48, VH_H - 30, VH_H, TEX_GOLD), (24, VH_H - 72, VH_H - 30, TEX_CREAM)):
+        det(box(VH_X0, VH_Y1 - d, z0, VH_X1, VH_Y1, z1, tex))
+        det(box(VH_X0, VH_Y0, z0, VH_X1, VH_Y0 + d, z1, tex))
+        det(box(VH_X0, VH_Y0 + d, z0, VH_X0 + d, VH_Y1 - d, z1, tex))
+        det(box(VH_X1 - d, VH_Y0 + d, z0, VH_X1, VH_Y1 - d, z1, tex))
+    for x0, y0, x1, y1 in ((VH_X0, VH_Y1 - 6, VH_PX0 - 24, VH_Y1), (VH_PX1 + 24, VH_Y1 - 6, VH_X1, VH_Y1),
+                           (VH_X0, VH_Y0, VS_X0, VH_Y0 + 6), (VS_X1, VH_Y0, VH_X1, VH_Y0 + 6),
+                           (VH_X0, VH_Y0 + 6, VH_X0 + 6, VH_Y1 - 6), (VH_X1 - 6, VH_Y0 + 6, VH_X1, VH_Y1 - 6)):
+        det(box(x0, y0, 0, x1, y1, 8 * FT, TEX_CREAM))
+    # East end: a doorway with a carved cream pediment, lit glass doors behind.
+    ex, cy = VH_X1, (VH_Y0 + VH_Y1) // 2
+    det(box(ex - 10, cy - 6 * FT, 0, ex - 6, cy + 6 * FT, 11 * FT, TEX_DOOR))
+    for y0, y1 in ((cy - 8 * FT, cy - 6 * FT), (cy + 6 * FT, cy + 8 * FT)):
+        det(box(ex - 24, y0, 0, ex - 6, y1, 13 * FT, TEX_CREAM))
+    det(box(ex - 30, cy - 9 * FT, 13 * FT, ex - 6, cy + 9 * FT, 15 * FT, TEX_CREAM))
+    det(box(ex - 36, cy - 9 * FT, 15 * FT, ex - 6, cy + 9 * FT, 15 * FT + 4, TEX_GOLD))
+    det(xprism(ccw([(cy - 4 * FT, 15 * FT + 4), (cy + 4 * FT, 15 * FT + 4), (cy, 20 * FT)]), ex - 26, ex - 6, TEX_CREAM))
+    # Five tiered chandeliers down the centre (rings of glowing bulbs under a gold stem).
+    for k in range(5):
+        x = VH_X0 + (2 * k + 1) * (VH_X1 - VH_X0) // 10
+        zc = VH_H - 26 * FT
+        det(prism(ngon(x, cy, 2, 6), zc + 10 * FT, VH_H - 4, TEX_GOLD))
+        det(prism(ngon(x, cy, 8, 8, math.pi / 8), zc + 30, zc + 10 * FT, TEX_GOLD))
+        det(prism(ngon(x, cy, 30, 12, math.pi / 12), VH_H - 4, VH_H, TEX_CREAM))   # ceiling rosette
+        for r, z in ((42, zc + 24), (30, zc), (18, zc - 24)):
+            det(prism(ngon(x, cy, r, 12, math.pi / 12), z - 4, z, TEX_GOLD))
+            det(prism(ngon(x, cy, r - 10, 12, math.pi / 12), z, z + 6, TEX_GOLD))
+            ring = ngon(x, cy, r + 2, 12, math.pi / 12)
+            inner = ngon(x, cy, r - 10, 12, math.pi / 12)
+            for i in range(12):
+                det(prism(ccw([ring[i], ring[(i + 1) % 12], inner[(i + 1) % 12], inner[i]]), z, z + 6, TEX_BULB))
+        det(prism(ngon(x, cy, 8, 8, math.pi / 8), zc - 44, zc - 28, TEX_GOLD))
+        ents.append(ent("light", (x, cy, zc - 80), _light="255 220 170 45"))
+    ents.append(ent("light", ((VH_X0 + VH_X1) // 2, cy, VH_H - 60), _light="255 225 180 15"))
+    ents.append(ent("env_cubemap", ((VH_X0 + VH_X1) // 2, cy, 160)))
+    ents.append(ent("env_cubemap", (pc, (py0 + py1) // 2, 100)))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="vh_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
 def build():
     world, ents = [], []
     W = world.append
 
     # Sealed outer hull (nodraw) so the interior can't leak while geometry is rough.
     O = 256
-    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, -HY-WALL-64, HY+WALL+64, CROWN+WALL+64
+    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, VH_Y0-2*WALL-VS_D-128, HY+WALL+64, CROWN+WALL+64
     ZB = LOW_Z - 2*WALL - 64
     W(box(X0, Y0, ZB, X1, Y1, ZB+64, NODRAW))
     W(box(X0, Y0, Z1, X1, Y1, Z1+64, NODRAW))
@@ -512,7 +625,12 @@ def build():
         W(box(-HX, y0, -WALL, RAMP_X0, y1, 0, TEX_FLOOR))
         W(box(-RAMP_X0, y0, -WALL, HX, y1, 0, TEX_FLOOR))
     lower_level(W, ents)
-    W(box(-HX, -HY-WALL, -WALL, HX, -HY, SPRING, TEX_WALL))
+    # South wall, cut by the passage to Vanderbilt Hall in its west bay.
+    W(box(-HX, -HY-WALL, -WALL, VH_PX0, -HY, SPRING, TEX_WALL))
+    W(box(VH_PX1, -HY-WALL, -WALL, HX, -HY, SPRING, TEX_WALL))
+    W(box(VH_PX0, -HY-WALL, VH_PH, VH_PX1, -HY, SPRING, TEX_WALL))
+    W(box(VH_PX0, -HY-WALL, -WALL, VH_PX1, -HY, 0, TEX_FLOOR))
+    vanderbilt(W, ents)
     W(box(-HX, HY, -WALL, HX, HY+WALL, SPRING, TEX_WALL))
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
