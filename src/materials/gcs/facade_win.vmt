@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "gcs/facade_win"
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[0.15 0.15 0.15]"
+	"$surfaceprop" "glass"
+}
