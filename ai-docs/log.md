@@ -14,3 +14,4 @@
 - 2026-11-23: Zodiac vault mural (tools/make_vault.py) mapped once over the vault via per-face uaxis/vaxis with shift = (s0 - dot(p0,t))/scale; continuous across 20 segments, shots/20261123-1757.
 - 2026-11-23: Lunette cream hoods + 4-block ashlar; first cream tint [1.05 .98 .86] on plaster003a read grey-brown, [1.35 1.22 .98] reads cream (shots/20261123-1803).
 - 2026-11-23: Booth clock as brushes + procedural opal dial VTF (UnlitGeneric); per-material u shift (USHIFT) centres a texture on a face. Clean compile, shots/20261123-1807.
+- 2026-11-23: Brush chandeliers (gold drum, 16 bulbs each, gcs/bulb UnlitGeneric) on both long walls; clock dials on -x/+y faces unmirrored by negating u. Clean compile, shots/20261123-1811.

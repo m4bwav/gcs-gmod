@@ -34,11 +34,13 @@ Updated: 2026-11-23
 
 - Booth and clock: tools/make_clock.py writes clock_face.vtf (opal dial, black ticks and hands, brass bezel); gcs/clock is UnlitGeneric. Booth now cream base, dark glass with brass posts, gold cornice; brass column carries a 30 u four-faced clock, gold cap and acorn. build_vmf.py USHIFT centres the dial. New `clock` camera in gcs_shots.lua. shots/20261123-1807.
 
+- Chandeliers: 16 brush chandeliers (gold rod from cornice, drum, two tiers of 8 glowing bulbs gcs/bulb, finial), one light each, down both long walls. Clock dials unmirrored (all four read 10:08). shots/20261123-1811.
+
 ## Next
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
-2. Booth glass is flat blue-grey; real booth has brass grilles and ticket windows. Clock dials mirror on the -x/-y faces (hands read 1:52); fine at distance.
+2. Booth glass is flat blue-grey; real booth has brass grilles and ticket windows.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
-4. Chandeliers (polywright), ticket-window departure board, flags; then the zodiac ceiling.
+4. Ticket-window departure board, flags; chandeliers could become a polywright model with globes later.
 5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)

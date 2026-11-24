@@ -29,6 +29,7 @@ TEX_GRID = "gcs/mullion"
 TEX_DIM = "gcs/window_dim"
 TEX_CREAM = "gcs/cream"
 TEX_CLOCK = "gcs/clock"
+TEX_BULB = "gcs/bulb"
 NODRAW = "tools/toolsnodraw"
 
 _id = [0]
@@ -66,6 +67,8 @@ def side(pts, n, tex, uv=None):
         p2, p3 = p3, p2
     f = lambda p: "(%g %g %g)" % p
     u, v = uv or axes_for(n, SCALE.get(tex, 0.25))
+    if not uv and tex == TEX_CLOCK and abs(n[2]) < 0.5 and n[0] - n[1] < 0:
+        u = u.replace("[0 1 0", "[0 -1 0").replace("[1 0 0", "[-1 0 0")   # unmirror -x and +y dials
     if not uv and tex in USHIFT:
         u = u.replace(" 0] ", " %g] " % USHIFT[tex])
     return ('\tside\n\t{\n\t\t"id" "%d"\n\t\t"plane" "%s %s %s"\n\t\t"material" "%s"\n'
@@ -310,10 +313,21 @@ def build():
         ents.append(ent("func_detail", solids=box(x-6*FT, -HY+0, 0, x-5*FT, -HY+3*FT, 14*FT, TEX_TRIM)))
     ents.append(ent("func_detail", solids=box(-100*FT, -HY, 14*FT, 100*FT, -HY+4*FT, 16*FT, TEX_TRIM)))
 
-    # Chandelier lights down both long sides, and soft fill under the vault.
+    # Chandeliers down both long sides: a gold rod from the cornice, a gold drum with
+    # two tiers of glowing bulbs, a finial below; a light at each body.
     for x in range(-HX+300, HX-299, 450):
         for y in (-HY+120, HY-120):
-            ents.append(ent("light", (x, y, 32*FT), _light="255 214 160 18"))
+            zc = 32*FT
+            det(ngon(x, y, 2, 6), zc+48, SPRING, TEX_GOLD)
+            det(ngon(x, y, 22, 8, math.pi/8), zc-6, zc+6, TEX_GOLD)
+            det(ngon(x, y, 12, 8, math.pi/8), zc+6, zc+48, TEX_GOLD)
+            det(ngon(x, y, 8, 8, math.pi/8), zc-30, zc-6, TEX_GOLD)
+            det(ngon(x, y, 5, 4), zc-40, zc-30, TEX_GOLD)
+            for tier, (r, z0) in enumerate(((30, zc+6), (18, zc+30))):
+                for a in range(8):
+                    t = 2*math.pi*(a + 0.5*tier)/8
+                    det(ngon(x + r*math.cos(t), y + r*math.sin(t), 4, 6), z0, z0+8, TEX_BULB)
+            ents.append(ent("light", (x, y, zc-48), _light="255 214 160 18"))
         ents.append(ent("light", (x, 0, SPRING+300), _light="160 200 210 10"))
 
     ents.append(ent("env_tonemap_controller", (0, 0, 64), targetname="tonemap"))
