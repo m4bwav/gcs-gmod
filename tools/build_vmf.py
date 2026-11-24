@@ -60,7 +60,7 @@ USHIFT = {TEX_CLOCK: 128}      # centre the dial on faces spanning -15..15
 # Departure board over the ticket windows (faces +y) and the flag hung from the crown
 # (faces +-x); both map their texture once over the front faces, the rest gets black/gold.
 BOARD = (-20*FT, 20*FT, 17*FT, 27*FT)         # x0, x1, z0, z1: 40 x 10 ft, inside the centre bay
-FLAG = (24*FT, 24*FT + 2, -10*FT, 10*FT, SPRING - 38*FT, SPRING)   # x0, x1 (thin), y0, y1, z0, z1
+FLAG = (-10*FT, 10*FT, HY - 8*FT, HY - 8*FT + 2, SPRING - 46*FT, SPRING - 8*FT)   # x0, x1, y0, y1 (thin), z0, z1: north centre bay
 
 
 def _board_uv(n):
@@ -71,10 +71,11 @@ def _board_uv(n):
 
 
 def _flag_uv(n):
-    _, _, y0, y1, z0, z1 = FLAG
-    su, sv = (y1-y0)/256, (z1-z0)/512
-    s = 1 if n[0] > 0 else -1
-    return "[0 %d 0 %g] %g" % (s, -s*(y0 if s > 0 else y1)/su, su), "[0 0 -1 %g] %g" % (z1/sv, sv)
+    x0, x1, _, _, z0, z1 = FLAG
+    su, sv = (x1-x0)/256, (z1-z0)/512
+    if abs(n[1]) > 0.5:
+        s = -1 if n[1] > 0 else 1
+        return "[%d 0 0 %g] %g" % (s, -s*(x0 if s > 0 else x1)/su, su), "[0 0 -1 %g] %g" % (z1/sv, sv)
 
 
 FACEUV = {"gcs/board": _board_uv, "gcs/flag": _flag_uv}
@@ -246,9 +247,9 @@ def build():
     W(box(-HX, HY, SPRING, HX, HY+WALL, SPRING+8, TEX_TRIM))
 
     # End walls with three tall arched windows (blockout: rectangular openings into glowing alcoves).
-    win_w, win_z0, win_z1 = 28*FT, BALC_Z + 16*FT, SPRING + 16*FT
-    win_zc = SPRING + 26*FT                 # the centre window rises higher, under the crown
-    centres = [-38*FT, 0, 38*FT]
+    win_w, win_z0, win_z1 = 26*FT, BALC_Z + 16*FT, SPRING + 20*FT
+    win_zc = SPRING + 28*FT                 # the centre window rises higher, under the crown
+    centres = [-31*FT, 0, 31*FT]            # close-set, as in the photos: narrow piers between
     for sgn in (-1, 1):
         xin, xout = sgn*HX, sgn*(HX+WALL)
         xa, xb = min(xin, xout), max(xin, xout)
@@ -282,10 +283,10 @@ def build():
                 ents.append(ent("func_detail", solids=xprism(ccw([corner, arc[i], arc[i+1]]), xa, xb, TEX_WALL)))
         for c in centres:
             ents.append(ent("light", (sgn*(HX+WALL+96), c, (win_z0+win_z1)/2),
-                            _light="255 240 215 45", _quadratic_attn="0", _linear_attn="1", _fifty_percent_distance="900", _zero_percent_distance="2400"))
+                            _light="255 240 215 60", _quadratic_attn="0", _linear_attn="1", _fifty_percent_distance="900", _zero_percent_distance="2400"))
             ents.append(ent("light_spot", (sgn*(HX+WALL+150), c, win_z1-40),
                             angles="-38 %d 0" % (180 if sgn > 0 else 0), pitch="-38",
-                            _light="255 235 200 225", _inner_cone="12", _cone="22", _exponent="1",
+                            _light="255 235 200 110", _inner_cone="30", _cone="65", _exponent="1",
                             _distance="0", _fifty_percent_distance="2600", _zero_percent_distance="5200"))
 
     # Mullion grid in the end windows, gilded band across each end at the springline.
@@ -302,8 +303,8 @@ def build():
             ents.append(ent("func_detail", solids=box(xa, edges[j], SPRING-40, xb, edges[j+1], SPRING, TEX_GOLD)))
         # Paired engaged columns on the piers between the windows, gilded capitals.
         xc0, xc1 = sorted((sgn*HX, sgn*(HX-3*FT)))
-        for py in (-19*FT, 19*FT):
-            for dy in (-3*FT, 3*FT):
+        for py in (-31*FT//2, 31*FT//2):
+            for dy in (-2*FT, 2*FT):
                 y = py + dy
                 ents.append(ent("func_detail", solids=box(xc0, y-18, BALC_Z, xc1, y+18, SPRING-64, TEX_CREAM)))
                 ents.append(ent("func_detail", solids=box(xc0, y-24, SPRING-64, xc1, y+24, SPRING-40, TEX_GOLD)))
@@ -411,12 +412,12 @@ def build():
     bx0, bx1, bz0, bz1 = BOARD
     det([(bx0, -HY), (bx1, -HY), (bx1, -HY+16), (bx0, -HY+16)], bz0, bz1, "gcs/board", TEX_GOLD)
 
-    # The flag hung from the crown on two gold rods.
+    # The flag hangs in the north centre bay from a gold pole bracketed to the wall.
     fx0, fx1, fy0, fy1, fz0, fz1 = FLAG
     ents.append(ent("func_detail", solids=box(fx0, fy0, fz0, fx1, fy1, fz1, "gcs/flag")))
-    ents.append(ent("func_detail", solids=box(fx0-2, fy0, fz1, fx1+2, fy1, fz1+4, TEX_GOLD)))
-    for y in (fy0+12, fy1-12):
-        det(ngon((fx0+fx1)/2, y, 2, 6), fz1+4, CROWN-8, TEX_GOLD)
+    ents.append(ent("func_detail", solids=box(fx0-6, fy0-3, fz1, fx1+6, fy1+3, fz1+6, TEX_GOLD)))
+    for x in (fx0+12, fx1-12):
+        ents.append(ent("func_detail", solids=box(x-2, fy0, fz1+2, x+2, HY, fz1+6, TEX_GOLD)))
 
     # Chandeliers down both long sides: a gold rod from the cornice, a gold drum with
     # two tiers of glowing bulbs, a finial below; a light at each body.

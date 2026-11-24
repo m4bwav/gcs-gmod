@@ -23,3 +23,4 @@
 - 2026-11-23: east_balcony compared against the photo: the long-wall bay windows started too low (30 ft). BAY_Z0 = 42 ft gives a stone lower storey like the photo. Clean compile, shots/20261123-1840/pair_east.jpg.
 - 2026-11-23: Taller end windows (centre one higher under the crown), deeper great arch soffit, cornice modillion band. Clean compile, shots/20261123-1844.
 - 2026-11-23: vault_up camera sat inside the booth clock column (black shot); moved to x=-600. Ashlar paler cream. Clean compile, shots/20261123-1847.
+- 2026-11-23: End windows moved closer together and taller, floor sun spots softened, flag moved into the north centre bay. Clean compile, shots/20261123-1851.

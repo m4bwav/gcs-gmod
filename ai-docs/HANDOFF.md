@@ -52,8 +52,10 @@ Updated: 2026-11-23
 
 - vault_up camera moved out of the booth clock column (was black); ashlar base colour paler cream [228 208 172] to match photos. shots/20261123-1847.
 
+- End windows close-set (26 ft wide at y=0/±31 ft, heads SPRING+20/+28 ft), window spots softened (110, cone 65), flag moved to the north centre bay hanging from a gold pole (camera flag looks north). shots/20261123-1851.
+
 ## Next
-0. Gaps from shots/20261123-1847 compare: end windows still shorter and further apart than the photo (photo: three tall windows nearly reaching the arch); hard sunlight patches on the floor (photo floor is evenly lit, so soften window spots); flag hangs in front of the end wall, photo shows it in a long-wall bay.
+0. From shots/20261123-1851 compare: the photo's flag is wider and hangs horizontally (stripes run across); the end windows are still a little short of the arch; the booth glass and the stairs read flat.
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
 2. Booth glass is flat blue-grey; real booth has brass grilles and ticket windows.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
