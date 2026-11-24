@@ -479,6 +479,15 @@ def build():
             # Cream marble reveals frame the glass on both sides.
             for j0, j1 in ((w0, w0+10), (w1-10, w1)):
                 ents.append(ent("func_detail", solids=box(j0, -HY, 3.5*FT+2, j1, -HY+2*FT, 10*FT, TEX_CREAM)))
+            # Segmental arched head: cream spandrels between the reveals, 1.5 ft rise.
+            xl, xr, zs, zt = w0+10, w1-10, 8.5*FT, 10*FT
+            a, s = (xr - xl)/2, zt - zs
+            R, xc = (a*a + s*s)/(2*s), (xl + xr)/2
+            pts = [(round(xc + dx), round(zt - R + math.sqrt(R*R - dx*dx)))
+                   for dx in (-a + 2*a*i/8 for i in range(9))]
+            for i in range(8):
+                corner = (xl, zt) if i < 4 else (xr, zt)
+                ents.append(ent("func_detail", solids=yprism(ccw([corner, pts[i], pts[i+1]]), -HY, -HY+2*FT, TEX_CREAM)))
             ents.append(ent("func_detail", solids=box(w0, -HY, 10*FT, w1, -HY+2*FT, 11*FT, TEX_GOLD)))
             ents.append(ent("func_detail", solids=box(w0, -HY, 11*FT, w1, -HY+18, 14*FT, TEX_CREAM)))
             # Bronze TICKETS plaque centred on the lintel.
