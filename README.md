@@ -2,6 +2,8 @@
 
 # gm_grand_central
 
+**Play it:** [Steam Workshop: Grand Central Terminal (gm_grand_central)](https://steamcommunity.com/sharedfiles/filedetails/?id=3845077025)
+
 A Garry's Mod map of the Main Concourse of Grand Central Terminal in New York, built at true scale (1 ft = 12 units). It's a work in progress. The concourse comes first; the dining concourse, Vanderbilt Hall, the platforms and the 42nd Street facade come after it (see the [plan](ai-docs/plans/gcs-gmod-plan.md)).
 
 The map is written as VMF text by a Python script, not drawn in Hammer. Every custom texture (the zodiac vault, the marble floor, the ashlar, the clock face, the departure board) is drawn procedurally by a script in `tools/`, with colours sampled from openly licensed photos of the real building.
@@ -37,6 +39,9 @@ Then in Garry's Mod: `map gm_grand_central`.
 The textures in `src/materials/gcs/` are already generated, so you only need the `make_*.py` scripts when you change them. Some materials point at stock Half-Life 2 textures that ship with Garry's Mod; none of them are redistributed here.
 
 ## Credits and licences
+
+- Built with [modwright](https://github.com/m4bwav/modwright), a Claude Code plugin for modding games.
+- In-map textures are procedural (scripts in `tools/`) or stock Half-Life 2 materials; no AI-generated images are in the map.
 
 - Code (`tools/`): MIT, see [LICENSE](LICENSE).
 - Map source, generated textures and screenshots: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
