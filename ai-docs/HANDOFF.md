@@ -68,12 +68,14 @@ Updated: 2026-11-23
 
 - Zodiac figures: each constellation sits on a gold-outlined limb silhouette (stick figure thickened, rounded, faint wash) in tools/make_vault.py. shots/20261123-1939/vault_up.jpg.
 
+- Board lettering: make_board.py draws a real 5x7 dot-matrix font (round LEDs, unlit cells faint); legible in shots/20261123-1943/board.jpg.
+
 ## Next
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
 1. Zodiac figures have outlines now; real animal/human drawings would be the next step. Lunette hoods could get relief carving (normal map or more steps).
 2. Booth interior is in; could add clerks' props or brighter interior light.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
-4. Board glyphs are stand-in dot clusters, not letters; chandeliers could become a polywright model with globes later.
+4. Chandeliers could become a polywright model with globes later.
 5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
