@@ -90,6 +90,8 @@ Updated: 2026-11-23
 
 - Cream marble: tools/make_walls.py writes cream_marble.vtf (seamless pale marble, thin warm veins); gcs/cream uses it (was stained stock plaster that read muddy on stair balustrades); pilaster plinths cream instead of grey trim. shots/20261123-2047/floor_east.jpg.
 
+- Arcade passages: cream barrel vault continuing each opening arch (was a flat dark ceiling). shots/20261123-2052/arcade_west.jpg.
+
 ## Next
 - FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
