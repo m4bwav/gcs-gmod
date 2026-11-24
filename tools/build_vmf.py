@@ -19,7 +19,7 @@ BALC_Z = 26 * FT                            # balcony floor height
 BALC_D = 22 * FT                            # balcony depth from the end wall
 BAY_Z0 = 42 * FT                            # bottom of the long-wall bay windows (photo estimate)
 ARCH_W, ARCH_TOP, ARCH_D = 18 * FT, 21 * FT, 16 * FT   # floor arcade under each balcony
-BARCH_W, BARCH_H = 14 * FT, 16 * FT        # balcony-level arcade behind each balcony
+BARCH_W, BARCH_H = 14 * FT, 14 * FT        # balcony-level arcade behind each balcony
 
 # src/materials/gcs: stock HL2 textures tinted to colours sampled from refs/photos.
 TEX_FLOOR = "gcs/floor"
@@ -246,7 +246,8 @@ def build():
     W(box(-HX, HY, SPRING, HX, HY+WALL, SPRING+8, TEX_TRIM))
 
     # End walls with three tall arched windows (blockout: rectangular openings into glowing alcoves).
-    win_w, win_z0, win_z1 = 28*FT, BALC_Z + 20*FT, SPRING + 16*FT
+    win_w, win_z0, win_z1 = 28*FT, BALC_Z + 16*FT, SPRING + 16*FT
+    win_zc = SPRING + 26*FT                 # the centre window rises higher, under the crown
     centres = [-38*FT, 0, 38*FT]
     for sgn in (-1, 1):
         xin, xout = sgn*HX, sgn*(HX+WALL)
@@ -263,19 +264,21 @@ def build():
                 W(box(xa, aedges[j], z0, xb, aedges[j+1], top, TEX_WALL))
             for c in centres:
                 arcade_bay(W, ents, sgn, xin, xout, c, z0, aw//2, top, min(WALL, BALC_Z - ARCH_TOP) if z0 == 0 else WALL)
-        W(box(xa, -HY, win_z1, xb, HY, CROWN+WALL, TEX_WALL))
+        W(box(xa, -HY, win_zc, xb, HY, CROWN+WALL, TEX_WALL))
+        W(box(xa, -HY, win_z1, xb, -win_w//2, win_zc, TEX_WALL))
+        W(box(xa, win_w//2, win_z1, xb, HY, win_zc, TEX_WALL))
         edges = [-HY] + [e for c in centres for e in (c-win_w//2, c+win_w//2)] + [HY]
         for j in range(0, len(edges), 2):
             W(box(xa, edges[j], win_z0, xb, edges[j+1], win_z1, TEX_WALL))
         # Alcove behind: glowing back panel.
         xg0, xg1 = sorted((sgn*(HX+WALL+192), sgn*(HX+WALL+224)))
-        W(box(xg0, -HY, win_z0-32, xg1, HY, win_z1+32, TEX_DIM))
+        W(box(xg0, -HY, win_z0-32, xg1, HY, win_zc+32, TEX_DIM))
         # Arched heads: fill the corners above each arch with triangle fans.
         for c in centres:
-            r = win_w//2
-            arc = halfdisc(c, win_z1 - r, r, 8)
+            r, zt = win_w//2, (win_zc if c == 0 else win_z1)
+            arc = halfdisc(c, zt - r, r, 8)
             for i in range(8):
-                corner = (c + r, win_z1) if i < 4 else (c - r, win_z1)
+                corner = (c + r, zt) if i < 4 else (c - r, zt)
                 ents.append(ent("func_detail", solids=xprism(ccw([corner, arc[i], arc[i+1]]), xa, xb, TEX_WALL)))
         for c in centres:
             ents.append(ent("light", (sgn*(HX+WALL+96), c, (win_z0+win_z1)/2),
@@ -291,8 +294,8 @@ def build():
         for c in centres:
             for k in range(1, 8):
                 y = c - win_w//2 + k*win_w//8
-                ents.append(ent("func_detail", solids=box(xm0, y-3, win_z0, xm1, y+3, win_z1, TEX_GRID)))
-            for z in range(win_z0 + 48, win_z1, 96):
+                ents.append(ent("func_detail", solids=box(xm0, y-3, win_z0, xm1, y+3, win_zc if c == 0 else win_z1, TEX_GRID)))
+            for z in range(win_z0 + 48, win_zc if c == 0 else win_z1, 96):
                 ents.append(ent("func_detail", solids=box(xm0, c-win_w//2, z-3, xm1, c+win_w//2, z+3, TEX_GRID)))
         xa, xb = sorted((sgn*HX, sgn*(HX-24)))
         for j in range(0, len(edges), 2):
@@ -310,9 +313,9 @@ def build():
         for i in range(N):
             a0, a1 = math.pi*i/N, math.pi*(i+1)/N
             xa, xb = sorted((sgn*HX, sgn*(HX-6*FT)))
-            ents.append(ent("func_detail", solids=xprism(ccw([e(0, 0, a0), e(0, 0, a1), e(8*FT, 7*FT, a1), e(8*FT, 7*FT, a0)]), xa, xb, TEX_COFFER)))
+            ents.append(ent("func_detail", solids=xprism(ccw([e(0, 0, a0), e(0, 0, a1), e(11*FT, 9*FT, a1), e(11*FT, 9*FT, a0)]), xa, xb, TEX_COFFER)))
             xa, xb = sorted((sgn*(HX-5*FT), sgn*(HX-6*FT-8)))
-            ents.append(ent("func_detail", solids=xprism(ccw([e(8*FT, 7*FT, a0), e(8*FT, 7*FT, a1), e(9*FT, 8*FT, a1), e(9*FT, 8*FT, a0)]), xa, xb, TEX_GOLD)))
+            ents.append(ent("func_detail", solids=xprism(ccw([e(11*FT, 9*FT, a0), e(11*FT, 9*FT, a1), e(12*FT, 10*FT, a1), e(12*FT, 10*FT, a0)]), xa, xb, TEX_GOLD)))
 
     # Long walls: pilasters between bays, a tall dark window grid in each bay, the
     # gilded cornice at the springline and a lunette window cut into the vault above.
@@ -354,6 +357,12 @@ def build():
         ents.append(ent("func_detail", solids=box(-HX, ca, SPRING-40, HX, cb, SPRING, TEX_GOLD)))
         ca, cb = inset(0, 72)
         ents.append(ent("func_detail", solids=box(-HX, ca, SPRING-72, HX, cb, SPRING-40, TEX_TRIM)))
+        # Modillion band (east_balcony photo): cream brackets every 2 ft under an overhanging crown.
+        ca, cb = inset(88, 104)
+        ents.append(ent("func_detail", solids=box(-HX, ca, SPRING-10, HX, cb, SPRING, TEX_GOLD)))
+        ma, mb = inset(72, 100)
+        for x in range(-HX + 12, HX - 6, 24):
+            ents.append(ent("func_detail", solids=box(x-5, ma, SPRING-40, x+5, mb, SPRING-10, TEX_CREAM)))
 
     # Balconies at both ends with a parapet.
     for sgn in (-1, 1):

@@ -48,8 +48,10 @@ Updated: 2026-11-23
 
 - east_balcony vs photo: long-wall bay windows raised to BAY_Z0 = 42 ft (stone lower storey). shots/20261123-1840/pair_east.jpg.
 
+- End windows taller (sill BALC_Z+16 ft; centre window head SPRING+26 ft, sides SPRING+16 ft), balcony arcade 14 ft high, great end arch soffit 11 ft deep, modillion band (cream brackets every 2 ft) under an overhanging gold crown on both long walls. shots/20261123-1844.
+
 ## Next
-0. Still open from the east_balcony comparison: the end windows look shorter and the great end arch shallower than in the photo; the photo's long-wall cornice has a deep modillion band.
+0. Compare east_balcony/west_balcony against the photos again (compare.jpg in shots/20261123-1844) for the next gap.
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
 2. Booth glass is flat blue-grey; real booth has brass grilles and ticket windows.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
@@ -60,7 +62,7 @@ Updated: 2026-11-23
 - Zodiac constellations are simplified stick figures, not the real ceiling's figure drawings; band curves are stylised sinusoids.
 - Vault rise 40 ft, estimated from photos (check against the HABS section).
 - Bay window bottom 42 ft estimated from photo.
-- Balcony arcade 14x16 ft openings and window sill BALC_Z+20 ft are estimated from photos.
+- Balcony arcade 14x14 ft openings, window sill BALC_Z+16 ft, centre end window head SPRING+26 ft are estimated from photos.
 - Flag placement (x=+24 ft, crown, 20x38 ft) and board size estimated, not measured.
 - Stairs placed at both ends with 12 u risers / 18 u treads.
 - Light levels (after surfaces v2): window point 45, window spot 225, booth 25, chandeliers 18, vault fill 10.
