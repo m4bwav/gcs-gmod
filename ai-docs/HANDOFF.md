@@ -36,16 +36,19 @@ Updated: 2026-11-23
 
 - Chandeliers: 16 brush chandeliers (gold rod from cornice, drum, two tiers of 8 glowing bulbs gcs/bulb, finial), one light each, down both long walls. Clock dials unmirrored (all four read 10:08). shots/20261123-1811.
 
+- Departure board and flag: tools/make_board.py writes board.vtf (black LED board, dot-matrix rows; gcs/board UnlitGeneric) and flag.vtf (vertical US flag; gcs/flag). Board 40x10 ft over the ticket windows in the centre south bay; flag 20x38 ft hangs from the crown on gold rods at x=+24 ft. build_vmf.py FACEUV maps a texture once over a brush face. New cameras board, flag. shots/20261123-1818 (flag in 20261123-1815).
+
 ## Next
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
 2. Booth glass is flat blue-grey; real booth has brass grilles and ticket windows.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
-4. Ticket-window departure board, flags; chandeliers could become a polywright model with globes later.
+4. Board glyphs are stand-in dot clusters, not letters; chandeliers could become a polywright model with globes later.
 5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
 - Zodiac constellations are simplified stick figures, not the real ceiling's figure drawings; band curves are stylised sinusoids.
 - Vault rise 40 ft, estimated from photos (check against the HABS section).
+- Flag placement (x=+24 ft, crown, 20x38 ft) and board size estimated, not measured.
 - Stairs placed at both ends with 12 u risers / 18 u treads.
 - Light levels (after surfaces v2): window point 45, window spot 225, booth 25, chandeliers 18, vault fill 10.
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.

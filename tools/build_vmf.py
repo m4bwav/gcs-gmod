@@ -50,6 +50,28 @@ SCALE = {TEX_FLOOR: 0.1875,   # 512 px texture = 2x2 slabs of 4 ft
          TEX_CLOCK: 30/256}    # one 256 px dial per 30 u clock side
 USHIFT = {TEX_CLOCK: 128}      # centre the dial on faces spanning -15..15
 
+# Departure board over the ticket windows (faces +y) and the flag hung from the crown
+# (faces +-x); both map their texture once over the front faces, the rest gets black/gold.
+BOARD = (-20*FT, 20*FT, 17*FT, 27*FT)         # x0, x1, z0, z1: 40 x 10 ft, inside the centre bay
+FLAG = (24*FT, 24*FT + 2, -10*FT, 10*FT, SPRING - 38*FT, SPRING)   # x0, x1 (thin), y0, y1, z0, z1
+
+
+def _board_uv(n):
+    x0, x1, z0, z1 = BOARD
+    su, sv = (x1-x0)/1024, (z1-z0)/256
+    if n[1] > 0.5:
+        return "[-1 0 0 %g] %g" % (x1/su, su), "[0 0 -1 %g] %g" % (z1/sv, sv)
+
+
+def _flag_uv(n):
+    _, _, y0, y1, z0, z1 = FLAG
+    su, sv = (y1-y0)/256, (z1-z0)/512
+    s = 1 if n[0] > 0 else -1
+    return "[0 %d 0 %g] %g" % (s, -s*(y0 if s > 0 else y1)/su, su), "[0 0 -1 %g] %g" % (z1/sv, sv)
+
+
+FACEUV = {"gcs/board": _board_uv, "gcs/flag": _flag_uv}
+
 
 def axes_for(n, s=0.25):
     ax = max(range(3), key=lambda i: abs(n[i]))
@@ -66,6 +88,7 @@ def side(pts, n, tex, uv=None):
     if dot(cross(sub(p3, p1), sub(p2, p1)), n) < 0:
         p2, p3 = p3, p2
     f = lambda p: "(%g %g %g)" % p
+    uv = uv or (FACEUV[tex](n) if tex in FACEUV else None)
     u, v = uv or axes_for(n, SCALE.get(tex, 0.25))
     if not uv and tex == TEX_CLOCK and abs(n[2]) < 0.5 and n[0] - n[1] < 0:
         u = u.replace("[0 1 0", "[0 -1 0").replace("[1 0 0", "[-1 0 0")   # unmirror -x and +y dials
@@ -312,6 +335,15 @@ def build():
         x = k*16*FT
         ents.append(ent("func_detail", solids=box(x-6*FT, -HY+0, 0, x-5*FT, -HY+3*FT, 14*FT, TEX_TRIM)))
     ents.append(ent("func_detail", solids=box(-100*FT, -HY, 14*FT, 100*FT, -HY+4*FT, 16*FT, TEX_TRIM)))
+    bx0, bx1, bz0, bz1 = BOARD
+    det([(bx0, -HY), (bx1, -HY), (bx1, -HY+16), (bx0, -HY+16)], bz0, bz1, "gcs/board", TEX_GOLD)
+
+    # The flag hung from the crown on two gold rods.
+    fx0, fx1, fy0, fy1, fz0, fz1 = FLAG
+    ents.append(ent("func_detail", solids=box(fx0, fy0, fz0, fx1, fy1, fz1, "gcs/flag")))
+    ents.append(ent("func_detail", solids=box(fx0-2, fy0, fz1, fx1+2, fy1, fz1+4, TEX_GOLD)))
+    for y in (fy0+12, fy1-12):
+        det(ngon((fx0+fx1)/2, y, 2, 6), fz1+4, CROWN-8, TEX_GOLD)
 
     # Chandeliers down both long sides: a gold rod from the cornice, a gold drum with
     # two tiers of glowing bulbs, a finial below; a light at each body.

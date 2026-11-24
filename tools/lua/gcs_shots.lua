@@ -11,6 +11,8 @@ local CAMS = {
   { "floor_east",   Vector(-1200, -500, 72), Angle(-15, 20, 0) },
   { "booth",        Vector(-500, 300, 120), Angle(0, -30, 0) },
   { "clock",        Vector(-320, -60, 120), Angle(-8, 10, 0) },
+  { "board",        Vector(150, 0, 150), Angle(-10, -95, 0) },
+  { "flag",         Vector(-700, 0, 72), Angle(-48, 0, 0) },
   { "vault_up",     Vector(0, 0, 72), Angle(-80, 0, 0) },
   { "east_balcony", Vector(1500, 0, 400), Angle(5, 180, 0) },
   { "stairs_west",  Vector(-700, -300, 72), Angle(-5, 160, 0) },
