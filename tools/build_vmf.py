@@ -549,20 +549,25 @@ def vanderbilt(W, ents):
     det(box(VS_X0, vy0, 12 * FT, VS_X1, vy0 + 8, 13 * FT, TEX_GOLD))
     det(box(VS_X0 + 12, vy0, 13 * FT, VS_X1 - 12, vy0 + 4, 19 * FT, TEX_DOOR))
     ents.append(ent("light", ((VS_X0 + VS_X1) // 2, vy0 + 120, 16 * FT), _light="255 215 160 40"))
-    # Tall dark-green grilled windows on both long walls, cream sills.
+    # Tall dark-green grilled windows on both long walls (dark glass behind a green iron grid), cream sills.
     for yw, s in ((VH_Y1, -1), (VH_Y0, 1)):
         for cx in range(VH_X0 + 30 * FT, VH_X1 - 20 * FT + 1, 40 * FT):
             if VH_PX0 - 10 * FT < cx < VH_PX1 + 10 * FT or VS_X0 - 10 * FT < cx < VS_X1 + 10 * FT:
                 continue
+            wz0, wz1, hw = 14 * FT, 50 * FT, 8 * FT
             ga, gb = sorted((yw, yw + s * 2))
-            det(box(cx - 7 * FT, ga, 20 * FT, cx + 7 * FT, gb, 48 * FT, TEX_DIM))
+            det(box(cx - hw, ga, wz0, cx + hw, gb, wz1, "gcs/vh_glass"))
             ma, mb = sorted((yw + s * 2, yw + s * 6))
-            for j in range(-3, 4):
-                det(box(cx + j * 24 - 2, ma, 20 * FT, cx + j * 24 + 2, mb, 48 * FT, TEX_GRID))
-            for z in range(20 * FT, 48 * FT + 1, 48):
-                det(box(cx - 7 * FT, ma, z - 2, cx + 7 * FT, mb, z + 2, TEX_GRID))
+            for j in range(-4, 5):
+                det(box(cx + j * 24 - 2, ma, wz0, cx + j * 24 + 2, mb, wz1, "gcs/vh_grille"))
+            for z in range(wz0, wz1 + 1, 36):
+                det(box(cx - hw, ma, z - 2, cx + hw, mb, z + 2, "gcs/vh_grille"))
+            fa, fb = sorted((yw, yw + s * 10))
+            for x0, x1 in ((cx - hw - 8, cx - hw), (cx + hw, cx + hw + 8)):
+                det(box(x0, fa, wz0, x1, fb, wz1 + 8, "gcs/vh_grille"))
+            det(box(cx - hw - 8, fa, wz1, cx + hw + 8, fb, wz1 + 8, "gcs/vh_grille"))
             sa, sb = sorted((yw, yw + s * 18))
-            det(box(cx - 8 * FT, sa, 19 * FT, cx + 8 * FT, sb, 20 * FT, TEX_CREAM))
+            det(box(cx - hw - 12, sa, wz0 - 12, cx + hw + 12, sb, wz0, TEX_CREAM))
     # Gilded cornice and cream frieze round the ceiling; marble dado at the foot of the walls.
     for d, z0, z1, tex in ((48, VH_H - 30, VH_H, TEX_GOLD), (24, VH_H - 72, VH_H - 30, TEX_CREAM)):
         det(box(VH_X0, VH_Y1 - d, z0, VH_X1, VH_Y1, z1, tex))
@@ -573,6 +578,16 @@ def vanderbilt(W, ents):
                            (VH_X0, VH_Y0, VS_X0, VH_Y0 + 6), (VS_X1, VH_Y0, VH_X1, VH_Y0 + 6),
                            (VH_X0, VH_Y0 + 6, VH_X0 + 6, VH_Y1 - 6), (VH_X1 - 6, VH_Y0 + 6, VH_X1, VH_Y1 - 6)):
         det(box(x0, y0, 0, x1, y1, 8 * FT, TEX_CREAM))
+    # Each end wall carries a large moulded panel frame (cream, gold inner bead) above the door height.
+    for xw, s in ((VH_X0, 1), (VH_X1, -1)):
+        fa, fb = sorted((xw, xw + s * 6))
+        ga, gb = sorted((xw, xw + s * 8))
+        y0, y1, z0, z1 = VH_Y0 + 14 * FT, VH_Y1 - 14 * FT, 22 * FT, VH_H - 10 * FT
+        for b in ((y0, z0, y0 + 10, z1), (y1 - 10, z0, y1, z1), (y0, z0, y1, z0 + 10), (y0, z1 - 10, y1, z1)):
+            det(box(fa, b[0], b[1], fb, b[2], b[3], TEX_CREAM))
+        for b in ((y0 + 10, z0 + 10, y0 + 12, z1 - 10), (y1 - 12, z0 + 10, y1 - 10, z1 - 10),
+                  (y0 + 10, z0 + 10, y1 - 10, z0 + 12), (y0 + 10, z1 - 12, y1 - 10, z1 - 10)):
+            det(box(ga, b[0], b[1], gb, b[2], b[3], TEX_GOLD))
     # East end: a doorway with a carved cream pediment, lit glass doors behind.
     ex, cy = VH_X1, (VH_Y0 + VH_Y1) // 2
     det(box(ex - 10, cy - 6 * FT, 0, ex - 6, cy + 6 * FT, 11 * FT, TEX_DOOR))
@@ -581,22 +596,32 @@ def vanderbilt(W, ents):
     det(box(ex - 30, cy - 9 * FT, 13 * FT, ex - 6, cy + 9 * FT, 15 * FT, TEX_CREAM))
     det(box(ex - 36, cy - 9 * FT, 15 * FT, ex - 6, cy + 9 * FT, 15 * FT + 4, TEX_GOLD))
     det(xprism(ccw([(cy - 4 * FT, 15 * FT + 4), (cy + 4 * FT, 15 * FT + 4), (cy, 20 * FT)]), ex - 26, ex - 6, TEX_CREAM))
-    # Five tiered chandeliers down the centre (rings of glowing bulbs under a gold stem).
+    # Five chandeliers down the centre: chain from a ceiling rosette, a tall bronze cage, then three
+    # rings of glowing bulbs narrowing downward to a finial (photo: GCT_Vanderbilt_hall_chandeliers).
     for k in range(5):
         x = VH_X0 + (2 * k + 1) * (VH_X1 - VH_X0) // 10
-        zc = VH_H - 26 * FT
-        det(prism(ngon(x, cy, 2, 6), zc + 10 * FT, VH_H - 4, TEX_GOLD))
-        det(prism(ngon(x, cy, 8, 8, math.pi / 8), zc + 30, zc + 10 * FT, TEX_GOLD))
+        zc = VH_H - 30 * FT
+        cage0, cage1 = zc + 34, zc + 13 * FT
         det(prism(ngon(x, cy, 30, 12, math.pi / 12), VH_H - 4, VH_H, TEX_CREAM))   # ceiling rosette
-        for r, z in ((42, zc + 24), (30, zc), (18, zc - 24)):
-            det(prism(ngon(x, cy, r, 12, math.pi / 12), z - 4, z, TEX_GOLD))
+        det(prism(ngon(x, cy, 2, 6), cage1 + 18, VH_H - 4, "gcs/bronze"))          # chain
+        det(prism(ngon(x, cy, 10, 8, math.pi / 8), cage1, cage1 + 18, TEX_GOLD))     # crown collar
+        det(prism(ngon(x, cy, 4, 8, math.pi / 8), cage0, cage1, "gcs/bronze"))       # stem inside the cage
+        for i in range(8):
+            a = i * math.pi / 4
+            bx, by = x + int(round(16 * math.cos(a))), cy + int(round(16 * math.sin(a)))
+            det(prism(ngon(bx, by, 2, 4), cage0, cage1, "gcs/bronze"))               # cage bars
+        for z, r in ((cage1 - 10, 16), (cage0 + 3 * FT, 22), (cage0, 30)):
+            det(prism(ngon(x, cy, r, 12, math.pi / 12), z - 4, z, TEX_GOLD))         # cage bands
+        for r, z in ((54, zc + 24), (40, zc), (26, zc - 24)):
+            det(prism(ngon(x, cy, r, 12, math.pi / 12), z - 4, z, "gcs/bronze"))
             det(prism(ngon(x, cy, r - 10, 12, math.pi / 12), z, z + 6, TEX_GOLD))
             ring = ngon(x, cy, r + 2, 12, math.pi / 12)
             inner = ngon(x, cy, r - 10, 12, math.pi / 12)
             for i in range(12):
                 det(prism(ccw([ring[i], ring[(i + 1) % 12], inner[(i + 1) % 12], inner[i]]), z, z + 6, TEX_BULB))
-        det(prism(ngon(x, cy, 8, 8, math.pi / 8), zc - 44, zc - 28, TEX_GOLD))
-        ents.append(ent("light", (x, cy, zc - 80), _light="255 220 170 45"))
+        det(prism(ngon(x, cy, 10, 8, math.pi / 8), zc - 30, zc + 30, "gcs/bronze"))   # bowl core
+        det(prism(ngon(x, cy, 6, 8, math.pi / 8), zc - 52, zc - 30, TEX_GOLD))       # finial
+        ents.append(ent("light", (x, cy, zc - 90), _light="255 220 170 45"))
     ents.append(ent("light", ((VH_X0 + VH_X1) // 2, cy, VH_H - 60), _light="255 225 180 15"))
     ents.append(ent("env_cubemap", ((VH_X0 + VH_X1) // 2, cy, 160)))
     ents.append(ent("env_cubemap", (pc, (py0 + py1) // 2, 100)))
