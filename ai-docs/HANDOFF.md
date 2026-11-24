@@ -72,11 +72,13 @@ Updated: 2026-11-23
 
 - Lunette relief: alternate voussoirs of the middle hood ring stand 6 u proud, cream keystone at each crown. shots/20261123-1949.
 
+- Booth interior lights 30 -> 55, warmer (reads lit through the glass). shots/20261123-1957.
+
 ## Next
 - FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
 1. Zodiac figures have outlines now; real animal/human drawings would be the next step. Lunette hoods have voussoirs and keystones; garland carving would be a normal map.
-2. Booth interior is in; could add clerks' props or brighter interior light.
+2. Booth interior is in and brighter; clerks' props could follow.
 3. Measured references: secondary-source check done (refs/concourse-dimensions.md, 2026-11-23): vault springline/rise agree with the build. Still open: a real HABS NY-5450 section or LPC report for balcony, sill and lunette heights; flag may be ~48 ft long (ours 38 ft), end windows maybe 33x60 ft (ours 26 ft wide, taller).
 4. Chandeliers could become a polywright model with globes later.
 5. Hammer++ for hand checks (optional).
