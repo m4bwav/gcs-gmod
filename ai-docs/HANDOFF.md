@@ -92,6 +92,8 @@ Updated: 2026-11-23
 
 - Arcade passages: cream barrel vault continuing each opening arch (was a flat dark ceiling). shots/20261123-2052/arcade_west.jpg.
 
+- arcade_west camera moved onto the centre arch axis under the balcony (old spot showed a black strip at the left edge). shots/20261123-2056/arcade_west.jpg.
+
 ## Next
 - FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
