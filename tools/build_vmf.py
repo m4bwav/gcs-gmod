@@ -30,6 +30,7 @@ TEX_GLOW = "gcs/window_glow"
 TEX_GOLD = "gcs/gold"
 TEX_GRID = "gcs/mullion"
 TEX_DIM = "gcs/window_dim"
+TEX_GLASS = "gcs/window_glass"  # pale pane grid for the big windows
 TEX_CREAM = "gcs/cream"
 TEX_CLOCK = "gcs/clock"
 TEX_BULB = "gcs/bulb"
@@ -273,7 +274,7 @@ def build():
             W(box(xa, edges[j], win_z0, xb, edges[j+1], win_z1, TEX_WALL))
         # Alcove behind: glowing back panel.
         xg0, xg1 = sorted((sgn*(HX+WALL+192), sgn*(HX+WALL+224)))
-        W(box(xg0, -HY, win_z0-32, xg1, HY, win_zc+32, TEX_DIM))
+        W(box(xg0, -HY, win_z0-32, xg1, HY, win_zc+32, TEX_GLASS))
         # Arched heads: fill the corners above each arch with triangle fans.
         for c in centres:
             r, zt = win_w//2, (win_zc if c == 0 else win_z1)
@@ -334,7 +335,7 @@ def build():
             cx = -HX + k*bay + bay//2
             w = bay//2 - 10*FT
             ga, gb = inset(0, 2)
-            ents.append(ent("func_detail", solids=box(cx-w, ga, BAY_Z0, cx+w, gb, SPRING-8*FT, TEX_DIM)))
+            ents.append(ent("func_detail", solids=box(cx-w, ga, BAY_Z0, cx+w, gb, SPRING-8*FT, TEX_GLASS)))
             ma, mb = inset(2, 6)
             for j in range(-3, 4):
                 ents.append(ent("func_detail", solids=box(cx + j*w//4 - 3, ma, BAY_Z0, cx + j*w//4 + 3, mb, SPRING-8*FT, TEX_GRID)))
