@@ -87,7 +87,14 @@ def _tickets_uv(n):
         return "[-1 0 0 704] %g" % su, "[0 0 -1 %g] %g" % (13.25*FT/sv, sv)
 
 
-FACEUV = {"gcs/board": _board_uv, "gcs/flag": _flag_uv, "gcs/tickets": _tickets_uv}
+def _oysterbar_uv(n):
+    # OYSTER BAR band over the gallery's west opening, y -120..120, faces +x.
+    su, sv = 240/1024, 20/64
+    if n[0] > 0.5:
+        return "[0 1 0 %g] %g" % (120/su, su), "[0 0 -1 %g] %g" % ((LOW_Z + 120)/sv, sv)
+
+
+FACEUV = {"gcs/oysterbar": _oysterbar_uv, "gcs/board": _board_uv, "gcs/flag": _flag_uv, "gcs/tickets": _tickets_uv}
 
 
 def axes_for(n, s=0.25):
@@ -338,6 +345,15 @@ def lower_level(W, ents):
     for x, y in ((gxc, gy - 120), (gxc, -gy + 120), (gx0 + 120, 0), (gx1 - 120, 0)):
         ents.append(ent("light", (round(x), y, Z + 90), _light="255 215 175 25"))
     ents.append(ent("env_cubemap", (round(gxc), 0, Z + 72)))
+    # Oyster Bar entrance: bronze OYSTER BAR band in the head of the opening (the vault springs just above), oak door frames with a
+    # transom bar and side lights, the doors themselves left open.
+    det(box(gx0 - 8, -120, Z + 100, gx0 + 3, 120, Z + 120, "gcs/oysterbar"))
+    det(box(gx0 - 8, -124, Z + 97, gx0 + 5, 124, Z + 100, TEX_GOLD))
+    for y0 in (-120, 104, -84, 76):
+        det(box(gx0 - WALL, y0, Z, gx0 + 2, y0 + (16 if abs(y0) > 100 else 8), Z + 120, TEX_WOOD))
+    det(box(gx0 - WALL, -120, Z + 92, gx0 + 2, 120, Z + 100, TEX_WOOD))
+    for ya, yb in ((-104, -84), (84, 104)):
+        det(box(gx0 - 34, ya, Z, gx0 - 30, yb, Z + 92, TEX_DOOR))
 
     # Oyster Bar: 4 x 4 bays of shallow Guastavino groins on piers; a long oak counter.
     bx, by = 288, 240
@@ -365,6 +381,16 @@ def lower_level(W, ents):
     det(box(cx0 - 6, -38, Z + 40, cx1 + 6, 38, Z + 43, TEX_WOOD))
     for x in range(cx0 + 24, cx1, 48):
         for y in (-56, 56):
+            det(prism(ngon(x, y, 2, 6), Z, Z + 24, TEX_GOLD))
+            det(prism(ngon(x, y, 8, 8, math.pi/8), Z + 24, Z + 28, TEX_WOOD))
+    # Wall counters: oak-topped cream counters along both long walls, stools in front.
+    for sg in (-1, 1):
+        ya, yb = sorted((sg*oy, sg*(oy - 30)))
+        det(box(OB_X0 + 48, ya, Z, OB_X1 - 96, yb, Z + 40, TEX_CREAM))
+        ya, yb = sorted((sg*oy, sg*(oy - 38)))
+        det(box(OB_X0 + 42, ya, Z + 40, OB_X1 - 90, yb, Z + 43, TEX_WOOD))
+        for x in range(OB_X0 + 72, OB_X1 - 96, 48):
+            y = sg*(oy - 58)
             det(prism(ngon(x, y, 2, 6), Z, Z + 24, TEX_GOLD))
             det(prism(ngon(x, y, 8, 8, math.pi/8), Z + 24, Z + 28, TEX_WOOD))
     ents.append(ent("env_cubemap", ((OB_X0+OB_X1)//2, -200, Z + 72)))
@@ -400,7 +426,11 @@ def lower_level(W, ents):
     det(prism(oct8(7*FT), Z, Z + 42, TEX_CREAM))
     det(prism(oct8(7*FT + 4), Z + 42, Z + 46, TEX_GOLD))
     det(prism(oct8(1*FT), Z + 46, Z + 90, TEX_GOLD))
-    det(prism(oct8(2*FT), Z + 90, Z + 110, TEX_BULB))
+    # Brass column with a four-faced opal clock, like the one upstairs.
+    det(prism(oct8(10), Z + 46, -150, TEX_GOLD))
+    det(prism([(-15, -15), (15, -15), (15, 15), (-15, 15)], -150, -120, TEX_CLOCK, TEX_GOLD))
+    det(prism(oct8(20), -120, -116, TEX_GOLD))
+    det(prism(oct8(10), -116, -104, TEX_GOLD))
     ents.append(ent("env_cubemap", (0, -300, Z + 72)))
 
 
