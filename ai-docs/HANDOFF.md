@@ -42,8 +42,10 @@ Updated: 2026-11-23
 
 - End wall arcade: three 18 ft arched openings (cream archivolts and jambs) under each balcony into sealed 16 ft passages with dim glass at the back; great end arch soffit uses gcs/coffer (procedural 2x2 cream coffers, gold rosettes, tools/make_walls.py); ashlar at scale 0.5 (2.7 x 5.3 ft blocks) with softer joints. shots/20261123-1826.
 
+- Arcade passages lit: cream walls and ceiling, amber glass doors (gcs/door_glow) in brass frames with transom, pendant lamp, warm lights; new camera arcade_west. shots/20261123-1829.
+
 ## Next
-0. Arcade passages read as blue sky through the arch (dim glass back); give them a warm lit corridor look. Balcony-level arcade behind the balcony (real GCT) still missing.
+0. Balcony-level arcade behind the balcony (real GCT) still missing.
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
 2. Booth glass is flat blue-grey; real booth has brass grilles and ticket windows.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.

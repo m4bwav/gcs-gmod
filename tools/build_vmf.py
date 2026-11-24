@@ -32,6 +32,7 @@ TEX_CREAM = "gcs/cream"
 TEX_CLOCK = "gcs/clock"
 TEX_BULB = "gcs/bulb"
 TEX_COFFER = "gcs/coffer"
+TEX_DOOR = "gcs/door_glow"
 NODRAW = "tools/toolsnodraw"
 
 _id = [0]
@@ -229,15 +230,27 @@ def build():
                 ents.append(ent("func_detail", solids=xprism(ccw([outer[i], outer[i+1], inner[i+1], inner[i]]), fa, fb, TEX_CREAM)))
             for y0 in (c - r - 18, c + r):
                 ents.append(ent("func_detail", solids=box(fa, y0, 0, fb, y0 + 18, ARCH_TOP - r, TEX_CREAM)))
-            # Passage behind, sealed: floor, ceiling, sides, dim glass doors at the back.
+            # Passage behind, sealed: warm cream corridor ending in lit glass doors with brass frames.
             pa, pb = sorted((xout, xout + sgn*ARCH_D))
             W(box(pa, c - r - WALL, -WALL, pb, c + r + WALL, 0, TEX_FLOOR))
-            W(box(pa, c - r - WALL, ARCH_TOP, pb, c + r + WALL, ARCH_TOP + WALL, TEX_TRIM))
-            W(box(pa, c - r - WALL, 0, pb, c - r, ARCH_TOP, TEX_WALL))
-            W(box(pa, c + r, 0, pb, c + r + WALL, ARCH_TOP, TEX_WALL))
-            ba, bb = sorted((xout + sgn*ARCH_D, xout + sgn*(ARCH_D + WALL)))
-            W(box(ba, c - r - WALL, -WALL, bb, c + r + WALL, ARCH_TOP + WALL, TEX_DIM))
-            ents.append(ent("light", (sgn*(HX + WALL + ARCH_D//2), c, ARCH_TOP - 48), _light="255 220 170 14"))
+            W(box(pa, c - r - WALL, ARCH_TOP, pb, c + r + WALL, ARCH_TOP + WALL, TEX_CREAM))
+            W(box(pa, c - r - WALL, 0, pb, c - r, ARCH_TOP, TEX_CREAM))
+            W(box(pa, c + r, 0, pb, c + r + WALL, ARCH_TOP, TEX_CREAM))
+            xback = xout + sgn*ARCH_D
+            ba, bb = sorted((xback, xback + sgn*WALL))
+            W(box(ba, c - r - WALL, -WALL, bb, c + r + WALL, ARCH_TOP + WALL, TEX_DOOR))
+            # Brass door frames: posts, transom bar and a header panel over the doors.
+            fa2, fb2 = sorted((xback, xback - sgn*6))
+            for yy in (c - r, c - 3*FT, c + 3*FT - 6, c + r - 6, c - 6, c):
+                ents.append(ent("func_detail", solids=box(fa2, yy, 0, fb2, yy + 6, ARCH_TOP, TEX_GRID)))
+            ents.append(ent("func_detail", solids=box(fa2, c - r, 8*FT, fb2, c + r, 8*FT + 6, TEX_GRID)))
+            ents.append(ent("func_detail", solids=box(fa2, c - r, 12*FT, fb2, c + r, ARCH_TOP, TEX_CREAM)))
+            # Pendant lamp.
+            lx = sgn*(HX + WALL + ARCH_D//2)
+            ents.append(ent("func_detail", solids=box(lx - 1, c - 1, ARCH_TOP - 30, lx + 1, c + 1, ARCH_TOP, TEX_GOLD)))
+            ents.append(ent("func_detail", solids=box(lx - 8, c - 8, ARCH_TOP - 44, lx + 8, c + 8, ARCH_TOP - 30, TEX_BULB)))
+            ents.append(ent("light", (lx, c, ARCH_TOP - 60), _light="255 205 140 40"))
+            ents.append(ent("light", (xback - sgn*24, c, 6*FT), _light="255 190 120 20"))
         W(box(xa, -HY, win_z1, xb, HY, CROWN+WALL, TEX_WALL))
         edges = [-HY] + [e for c in centres for e in (c-win_w//2, c+win_w//2)] + [HY]
         for j in range(0, len(edges), 2):

@@ -16,6 +16,7 @@ local CAMS = {
   { "vault_up",     Vector(0, 0, 72), Angle(-80, 0, 0) },
   { "east_balcony", Vector(1500, 0, 400), Angle(5, 180, 0) },
   { "stairs_west",  Vector(-700, -300, 72), Angle(-5, 160, 0) },
+  { "arcade_west",  Vector(-1350, 120, 72), Angle(-4, 180, 0) },
 }
 local i, cam, frames = 0, nil, 0
 
