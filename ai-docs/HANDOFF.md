@@ -46,8 +46,10 @@ Updated: 2026-11-23
 
 - Balcony arcade: three 14x16 ft arched openings behind each balcony into lit passages (shared arcade_bay() in build_vmf.py); end windows now start at BALC_Z+20 ft; paired end columns stand on the balcony floor. New camera balc_arcade. shots/20261123-1836.
 
+- east_balcony vs photo: long-wall bay windows raised to BAY_Z0 = 42 ft (stone lower storey). shots/20261123-1840/pair_east.jpg.
+
 ## Next
-0. Compare east_balcony against refs/photos (compare.py) now that both arcade tiers exist; balcony arcade proportions are estimated.
+0. Still open from the east_balcony comparison: the end windows look shorter and the great end arch shallower than in the photo; the photo's long-wall cornice has a deep modillion band.
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
 2. Booth glass is flat blue-grey; real booth has brass grilles and ticket windows.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
@@ -57,6 +59,7 @@ Updated: 2026-11-23
 ## Small rulings (flagged)
 - Zodiac constellations are simplified stick figures, not the real ceiling's figure drawings; band curves are stylised sinusoids.
 - Vault rise 40 ft, estimated from photos (check against the HABS section).
+- Bay window bottom 42 ft estimated from photo.
 - Balcony arcade 14x16 ft openings and window sill BALC_Z+20 ft are estimated from photos.
 - Flag placement (x=+24 ft, crown, 20x38 ft) and board size estimated, not measured.
 - Stairs placed at both ends with 12 u risers / 18 u treads.
