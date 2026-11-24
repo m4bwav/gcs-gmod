@@ -106,7 +106,10 @@ Updated: 2026-11-23
 
 - Release 0.1.0 (2026-11-23): Mark signed off in chat. Chandelier globes (shots/20261123-2134). Workshop https://steamcommunity.com/sharedfiles/filedetails/?id=3845077025 public with description (workshop/description.txt: modwright link, Z-Image Turbo banner note, Commons photo authors), 5 previews. Update an upload: gmad create -folder build/addon, gmpublish update -id 3845077025 -addon build/gm_grand_central.gma, then python tools/workshop_update.py 3845077025 --desc workshop/description.txt. GitHub release v0.1.0 carries the .gma.
 
+- Area 2 blockout, playable (2026-11-23): ramps flank the west staircase in railed floor wells, run west under the balcony's side arches (1:6, Guastavino soffit) to the Whispering Gallery (50 ft groin vault, tools/make_tile.py herringbone gcs/guastavino); the Oyster Bar opens off its west side (4x4 tiled groins on piers, oak counter gcs/wood, stools, pendant lamps); a corridor between the ramps leads east to a dining concourse under the main floor (pylons, lit shop fronts, small lower booth). Floor at -22 ft. New cameras ramp_head, ramp_down, whisper, oyster, dining. Clean full compile, shots/20261123-2230 (lower.jpg) and -2232 (Oyster Bar lit). Refs: Commons GCT_Dining_Concourse.jpg (MTA, CC BY), Whispering_Gallery.jpg (CC BY-SA), Oyster Bar (Jazz Guy, CC BY), 1939 section (PD) - not yet downloaded.
+
 ## Next
+- Area 2 detail: fetch the refs above into refs/photos (fetch_refs.py, SOURCES.md), compare.py for whisper/oyster/dining; east ramps by the east stair; dining concourse is too plain (terrazzo medallions, Pullman seating, ceiling); then lighting, make_map.py labels for the lower level (it draws chest-height footprints of z=0 only), README/wiki/Workshop update and release 0.2.0.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
 - Update the wiki Changelog/Home with the Workshop link.
@@ -118,6 +121,7 @@ Updated: 2026-11-23
 5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
+- Lower level at -22 ft, ramps 1:6 (real ones gentler and longer), gallery 50 ft square, Oyster Bar 96x80 ft, dining hall 167x100 ft: estimates, no measured plan yet. Only the west ramps so far.
 - Licence: code in tools/ is MIT; map source, generated textures and screenshots are CC BY-SA 4.0 (matches the BY-SA reference photos). README banner is Z-Image Turbo seed 11, labelled as AI art, not an in-game shot.
 - Sun shafts are fake volumetrics (additive brushes); a camera inside one sees haze, so they fade in only past the balcony edge.
 - Zodiac constellations are simplified stick figures over simple silhouettes of each sign of each sign, not the real ceiling's figure drawings; band curves are stylised sinusoids.

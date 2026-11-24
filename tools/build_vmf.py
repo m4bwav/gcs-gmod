@@ -178,8 +178,9 @@ def ent(cls, origin=None, solids="", **kv):
 
 
 
-def arcade_bay(W, ents, sgn, xin, xout, c, z0, r, top, roof):
-    """One arched opening in an end wall (z0..top, half-width r) and its lit passage."""
+def arcade_bay(W, ents, sgn, xin, xout, c, z0, r, top, roof, ramp=False):
+    """One arched opening in an end wall (z0..top, half-width r) and its lit passage.
+    ramp: the opening leads to a ramp down to the dining concourse (lower_level builds it)."""
     xa, xb = sorted((xin, xout))
     arc = halfdisc(c, top - r, r, 8)
     for i in range(8):
@@ -192,6 +193,8 @@ def arcade_bay(W, ents, sgn, xin, xout, c, z0, r, top, roof):
         ents.append(ent("func_detail", solids=xprism(ccw([outer[i], outer[i+1], inner[i+1], inner[i]]), fa, fb, TEX_CREAM)))
     for y0 in (c - r - 18, c + r):
         ents.append(ent("func_detail", solids=box(fa, y0, z0, fb, y0 + 18, top - r, TEX_CREAM)))
+    if ramp:
+        return
     # Passage behind, sealed: warm cream corridor ending in lit glass doors with brass frames.
     pa, pb = sorted((xout, xout + sgn*ARCH_D))
     W(box(pa, c - r - WALL, z0 - WALL, pb, c + r + WALL, z0, TEX_FLOOR))
@@ -219,22 +222,161 @@ def arcade_bay(W, ents, sgn, xin, xout, c, z0, r, top, roof):
     ents.append(ent("light", (xback - sgn*24, c, z0 + 6*FT), _light="255 190 120 20"))
 
 
+# Lower level (area 2). The Oyster Bar ramps flank the west staircase, run west under the
+# balcony through the side arches and land at the Whispering Gallery; the Oyster Bar opens
+# off its west side, and a corridor runs back east to the dining concourse under the floor.
+LOW_Z = -22 * FT                    # dining level floor
+RAMP_X0, RAMP_XF = -1100, -2684     # ramp head in the concourse floor, ramp foot (slope ~1:6)
+RAMP_Y0, RAMP_Y1 = 300, 480         # ramp well, |y|; inside the side arches (264..480)
+COR_Y = 168                         # half-width of the corridor between the ramps
+GAL_X0 = RAMP_XF - 50 * FT          # Whispering Gallery, 50 ft square
+OB_X1 = GAL_X0 - WALL
+OB_X0 = OB_X1 - 4 * 288             # Oyster Bar, four 24 ft bays by four
+DIN_X0, DIN_X1, DIN_Y = -1000, 1000, 600   # dining concourse under the main floor
+TEX_TILE = "gcs/guastavino"
+TEX_WOOD = "gcs/wood"
+
+
+def groin(W, x0, x1, y0, y1, zs, rise, tex, n=8):
+    """Groin vault over x0..x1, y0..y1 springing at zs: two crossing barrels whose solid
+    haunches overlap, leaving their intersection open. World brushes, so it seals."""
+    top = zs + rise + 16
+    yc, hy, xc, hx = (y0+y1)/2, (y1-y0)/2, (x0+x1)/2, (x1-x0)/2
+    a = [math.pi*i/n for i in range(n+1)]
+    py = [(round(yc + hy*math.cos(t)), round(zs + rise*math.sin(t))) for t in a]
+    px = [(round(xc + hx*math.cos(t)), round(zs + rise*math.sin(t))) for t in a]
+    for i in range(n):
+        W(xprism(ccw([py[i], py[i+1], (py[i+1][0], top), (py[i][0], top)]), x0, x1, tex))
+        W(yprism(ccw([px[i], px[i+1], (px[i+1][0], top), (px[i][0], top)]), y0, y1, tex))
+    W(box(x0, y0, top, x1, y1, top + WALL, tex))
+
+
+def lower_level(W, ents):
+    det = lambda s: ents.append(ent("func_detail", solids=s))
+    Z, H = LOW_Z, 216
+    # Ramps, one each side: a sloped floor slab, walls, rails round the well in the
+    # concourse, and past the end wall a sloping Guastavino-tiled soffit.
+    for s in (-1, 1):
+        ya, yb = sorted((s*RAMP_Y0, s*RAMP_Y1))
+        slope = [(RAMP_X0, 0), (RAMP_XF, Z), (RAMP_XF, Z - WALL), (RAMP_X0, -WALL)]
+        W(yprism(ccw(slope), ya, yb, TEX_FLOOR))
+        ia, ib = sorted((s*COR_Y, s*RAMP_Y0))
+        oa, ob = sorted((s*RAMP_Y1, s*(RAMP_Y1 + WALL)))
+        for wa, wb in ((ia, ib), (oa, ob)):
+            W(box(-HX, wa, Z - WALL, RAMP_X0, wb, 0, TEX_CREAM))
+            W(box(RAMP_XF, wa, Z - WALL, -HX, wb, ARCH_TOP, TEX_CREAM))
+        x1 = -HX - WALL
+        soffit = [(x1, ARCH_TOP), (RAMP_XF, Z + H), (RAMP_XF, Z + H + WALL), (x1, ARCH_TOP + WALL)]
+        W(yprism(ccw(soffit), ya, yb, TEX_TILE))
+        # Cream parapets with brass rails on the floor round the well.
+        for ra, rb in (sorted((s*(RAMP_Y0 - 16), s*RAMP_Y0)), sorted((s*RAMP_Y1, s*(RAMP_Y1 + 16)))):
+            det(box(-HX, ra, 0, RAMP_X0, rb, 42, TEX_CREAM))
+            det(box(-HX, ra - 2, 42, RAMP_X0, rb + 2, 46, TEX_GOLD))
+        det(box(RAMP_X0, ya, 0, RAMP_X0 + 16, yb, 42, TEX_CREAM))
+        det(box(RAMP_X0 - 2, ya, 42, RAMP_X0 + 18, yb, 46, TEX_GOLD))
+        for k in range(4):
+            x = round(-HX - WALL - 100 - k*(-HX - WALL - 100 - RAMP_XF)/3.5)
+            t = (x - RAMP_X0) / (RAMP_XF - RAMP_X0)
+            ents.append(ent("light", (x, s*(RAMP_Y0+RAMP_Y1)//2, Z*t + 150), _light="255 205 150 30"))
+    # Corridor between the ramps from the gallery east to the dining concourse.
+    W(box(RAMP_XF, -COR_Y, Z - WALL, DIN_X0, COR_Y, Z, TEX_FLOOR))
+    W(box(RAMP_XF, -COR_Y, -WALL - 16, DIN_X0, COR_Y, 0, TEX_CREAM))
+    for s in (-1, 1):
+        wa, wb = sorted((s*COR_Y, s*RAMP_Y0))
+        W(box(-HX, wa, Z - WALL, DIN_X0, wb, -WALL, TEX_CREAM))
+    for x in range(RAMP_XF + 160, DIN_X0, 320):
+        ents.append(ent("light", (x, 0, -110), _light="255 210 160 25"))
+
+    # Whispering Gallery: a low groin vault of Guastavino tile where four arches meet.
+    gx0, gx1, gy = GAL_X0, RAMP_XF, RAMP_Y1
+    W(box(gx0, -gy, Z - WALL, gx1, gy, Z, TEX_FLOOR))
+    for s in (-1, 1):
+        ya, yb = sorted((s*gy, s*(gy + WALL)))
+        W(box(gx0 - WALL, ya, Z - WALL, gx1, yb, 64, TEX_TILE))
+    for y0, y1 in ((-gy, -120), (120, gy)):
+        W(box(gx0 - WALL, y0, Z, gx0, y1, 64, TEX_TILE))
+    W(box(gx0 - WALL, -120, Z + 120, gx0, 120, 64, TEX_TILE))
+    groin(W, gx0, gx1, -gy, gy, Z + 10*FT, 9*FT, TEX_TILE)
+    ents.append(ent("light", ((gx0+gx1)//2, 0, Z + 140), _light="255 200 140 45"))
+    ents.append(ent("env_cubemap", ((gx0+gx1)//2, 0, Z + 72)))
+
+    # Oyster Bar: 4 x 4 bays of shallow Guastavino groins on piers; a long oak counter.
+    bx, by = 288, 240
+    oy = 2*by
+    W(box(OB_X0, -oy, Z - WALL, OB_X1, oy, Z, TEX_FLOOR))
+    for s in (-1, 1):
+        ya, yb = sorted((s*oy, s*(oy + WALL)))
+        W(box(OB_X0 - WALL, ya, Z - WALL, OB_X1, yb, 64, TEX_CREAM))
+    W(box(OB_X0 - WALL, -oy, Z - WALL, OB_X0, oy, 64, TEX_CREAM))
+    zs = Z + 11*FT
+    for i in range(4):
+        for j in range(4):
+            x0, y0 = OB_X0 + i*bx, -oy + j*by
+            groin(W, x0, x0 + bx, y0, y0 + by, zs, 6*FT, TEX_TILE)
+            ents.append(ent("light", (x0 + bx//2, y0 + by//2, zs - 40), _light="255 195 130 45"))
+            det(box(x0 + bx//2 - 1, y0 + by//2 - 1, zs - 10, x0 + bx//2 + 1, y0 + by//2 + 1, zs + 70, TEX_GOLD))
+            det(prism(ngon(x0 + bx//2, y0 + by//2, 8, 8, math.pi/8), zs - 22, zs - 10, TEX_BULB))
+    for i in range(1, 4):
+        for j in range(1, 4):
+            x, y = OB_X0 + i*bx, -oy + j*by
+            det(box(x - 14, y - 14, Z, x + 14, y + 14, zs + 20, TEX_TILE))
+    # Counter: oak top on a cream marble base, running down the middle with stools.
+    cx0, cx1 = OB_X0 + 96, OB_X1 - 192
+    det(box(cx0, -30, Z, cx1, 30, Z + 40, TEX_CREAM))
+    det(box(cx0 - 6, -38, Z + 40, cx1 + 6, 38, Z + 43, TEX_WOOD))
+    for x in range(cx0 + 24, cx1, 48):
+        for y in (-56, 56):
+            det(prism(ngon(x, y, 2, 6), Z, Z + 24, TEX_GOLD))
+            det(prism(ngon(x, y, 8, 8, math.pi/8), Z + 24, Z + 28, TEX_WOOD))
+    ents.append(ent("env_cubemap", ((OB_X0+OB_X1)//2, -200, Z + 72)))
+
+    # Dining concourse under the main floor: cream walls, pylons, lit shop fronts round
+    # the edge and a small brass-topped lower information booth in the middle.
+    W(box(DIN_X0, -DIN_Y, Z - WALL, DIN_X1, DIN_Y, Z, TEX_FLOOR))
+    W(box(DIN_X0, -DIN_Y, -WALL - 16, DIN_X1, DIN_Y, -WALL, TEX_CREAM))
+    for s in (-1, 1):
+        ya, yb = sorted((s*DIN_Y, s*(DIN_Y + WALL)))
+        W(box(DIN_X0 - WALL, ya, Z - WALL, DIN_X1 + WALL, yb, 0, TEX_CREAM))
+    W(box(DIN_X1, -DIN_Y, Z - WALL, DIN_X1 + WALL, DIN_Y, 0, TEX_CREAM))
+    for y0, y1 in ((-DIN_Y, -COR_Y), (COR_Y, DIN_Y)):
+        W(box(DIN_X0 - WALL, y0, Z - WALL, DIN_X0, y1, 0, TEX_CREAM))
+    for x in range(DIN_X0 + 160, DIN_X1 - 100, 240):
+        for s in (-1, 1):
+            ya, yb = sorted((s*(DIN_Y - 4), s*DIN_Y))
+            det(box(x - 90, ya, Z + 12, x + 90, yb, Z + 110, TEX_DOOR))
+            det(box(x - 90, ya, Z + 120, x + 90, yb, Z + 140, TEX_GOLD))
+        for y in (-320, 320):
+            det(box(x - 16, y - 16, Z, x + 16, y + 16, -WALL - 16, TEX_CREAM))
+        for y in (-440, 0, 440):
+            ents.append(ent("light", (x, y, -140), _light="255 215 170 35"))
+    oct8 = lambda r: ngon(0, 0, r, 8, math.pi/8)
+    det(prism(oct8(7*FT), Z, Z + 42, TEX_CREAM))
+    det(prism(oct8(7*FT + 4), Z + 42, Z + 46, TEX_GOLD))
+    det(prism(oct8(1*FT), Z + 46, Z + 90, TEX_GOLD))
+    det(prism(oct8(2*FT), Z + 90, Z + 110, TEX_BULB))
+    ents.append(ent("env_cubemap", (0, -300, Z + 72)))
+
+
 def build():
     world, ents = [], []
     W = world.append
 
     # Sealed outer hull (nodraw) so the interior can't leak while geometry is rough.
     O = 256
-    X0, X1, Y0, Y1, Z1 = -HX-O-WALL, HX+O+WALL, -HY-WALL-64, HY+WALL+64, CROWN+WALL+64
-    W(box(X0, Y0, -WALL-64, X1, Y1, -WALL, NODRAW))
+    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, HX+O+WALL, -HY-WALL-64, HY+WALL+64, CROWN+WALL+64
+    ZB = LOW_Z - 2*WALL - 64
+    W(box(X0, Y0, ZB, X1, Y1, ZB+64, NODRAW))
     W(box(X0, Y0, Z1, X1, Y1, Z1+64, NODRAW))
-    W(box(X0, Y0-64, -WALL-64, X1, Y0, Z1+64, NODRAW))
-    W(box(X0, Y1, -WALL-64, X1, Y1+64, Z1+64, NODRAW))
-    W(box(X0-64, Y0-64, -WALL-64, X0, Y1+64, Z1+64, NODRAW))
-    W(box(X1, Y0-64, -WALL-64, X1+64, Y1+64, Z1+64, NODRAW))
+    W(box(X0, Y0-64, ZB, X1, Y0, Z1+64, NODRAW))
+    W(box(X0, Y1, ZB, X1, Y1+64, Z1+64, NODRAW))
+    W(box(X0-64, Y0-64, ZB, X0, Y1+64, Z1+64, NODRAW))
+    W(box(X1, Y0-64, ZB, X1+64, Y1+64, Z1+64, NODRAW))
 
-    # Floor and long walls.
-    W(box(-HX, -HY, -WALL, HX, HY, 0, TEX_FLOOR))
+    # Floor (cut by the two west ramp wells) and long walls.
+    W(box(RAMP_X0, -HY, -WALL, HX, HY, 0, TEX_FLOOR))
+    for y0, y1 in ((-HY, -RAMP_Y1), (-RAMP_Y0, RAMP_Y0), (RAMP_Y1, HY)):
+        W(box(-HX, y0, -WALL, RAMP_X0, y1, 0, TEX_FLOOR))
+    lower_level(W, ents)
     W(box(-HX, -HY-WALL, -WALL, HX, -HY, SPRING, TEX_WALL))
     W(box(-HX, HY, -WALL, HX, HY+WALL, SPRING, TEX_WALL))
 
@@ -269,7 +411,11 @@ def build():
         xa, xb = min(xin, xout), max(xin, xout)
         # Arcades: three arched openings under the balcony and three behind it, each into a
         # short sealed passage. Wall bands between them are solid.
-        W(box(xa, -HY, -WALL, xb, HY, 0, TEX_WALL))
+        if sgn < 0:   # ramps pass under the west wall's side arches
+            for y0, y1 in ((-HY, -RAMP_Y1), (-RAMP_Y0, RAMP_Y0), (RAMP_Y1, HY)):
+                W(box(xa, y0, -WALL, xb, y1, 0, TEX_WALL))
+        else:
+            W(box(xa, -HY, -WALL, xb, HY, 0, TEX_WALL))
         W(box(xa, -HY, ARCH_TOP, xb, HY, BALC_Z, TEX_WALL))
         W(box(xa, -HY, BALC_Z + BARCH_H, xb, HY, win_z0, TEX_WALL))
         for z0, aw, ah in ((0, ARCH_W, ARCH_TOP), (BALC_Z, BARCH_W, BARCH_H)):
@@ -278,7 +424,8 @@ def build():
             for j in range(0, len(aedges), 2):
                 W(box(xa, aedges[j], z0, xb, aedges[j+1], top, TEX_WALL))
             for c in centres:
-                arcade_bay(W, ents, sgn, xin, xout, c, z0, aw//2, top, min(WALL, BALC_Z - ARCH_TOP) if z0 == 0 else WALL)
+                arcade_bay(W, ents, sgn, xin, xout, c, z0, aw//2, top, min(WALL, BALC_Z - ARCH_TOP) if z0 == 0 else WALL,
+                           ramp=(sgn < 0 and z0 == 0 and c != 0))
         W(box(xa, -HY, win_zc, xb, HY, CROWN+WALL, TEX_WALL))
         W(box(xa, -HY, win_z1, xb, -win_w//2, win_zc, TEX_WALL))
         W(box(xa, win_w//2, win_z1, xb, HY, win_zc, TEX_WALL))
