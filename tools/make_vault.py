@@ -3,7 +3,8 @@
 Colours sampled from refs/photos/Grand_Central_Station_Flag_Ceiling.jpg: deep green field,
 gold stars, gold band lines. Layout after the real ceiling: the ecliptic and the equator as
 two gold arcs crossing the length, twelve zodiac constellations as stick figures along the
-ecliptic, a faint Milky Way. Figures are simplified (small creative ruling, see HANDOFF).
+ecliptic, a faint Milky Way. Figures are simplified: stick constellations over gold-outlined limb silhouettes
+(small creative ruling, see HANDOFF).
 Writes src/materials/gcs/vault_mural.vtf and shots/tex/vault_mural.png. Needs srctools pillow numpy."""
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
@@ -76,11 +77,36 @@ FIGS = [
     ([(0, 0), (.6, .3), (1.2, .5), (1.5, .1), (1.8, -.3), (2.2, -.1)], [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5)]),  # pisces
 ]
 SC = 0.075 * h
+
+
+def figure(pts, lines):
+    """Figure drawing behind a constellation: the stick figure thickened into limbs and
+    rounded, with a faint lighter wash and a thin gold outline (the real ceiling shows
+    gold-line figures; these suggest them at concourse distance)."""
+    m = Image.new("L", img.size, 0)
+    md = ImageDraw.Draw(m)
+    for a, b in lines:
+        md.line([pts[a], pts[b]], fill=255, width=int(.5*SC))
+    for px, py in pts:
+        r = .3*SC * (.8 + .5*rng.random())
+        md.ellipse([px-r, py-r, px+r, py+r], fill=255)
+    m = m.filter(ImageFilter.GaussianBlur(.18*SC)).point(lambda v: 255 if v > 90 else 0)
+    img.paste(Image.new("RGB", img.size, (66, 136, 100)),
+              (0, 0), m.filter(ImageFilter.GaussianBlur(4*S)).point(lambda v: v*45//255))
+    a = np.asarray(m) > 0
+    grow = a.copy()
+    for dx, dy in ((-2, 0), (2, 0), (0, -2), (0, 2), (-1, -1), (1, 1), (-1, 1), (1, -1)):
+        grow |= np.roll(np.roll(a, dy, 0), dx, 1)
+    edge = grow & ~a
+    img.paste(Image.new("RGB", img.size, (214, 182, 112)), (0, 0), Image.fromarray(edge.astype(np.uint8)*255))
+
+
 for i, (stars, lines) in enumerate(FIGS):
     t = (i + .5) / 12
     cx = t * w - .8*SC
     cy = ecl(t) * h + (-1.6 if i % 2 else .6) * SC     # alternate above and below the band
     pts = [(cx + sx*SC, cy + sy*SC) for sx, sy in stars]
+    figure(pts, lines)
     for a, b in lines:
         dr.line([pts[a], pts[b]], fill=(200, 170, 100), width=2*S)
     for px, py in pts:

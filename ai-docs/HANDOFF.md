@@ -66,9 +66,11 @@ Updated: 2026-11-23
 
 - Booth interior: glass is a thin translucent ring (gcs/booth_glass, UnlitGeneric alpha 0.28); inside a cream counter with brass top under the glass, a cream cabinet core under the clock column, two warm lights. Reads see-through like the photos. shots/20261123-1935.
 
+- Zodiac figures: each constellation sits on a gold-outlined limb silhouette (stick figure thickened, rounded, faint wash) in tools/make_vault.py. shots/20261123-1939/vault_up.jpg.
+
 ## Next
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
-1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
+1. Zodiac figures have outlines now; real animal/human drawings would be the next step. Lunette hoods could get relief carving (normal map or more steps).
 2. Booth interior is in; could add clerks' props or brighter interior light.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
 4. Board glyphs are stand-in dot clusters, not letters; chandeliers could become a polywright model with globes later.
@@ -76,7 +78,7 @@ Updated: 2026-11-23
 
 ## Small rulings (flagged)
 - Sun shafts are fake volumetrics (additive brushes); a camera inside one sees haze, so they fade in only past the balcony edge.
-- Zodiac constellations are simplified stick figures, not the real ceiling's figure drawings; band curves are stylised sinusoids.
+- Zodiac constellations are simplified stick figures over abstract limb silhouettes, not the real ceiling's figure drawings; band curves are stylised sinusoids.
 - Vault rise 40 ft, estimated from photos (check against the HABS section).
 - Bay window bottom 42 ft estimated from photo.
 - Balcony arcade 14x14 ft openings, window sill BALC_Z+16 ft, centre end window head SPRING+29.5 ft are estimated from photos.
