@@ -74,12 +74,14 @@ Updated: 2026-11-23
 
 - Booth interior lights 30 -> 55, warmer (reads lit through the glass). shots/20261123-1957.
 
+- Flag 48x25 ft (sourced length, Gothamist; 1.9:1), spans the north centre bay. shots/20261123-2003/flag.jpg.
+
 ## Next
 - FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
 1. Zodiac figures have outlines now; real animal/human drawings would be the next step. Lunette hoods have voussoirs and keystones; garland carving would be a normal map.
 2. Booth interior is in and brighter; clerks' props could follow.
-3. Measured references: secondary-source check done (refs/concourse-dimensions.md, 2026-11-23): vault springline/rise agree with the build. Still open: a real HABS NY-5450 section or LPC report for balcony, sill and lunette heights; flag may be ~48 ft long (ours 38 ft), end windows maybe 33x60 ft (ours 26 ft wide, taller).
+3. Measured references: secondary-source check done (refs/concourse-dimensions.md, 2026-11-23): vault springline/rise agree with the build. Still open: a real HABS NY-5450 section or LPC report for balcony, sill and lunette heights; end windows maybe 33x60 ft (ours 26 ft wide, taller).
 4. Chandeliers could become a polywright model with globes later.
 5. Hammer++ for hand checks (optional).
 
@@ -90,7 +92,7 @@ Updated: 2026-11-23
 - Vault rise 40 ft, estimated from photos (check against the HABS section).
 - Bay window bottom 42 ft estimated from photo.
 - Balcony arcade 14x14 ft openings, window sill BALC_Z+16 ft, centre end window head SPRING+29.5 ft are estimated from photos.
-- Flag placement (north centre bay, 38x20 ft horizontal) and board size estimated, not measured.
+- Flag placement (north centre bay) and board size estimated; flag length sourced (48 ft), not measured.
 - Stairs placed at both ends with 12 u risers / 18 u treads.
 - Light levels (after surfaces v2): window point 45, window spot 225, booth 25, chandeliers 18, vault fill 10.
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.

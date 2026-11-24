@@ -15,5 +15,5 @@ Secondary sources only; no HABS section or LPC report read yet (next: HABS NY-54
 | Vault base / crown elevation | 121.5 / 160.25 ft datum, so springline ~86 ft above floor, rise ~38.75 ft (derived) | same article | SPRING 85 ft, VRISE 40 ft (agrees; the 65 ft / half-circle values above are superseded) |
 | End windows | ~60 ft high (Langmead p.175), ~33 ft wide (railway-technology.com, unconfirmed) | same article; secondary | 26 ft wide, sill 42 ft, centre head 114.5 ft (taller and narrower than sourced; kept, photo-matched) |
 | Booth clock | four faces, 24 in each | Wikipedia citing NYT 1954-01-20 | 30 u (2.5 ft) block, fine |
-| Flag | ~48 ft long (width not found) | https://gothamist.com/news/the-flag-in-grand-central-terminal | 38 x 20 ft |
+| Flag | ~48 ft long (width not found) | https://gothamist.com/news/the-flag-in-grand-central-terminal | 48 x 25 ft (2026-11-23) |
 | Balcony height, sill, lunette windows, booth size | not found | | photo estimates |
