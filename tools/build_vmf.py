@@ -410,6 +410,12 @@ def build():
             # Cream marble parapet with a brass handrail on top, like the stair balustrades.
             ents.append(ent("func_detail", solids=box(ra, y0, BALC_Z, rb, y1, BALC_Z+42, TEX_CREAM)))
             ents.append(ent("func_detail", solids=box(ra-2, y0, BALC_Z+42, rb+2, y1, BALC_Z+46, TEX_GOLD)))
+        # Ceiling lamps under the balcony so the floor arcade and stair sides aren't black.
+        lx = sgn*(HX - BALC_D//2)
+        for ly in (-3*HY//4, -HY//4, HY//4, 3*HY//4):
+            ents.append(ent("func_detail", solids=box(lx-10, ly-10, BALC_Z-32, lx+10, ly+10, BALC_Z-24, TEX_GOLD)))
+            ents.append(ent("func_detail", solids=box(lx-7, ly-7, BALC_Z-40, lx+7, ly+7, BALC_Z-32, TEX_BULB)))
+            ents.append(ent("light", (lx, ly, BALC_Z-64), _light="255 205 145 30"))
 
     # Double staircases: two flights per end, landing on the balcony.
     rise, run = 12, 18
