@@ -36,6 +36,7 @@ TEX_CLOCK = "gcs/clock"
 TEX_BULB = "gcs/bulb"
 TEX_COFFER = "gcs/coffer"
 TEX_DOOR = "gcs/door_glow"
+TEX_SHAFT = "gcs/shaft"        # additive sun beam, nonsolid
 NODRAW = "tools/toolsnodraw"
 
 _id = [0]
@@ -132,14 +133,15 @@ def xprism(poly, x0, x1, tex, uvs=None):
     return "solid\n{\n\t\"id\" \"%d\"\n%s}\n" % (nid(), s)
 
 
-def yprism(poly, y0, y1, tex):
-    """Convex polygon in xz (counter-clockwise seen from -y), extruded y0..y1."""
-    s = side([(x, y0, z) for x, z in poly], (0, -1, 0), tex)
-    s += side([(x, y1, z) for x, z in poly], (0, 1, 0), tex)
+def yprism(poly, y0, y1, tex, uv=None, ends=None):
+    """Convex polygon in xz (counter-clockwise seen from -y), extruded y0..y1.
+    uv: one (u, v) for every face; ends: material for the two y faces (default tex)."""
+    s = side([(x, y0, z) for x, z in poly], (0, -1, 0), ends or tex, uv)
+    s += side([(x, y1, z) for x, z in poly], (0, 1, 0), ends or tex, uv)
     for i in range(len(poly)):
         a, b = poly[i], poly[(i+1) % len(poly)]
         n = (b[1]-a[1], 0, -(b[0]-a[0]))
-        s += side([(a[0], y0, a[1]), (b[0], y0, b[1]), (b[0], y1, b[1])], n, tex)
+        s += side([(a[0], y0, a[1]), (b[0], y0, b[1]), (b[0], y1, b[1])], n, tex, uv)
     return "solid\n{\n\t\"id\" \"%d\"\n%s}\n" % (nid(), s)
 
 
@@ -289,6 +291,22 @@ def build():
                             angles="-38 %d 0" % (180 if sgn > 0 else 0), pitch="-38",
                             _light="255 235 200 110", _inner_cone="30", _cone="65", _exponent="1",
                             _distance="0", _fifty_percent_distance="2600", _zero_percent_distance="5200"))
+
+        # Sun shafts: one additive beam per window, falling inward at the spotlight pitch.
+        a = math.radians(38)
+        dx, dz = -sgn*math.cos(a), -math.sin(a)
+        x0 = sgn*HX
+        for c in centres:
+            zt = (win_zc if c == 0 else win_z1) - 6*FT
+            zb = win_z0 + 2*FT
+            L, lb = (zt - 8) / -dz, (zb - 8) / -dz   # slant lengths to the floor
+            poly = ccw([(x0, zb), (x0, zt), (round(x0 + dx*L), 8), (round(x0 + dx*lb), 8)])
+            w = round(win_w * 0.55)
+            y0 = c - w//2
+            su, sv = w/256, L/256
+            uv = ("[0 1 0 %g] %g" % (-y0/su, su),
+                  "[%g 0 %g %g] %g" % (dx, dz, -(dx*x0 + dz*zt)/sv, sv))
+            ents.append(ent("func_illusionary", solids=yprism(poly, y0, y0 + w, TEX_SHAFT, uv, NODRAW), disableshadows="1"))
 
     # Mullion grid in the end windows, gilded band across each end at the springline.
     for sgn in (-1, 1):
