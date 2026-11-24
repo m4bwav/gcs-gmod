@@ -32,6 +32,12 @@ VMTS = {
     "bulb": '"UnlitGeneric"\n{\n\t"$basetexture" "lights/white002"\n\t"$color2" "[1.0 0.86 0.6]"\n\t"$model" "1"\n}\n',
     "statue": '"VertexLitGeneric"\n{\n\t"$basetexture" "gcs/facade_stone"\n\t"$color2" "[0.8 0.76 0.7]"\n'
               '\t"$nocull" "1"\n\t"$surfaceprop" "stone"\n}\n',
+    "taxi": '"VertexLitGeneric"\n{\n\t"$basetexture" "metal/metalwall001a"\n\t"$color2" "[1.5 1.1 0.12]"\n'
+            '\t"$envmap" "env_cubemap"\n\t"$envmaptint" "[0.2 0.2 0.2]"\n\t"$surfaceprop" "metal"\n}\n',
+    "car_glass": '"VertexLitGeneric"\n{\n\t"$basetexture" "metal/metalwall001a"\n\t"$color2" "[0.08 0.1 0.12]"\n'
+                 '\t"$envmap" "env_cubemap"\n\t"$envmaptint" "[0.4 0.42 0.45]"\n\t"$surfaceprop" "glass"\n}\n',
+    "tyre": '"VertexLitGeneric"\n{\n\t"$basetexture" "metal/metalwall001a"\n\t"$color2" "[0.05 0.05 0.05]"\n'
+            '\t"$surfaceprop" "rubber"\n}\n',
 }
 
 
@@ -287,7 +293,50 @@ def statue_group():
     return m
 
 
-MODELS = {"statue_group": statue_group, "chandelier": chandelier, "vh_chandelier": vh_chandelier}
+def eagle():
+    """Bronze eagle on a corner of the 42nd Street facade (one of the 1898 Grand Central Station
+    eagles re-set on the terminal, about 13 ft across the wings). Origin at the plinth foot,
+    facing -y, wings half raised."""
+    m = Mesh()
+    m.slab("statue", [(-30, 0), (30, 0), (30, 14), (-30, 14)], -30, 30)          # plinth
+    m.blob("statue", (0, 0, 22), 14, 14, 10)                                      # globe it grips
+    for s in (-1, 1):
+        m.tube("statue", (s * 8, -4, 26), (s * 9, -8, 34), 2.2, 2.6, 8)           # legs
+    m.blob("statue", (0, 4, 58), 18, 16, 26)                                      # body
+    m.blob("statue", (0, -6, 70), 15, 12, 14)                                     # breast
+    m.tube("statue", (0, -4, 80), (0, -14, 96), 8, 7, 10)                         # neck
+    m.blob("statue", (0, -18, 100), 8, 10, 8)                                     # head
+    m.tube("statue", (0, -26, 100), (0, -34, 94), 3.5, 1, 8)                      # beak, hooked down
+    m.slab("statue", [(-14, 40), (14, 40), (10, 34), (0, 18), (-10, 34)][::-1], 18, 26)   # tail
+    for s in (-1, 1):
+        # Wing as a fan of convex quads from the shoulder: up and out, primaries spread at the tip.
+        wing = [(10, 74), (40, 96), (70, 112), (78, 106), (84, 96), (80, 88), (82, 74), (72, 70), (60, 62), (34, 56), (12, 58)]
+        for i in range(1, len(wing) - 2, 2):
+            q = [wing[0], wing[i], wing[i + 1], wing[i + 2]]
+            m.slab("statue", [(s * x, z) for x, z in (q if s < 0 else q[::-1])], 2, 10)
+    return m
+
+
+def taxi():
+    """New York yellow cab, a generic sedan about 16 ft long. Origin on the road under its
+    centre, length along x (front +x)."""
+    m = Mesh()
+    L, W = 96, 36
+    body = [(-L, 10), (L, 10), (L, 30), (L - 6, 36), (L - 40, 38), (-L + 30, 38), (-L, 34)]
+    m.slab("taxi", body[::-1], -W, W)
+    m.slab("car_glass", [(-L + 34, 38), (L - 46, 38), (L - 62, 56), (-L + 46, 56)][::-1], -W + 3, W - 3)
+    m.slab("taxi", [(-L + 46, 56), (L - 62, 56), (L - 62, 58), (-L + 46, 58)][::-1], -W + 4, W - 4)   # roof
+    m.slab("taxi", [(-12, 58), (12, 58), (10, 66), (-10, 66)][::-1], -10, 10)                        # roof sign
+    m.slab("car_glass", [(-L - 1, 14), (L + 1, 14), (L + 1, 18), (-L - 1, 18)][::-1], -W - 1, W + 1)   # bumpers
+    for x in (-L + 26, L - 26):
+        for y in (-W + 4, W - 4):
+            m.tube("tyre", (x, y - 5, 13), (x, y + 5, 13), 13, 13, 12)
+    for y in (-W + 8, W - 8):
+        m.tube("bulb", (L + 1, y, 30), (L + 2, y, 30), 4, 4, 8)                       # headlamps
+    return m
+
+
+MODELS = {"eagle": eagle, "taxi": taxi, "statue_group": statue_group, "chandelier": chandelier, "vh_chandelier": vh_chandelier}
 
 
 def build():

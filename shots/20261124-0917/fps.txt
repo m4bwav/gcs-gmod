@@ -1,0 +1,4 @@
+ext_street      146 fps
+ext_clock       146 fps
+eagle           146 fps
+taxis           146 fps

@@ -745,6 +745,14 @@ def exterior(W, ents):
     # Figures as one model (make_models.py statue_group): brushes cost too many vertices.
     ents.append(ent("prop_static", (FCX, YF + 3 * FT, RZ + 8 * FT), model="models/gcs/statue_group.mdl",
                     angles="0 -90 0", solid="0", disableshadows="1"))   # studiomdl turns SMD +x to model +y
+    # Bronze eagles on the facade's top corners (make_models.py eagle).
+    for x in (FX0 + 6 * FT, FX1 - 6 * FT):
+        ents.append(ent("prop_static", (x, YF - 2 * FT, RZ), model="models/gcs/eagle.mdl",
+                        angles="0 -90 0", solid="0", disableshadows="1"))
+    # Yellow cabs on 42nd Street (make_models.py taxi), both directions.
+    for dx, y, yaw in ((-170, 62, 90), (-20, 62, 90), (150, 62, 90), (-90, 36, -90), (100, 36, -90)):
+        ents.append(ent("prop_static", (FCX + dx * FT, YS + y * FT, -8), model="models/gcs/taxi.mdl",
+                        angles="0 %d 0" % yaw, solid="6"))
     # Park Avenue Viaduct crossing 42nd Street: deck at terrace level, arched steel fascias,
     # bronze railings, a lit portal into the building across the street.
     W(box(VIA_X0, YS, TER_Z - 4 * FT, VIA_X1, YF - TER_D, TER_Z, "gcs/sidewalk"))
