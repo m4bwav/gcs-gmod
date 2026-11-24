@@ -26,3 +26,4 @@
 - 2026-11-23: End windows moved closer together and taller, floor sun spots softened, flag moved into the north centre bay. Clean compile, shots/20261123-1851.
 - 2026-11-23: Flag now hangs horizontally (38x20 ft, texture no longer transposed). Clean compile, shots/20261123-1857. Python rewrites turned make_board.py LF into CRLF; strip CR after scripted edits.
 - 2026-11-23: git worktree remove --force deletes untracked shots/ in the worktree; take shots from the main checkout after merging.
+- 2026-11-23: Stair balustrades (yprism sloped cream walls, brass rail, newels) and booth brass grille. Clean compile, shots/20261123-1901. Auto mode refused a chained `git checkout -- src` + `worktree remove --force`; ff-merge worked without them, and the ../gcs-gmod-booth-stairs worktree was left for manual removal.

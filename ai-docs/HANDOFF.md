@@ -56,10 +56,12 @@ Updated: 2026-11-23
 
 - Flag horizontal like the photo: 38x20 ft, stripes across, union upper left (flag.vtf 512x256). shots/20261123-1857.
 
+- Stairs and booth: each flight has solid cream balustrades with a brass handrail and newel posts at the foot; booth glass has a brass grille (two mullions per face, counter ledge at 4 ft, top rail at 7 ft). shots/20261123-1901.
+
 ## Next
-0. From shots/20261123-1851 compare: the end windows are still a little short of the arch; the booth glass and the stairs read flat.
+0. From shots/20261123-1851 compare: the end windows are still a little short of the arch.
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
-2. Booth glass is flat blue-grey; real booth has brass grilles and ticket windows.
+2. Booth glass is still flat blue-grey behind the new grille; could get ticket-window openings or a lit interior.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
 4. Board glyphs are stand-in dot clusters, not letters; chandeliers could become a polywright model with globes later.
 5. Hammer++ for hand checks (optional).
