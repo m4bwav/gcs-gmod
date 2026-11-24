@@ -434,8 +434,8 @@ def build():
     ring(oct8(12.4*FT), oct8(10.4*FT), 4*FT, 4*FT+2, TEX_GOLD)
     det(oct8(4*FT), 3*FT, 8*FT, TEX_CREAM)
     det(oct8(4.3*FT), 7*FT, 8*FT, TEX_GOLD)
-    ents.append(ent("light", (0, 7*FT, 7*FT), _light="255 215 150 30"))
-    ents.append(ent("light", (0, -7*FT, 7*FT), _light="255 215 150 30"))
+    ents.append(ent("light", (0, 7*FT, 7*FT), _light="255 220 160 55"))
+    ents.append(ent("light", (0, -7*FT, 7*FT), _light="255 220 160 55"))
     for x, y in oct8(13*FT):
         det(ngon(x, y, 6, 4, math.pi/4), 3*FT, 8*FT, TEX_GOLD)
     # Brass grille on the glass: two mullions per face, a counter ledge and a top rail.

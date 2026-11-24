@@ -128090,14 +128090,14 @@ entity
 {
 	"id" "13616"
 	"classname" "light"
-	"_light" "255 215 150 30"
+	"_light" "255 220 160 55"
 	"origin" "0 84 84"
 }
 entity
 {
 	"id" "13617"
 	"classname" "light"
-	"_light" "255 215 150 30"
+	"_light" "255 220 160 55"
 	"origin" "0 -84 84"
 }
 entity
