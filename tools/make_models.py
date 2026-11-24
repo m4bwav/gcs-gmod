@@ -30,7 +30,17 @@ VMTS = {
     "bronze": '"VertexLitGeneric"\n{\n\t"$basetexture" "metal/metalwall001a"\n\t"$color2" "[0.45 0.33 0.18]"\n'
               '\t"$envmap" "env_cubemap"\n\t"$envmaptint" "[0.25 0.2 0.12]"\n\t"$surfaceprop" "metal"\n}\n',
     "bulb": '"UnlitGeneric"\n{\n\t"$basetexture" "lights/white002"\n\t"$color2" "[1.0 0.86 0.6]"\n\t"$model" "1"\n}\n',
+    "statue": '"VertexLitGeneric"\n{\n\t"$basetexture" "gcs/facade_stone"\n\t"$color2" "[0.8 0.76 0.7]"\n'
+              '\t"$nocull" "1"\n\t"$surfaceprop" "stone"\n}\n',
 }
+
+
+def _cross(a, b): return (a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0])
+
+
+def _unit(a):
+    ln = math.sqrt(sum(c * c for c in a)) or 1
+    return tuple(c / ln for c in a)
 
 
 class Mesh:
@@ -65,6 +75,59 @@ class Mesh:
     def sphere(self, mat, cx, cy, cz, r, n=10):
         prof = [(r * math.sin(math.pi * k / n), -r * math.cos(math.pi * k / n)) for k in range(n + 1)]
         self.lathe(mat, prof, cx, cy, cz, 2 * n)
+
+    def tube(self, mat, a, b, r0, r1, n=10):
+        """Tapered tube from point a (radius r0) to b (radius r1), domed ends, any direction."""
+        ax = (b[0] - a[0], b[1] - a[1], b[2] - a[2])
+        ln = math.sqrt(sum(c * c for c in ax)) or 1
+        w = tuple(c / ln for c in ax)
+        u = _unit(_cross(w, (1, 0, 0) if abs(w[0]) < 0.9 else (0, 1, 0)))
+        v = _cross(w, u)
+        prof = [(0, -r0 * 0.6), (r0 * 0.7, -r0 * 0.4), (r0, 0), (r1, ln), (r1 * 0.7, ln + r1 * 0.4), (0, ln + r1 * 0.6)]
+        self.frame(mat, prof, a, u, v, w, n)
+
+    def blob(self, mat, c, rx, ry, rz, n=8):
+        """Ellipsoid centred at c with radii along x, y, z."""
+        prof = [(math.sin(math.pi * k / n), -math.cos(math.pi * k / n)) for k in range(n + 1)]
+        for i in range(n):
+            (r0, z0), (r1, z1) = prof[i], prof[i + 1]
+            for j in range(2 * n):
+                t0, t1 = math.pi * j / n, math.pi * (j + 1) / n
+                def v(r, z, t):
+                    nx, ny, nz = r * math.cos(t), r * math.sin(t), z
+                    p = (c[0] + rx * nx, c[1] + ry * ny, c[2] + rz * nz)
+                    return (p, _unit((nx / rx, ny / ry, nz / rz)), (p[0] / 128.0, p[2] / 128.0))
+                self.quad(mat, v(r0, z0, t0), v(r0, z0, t1), v(r1, z1, t1), v(r1, z1, t0))
+
+    def frame(self, mat, prof, o, u, v, w, n):
+        """Lathe a profile [(r, h)] about axis w through o; (u, v) span the ring plane."""
+        for i in range(len(prof) - 1):
+            (r0, h0), (r1, h1) = prof[i], prof[i + 1]
+            dr, dh = r1 - r0, h1 - h0
+            ln = math.hypot(dr, dh) or 1
+            nr, nh = dh / ln, -dr / ln
+            for j in range(n):
+                t0, t1 = 2 * math.pi * j / n, 2 * math.pi * (j + 1) / n
+                def vt(r, h, t):
+                    ct, st = math.cos(t), math.sin(t)
+                    p = tuple(o[k] + r * (ct * u[k] + st * v[k]) + h * w[k] for k in range(3))
+                    nrm = tuple(nr * (ct * u[k] + st * v[k]) + nh * w[k] for k in range(3))
+                    return (p, nrm, (p[0] / 128.0, p[2] / 128.0))
+                self.quad(mat, vt(r0, h0, t0), vt(r0, h0, t1), vt(r1, h1, t1), vt(r1, h1, t0))
+
+    def slab(self, mat, poly, y0, y1):
+        """Flat plate: convex-ish polygon [(x, z)], counter-clockwise seen from -y, from y0 to y1."""
+        cx, cz = sum(p[0] for p in poly) / len(poly), sum(p[1] for p in poly) / len(poly)
+        uv = lambda x, z: (x / 128.0, z / 128.0)
+        for i in range(len(poly)):
+            (x0, z0), (x1, z1) = poly[i], poly[(i + 1) % len(poly)]
+            self.tris.append((mat, [((cx, y0, cz), (0, -1, 0), uv(cx, cz)), ((x1, y0, z1), (0, -1, 0), uv(x1, z1)),
+                                    ((x0, y0, z0), (0, -1, 0), uv(x0, z0))]))
+            self.tris.append((mat, [((cx, y1, cz), (0, 1, 0), uv(cx, cz)), ((x0, y1, z0), (0, 1, 0), uv(x0, z0)),
+                                    ((x1, y1, z1), (0, 1, 0), uv(x1, z1))]))
+            nn = _unit((z1 - z0, 0, x0 - x1))
+            self.quad(mat, ((x0, y0, z0), nn, uv(x0, z0)), ((x1, y0, z1), nn, uv(x1, z1)),
+                      ((x1, y1, z1), nn, uv(x1, z1)), ((x0, y1, z0), nn, uv(x0, z0)))
 
     def smd(self):
         out = ["version 1", "nodes", '0 "root" -1', "end", "skeleton", "time 0", "0 0 0 0 0 0 0", "end", "triangles"]
@@ -123,7 +186,108 @@ def vh_chandelier():
     return m
 
 
-MODELS = {"chandelier": chandelier, "vh_chandelier": vh_chandelier}
+class Figure:
+    """Pose a figure in body inches (6 ft tall, feet at 0, facing -y), scaled by k and moved
+    to base in model space (x right as seen from the street, y back, z up)."""
+    def __init__(self, m, base, k):
+        self.m, self.b, self.k = m, base, k
+
+    def P(self, p):
+        return tuple(self.b[i] + p[i] * self.k for i in range(3))
+
+    def limb(self, a, b, r0, r1, n=10):
+        self.m.tube("statue", self.P(a), self.P(b), r0 * self.k, r1 * self.k, n)
+
+    def blob(self, c, rx, ry, rz):
+        self.m.blob("statue", self.P(c), rx * self.k, ry * self.k, rz * self.k)
+
+    def head(self, c):
+        self.limb((c[0], c[1], c[2] - 9), (c[0], c[1], c[2] - 4), 2.6, 2.4)   # neck
+        self.blob(c, 3.6, 4.2, 4.8)
+
+    def plate(self, pts, y, t=1.0):
+        # Thin plate through body points [(x, z)] at depth y (wings on hats and wands).
+        self.m.slab("statue", [(self.b[0] + x * self.k, self.b[2] + z * self.k) for x, z in pts],
+                    self.b[1] + (y - t / 2) * self.k, self.b[1] + (y + t / 2) * self.k)
+
+
+def statue_group():
+    """Glory of Commerce (Coutan, 1914) over the 42nd Street clock. Origin on the pedestal top
+    at the facade axis, facing -y. Mercury strides with his right arm flung out and the
+    caduceus raised in his left, an eagle's wings spread behind him; Hercules reclines on the
+    viewer's left, Minerva sits on the right with helmet and shield (photo:
+    42nd_Street_Facade_Grand_Central_Terminal_October_2025). About 48 ft high."""
+    m = Mesh()
+    # Mercury, 26 ft, on the clock surround's crown (19 ft), weight on his left leg.
+    f = Figure(m, (0, 2 * FT, 19 * FT), 26 * FT / 72)
+    f.blob((-5, -3, 2), 2.6, 5.5, 2)
+    f.blob((4, 1, 2), 2.6, 5.5, 2)
+    f.limb((-5, -2, 3), (-5, -4, 19), 2.6, 3.4)            # shins
+    f.limb((4, 1, 3), (4.5, 0, 19), 2.6, 3.4)
+    f.limb((-5, -4, 19), (-4, 0, 36), 3.8, 5.4)            # thighs
+    f.limb((4.5, 0, 19), (4, 0, 36), 3.8, 5.4)
+    f.blob((0, 0, 37), 8, 5, 6)                            # hips
+    f.limb((0, 0, 37), (0.5, 0, 52), 6.5, 8)               # torso
+    f.blob((0.5, -1, 50), 8.5, 5.5, 7.5)                   # chest
+    f.head((1, -0.5, 66))
+    f.limb((-2.5, -0.5, 69), (4.5, -0.5, 69), 4.4, 4.4, 12)   # petasos
+    for s in (-1, 1):
+        f.plate([(s * 3, 69), (s * 6, 71), (s * 10, 77)][::s], -0.5)   # its wings
+    f.limb((-8.5, 0, 55), (-20, -2, 60), 2.8, 2.2)         # right arm flung out
+    f.limb((-20, -2, 60), (-31, -3, 66), 2.2, 1.8)
+    f.blob((-33, -3, 67), 2, 1.2, 2.2)
+    f.limb((9, 0, 55), (13, -1, 44), 2.8, 2.2)             # left arm bent up to the caduceus
+    f.limb((13, -1, 44), (15, -3, 58), 2.2, 1.8)
+    f.limb((15, -3, 30), (15.5, -3, 84), 0.7, 0.7, 8)      # caduceus staff
+    f.blob((15.5, -3, 85), 1.6, 1.6, 1.6)
+    for s in (-1, 1):
+        f.plate([(15.5, 80), (15.5 + s * 5, 81), (15.5 + s * 6, 84)][::s], -3)
+        for z in (68, 74):                                 # serpent coils
+            f.blob((15.5 + s * 1.4, -3, z), 1.2, 1.2, 2.4)
+    f.blob((-6, 4, 46), 9, 3, 14)                          # cloak off the shoulder
+    # Eagle behind Mercury, wings spread up and out.
+    ey = 5 * FT
+    m.blob("statue", (0, ey, 21 * FT), 3 * FT, 3 * FT, 5 * FT)
+    m.blob("statue", (0, ey - 2 * FT, 27 * FT), 1.4 * FT, 1.8 * FT, 1.4 * FT)
+    for s in (-1, 1):
+        wing = [(3, 19), (8, 20), (14, 22), (13, 23), (18, 27), (16, 27), (19, 31), (17, 32), (9, 25), (2, 22)]
+        # Wing as a fan of convex quads from the shoulder so the slab stays convex.
+        for i in range(1, len(wing) - 2, 2):
+            q = [wing[0], wing[i], wing[i + 1], wing[i + 2]]
+            m.slab("statue", [(s * x * FT, z * FT) for x, z in (q if s < 0 else q[::-1])], ey - 8, ey + 8)
+    # Hercules, reclining on the left, propped on his left elbow, club along his side.
+    h = Figure(m, (-15 * FT, 0, 0), 30 * FT / 72)
+    h.blob((-2, 0, 22), 10, 7, 6)
+    h.limb((-2, 0, 22), (12, 0, 40), 7, 8.5)               # torso rising toward the centre
+    h.blob((10, -1, 37), 9, 6.5, 8)
+    h.head((17, -2, 53))
+    h.limb((-6, 0, 21), (-26, -6, 18), 5.5, 4)             # far leg stretched out
+    h.limb((-26, -6, 18), (-42, -8, 6), 4, 3)
+    h.limb((2, -2, 22), (-16, -12, 26), 5.5, 4.2)          # near leg drawn up
+    h.limb((-16, -12, 26), (-30, -14, 10), 4.2, 3)
+    h.limb((5, 2, 40), (0, 4, 28), 3.6, 3)                 # left arm propping
+    h.limb((19, -3, 41), (24, -8, 30), 3.6, 3)             # right arm on the knee
+    h.limb((-36, -10, 4), (24, -10, 28), 2, 3.4)           # club
+    h.blob((4, 5, 30), 14, 5, 7)                           # lion skin
+    # Minerva, seated on the right: robe over the knees, helmet and crest, shield at her side.
+    mi = Figure(m, (16 * FT, 0, 0), 30 * FT / 72)
+    rx, ry, _ = mi.P((6, -8, 0))
+    k = mi.k
+    m.lathe("statue", [(0, 0), (11 * k, 0), (10 * k, 4 * k), (9 * k, 14 * k), (7 * k, 20 * k), (0, 22 * k)], rx, ry, 0, 14)
+    mi.blob((0, 0, 22), 9, 7, 6)
+    mi.limb((0, 0, 22), (-4, 0, 40), 6.5, 7.5)             # torso leaning toward the centre
+    mi.blob((-4, -1, 37), 8, 6, 7.5)
+    mi.head((-7, -1, 53))
+    mi.limb((-9.5, -1, 57), (-1, -1, 57), 4.6, 4.6, 12)    # helmet
+    mi.limb((-7, 1, 58), (-7, 4, 63), 1.2, 3)              # crest
+    mi.limb((4, 0, 40), (14, -4, 34), 3.4, 2.8)            # right arm on the shield
+    mi.limb((-12, -1, 40), (-20, -6, 46), 3.4, 2.8)        # left arm toward Mercury
+    m.frame("statue", [(0, 0), (16 * k, 0), (16 * k, 2 * k), (6 * k, 4 * k), (0, 4 * k)],
+            mi.P((22, -2, 22)), (0, 1, 0), (0, 0, 1), (-1, 0, 0), 16)   # round shield
+    return m
+
+
+MODELS = {"statue_group": statue_group, "chandelier": chandelier, "vh_chandelier": vh_chandelier}
 
 
 def build():
