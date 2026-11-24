@@ -44,8 +44,10 @@ Updated: 2026-11-23
 
 - Arcade passages lit: cream walls and ceiling, amber glass doors (gcs/door_glow) in brass frames with transom, pendant lamp, warm lights; new camera arcade_west. shots/20261123-1829.
 
+- Balcony arcade: three 14x16 ft arched openings behind each balcony into lit passages (shared arcade_bay() in build_vmf.py); end windows now start at BALC_Z+20 ft; paired end columns stand on the balcony floor. New camera balc_arcade. shots/20261123-1836.
+
 ## Next
-0. Balcony-level arcade behind the balcony (real GCT) still missing.
+0. Compare east_balcony against refs/photos (compare.py) now that both arcade tiers exist; balcony arcade proportions are estimated.
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
 2. Booth glass is flat blue-grey; real booth has brass grilles and ticket windows.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
@@ -55,6 +57,7 @@ Updated: 2026-11-23
 ## Small rulings (flagged)
 - Zodiac constellations are simplified stick figures, not the real ceiling's figure drawings; band curves are stylised sinusoids.
 - Vault rise 40 ft, estimated from photos (check against the HABS section).
+- Balcony arcade 14x16 ft openings and window sill BALC_Z+20 ft are estimated from photos.
 - Flag placement (x=+24 ft, crown, 20x38 ft) and board size estimated, not measured.
 - Stairs placed at both ends with 12 u risers / 18 u treads.
 - Light levels (after surfaces v2): window point 45, window spot 225, booth 25, chandeliers 18, vault fill 10.

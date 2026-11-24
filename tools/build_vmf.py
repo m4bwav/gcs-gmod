@@ -18,6 +18,7 @@ WALL = 64
 BALC_Z = 26 * FT                            # balcony floor height
 BALC_D = 22 * FT                            # balcony depth from the end wall
 ARCH_W, ARCH_TOP, ARCH_D = 18 * FT, 21 * FT, 16 * FT   # floor arcade under each balcony
+BARCH_W, BARCH_H = 14 * FT, 16 * FT        # balcony-level arcade behind each balcony
 
 # src/materials/gcs: stock HL2 textures tinted to colours sampled from refs/photos.
 TEX_FLOOR = "gcs/floor"
@@ -164,6 +165,44 @@ def ent(cls, origin=None, solids="", **kv):
     return "entity\n{\n\t\"id\" \"%d\"\n%s%s}\n" % (nid(), body, solids)
 
 
+
+def arcade_bay(W, ents, sgn, xin, xout, c, z0, r, top, roof):
+    """One arched opening in an end wall (z0..top, half-width r) and its lit passage."""
+    xa, xb = sorted((xin, xout))
+    arc = halfdisc(c, top - r, r, 8)
+    for i in range(8):
+        corner = (c + r, top) if i < 4 else (c - r, top)
+        ents.append(ent("func_detail", solids=xprism(ccw([corner, arc[i], arc[i+1]]), xa, xb, TEX_WALL)))
+    # Cream archivolt proud of the wall, on cream jambs.
+    fa, fb = sorted((xin, xin - sgn*8))
+    outer, inner = halfdisc(c, top - r, r + 18), halfdisc(c, top - r, r)
+    for i in range(len(outer)-1):
+        ents.append(ent("func_detail", solids=xprism(ccw([outer[i], outer[i+1], inner[i+1], inner[i]]), fa, fb, TEX_CREAM)))
+    for y0 in (c - r - 18, c + r):
+        ents.append(ent("func_detail", solids=box(fa, y0, z0, fb, y0 + 18, top - r, TEX_CREAM)))
+    # Passage behind, sealed: warm cream corridor ending in lit glass doors with brass frames.
+    pa, pb = sorted((xout, xout + sgn*ARCH_D))
+    W(box(pa, c - r - WALL, z0 - WALL, pb, c + r + WALL, z0, TEX_FLOOR))
+    W(box(pa, c - r - WALL, top, pb, c + r + WALL, top + roof, TEX_CREAM))
+    W(box(pa, c - r - WALL, z0, pb, c - r, top, TEX_CREAM))
+    W(box(pa, c + r, z0, pb, c + r + WALL, top, TEX_CREAM))
+    xback = xout + sgn*ARCH_D
+    ba, bb = sorted((xback, xback + sgn*WALL))
+    W(box(ba, c - r - WALL, z0 - WALL, bb, c + r + WALL, top + WALL, TEX_DOOR))
+    # Brass door frames: posts, transom bar and a header panel over the doors.
+    fa2, fb2 = sorted((xback, xback - sgn*6))
+    for yy in (c - r, c - 3*FT, c + 3*FT - 6, c + r - 6, c - 6, c):
+        ents.append(ent("func_detail", solids=box(fa2, yy, z0, fb2, yy + 6, top, TEX_GRID)))
+    ents.append(ent("func_detail", solids=box(fa2, c - r, z0 + 8*FT, fb2, c + r, z0 + 8*FT + 6, TEX_GRID)))
+    ents.append(ent("func_detail", solids=box(fa2, c - r, z0 + 12*FT, fb2, c + r, top, TEX_CREAM)))
+    # Pendant lamp.
+    lx = sgn*(HX + WALL + ARCH_D//2)
+    ents.append(ent("func_detail", solids=box(lx - 1, c - 1, top - 30, lx + 1, c + 1, top, TEX_GOLD)))
+    ents.append(ent("func_detail", solids=box(lx - 8, c - 8, top - 44, lx + 8, c + 8, top - 30, TEX_BULB)))
+    ents.append(ent("light", (lx, c, top - 60), _light="255 205 140 40"))
+    ents.append(ent("light", (xback - sgn*24, c, z0 + 6*FT), _light="255 190 120 20"))
+
+
 def build():
     world, ents = [], []
     W = world.append
@@ -206,51 +245,23 @@ def build():
     W(box(-HX, HY, SPRING, HX, HY+WALL, SPRING+8, TEX_TRIM))
 
     # End walls with three tall arched windows (blockout: rectangular openings into glowing alcoves).
-    win_w, win_z0, win_z1 = 28*FT, BALC_Z + 6*FT, SPRING + 16*FT
+    win_w, win_z0, win_z1 = 28*FT, BALC_Z + 20*FT, SPRING + 16*FT
     centres = [-38*FT, 0, 38*FT]
     for sgn in (-1, 1):
         xin, xout = sgn*HX, sgn*(HX+WALL)
         xa, xb = min(xin, xout), max(xin, xout)
-        # Floor-level arcade under the balcony: three arched openings into short dark passages.
+        # Arcades: three arched openings under the balcony and three behind it, each into a
+        # short sealed passage. Wall bands between them are solid.
         W(box(xa, -HY, -WALL, xb, HY, 0, TEX_WALL))
-        W(box(xa, -HY, ARCH_TOP, xb, HY, win_z0, TEX_WALL))
-        aedges = [-HY] + [e for c in centres for e in (c-ARCH_W//2, c+ARCH_W//2)] + [HY]
-        for j in range(0, len(aedges), 2):
-            W(box(xa, aedges[j], 0, xb, aedges[j+1], ARCH_TOP, TEX_WALL))
-        for c in centres:
-            r = ARCH_W//2
-            arc = halfdisc(c, ARCH_TOP - r, r, 8)
-            for i in range(8):
-                corner = (c + r, ARCH_TOP) if i < 4 else (c - r, ARCH_TOP)
-                ents.append(ent("func_detail", solids=xprism(ccw([corner, arc[i], arc[i+1]]), xa, xb, TEX_WALL)))
-            # Cream archivolt proud of the wall, on cream jambs.
-            fa, fb = sorted((xin, xin - sgn*8))
-            outer, inner = halfdisc(c, ARCH_TOP - r, r + 18), halfdisc(c, ARCH_TOP - r, r)
-            for i in range(len(outer)-1):
-                ents.append(ent("func_detail", solids=xprism(ccw([outer[i], outer[i+1], inner[i+1], inner[i]]), fa, fb, TEX_CREAM)))
-            for y0 in (c - r - 18, c + r):
-                ents.append(ent("func_detail", solids=box(fa, y0, 0, fb, y0 + 18, ARCH_TOP - r, TEX_CREAM)))
-            # Passage behind, sealed: warm cream corridor ending in lit glass doors with brass frames.
-            pa, pb = sorted((xout, xout + sgn*ARCH_D))
-            W(box(pa, c - r - WALL, -WALL, pb, c + r + WALL, 0, TEX_FLOOR))
-            W(box(pa, c - r - WALL, ARCH_TOP, pb, c + r + WALL, ARCH_TOP + WALL, TEX_CREAM))
-            W(box(pa, c - r - WALL, 0, pb, c - r, ARCH_TOP, TEX_CREAM))
-            W(box(pa, c + r, 0, pb, c + r + WALL, ARCH_TOP, TEX_CREAM))
-            xback = xout + sgn*ARCH_D
-            ba, bb = sorted((xback, xback + sgn*WALL))
-            W(box(ba, c - r - WALL, -WALL, bb, c + r + WALL, ARCH_TOP + WALL, TEX_DOOR))
-            # Brass door frames: posts, transom bar and a header panel over the doors.
-            fa2, fb2 = sorted((xback, xback - sgn*6))
-            for yy in (c - r, c - 3*FT, c + 3*FT - 6, c + r - 6, c - 6, c):
-                ents.append(ent("func_detail", solids=box(fa2, yy, 0, fb2, yy + 6, ARCH_TOP, TEX_GRID)))
-            ents.append(ent("func_detail", solids=box(fa2, c - r, 8*FT, fb2, c + r, 8*FT + 6, TEX_GRID)))
-            ents.append(ent("func_detail", solids=box(fa2, c - r, 12*FT, fb2, c + r, ARCH_TOP, TEX_CREAM)))
-            # Pendant lamp.
-            lx = sgn*(HX + WALL + ARCH_D//2)
-            ents.append(ent("func_detail", solids=box(lx - 1, c - 1, ARCH_TOP - 30, lx + 1, c + 1, ARCH_TOP, TEX_GOLD)))
-            ents.append(ent("func_detail", solids=box(lx - 8, c - 8, ARCH_TOP - 44, lx + 8, c + 8, ARCH_TOP - 30, TEX_BULB)))
-            ents.append(ent("light", (lx, c, ARCH_TOP - 60), _light="255 205 140 40"))
-            ents.append(ent("light", (xback - sgn*24, c, 6*FT), _light="255 190 120 20"))
+        W(box(xa, -HY, ARCH_TOP, xb, HY, BALC_Z, TEX_WALL))
+        W(box(xa, -HY, BALC_Z + BARCH_H, xb, HY, win_z0, TEX_WALL))
+        for z0, aw, ah in ((0, ARCH_W, ARCH_TOP), (BALC_Z, BARCH_W, BARCH_H)):
+            top = z0 + ah
+            aedges = [-HY] + [e for c in centres for e in (c-aw//2, c+aw//2)] + [HY]
+            for j in range(0, len(aedges), 2):
+                W(box(xa, aedges[j], z0, xb, aedges[j+1], top, TEX_WALL))
+            for c in centres:
+                arcade_bay(W, ents, sgn, xin, xout, c, z0, aw//2, top, min(WALL, BALC_Z - ARCH_TOP) if z0 == 0 else WALL)
         W(box(xa, -HY, win_z1, xb, HY, CROWN+WALL, TEX_WALL))
         edges = [-HY] + [e for c in centres for e in (c-win_w//2, c+win_w//2)] + [HY]
         for j in range(0, len(edges), 2):
@@ -290,9 +301,9 @@ def build():
         for py in (-19*FT, 19*FT):
             for dy in (-3*FT, 3*FT):
                 y = py + dy
-                ents.append(ent("func_detail", solids=box(xc0, y-18, BALC_Z+42, xc1, y+18, SPRING-64, TEX_CREAM)))
+                ents.append(ent("func_detail", solids=box(xc0, y-18, BALC_Z, xc1, y+18, SPRING-64, TEX_CREAM)))
                 ents.append(ent("func_detail", solids=box(xc0, y-24, SPRING-64, xc1, y+24, SPRING-40, TEX_GOLD)))
-                ents.append(ent("func_detail", solids=box(xc0, y-24, BALC_Z+42, xc1, y+24, BALC_Z+60, TEX_TRIM)))
+                ents.append(ent("func_detail", solids=box(xc0, y-24, BALC_Z, xc1, y+24, BALC_Z+18, TEX_TRIM)))
         # The great end arch: a deep soffit following the vault, gilded on its inner edge.
         e = lambda dy, dz, a: (round((HY-dy)*math.cos(a)), round(SPRING + (VRISE-dz)*math.sin(a)))
         for i in range(N):

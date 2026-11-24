@@ -19,3 +19,4 @@
 - 2026-11-23: End walls v2 (wider windows, paired engaged columns), clean compile, shots/20261123-1821. Compare vs photos: next gaps are the balcony arcade, coffered arch soffit and brick-like ashlar.
 - 2026-11-23: End-wall floor arcade + coffered soffit + bigger ashlar (SCALE 0.5, soft joints). Clean compile, shots/20261123-1826; ashlar no longer reads like brick.
 - 2026-11-23: Arcade passages now warm lit corridors with amber brass-framed doors (gcs/door_glow, pendant lamp); clean compile, shots/20261123-1829 (arcade_west camera).
+- 2026-11-23: Balcony-level arcade (arcade_bay() shared with the floor arcade), windows raised to BALC_Z+20 ft, end columns grounded on the balcony. Clean compile, shots/20261123-1836 (balc_arcade camera).
