@@ -100,6 +100,8 @@ Updated: 2026-11-23
 
 - Zodiac figure drawings: tools/make_vault.py SHAPES draws a silhouette per sign (ram with curled horn, bull, twins, crab, lion with mane, robed virgin, scales, curled scorpion, centaur archer, goat-fish, water bearer with urn, two fish on a cord), gold outline and faint wash under the constellation. shots/20261123-2120/vault_up.jpg.
 
+- Frame rate: tools/lua/gcs_shots.lua logs average fps per camera (frames 31-89) to fps.txt, copied into each shots/ folder. shots/20261123-2122: 146-147 fps at every camera on the RTX 5060 Ti, flat, so it is a frame cap (vsync or fps_max), not the map's limit. Wide margin over the 60 fps bar; a mid-range check (fps_max 0, mat_vsync 0, or a weaker GPU) is still open.
+
 ## Next
 - FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
