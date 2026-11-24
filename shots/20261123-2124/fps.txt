@@ -1,0 +1,11 @@
+west_balcony    718 fps
+floor_east      676 fps
+booth           737 fps
+clock           734 fps
+board           746 fps
+flag            783 fps
+vault_up        779 fps
+east_balcony    745 fps
+stairs_west     824 fps
+arcade_west     888 fps
+balc_arcade     896 fps

@@ -102,6 +102,8 @@ Updated: 2026-11-23
 
 - Frame rate: tools/lua/gcs_shots.lua logs average fps per camera (frames 31-89) to fps.txt, copied into each shots/ folder. shots/20261123-2122: 146-147 fps at every camera on the RTX 5060 Ti, flat, so it is a frame cap (vsync or fps_max), not the map's limit. Wide margin over the 60 fps bar; a mid-range check (fps_max 0, mat_vsync 0, or a weaker GPU) is still open.
 
+- Uncapped fps: `UNCAP=1 sh tools/shots.sh` adds +fps_max 0 +mat_vsync 0. shots/20261123-2124: 676-896 fps (worst floor_east), so even a GPU at a fifth of the 5060 Ti clears 100 fps. Budget is not a concern at this detail level.
+
 ## Next
 - FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
