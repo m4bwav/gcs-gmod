@@ -64,3 +64,5 @@
 - Mark signed off ("release it, link modwright, acknowledge models and images, fix everything"). Last open gap done: chandelier bulbs are now brush globes (3 octagonal slices) plus a 10 u bottom globe; shots/20261123-2134.
 - Workshop item 3845077025, public: gmad + gmpublish create (build/, gitignored), then tools/workshop_update.py (ctypes on GMod's bin/win64/steam_api64.dll, SteamUGC v021) set description (workshop/description.txt), 5 previews and visibility. gmpublish cannot set descriptions or visibility; this script can.
 - Gap for modwright: no Garry's Mod publish route documented (gmad/gmpublish/steam_api updater). Fold tools/workshop_update.py into modwright next session.
+
+- 2026-11-23: tools/make_map.py draws docs/level-map.png (top-down plan from the VMF, chest-height brush footprints, spawns). README shows 10 final shots + map; Workshop 3845077025 now has 11 previews incl. the map. AddItemPreviewFile appends; it does not replace.

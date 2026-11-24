@@ -8,10 +8,21 @@ A Garry's Mod map of the Main Concourse of Grand Central Terminal in New York, b
 
 The map is written as VMF text by a Python script, not drawn in Hammer. Every custom texture (the zodiac vault, the marble floor, the ashlar, the clock face, the departure board) is drawn procedurally by a script in `tools/`, with colours sampled from openly licensed photos of the real building.
 
+Screenshots from release 0.1.0 (shots/20261123-2134):
+
 | | |
 |---|---|
-| ![West balcony](docs/west_balcony.jpg) | ![Zodiac vault](docs/vault_up.jpg) |
-| ![Booth clock](docs/clock.jpg) | ![Departure board](docs/board.jpg) |
+| ![East balcony](docs/east_balcony.jpg) | ![West balcony](docs/west_balcony.jpg) |
+| ![Concourse floor](docs/floor_east.jpg) | ![Zodiac vault](docs/vault_up.jpg) |
+| ![Information booth](docs/booth.jpg) | ![Booth clock](docs/clock.jpg) |
+| ![Departure board](docs/board.jpg) | ![Flag](docs/flag.jpg) |
+| ![West stairs](docs/stairs_west.jpg) | ![West arcade](docs/arcade_west.jpg) |
+
+### Level map
+
+![Rough plan of the Main Concourse](docs/level-map.png)
+
+Drawn from the map source by `tools/make_map.py`: walls and fixtures at chest height, balconies in light tone, red dots for the two spawns.
 
 ## What's in it
 
