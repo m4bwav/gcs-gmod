@@ -59,3 +59,8 @@
 - 2026-11-23: UNCAP=1 option in tools/shots.sh; uncapped fps 676-896 per camera (shots/20261123-2124). Sign-off set still unanswered, wiki repo still absent.
 - 2026-11-23: Mark saved the wiki's first page; pushed docs/wiki/ to the wiki, live check 6 pages 0 failures. Public-repo milestone done. Sign-off set still unanswered.
 - 2026-11-23: Sign-off set still unanswered (page up at 127.0.0.1:62012). No map work this pass: remaining items are optional polish, so the session stopped to wait on Mark.
+
+## 2026-11-23 release 0.1.0
+- Mark signed off ("release it, link modwright, acknowledge models and images, fix everything"). Last open gap done: chandelier bulbs are now brush globes (3 octagonal slices) plus a 10 u bottom globe; shots/20261123-2134.
+- Workshop item 3845077025, public: gmad + gmpublish create (build/, gitignored), then tools/workshop_update.py (ctypes on GMod's bin/win64/steam_api64.dll, SteamUGC v021) set description (workshop/description.txt), 5 previews and visibility. gmpublish cannot set descriptions or visibility; this script can.
+- Gap for modwright: no Garry's Mod publish route documented (gmad/gmpublish/steam_api updater). Fold tools/workshop_update.py into modwright next session.
