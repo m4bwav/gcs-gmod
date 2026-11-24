@@ -95,6 +95,7 @@ def _oysterbar_uv(n):
 
 
 FACEUV = {"gcs/facade_win": lambda n: ("[1 0 0 0] 0.375", "[0 0 -1 0] 0.5625"), "gcs/inscription": lambda n: _ext_uv(n, "ins"), "gcs/clock_out": lambda n: _ext_uv(n, "clock"),
+          "gcs/pershing": lambda n: _ext_uv(n, "pershing"),
           "gcs/oysterbar": _oysterbar_uv, "gcs/board": _board_uv, "gcs/flag": _flag_uv, "gcs/tickets": _tickets_uv}
 
 
@@ -634,9 +635,18 @@ WIN_SP = WIN_Z0 + 60 * FT - WIN_HW          # arch springline: windows 60 ft tal
 PAIRS = (-116 * FT, -40 * FT, 40 * FT, 116 * FT)
 VIA_X0, VIA_X1 = FX0, FX0 + 34 * FT         # Park Avenue Viaduct deck
 CLK_R, CLK_Z = 78, RZ + 15 * FT             # 13 ft clock
+PX0, PX1 = VIA_X0 - 6 * FT, VIA_X1 + 6 * FT  # Pershing Square portal under the tower across 42nd St
+PZ = TER_Z + 20 * FT                        # portal head
+PD = 90 * FT                                # depth of the pocket behind it
+PY0 = YS - PD                               # pocket back wall face
 
 
 def _ext_uv(n, which):
+    if which == "pershing":
+        su, sv = 40 * FT / 1024, 3 * FT / 64
+        if n[1] > 0.5:
+            return "[-1 0 0 %g] %g" % ((PX0 + PX1) / 2 / su + 512, su), "[0 0 -1 %g] %g" % ((PZ + 5 * FT) / sv, sv)
+        return None
     if n[1] > -0.5:
         return None
     if which == "ins":
@@ -677,9 +687,10 @@ def exterior(W, ents):
     for y in (ym - 8, ym + 4):
         det(box(EX0, y, -8, EX1, y + 4, -7, "gcs/plat_edge"))
     # Towers: across the street (glass, pale precast, glass), at both street ends, beside the terminal.
-    for x0, x1, tex in ((EX0, FCX - 70 * FT, "gcs/office"), (FCX - 70 * FT, FCX + 60 * FT, "gcs/metlife"),
-                        (FCX + 60 * FT, EX1, "gcs/office")):
+    for x0, x1, tex in ((EX0, PX0, "gcs/office"), (PX1, FCX - 70 * FT, "gcs/office"),
+                        (FCX - 70 * FT, FCX + 60 * FT, "gcs/metlife"), (FCX + 60 * FT, EX1, "gcs/office")):
         W(box(x0, YS - WALL, -WALL, x1, YS, SKYZ, tex))
+    W(box(PX0, YS - WALL, PZ, PX1, YS, SKYZ, "gcs/office"))
     W(box(EX0 - WALL, YS - WALL, -WALL, EX0, YF + RN + WALL, SKYZ, "gcs/office"))
     W(box(EX1, YS - WALL, -WALL, EX1 + WALL, YF + RN + WALL, SKYZ, "gcs/office"))
     W(box(EX0, YF, -WALL, FX0, YF + RN + WALL, SKYZ, "gcs/office"))
@@ -766,8 +777,8 @@ def exterior(W, ents):
     for x in (VIA_X0 + 4, VIA_X1 - 4):
         det(box(x - 3, ya, TER_Z + 38, x + 3, yb, TER_Z + 42, "gcs/bronze"))
         det(box(x - 1, ya, TER_Z, x + 1, yb, TER_Z + 38, "gcs/vh_grille"))
-    det(box(VIA_X0 + 16, YS, TER_Z, VIA_X1 - 16, YS + 2, TER_Z + 12 * FT, TEX_DOOR))
     ents.append(ent("light", ((VIA_X0 + VIA_X1) // 2, YS + 100, TER_Z + 8 * FT), _light="255 215 160 60"))
+    pershing(W, ents, det)
     # Street lamps along the north kerb.
     for k in range(-3, 4):
         x, y = FCX + k * 60 * FT + 30 * FT, YF - SW + 24
@@ -783,6 +794,55 @@ def exterior(W, ents):
     ents.append(ent("env_cubemap", ((VIA_X0 + VIA_X1) // 2, YF - 50 * FT, TER_Z + 6 * FT)))
     ents.append(ent("func_brush", solids="".join(decor), targetname="ext_decor", Solidity="2",
                     disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
+# Pershing Square portal (2026-11-24): the viaduct runs on south through a stone-framed opening
+# in the building across 42nd Street and ramps down toward Pershing Square; under the deck at
+# street level the Pershing Square Cafe's lit storefront. A pocket 90 ft deep, sealed at the
+# far end by a dark tunnel mouth (photo: Park_Avenue_Viaduct_Pershing_Square, estimates).
+def pershing(W, ents, det):
+    STONE, BRICK = "gcs/facade_stone", "gcs/wall"
+    cx = (VIA_X0 + VIA_X1) // 2
+    # Pocket shell: floor, side walls, ceiling, back wall.
+    W(box(PX0, PY0, -WALL, PX1, YS, 0, "gcs/sidewalk"))
+    W(box(PX0 - WALL, PY0 - WALL, -WALL, PX0, YS - WALL, PZ + WALL, BRICK))
+    W(box(PX1, PY0 - WALL, -WALL, PX1 + WALL, YS - WALL, PZ + WALL, BRICK))
+    W(box(PX0, PY0, PZ, PX1, YS - WALL, PZ + WALL, "gcs/coffer"))
+    W(box(PX0, PY0 - WALL, -WALL, PX1, PY0, PZ, BRICK))
+    # Deck ramps down 10 ft from the street bridge to the back wall (1:9).
+    zt = lambda y: round(TER_Z - 10 * FT * (YS - y) / PD)
+    W(xprism(ccw([(PY0, zt(PY0) - 4 * FT), (YS, TER_Z - 4 * FT), (YS, TER_Z), (PY0, zt(PY0))]), VIA_X0, VIA_X1, "gcs/sidewalk"))
+    for x0, x1 in ((VIA_X0 - 10, VIA_X0), (VIA_X1, VIA_X1 + 10)):
+        det(xprism(ccw([(PY0, zt(PY0) - 2 * FT), (YS, TER_Z - 2 * FT), (YS, TER_Z), (PY0, zt(PY0))]), x0, x1, "gcs/gold"))
+        det(xprism(ccw([(PY0, zt(PY0) + 36), (YS, TER_Z + 36), (YS, TER_Z + 42), (PY0, zt(PY0) + 42)]), x0, x1, "gcs/bronze"))
+    # Dark tunnel mouth over the deck end, lamps either side.
+    det(box(VIA_X0 + 2 * FT, PY0, zt(PY0), VIA_X1 - 2 * FT, PY0 + 4, zt(PY0) + 14 * FT, "gcs/shed_dark"))
+    for x in (VIA_X0 + FT, VIA_X1 - FT):
+        det(prism(ngon(x, PY0 + 12, 8, 8), zt(PY0) + 15 * FT, zt(PY0) + 16 * FT, TEX_BULB))
+    ents.append(ent("light", (cx, PY0 + 6 * FT, zt(PY0) + 12 * FT), _light="255 220 170 70"))
+    # Wall lamps over the ramp: brass bracket globes on both side walls, a warm light each.
+    for k in range(3):
+        y = YS - (k + 1) * PD // 4
+        for x, s in ((PX0, 1), (PX1, -1)):
+            det(box(min(x, x + s * 16), y - 4, PZ - 8 * FT, max(x, x + s * 16), y + 4, PZ - 8 * FT + 6, "gcs/gold"))
+            det(prism(ngon(x + s * 20, y, 7, 8), PZ - 8 * FT - 10, PZ - 8 * FT + 4, TEX_BULB))
+            ents.append(ent("light", (x + s * 40, y, PZ - 9 * FT), _light="255 215 160 50"))
+    # Pershing Square Cafe under the deck: lit glass storefront in brass frames, a bronze sign band.
+    zf = zt(PY0) - 4 * FT - 16
+    det(box(PX0 + 4 * FT, PY0, 0, PX1 - 4 * FT, PY0 + 2, zf - 3 * FT, TEX_DOOR))
+    for k in range(7):
+        x = PX0 + 4 * FT + (PX1 - PX0 - 8 * FT) * k // 6
+        det(box(x - 4, PY0, 0, x + 4, PY0 + 6, zf - 3 * FT, "gcs/gold"))
+    det(box(PX0 + 4 * FT, PY0, zf - 3 * FT, PX1 - 4 * FT, PY0 + 6, zf - 3 * FT + 10, "gcs/gold"))
+    for k in range(3):
+        ents.append(ent("light", (PX0 + (PX1 - PX0) * (k + 1) // 4, PY0 + 6 * FT, zf - 4 * FT), _light="255 200 140 45"))
+    # Portal surround on the tower face: stone jambs, lintel with the bronze PERSHING SQUARE band, cornice.
+    for x0, x1 in ((PX0 - 4 * FT, PX0), (PX1, PX1 + 4 * FT)):
+        det(box(x0, YS, 0, x1, YS + 12, PZ, STONE))
+    det(box(PX0 - 4 * FT, YS, PZ, PX1 + 4 * FT, YS + 12, PZ + 7 * FT, STONE))
+    det(box(cx - 20 * FT, YS + 12, PZ + 2 * FT, cx + 20 * FT, YS + 14, PZ + 5 * FT, "gcs/pershing"))
+    det(box(PX0 - 6 * FT, YS, PZ + 7 * FT, PX1 + 6 * FT, YS + 24, PZ + 8 * FT, STONE))
+    ents.append(ent("env_cubemap", (cx, YS - PD // 2, TER_Z + 6 * FT)))
 
 
 def ngon_xz(cx, cz, r, n):
@@ -930,7 +990,7 @@ def build():
 
     # Sealed outer hull (nodraw) so the interior can't leak while geometry is rough.
     O = 256
-    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, YS - 2*WALL - 128, SH_Y1+WALL+64, SKYZ+WALL+64
+    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, PY0 - 2*WALL - 128, SH_Y1+WALL+64, SKYZ+WALL+64
     X0, X1 = min(X0, EX0 - 2*WALL - 128), max(X1, EX1 + 2*WALL + 128)
     ZB = LOW_Z - 2*WALL - 64
     W(box(X0, Y0, ZB, X1, Y1, ZB+64, NODRAW))

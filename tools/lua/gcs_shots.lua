@@ -52,6 +52,9 @@ local CAMS = {
   { "ext_terrace",  Vector(1300, -2316, 352), Angle(0, 180, 0) },
   { "eagle",        Vector(1100, -3300, 600), Angle(-44, 69, 0) },
   { "taxis",        Vector(-1200, -2700, 140), Angle(-10, -40, 0) },
+  { "pershing",     Vector(-2076, -3100, 352), Angle(-4, -90, 0) },
+  { "pershing_ramp", Vector(-2076, -3700, 330), Angle(0, -90, 0) },
+  { "pershing_in",  Vector(-2076, -3900, 64), Angle(-2, -90, 0) },
 }
 if want ~= "go" then
   local keep, set = {}, {}
@@ -71,7 +74,8 @@ hook.Add("PostRender", "gcs_shots", function()
   frames = frames + 1
   if frames > 30 then ft = ft + RealFrameTime() end
   if frames < 90 then return end
-  fpslog[#fpslog + 1] = string.format("%-14s %4.0f fps", cam[1], 59 / math.max(ft, 1e-4))
+  fpslog[#fpslog + 1] = string.format("%-14s %4.0f fps%s", cam[1], 59 / math.max(ft, 1e-4),
+    bit.band(util.PointContents(cam[2]), CONTENTS_SOLID) ~= 0 and "  CAMERA IN SOLID" or "")
   ft = 0
   local data = render.Capture({ format = "jpg", quality = 92, x = 0, y = 0, w = ScrW(), h = ScrH() })
   file.Write("gcs_shots/" .. cam[1] .. ".jpg", data)

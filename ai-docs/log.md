@@ -83,3 +83,4 @@
 - 2026-11-24: Glory of Commerce figures are now models/gcs/statue_group.mdl, built procedurally in make_models.py. A prop at angles 0 0 0 came out turned 90 deg: studiomdl maps SMD +x to model +y, so the prop uses yaw -90. Worktree ../gcs-gmod-statue.
 
 - 2026-11-24: eagle and taxi models (make_models.py) placed on the facade corners and 42nd Street; clean full compile, shots/20261124-0917.
+- 2026-11-24: Pershing Square portal built (viaduct pocket, ramp, cafe). Geometry beyond the map's nodraw outer hull (build_vmf.py build(): X0/X1/Y0/Y1) gets cut off into its own vbsp area and renders as sky from outside, black inside, with no leak reported: grow the hull bounds when an area extends the map. Diagnosed by reading the BSP leaf lump (area bits) after r_novis and a no-vvis build changed nothing. Worktree ../gcs-gmod-pershing.

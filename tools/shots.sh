@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 D="$G/garrysmod/data"
 echo 4000 > "$G/steam_appid.txt"
 cp tools/lua/gcs_shots.lua "$G/garrysmod/lua/autorun/client/gcs_shots.lua"
-EXTRA=""; [ -n "$UNCAP" ] && EXTRA="+fps_max 0 +mat_vsync 0"
+EXTRA=""; [ -n "$UNCAP" ] && EXTRA="+fps_max 0 +mat_vsync 0" ; EXTRA="$EXTRA $GARGS"   # GARGS: extra launch args, e.g. "+sv_cheats 1 +mat_fullbright 1"
 mkdir -p "$D"; rm -rf "$D/gcs_shots"; echo "${CAMS:-go}" > "$D/gcs_shots_go.txt"
 "$G/gmod.exe" -windowed -w 1600 -h 900 -novid -nojoy -condebug $EXTRA +map gm_grand_central &
 for n in $(seq 1 60); do [ -f "$D/gcs_shots/done.txt" ] && break; sleep 5; done

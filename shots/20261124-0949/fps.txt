@@ -1,0 +1,4 @@
+ext_viaduct     146 fps
+pershing        146 fps
+pershing_ramp   147 fps
+pershing_in     147 fps
