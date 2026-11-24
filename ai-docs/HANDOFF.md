@@ -86,6 +86,8 @@ Updated: 2026-11-23
 
 - Ticket-hall lamps: brass bracket lamp with a glowing globe on each ticket-window pier (13), dim warm light each (8). shots/20261123-2031/board.jpg.
 
+- Balconies: cream marble parapets with a brass handrail, cream balcony slabs and stair treads (were grey stock trim). shots/20261123-2041/east_balcony.jpg.
+
 ## Next
 - FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
