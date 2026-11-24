@@ -1,6 +1,6 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.3.0 released 2026-11-24: Vanderbilt Hall; Workshop 3845077025, GitHub v0.3.0)
+Status: in progress (0.4.0 released 2026-11-24: track platforms; Workshop 3845077025, GitHub v0.4.0)
 Updated: 2026-11-24
 
 - Prompt: plans/2026-11-23-gcs-gmod-continue-prompt.md
@@ -119,7 +119,9 @@ Updated: 2026-11-24
 - vbsp limit hit: the world model is at the t-junction index cap ("Too many t-junctions", 65536). New areas put their decor in ONE func_brush per area (vanderbilt(): decor list -> func_brush vh_decor), not func_detail. Do the same for every later area.
 - tools/package.sh: one-command release (`sh tools/package.sh "note" [previews...]`, DRY=1 builds the .gma only) after tools/compile.sh.
 - Vanderbilt Hall detail pass 1 (2026-11-24): windows 16x36 ft, dark glass (gcs/vh_glass) behind a dark-green iron grid and frame (gcs/vh_grille); chandeliers bigger (rings r 54/40/26) under a tall bronze cage (8 bars, gold bands, gcs/bronze) on a chain; moulded cream panel with gold bead on both end walls; `vanderbilt` camera on the hall axis, new `vh_chand`. Clean full compile, shots/20261124-0806 (vh.jpg). No release (detail only).
-- NEXT: area 4, the track platforms through the east landing hall doors (refs and plan first). Optional Vanderbilt polish later: ceiling has big rosette panels and deep beams, not small coffers; pilasters between windows.
+- Release 0.4.0 (2026-11-24): area 4, upper-level track platforms. Three gates (12x12 ft, brass frames, TRACK 29/30/31 signs from make_board.py track_signs, FACEUV _sign_uv) in the concourse north wall at the bay centres x=-660/0/660 lead to a 170x300x18 ft shed (build_vmf.py platforms(), GATES/SH_*/PLATS/PITS/TRACKS): three island platforms (gcs/plat_tile, yellow gcs/plat_edge), six tracks in ballast pits 4 ft deep with rails and bumpers, brass railing round the pit ends, steel columns and beams (gcs/steel), white strips (gcs/fluor), three stainless cars (gcs/train, train_steel.vtf); the car west of Track 30 has two open doors and benches. Decor in func_brush plat_decor. Cameras gate, plat_head, plat_long, car_door, car_in; `python tools/compare.py shots/<stamp> plat`. Clean full compile, shots/20261124-0820. make_map.py panels now size to their own level.
+- NEXT: area 5, the exterior: 42nd Street facade (Glory of Commerce group and clock) through the Vanderbilt vestibule doors, Park Avenue Viaduct, Midtown skybox (refs and plan first). The east landing hall doors (lower level) stay sealed; lower-level tracks are an area-6 extra.
+- Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
 - Wiki is live (notes/2026-11-23-github-wiki.md); update it from docs/wiki/ when the map changes.
@@ -130,6 +132,7 @@ Updated: 2026-11-24
 5. Hammer++ for hand checks (optional).
 
 ## Small rulings (flagged)
+- Platforms (2026-11-24): put at concourse level north of the north wall (the real upper level), not behind the east landing hall doors HANDOFF had named; shed 300 ft long (real ~800 ft), 18 ft high, platforms 20 ft wide, track numbers 29-31 chosen, not the real ones at those gates.
 - Vanderbilt Hall size 200x64x56 ft, passage in the concourse's west bay, hall floor level with the concourse (real one slightly higher, reached by a slope): estimates.
 - Lower level at -22 ft, ramps 1:6 (real ones gentler and longer), gallery 50 ft square, Oyster Bar 96x80 ft, dining hall 167x100 ft: estimates, no measured plan yet. Only the west ramps so far.
 - Licence: code in tools/ is MIT; map source, generated textures and screenshots are CC BY-SA 4.0 (matches the BY-SA reference photos). README banner is Z-Image Turbo seed 11, labelled as AI art, not an in-game shot.

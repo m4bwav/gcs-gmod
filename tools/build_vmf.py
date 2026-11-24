@@ -629,13 +629,148 @@ def vanderbilt(W, ents):
                     disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
+# Upper-level track platforms (area 4). Three gates in the concourse north wall (bay centres)
+# lead through short passages to a low dark train shed; tracks run north, three island
+# platforms (rose tile, yellow edge), riveted steel columns, fluorescent strips; a Metro-North
+# car stands open on the track west of the centre platform (photos: Grand_Central_Station_tracks,
+# Metro_North_M7a_Rainbow_Heart_Sticker_Grand_Central).
+GATES = ((-660, 29), (0, 30), (660, 31))   # gate x, track number on the sign
+GATE_W, GATE_H = 12 * FT, 12 * FT
+SH_Y0 = HY + WALL + 8 * FT                 # shed south face
+SH_Y1 = SH_Y0 + 300 * FT                   # 300 ft of platform (real ones run ~800 ft)
+SH_X = 85 * FT                             # shed half-width
+SH_H = 18 * FT
+PIT = 4 * FT                               # rail head below platform
+HEAD = 20 * FT                             # cross-platform strip at the platform heads
+PLATS = ((-780, -540), (-120, 120), (540, 780))
+PITS = ((-SH_X, -780), (-540, -120), (120, 540), (780, SH_X))
+TRACKS = (-900, -474, -186, 186, 474, 900)
+CAR_X = (-246, -126)                       # walk-in car on track -186, 10 ft wide
+CAR_Y0 = SH_Y0 + HEAD + 5 * FT
+CAR_L = 85 * FT
+
+
+def _sign_uv(gx):
+    def uv(n):
+        su, sv = 96/512, 24/128
+        if n[1] < -0.5:
+            return "[1 0 0 %g] %g" % (-(gx - 48)/su, su), "[0 0 -1 %g] %g" % (180/sv, sv)
+    return uv
+
+
+for _gx, _n in GATES:
+    FACEUV["gcs/track%d" % _n] = _sign_uv(_gx)
+
+
+def platforms(W, ents):
+    # Decor goes into one func_brush (world model is at vbsp's t-junction cap).
+    decor = []
+    det = decor.append
+    T_TILE, T_EDGE, T_DARK, T_STEEL = "gcs/plat_tile", "gcs/plat_edge", "gcs/shed_dark", "gcs/steel"
+    # Shed shell: walls, dark ceiling, head strip, platforms, ballast pits.
+    W(box(-SH_X, SH_Y0, SH_H, SH_X, SH_Y1, SH_H + WALL, T_DARK))
+    W(box(-SH_X - WALL, SH_Y0, -PIT - WALL, -SH_X, SH_Y1, SH_H + WALL, T_DARK))
+    W(box(SH_X, SH_Y0, -PIT - WALL, SH_X + WALL, SH_Y1, SH_H + WALL, T_DARK))
+    W(box(-SH_X - WALL, SH_Y1, -PIT - WALL, SH_X + WALL, SH_Y1 + WALL, SH_H + WALL, T_DARK))
+    W(box(-SH_X, SH_Y0, -PIT - WALL, SH_X, SH_Y0 + HEAD, 0, T_TILE))
+    for x0, x1 in PLATS:
+        W(box(x0, SH_Y0 + HEAD, -PIT - WALL, x1, SH_Y1, 0, T_TILE))
+    for x0, x1 in PITS:
+        W(box(x0, SH_Y0 + HEAD, -PIT - WALL, x1, SH_Y1, -PIT, "gcs/ballast"))
+    # South wall of the shed and the gate passages through the concourse north wall.
+    edges = [-SH_X - WALL] + [e for gx, _ in GATES for e in (gx - GATE_W//2, gx + GATE_W//2)] + [SH_X + WALL]
+    for j in range(0, len(edges), 2):
+        W(box(edges[j], HY + WALL, -WALL, edges[j + 1], SH_Y0, SH_H + WALL, TEX_CREAM))
+    for gx, n in GATES:
+        g0, g1 = gx - GATE_W//2, gx + GATE_W//2
+        W(box(g0, HY + WALL, GATE_H, g1, SH_Y0, SH_H + WALL, TEX_CREAM))
+        W(box(g0, HY, -WALL, g1, SH_Y0, 0, TEX_FLOOR))
+        ents.append(ent("light", (gx, (HY + SH_Y0)//2, GATE_H - 30), _light="255 215 160 25"))
+        # Brass gate frame and TRACK sign on the concourse face; the same sign hangs in the shed.
+        det(box(g0 - 10, HY - 4, 0, g0, HY, GATE_H + 10, TEX_GOLD))
+        det(box(g1, HY - 4, 0, g1 + 10, HY, GATE_H + 10, TEX_GOLD))
+        det(box(g0, HY - 4, GATE_H, g1, HY, GATE_H + 10, TEX_GOLD))
+        det(box(gx - 48, HY - 3, 156, gx + 48, HY, 180, "gcs/track%d" % n))
+        sy = SH_Y0 + HEAD + 2 * FT
+        det(box(gx - 48, sy, 156, gx + 48, sy + 3, 180, "gcs/track%d" % n))
+        det(box(gx - 50, sy - 1, 180, gx + 50, sy + 4, 184, T_STEEL))
+        det(box(gx - 2, sy, 184, gx + 2, sy + 3, SH_H, T_STEEL))
+    # Brass railing round the pit ends, bumpers and rails.
+    for x0, x1 in PITS:
+        y = SH_Y0 + HEAD
+        det(box(x0, y - 2, 40, x1, y + 2, 44, TEX_GOLD))
+        det(box(x0, y - 2, 20, x1, y + 2, 22, TEX_GOLD))
+        for x in range(x0 + 4, x1, 48):
+            det(box(x - 1, y - 1, 0, x + 1, y + 1, 40, TEX_GOLD))
+    for t in TRACKS:
+        det(box(t - 40, SH_Y0 + HEAD, -PIT, t + 40, SH_Y0 + HEAD + 24, -12, T_STEEL))
+        for r in (-30, 26):
+            det(box(t + r, SH_Y0 + HEAD + 24, -PIT, t + r + 4, SH_Y1, -PIT + 6, T_STEEL))
+    # Yellow edges, steel columns (platform centres and between paired tracks), cross beams,
+    # fluorescent strips with cool lights.
+    for x0, x1 in PLATS:
+        det(box(x0, SH_Y0 + HEAD, 0, x0 + 24, SH_Y1, 1, T_EDGE))
+        det(box(x1 - 24, SH_Y0 + HEAD, 0, x1, SH_Y1, 1, T_EDGE))
+    beams = range(SH_Y0 + 30 * FT, SH_Y1, 30 * FT)
+    for y in beams:
+        det(box(-SH_X, y - 8, SH_H - 20, SH_X, y + 8, SH_H, T_STEEL))
+        for cx, z0 in ((-660, 0), (0, 0), (660, 0), (-330, -PIT), (330, -PIT)):
+            det(box(cx - 8, y - 8, z0, cx + 8, y + 8, SH_H - 20, T_STEEL))
+    for x0, x1 in PLATS:
+        cx = (x0 + x1) // 2
+        for y in beams:
+            for ox in (-60, 60):
+                det(box(cx + ox - 4, y + 40, SH_H - 28, cx + ox + 4, y + 30 * FT - 40, SH_H - 22, "gcs/fluor"))
+        for y in range(SH_Y0 + HEAD + 15 * FT, SH_Y1, 40 * FT):
+            ents.append(ent("light", (cx, y, SH_H - 50), _light="235 240 255 45"))
+        ents.append(ent("env_cubemap", (cx, SH_Y0 + 60 * FT, 64)))
+    for y in range(SH_Y0 + 40 * FT, SH_Y1, 80 * FT):
+        for x in (-330, 330, -900, 900):
+            ents.append(ent("light", (x, y, SH_H - 60), _light="200 210 230 12"))
+    # Metro-North cars: a walk-in car on track -186 with two open doors on the platform
+    # side, benches and lights; a closed car coupled behind it and another on track 474.
+    cx0, cx1 = CAR_X
+    T_TR = "gcs/train"
+
+    def car(x0, x1, y0, y1, doors):
+        det(box(x0, y0, -PIT + 8, x1, y1, 0, T_TR))                         # underframe
+        det(box(x0 + 4, y0 + 4, 0, x1 - 4, y1 - 4, 1, "gcs/car_floor"))      # floor
+        det(box(x0, y0, 150, x1, y1, 162, T_TR))                            # roof
+        det(box(x0, y0, 0, x1, y0 + 4, 150, T_TR))                          # ends
+        det(box(x0, y1 - 4, 0, x1, y1, 150, T_TR))
+        for wx0, wx1, dd in ((x0, x0 + 4, ()), (x1 - 4, x1, doors)):
+            cuts = [y0 + 4] + [e for d in dd for e in (d - 36, d + 36)] + [y1 - 4]
+            for j in range(0, len(cuts), 2):
+                a, b = cuts[j], cuts[j + 1]
+                det(box(wx0, a, 0, wx1, b, 62, T_TR))
+                det(box(wx0, a, 62, wx1, b, 96, "gcs/vh_glass"))
+                det(box(wx0, a, 96, wx1, b, 150, T_TR))
+            for d in dd:
+                det(box(wx0, d - 36, 88, wx1, d + 36, 150, T_TR))
+    d1, d2 = CAR_Y0 + CAR_L // 4, CAR_Y0 + 3 * CAR_L // 4
+    car(cx0, cx1, CAR_Y0, CAR_Y0 + CAR_L, (d1, d2))
+    car(cx0, cx1, CAR_Y0 + CAR_L + 24, CAR_Y0 + 2 * CAR_L + 24, ())
+    car(414, 534, CAR_Y0 + 10 * FT, CAR_Y0 + 10 * FT + CAR_L, ())
+    for y in range(CAR_Y0 + 60, CAR_Y0 + CAR_L - 40, 54):
+        if any(abs(y - d) < 60 for d in (d1, d2)):
+            continue
+        for bx0, bx1 in ((cx0 + 4, cx0 + 44), (cx1 - 44, cx1 - 4)):
+            det(box(bx0, y, 1, bx1, y + 20, 18, "gcs/vh_grille"))
+            det(box(bx0, y + 20, 1, bx1, y + 26, 36, "gcs/vh_grille"))
+    for y in (CAR_Y0 + 200, CAR_Y0 + CAR_L // 2, CAR_Y0 + CAR_L - 200):
+        det(box(-190, y - 100, 146, -182, y + 100, 150, "gcs/fluor"))
+        ents.append(ent("light", (-186, y, 120), _light="235 240 255 18"))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="plat_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
 def build():
     world, ents = [], []
     W = world.append
 
     # Sealed outer hull (nodraw) so the interior can't leak while geometry is rough.
     O = 256
-    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, VH_Y0-2*WALL-VS_D-128, HY+WALL+64, CROWN+WALL+64
+    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, VH_Y0-2*WALL-VS_D-128, SH_Y1+WALL+64, CROWN+WALL+64
     ZB = LOW_Z - 2*WALL - 64
     W(box(X0, Y0, ZB, X1, Y1, ZB+64, NODRAW))
     W(box(X0, Y0, Z1, X1, Y1, Z1+64, NODRAW))
@@ -656,7 +791,13 @@ def build():
     W(box(VH_PX0, -HY-WALL, VH_PH, VH_PX1, -HY, SPRING, TEX_WALL))
     W(box(VH_PX0, -HY-WALL, -WALL, VH_PX1, -HY, 0, TEX_FLOOR))
     vanderbilt(W, ents)
-    W(box(-HX, HY, -WALL, HX, HY+WALL, SPRING, TEX_WALL))
+    # North wall, cut by the three track gates.
+    gedges = [-HX] + [e for gx, _ in GATES for e in (gx - GATE_W//2, gx + GATE_W//2)] + [HX]
+    for j in range(0, len(gedges), 2):
+        W(box(gedges[j], HY, -WALL, gedges[j+1], HY+WALL, SPRING, TEX_WALL))
+    for gx, _ in GATES:
+        W(box(gx - GATE_W//2, HY, GATE_H, gx + GATE_W//2, HY+WALL, SPRING, TEX_WALL))
+    platforms(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
     # The inner faces carry the zodiac mural (2048x1024) once: u along x, v along the arc.

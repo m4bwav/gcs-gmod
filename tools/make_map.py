@@ -44,13 +44,16 @@ for pts, tex in solids:
     if lo <= -18*FT <= hi: low.append(xy)   # lower level (floor -22 ft), cut at chest height
 allx = [x for h in floor + low for x, _ in h]; ally = [y for h in floor + low for _, y in h]
 x0, x1, y0, y1 = min(allx), max(allx), min(ally), max(ally)
-W = 1600; s = (W - 120) / (x1 - x0); PH = int((y1 - y0) * s) + 90; H = 2 * PH + 220
+W = 1600; s = (W - 120) / (x1 - x0)
+yr = lambda ps: (min(y for h in ps for _, y in h), max(y for h in ps for _, y in h))
+(ya0, ya1), (yb0, yb1) = yr(floor), yr(low)   # each panel is as tall as its own level
+PH1, PH2 = int((ya1 - ya0) * s) + 90, int((yb1 - yb0) * s) + 90; H = PH1 + PH2 + 220
 img = Image.new("RGB", (W, H), (246, 240, 226)); d = ImageDraw.Draw(img)
 try: f, fb = ImageFont.truetype("arial.ttf", 22), ImageFont.truetype("arialbd.ttf", 34)
 except OSError: f = fb = ImageFont.load_default()
 
-def panel(top, polys, faint, title, labels, spawns=()):
-    P = lambda x, y: (60 + (x - x0) * s, top + 40 + (y1 - y) * s)   # north (+y) up
+def panel(top, ytop, PH, polys, faint, title, labels, spawns=()):
+    P = lambda x, y: (60 + (x - x0) * s, top + 40 + (ytop - y) * s)   # north (+y) up
     d.text((60, top), title, fill=(60, 45, 30), font=f)
     for gx in range(0, int((x1-x0)/FT)+1, 50):
         X = P(x0 + gx*FT, 0)[0]; d.line((X, top + 36, X, top + PH - 10), fill=(214, 204, 186))
@@ -61,14 +64,15 @@ def panel(top, polys, faint, title, labels, spawns=()):
     for lbl, x, y in labels:
         cx, cy = P(x, y); w = d.textlength(lbl, font=f); d.rectangle((cx-w/2-6, cy-16, cx+w/2+6, cy+14), fill=(255, 255, 255)); d.text((cx-w/2, cy-13), lbl, fill=(30, 30, 30), font=f)
 
-d.text((60, 30), "gm_grand_central: Main Concourse, Vanderbilt Hall and lower level (rough plan)", fill=(40, 30, 20), font=fb)
+d.text((60, 30), "gm_grand_central: rough plan of both levels", fill=(40, 30, 20), font=fb)
 d.text((60, 78), f"dark = walls and fixtures at chest height, light = balcony level   |   grid 50 ft   |   {round((x1-x0)/FT)} x {round((y1-y0)/FT)} ft   |   N up", fill=(80, 70, 60), font=f)
 cx0 = -1650  # concourse west wall
-panel(130, floor, balc, "Main Concourse level (0 ft)",
+panel(130, ya1, PH1, floor, balc, "Main Concourse level (0 ft)",
       (("Information booth", 0, 0), ("Ticket windows (south)", 0, -600), ("Flag (north centre bay)", 0, 600),
        ("West balcony + stairs", cx0 + 360, 0), ("East balcony + stairs", -cx0 - 360, 0), ("Ramp wells", -1300, 390), ("Ramp wells", 1300, 390),
-       ("Vanderbilt Hall", -360, -1456), ("Passage", -1302, -930), ("42nd St doors", -360, -2050)), spawn)
-panel(130 + PH, low, (), "Lower level (-22 ft): ramps, Whispering Gallery, Oyster Bar, dining concourse, east landing hall",
+       ("Vanderbilt Hall", -360, -1456), ("Passage", -1302, -930), ("42nd St doors", -360, -2050),
+       ("Track gates", 0, 830), ("Track platforms (shed)", 0, 2600), ("Metro-North cars", -186, 1900)), spawn)
+panel(130 + PH1, yb1, PH2, low, (), "Lower level (-22 ft): ramps, Whispering Gallery, Oyster Bar, dining concourse, east landing hall",
       (("Dining concourse", 0, 0), ("Ramps", -2000, 390), ("Ramps", -2000, -390), ("Corridor", -1700, 0),
        ("Ramps", 2000, 390), ("Ramps", 2000, -390), ("Corridor", 1850, 0), ("East landing hall", 2924, 0),
        ("Whispering Gallery", -2984, 0), ("Oyster Bar", -3950, 0)))

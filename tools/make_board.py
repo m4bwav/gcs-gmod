@@ -145,7 +145,44 @@ def oysterbar():
     save(img, "oysterbar")
 
 
+def track_signs():
+    # 512x128 black gate signs with white serif-less "TRACK nn" (photo: Grand_Central_Station_tracks).
+    for n in (29, 30, 31):
+        W, H = 512, 128
+        img = Image.new("RGB", (W, H), (22, 22, 24))
+        d = ImageDraw.Draw(img)
+        d.rectangle([0, 0, W-1, H-1], outline=(150, 150, 150), width=4)
+        word, p = "TRACK %d" % n, 9
+        x0 = W/2 - (len(word)*6 - 1)*p/2
+        for k, ch in enumerate(word):
+            if ch == " ":
+                continue
+            for cy, bits in enumerate(int(b, 16) for b in FONT[ch].split()):
+                for cx in range(5):
+                    if bits >> (4 - cx) & 1:
+                        px, py = x0 + (k*6 + cx)*p, 32 + cy*p
+                        d.rectangle([px, py, px + p - 1, py + p - 1], fill=(240, 238, 228))
+        save(img, "track%d" % n)
+
+
+def train_steel():
+    # 512x512 stainless car side: brushed grey with fine horizontal streaks, riveted vertical
+    # panel seams every 128 px (photo: Metro_North_M7a_Rainbow_Heart_Sticker_Grand_Central).
+    rng = np.random.default_rng(3)
+    a = 178 + rng.normal(0, 6, (512, 1)) + rng.normal(0, 3, (512, 512))
+    a = np.clip(a, 0, 255)
+    img = Image.fromarray(np.dstack([a, a + 2, a + 6]).clip(0, 255).astype(np.uint8))
+    d = ImageDraw.Draw(img)
+    for x in range(0, 512, 128):
+        d.line([(x, 0), (x, 511)], fill=(120, 122, 126), width=2)
+        for y in range(8, 512, 32):
+            d.ellipse([x + 5, y, x + 8, y + 3], fill=(150, 152, 156))
+    save(img, "train_steel")
+
+
 board()
 flag()
 tickets()
 oysterbar()
+track_signs()
+train_steel()

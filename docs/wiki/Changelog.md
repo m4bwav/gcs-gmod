@@ -1,3 +1,10 @@
+## 0.4.0 (2026-11-24)
+
+- Upper-level track platforms, north of the concourse, through three brass-framed gates in the north wall signed TRACK 29, 30 and 31.
+- A 170 x 300 ft train shed, 18 ft high: three island platforms in rose tile with yellow edges, six tracks in ballast with bumpers and a brass railing round the track ends, riveted steel columns and beams, fluorescent strips.
+- Three stainless Metro-North cars; the one beside Track 30 stands with two doors open and benches inside.
+- The level map labels the gates and the platforms.
+
 ## 0.3.0 (2026-11-24)
 
 - Vanderbilt Hall, south of the concourse, reached by a passage through the west bay of the south wall.
