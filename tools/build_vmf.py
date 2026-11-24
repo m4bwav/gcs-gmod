@@ -461,6 +461,16 @@ def build():
     for k in range(-6, 7):
         x = k*16*FT
         ents.append(ent("func_detail", solids=box(x-6*FT, -HY+0, 0, x-5*FT, -HY+3*FT, 14*FT, TEX_TRIM)))
+        if k < 6:
+            # Each window: cream marble counter with a brass top, brass-grilled dim glass, cream lintel.
+            w0, w1 = x-5*FT, x+11*FT
+            ents.append(ent("func_detail", solids=box(w0, -HY, 0, w1, -HY+2*FT, 3.5*FT, TEX_CREAM)))
+            ents.append(ent("func_detail", solids=box(w0, -HY, 3.5*FT, w1, -HY+2*FT+3, 3.5*FT+2, TEX_GOLD)))
+            ents.append(ent("func_detail", solids=box(w0, -HY, 3.5*FT+2, w1, -HY+4, 10*FT, TEX_DIM)))
+            for gx in range(int(w0)+12, int(w1)-11, 12):
+                ents.append(ent("func_detail", solids=box(gx-1, -HY+4, 3.5*FT+2, gx+1, -HY+7, 10*FT, TEX_GOLD)))
+            ents.append(ent("func_detail", solids=box(w0, -HY, 10*FT, w1, -HY+2*FT, 11*FT, TEX_GOLD)))
+            ents.append(ent("func_detail", solids=box(w0, -HY, 11*FT, w1, -HY+18, 14*FT, TEX_CREAM)))
     ents.append(ent("func_detail", solids=box(-100*FT, -HY, 14*FT, 100*FT, -HY+4*FT, 16*FT, TEX_TRIM)))
     bx0, bx1, bz0, bz1 = BOARD
     det([(bx0, -HY), (bx1, -HY), (bx1, -HY+16), (bx0, -HY+16)], bz0, bz1, "gcs/board", TEX_GOLD)
