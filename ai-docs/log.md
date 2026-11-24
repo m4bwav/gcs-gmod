@@ -35,3 +35,4 @@
 - 2026-11-23: Departure board got a real 5x7 dot-matrix font (was random clusters); BOARDING clipped the frame at status column 900, now 860. Clean full compile, shots/20261123-1943. Sign-off set still unanswered.
 - 2026-11-23: Sign-off set still unanswered. Sourced-dimension check (Wikipedia/secondary only; LoC searches gave photos, no HABS section): vault base 121.5 / crown 160.25 ft datum gives springline ~86 ft, rise ~38.75, matching SPRING 85 / VRISE 40. Logged in refs/concourse-dimensions.md.
 - 2026-11-23: Created private m4bwav/gcs-gmod and pushed main (there was never a remote; pass 23's 'push failed' was a misreport). Sessions push main after each merge.
+- 2026-11-23: Sign-off set still unanswered. Lunette relief: alternating proud voussoirs and a keystone per hood. Clean full compile, shots/20261123-1949.

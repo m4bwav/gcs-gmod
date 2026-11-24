@@ -70,9 +70,11 @@ Updated: 2026-11-23
 
 - Board lettering: make_board.py draws a real 5x7 dot-matrix font (round LEDs, unlit cells faint); legible in shots/20261123-1943/board.jpg.
 
+- Lunette relief: alternate voussoirs of the middle hood ring stand 6 u proud, cream keystone at each crown. shots/20261123-1949.
+
 ## Next
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
-1. Zodiac figures have outlines now; real animal/human drawings would be the next step. Lunette hoods could get relief carving (normal map or more steps).
+1. Zodiac figures have outlines now; real animal/human drawings would be the next step. Lunette hoods have voussoirs and keystones; garland carving would be a normal map.
 2. Booth interior is in; could add clerks' props or brighter interior light.
 3. Measured references: secondary-source check done (refs/concourse-dimensions.md, 2026-11-23): vault springline/rise agree with the build. Still open: a real HABS NY-5450 section or LPC report for balcony, sill and lunette heights; flag may be ~48 ft long (ours 38 ft), end windows maybe 33x60 ft (ours 26 ft wide, taller).
 4. Chandeliers could become a polywright model with globes later.

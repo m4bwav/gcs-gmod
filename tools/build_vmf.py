@@ -367,7 +367,12 @@ def build():
                 fa, fb = inset(d0, d1)
                 outer, inner = halfdisc(cx, SPRING, r1*FT), halfdisc(cx, SPRING, r0*FT)
                 for i in range(len(outer)-1):
-                    ents.append(ent("func_detail", solids=yprism([outer[i], outer[i+1], inner[i+1], inner[i]], fa, fb, tex)))
+                    # Carved relief: alternate voussoirs of the middle ring stand 6 u proud.
+                    a, b = inset(d0, d1 + 6) if r0 == 19 and i % 2 == 0 else (fa, fb)
+                    ents.append(ent("func_detail", solids=yprism([outer[i], outer[i+1], inner[i+1], inner[i]], a, b, tex)))
+            # Keystone at the crown of the hood.
+            ka, kb = inset(92, 118)
+            ents.append(ent("func_detail", solids=box(cx - 2*FT, ka, SPRING + 15*FT, cx + 2*FT, kb, SPRING + 25*FT, TEX_CREAM)))
             ra, rb = inset(92, 96)
             for j in (-2, -1, 0, 1, 2):
                 top = SPRING + int(16*FT*math.sqrt(1 - (j*6/16)**2)) - 4
