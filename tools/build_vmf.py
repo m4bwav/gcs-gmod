@@ -596,31 +596,11 @@ def vanderbilt(W, ents):
     det(box(ex - 30, cy - 9 * FT, 13 * FT, ex - 6, cy + 9 * FT, 15 * FT, TEX_CREAM))
     det(box(ex - 36, cy - 9 * FT, 15 * FT, ex - 6, cy + 9 * FT, 15 * FT + 4, TEX_GOLD))
     det(xprism(ccw([(cy - 4 * FT, 15 * FT + 4), (cy + 4 * FT, 15 * FT + 4), (cy, 20 * FT)]), ex - 26, ex - 6, TEX_CREAM))
-    # Five chandeliers down the centre: chain from a ceiling rosette, a tall bronze cage, then three
-    # rings of glowing bulbs narrowing downward to a finial (photo: GCT_Vanderbilt_hall_chandeliers).
+    # Five chandeliers down the centre: models/gcs/vh_chandelier.mdl from tools/make_models.py.
     for k in range(5):
         x = VH_X0 + (2 * k + 1) * (VH_X1 - VH_X0) // 10
         zc = VH_H - 30 * FT
-        cage0, cage1 = zc + 34, zc + 13 * FT
-        det(prism(ngon(x, cy, 30, 12, math.pi / 12), VH_H - 4, VH_H, TEX_CREAM))   # ceiling rosette
-        det(prism(ngon(x, cy, 2, 6), cage1 + 18, VH_H - 4, "gcs/bronze"))          # chain
-        det(prism(ngon(x, cy, 10, 8, math.pi / 8), cage1, cage1 + 18, TEX_GOLD))     # crown collar
-        det(prism(ngon(x, cy, 4, 8, math.pi / 8), cage0, cage1, "gcs/bronze"))       # stem inside the cage
-        for i in range(8):
-            a = i * math.pi / 4
-            bx, by = x + int(round(16 * math.cos(a))), cy + int(round(16 * math.sin(a)))
-            det(prism(ngon(bx, by, 2, 4), cage0, cage1, "gcs/bronze"))               # cage bars
-        for z, r in ((cage1 - 10, 16), (cage0 + 3 * FT, 22), (cage0, 30)):
-            det(prism(ngon(x, cy, r, 12, math.pi / 12), z - 4, z, TEX_GOLD))         # cage bands
-        for r, z in ((54, zc + 24), (40, zc), (26, zc - 24)):
-            det(prism(ngon(x, cy, r, 12, math.pi / 12), z - 4, z, "gcs/bronze"))
-            det(prism(ngon(x, cy, r - 10, 12, math.pi / 12), z, z + 6, TEX_GOLD))
-            ring = ngon(x, cy, r + 2, 12, math.pi / 12)
-            inner = ngon(x, cy, r - 10, 12, math.pi / 12)
-            for i in range(12):
-                det(prism(ccw([ring[i], ring[(i + 1) % 12], inner[(i + 1) % 12], inner[i]]), z, z + 6, TEX_BULB))
-        det(prism(ngon(x, cy, 10, 8, math.pi / 8), zc - 30, zc + 30, "gcs/bronze"))   # bowl core
-        det(prism(ngon(x, cy, 6, 8, math.pi / 8), zc - 52, zc - 30, TEX_GOLD))       # finial
+        ents.append(ent("prop_static", (x, cy, zc), model="models/gcs/vh_chandelier.mdl", angles="0 0 0", solid="0", disableshadows="1", disablevertexlighting="0"))
         ents.append(ent("light", (x, cy, zc - 90), _light="255 220 170 45"))
     ents.append(ent("light", ((VH_X0 + VH_X1) // 2, cy, VH_H - 60), _light="255 225 180 15"))
     ents.append(ent("env_cubemap", ((VH_X0 + VH_X1) // 2, cy, 160)))

@@ -27,6 +27,8 @@ CHAND_Z = 32 * FT               # chandelier body height above the concourse flo
 VMTS = {
     "gold": '"VertexLitGeneric"\n{\n\t"$basetexture" "stone/stonewall033a"\n\t"$color2" "[1.25 0.95 0.45]"\n'
             '\t"$envmap" "env_cubemap"\n\t"$envmaptint" "[0.25 0.2 0.1]"\n\t"$surfaceprop" "metal"\n}\n',
+    "bronze": '"VertexLitGeneric"\n{\n\t"$basetexture" "metal/metalwall001a"\n\t"$color2" "[0.45 0.33 0.18]"\n'
+              '\t"$envmap" "env_cubemap"\n\t"$envmaptint" "[0.25 0.2 0.12]"\n\t"$surfaceprop" "metal"\n}\n',
     "bulb": '"UnlitGeneric"\n{\n\t"$basetexture" "lights/white002"\n\t"$color2" "[1.0 0.86 0.6]"\n\t"$model" "1"\n}\n',
 }
 
@@ -91,7 +93,37 @@ def chandelier():
     return m
 
 
-MODELS = {"chandelier": chandelier}
+VH_TOP = 30 * FT   # Vanderbilt Hall: ceiling above the chandelier centre (VH_H - zc in build_vmf.py)
+
+
+def vh_chandelier():
+    """Vanderbilt Hall chandelier, origin at the middle bulb ring: chain from a ceiling rosette,
+    a tall bronze cage of eight bars with gold bands, then three rings of globes narrowing
+    downward round a bronze bowl core to a gold finial (photo: GCT_Vanderbilt_hall_chandeliers)."""
+    m = Mesh()
+    cage0, cage1 = 34, 13 * FT
+    m.cyl("gold", 0, 0, 30, VH_TOP - 4, VH_TOP, 24)                 # ceiling rosette
+    m.cyl("bronze", 0, 0, 2, cage1 + 18, VH_TOP - 4, 8)              # chain
+    m.lathe("gold", [(0, cage1), (10, cage1), (12, cage1 + 9), (10, cage1 + 18), (0, cage1 + 18)], 0, 0, 0, 16)
+    m.cyl("bronze", 0, 0, 4, cage0, cage1, 8)                        # stem
+    for i in range(8):
+        a = i * math.pi / 4
+        m.cyl("bronze", 16 * math.cos(a), 16 * math.sin(a), 1.5, cage0, cage1 - 10, 6)   # cage bars
+    for z, r in ((cage1 - 10, 16), (cage0 + 3 * FT, 22), (cage0, 30)):
+        m.cyl("gold", 0, 0, r + 1, z - 4, z, 24)                     # cage bands
+    for r, z in ((54, 24), (40, 0), (26, -24)):
+        m.lathe("bronze", [(r - 10, z - 4), (r + 2, z - 4), (r + 2, z), (r - 10, z)], 0, 0, 0, 24)
+        m.cyl("gold", 0, 0, r - 10, z - 4, z + 3, 24)
+        k = max(10, int(r / 3.2))
+        for i in range(k):
+            t = 2 * math.pi * i / k
+            m.sphere("bulb", r * math.cos(t), r * math.sin(t), z + 5, 4.5, 5)
+    m.lathe("bronze", [(0, -30), (8, -26), (12, 0), (10, 30), (0, 30)], 0, 0, 0, 16)   # bowl core
+    m.lathe("gold", [(0, -54), (3, -50), (6, -40), (5, -30), (0, -30)], 0, 0, 0, 12)   # finial
+    return m
+
+
+MODELS = {"chandelier": chandelier, "vh_chandelier": vh_chandelier}
 
 
 def build():
