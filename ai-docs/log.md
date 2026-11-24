@@ -66,3 +66,4 @@
 - Gap for modwright: no Garry's Mod publish route documented (gmad/gmpublish/steam_api updater). Fold tools/workshop_update.py into modwright next session.
 
 - 2026-11-23: tools/make_map.py draws docs/level-map.png (top-down plan from the VMF, chest-height brush footprints, spawns). README shows 10 final shots + map; Workshop 3845077025 now has 11 previews incl. the map. AddItemPreviewFile appends; it does not replace.
+- 2026-11-23: Mark raised the chain to 30 sessions: chain_loop pid 227140 (20) is followed by a 10-session run, log ai-docs/chain-loop-extra.log.
