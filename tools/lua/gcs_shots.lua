@@ -54,6 +54,9 @@ local CAMS = {
   { "taxis",        Vector(-1200, -2700, 140), Angle(-10, -40, 0) },
   { "pershing",     Vector(-2076, -3100, 352), Angle(-4, -90, 0) },
   { "pershing_ramp", Vector(-2076, -3700, 330), Angle(0, -90, 0) },
+  { "bilt_door",    Vector(-1320, 600, 72), Angle(-2, 90, 0) },
+  { "biltmore",     Vector(-1560, 940, 90), Angle(-10, 70, 0) },
+  { "bilt_board",   Vector(-1360, 1200, 100), Angle(-4, 90, 0) },
   { "pershing_in",  Vector(-2076, -3900, 64), Angle(-2, -90, 0) },
 }
 if want ~= "go" then

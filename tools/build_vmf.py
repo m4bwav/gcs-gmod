@@ -984,6 +984,103 @@ def platforms(W, ents):
                     disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
+# The Biltmore Room (area 6 extra): the old arrival room off the concourse's northwest corner
+# (photos: Biltmore_Room_at_Grand_Central_Terminal, MTA_Reopens_Biltmore_Room, the schedule board
+# and clock). Cream marble walls and floor, a beamed and coffered ceiling, dentil cornice, the
+# old arrivals board (dark glass in a brass frame) on the north wall, brass sconces, and a railed
+# well where the escalators go down (sealed). Reached through a doorway in the concourse north wall.
+BD0, BD1, BD_H = -1404, -1236, 16 * FT      # doorway through the concourse north wall (14 ft)
+BX0, BX1 = -1600, -1120                     # room 40 x 80 ft (estimate), clear of the shed
+BY0, BY1 = HY + WALL + 8 * FT, HY + WALL + 88 * FT
+BH = 30 * FT
+
+
+def biltmore(W, ents):
+    decor = []
+    det = decor.append
+    T_DARK = "gcs/vh_glass"
+    # Floor with a railed well (10 x 20 ft, 8 ft deep) for the escalators.
+    wx0, wx1, wy0, wy1 = -1420, -1300, 1240, 1480
+    for b in ((BX0, BY0, BX1, wy0), (BX0, wy1, BX1, BY1), (BX0, wy0, wx0, wy1), (wx1, wy0, BX1, wy1)):
+        W(box(b[0], b[1], -WALL, b[2], b[3], 0, TEX_CREAM))
+    W(box(wx0, wy0, -96 - WALL, wx1, wy1, -96, T_DARK))
+    for b in ((wx0 - 16, wy0, wx0, wy1), (wx1, wy0, wx1 + 16, wy1)):
+        W(box(b[0], b[1], -96 - WALL, b[2], b[3], 0, TEX_CREAM))
+    for b in ((wx0 - 16, wy0 - 16, wx1 + 16, wy0), (wx0 - 16, wy1, wx1 + 16, wy1 + 16)):
+        W(box(b[0], b[1], -96 - WALL, b[2], b[3], 0, TEX_CREAM))
+    # Shell: cream marble walls and ceiling.
+    W(box(BX0, BY0, BH, BX1, BY1, BH + WALL, TEX_CREAM))
+    W(box(BX0 - WALL, BY0 - WALL, -WALL, BX0, BY1 + WALL, BH + WALL, TEX_CREAM))
+    W(box(BX1, BY0 - WALL, -WALL, BX1 + WALL, BY1 + WALL, BH + WALL, TEX_CREAM))
+    W(box(BX0, BY1, -WALL, BX1, BY1 + WALL, BH + WALL, TEX_CREAM))
+    W(box(BX0, BY0 - WALL, -WALL, BD0, BY0, BH + WALL, TEX_CREAM))
+    W(box(BD1, BY0 - WALL, -WALL, BX1, BY0, BH + WALL, TEX_CREAM))
+    W(box(BD0, BY0 - WALL, BD_H, BD1, BY0, BH + WALL, TEX_CREAM))
+    # Passage from the concourse.
+    W(box(BD0, HY, -WALL, BD1, BY0, 0, TEX_FLOOR))
+    W(box(BD0 - WALL, HY + WALL, -WALL, BD0, BY0 - WALL, BD_H + WALL, TEX_CREAM))
+    W(box(BD1, HY + WALL, -WALL, BD1 + WALL, BY0 - WALL, BD_H + WALL, TEX_CREAM))
+    W(box(BD0, HY + WALL, BD_H, BD1, BY0 - WALL, BD_H + WALL, TEX_CREAM))
+    ents.append(ent("light", ((BD0 + BD1) // 2, (HY + BY0) // 2, BD_H - 30), _light="255 215 160 25"))
+    # Square marble door frames with a gold edge on both faces.
+    for ya, yb in ((HY - 12, HY), (BY0, BY0 + 12)):
+        for x0, x1 in ((BD0 - 30, BD0), (BD1, BD1 + 30)):
+            det(box(x0, ya, 0, x1, yb, BD_H, TEX_CREAM))
+        det(box(BD0 - 30, ya, BD_H, BD1 + 30, yb, BD_H + 30, TEX_CREAM))
+        det(box(BD0 - 30, ya, BD_H + 30, BD1 + 30, yb, BD_H + 34, TEX_GOLD))
+    # Brass railing round the well.
+    for b in ((wx0 - 16, wy0 - 16, wx1 + 16, wy0 - 12), (wx0 - 16, wy1 + 12, wx1 + 16, wy1 + 16),
+              (wx0 - 16, wy0 - 12, wx0 - 12, wy1 + 12), (wx1 + 12, wy0 - 12, wx1 + 16, wy1 + 12)):
+        det(box(b[0], b[1], 36, b[2], b[3], 40, TEX_GOLD))
+    for x in range(wx0 - 16, wx1 + 17, 24):
+        for y in (wy0 - 16, wy1 + 12):
+            det(box(x, y, 0, x + 3, y + 4, 36, TEX_GOLD))
+    for y in range(wy0, wy1 + 1, 24):
+        for x in (wx0 - 16, wx1 + 12):
+            det(box(x, y, 0, x + 4, y + 3, 36, TEX_GOLD))
+    # Beamed ceiling: deep cross beams every 16 ft and a long beam each side, cream with a gold soffit line.
+    for y in range(BY0 + 192, BY1 - 1, 192):
+        det(box(BX0, y - 12, BH - 30, BX1, y + 12, BH, TEX_CREAM))
+        det(box(BX0, y - 4, BH - 31, BX1, y + 4, BH - 30, TEX_GOLD))
+    for x in (BX0 + 160, BX1 - 160):
+        det(box(x - 10, BY0, BH - 20, x + 10, BY1, BH, TEX_CREAM))
+    # Dentil cornice and a marble dado round the room.
+    for d, z0, z1, tex in ((20, BH - 24, BH, TEX_CREAM), (14, BH - 30, BH - 24, TEX_GOLD)):
+        det(box(BX0, BY0, z0, BX1, BY0 + d, z1, tex))
+        det(box(BX0, BY1 - d, z0, BX1, BY1, z1, tex))
+        det(box(BX0, BY0 + d, z0, BX0 + d, BY1 - d, z1, tex))
+        det(box(BX1 - d, BY0 + d, z0, BX1, BY1 - d, z1, tex))
+    for x in range(BX0 + 24, BX1 - 23, 12):
+        for y0, y1 in ((BY0 + 14, BY0 + 18), (BY1 - 18, BY1 - 14)):
+            det(box(x, y0, BH - 36, x + 6, y1, BH - 30, TEX_CREAM))
+    # The arrivals board: dark glass in a brass frame with three brass mullions, north wall.
+    cx, bw, z0, z1 = (BX0 + BX1) // 2, 15 * FT, 8 * FT, 17 * FT
+    det(box(cx - bw, BY1 - 4, z0, cx + bw, BY1, z1, T_DARK))
+    for x in (cx - bw - 6, cx - bw // 2 - 2, cx - 2, cx + bw // 2 - 2, cx + bw):
+        det(box(x, BY1 - 8, z0, x + (6 if abs(x - cx) > bw else 4), BY1 - 4, z1, TEX_GOLD))
+    for z in (z0 - 6, z1):
+        det(box(cx - bw - 6, BY1 - 8, z, cx + bw + 6, BY1 - 4, z + 6, TEX_GOLD))
+    det(box(cx - bw - 12, BY1 - 14, z0 - 14, cx + bw + 12, BY1, z0 - 6, TEX_CREAM))
+    # Brass sconces with glowing globes on the long walls, a lamp each side of the board.
+    sc = [(BX0, y, 1) for y in range(BY0 + 96, BY1 - 95, 192)] + [(BX1, y, -1) for y in range(BY0 + 96, BY1 - 95, 192)]
+    for xw, y, s in sc:
+        xa, xb = sorted((xw, xw + s * 14))
+        det(box(xa, y - 3, 108, xb, y + 3, 150, TEX_GOLD))
+        ga, gb = sorted((xw + s * 8, xw + s * 20))
+        det(box(ga, y - 6, 150, gb, y + 6, 162, TEX_BULB))
+        ents.append(ent("light", (xw + s * 40, y, 140), _light="255 215 165 22"))
+    for x in (cx - bw - 30, cx + bw + 18):
+        det(box(x, BY1 - 14, 150, x + 12, BY1, 162, TEX_BULB))
+    # Ceiling lights between the beams.
+    for y in range(BY0 + 96, BY1, 192):
+        for x in (BX0 + 80, (BX0 + BX1) // 2, BX1 - 80):
+            det(box(x - 12, y - 12, BH - 2, x + 12, y + 12, BH, TEX_BULB))
+        ents.append(ent("light", ((BX0 + BX1) // 2, y, BH - 60), _light="255 228 190 30"))
+    ents.append(ent("env_cubemap", ((BX0 + BX1) // 2, (BY0 + BY1) // 2, 120)))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="bilt_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
 def build():
     world, ents = [], []
     W = world.append
@@ -1014,12 +1111,14 @@ def build():
     vanderbilt(W, ents)
     exterior(W, ents)
     # North wall, cut by the three track gates.
-    gedges = [-HX] + [e for gx, _ in GATES for e in (gx - GATE_W//2, gx + GATE_W//2)] + [HX]
+    gedges = [-HX, BD0, BD1] + [e for gx, _ in GATES for e in (gx - GATE_W//2, gx + GATE_W//2)] + [HX]
     for j in range(0, len(gedges), 2):
         W(box(gedges[j], HY, -WALL, gedges[j+1], HY+WALL, SPRING, TEX_WALL))
     for gx, _ in GATES:
         W(box(gx - GATE_W//2, HY, GATE_H, gx + GATE_W//2, HY+WALL, SPRING, TEX_WALL))
+    W(box(BD0, HY, BD_H, BD1, HY+WALL, SPRING, TEX_WALL))
     platforms(W, ents)
+    biltmore(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
     # The inner faces carry the zodiac mural (2048x1024) once: u along x, v along the arc.

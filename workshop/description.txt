@@ -1,7 +1,9 @@
 [h1]Grand Central Terminal[/h1]
 The Main Concourse of New York's Grand Central Terminal at true scale: the green zodiac vault, the end windows with light shafts, the double staircases and balconies, the four-faced clock on the information booth, the ticket windows, the departure board, the flag and the chandeliers.
 
-Update 0.5.0 adds the exterior: walk out through the Vanderbilt Hall vestibule onto 42nd Street and look up at the facade, its great arched windows, the clock and the Glory of Commerce group, then climb the terrace stair or cross the Park Avenue Viaduct.
+Update 0.6.0 adds the Biltmore Room: step through the marble doorway at the northwest corner of the concourse into the old arrival room with its beamed ceiling, brass sconces and the old arrivals board.
+
+Update 0.5.0 added the exterior: walk out through the Vanderbilt Hall vestibule onto 42nd Street and look up at the facade, its great arched windows, the clock and the Glory of Commerce group, then climb the terrace stair or cross the Park Avenue Viaduct.
 
 Update 0.3.0 added Vanderbilt Hall: walk through the passage beside the ticket windows into the old waiting room with its five tiered chandeliers, gilded cornice and tall windows, and the 42nd Street doors.
 
@@ -20,7 +22,7 @@ Update 0.2.0 added the lower level: walk down the ramps from the concourse to th
 [*]Source, build scripts and changelog: [url=https://github.com/m4bwav/gcs-gmod]github.com/m4bwav/gcs-gmod[/url]
 [*]Built with [url=https://github.com/m4bwav/modwright]modwright[/url], a Claude Code plugin for modding games, which drove the compile, screenshot and comparison tools.
 [*]Textures are original and procedural (vault mural, marble, limestone, clock, board, flag, window glass), made by scripts in the repository, plus stock Half-Life 2 materials. No AI-generated images are in the map.
-[*]Colours and proportions were matched against photos from Wikimedia Commons, used for reference only and not included in the map: Ɱ (CC0), Billie Grace Ward (CC BY 2.0), Russ Allison Loar (CC BY 2.0), Charvey90 (CC BY-SA 4.0), ArnoldReinhold (CC BY 4.0), Reading Tom (CC BY 2.0), Chris Sampson (CC BY-SA 2.0), Tim Evanson (CC BY-SA 2.0), Detroit Publishing Co. (public domain), Chris Light (CC BY-SA 4.0), Lexcie (CC BY-SA 3.0), TheCatalyst31 (CC BY-SA 4.0), NicoARicoA (CC BY-SA 4.0). Full list with links: refs/SOURCES.md in the repository.
+[*]Colours and proportions were matched against photos from Wikimedia Commons, used for reference only and not included in the map: Ɱ (CC0), Billie Grace Ward (CC BY 2.0), Russ Allison Loar (CC BY 2.0), Charvey90 (CC BY-SA 4.0), ArnoldReinhold (CC BY 4.0), Reading Tom (CC BY 2.0), Chris Sampson (CC BY-SA 2.0), Tim Evanson (CC BY-SA 2.0), Detroit Publishing Co. (public domain), Chris Light (CC BY-SA 4.0), Lexcie (CC BY-SA 3.0), TheCatalyst31 (CC BY-SA 4.0), NicoARicoA (CC BY-SA 4.0), MTA (CC BY 2.0). Full list with links: refs/SOURCES.md in the repository.
 [*]The repository's banner image was made with the Z-Image Turbo model (Apache-2.0) and is labelled as AI art; it is not a screenshot.
 [*]Map source and textures: CC BY-SA 4.0. Tools: MIT.
 [/list]

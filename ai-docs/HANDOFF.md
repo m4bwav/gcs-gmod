@@ -1,6 +1,6 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.5.0 released 2026-11-24: the exterior; Workshop 3845077025, GitHub v0.5.0)
+Status: in progress (0.6.0 released 2026-11-24: the Biltmore Room; Workshop 3845077025, GitHub v0.6.0)
 Updated: 2026-11-24
 
 - Prompt: plans/2026-11-23-gcs-gmod-continue-prompt.md
@@ -128,7 +128,9 @@ Updated: 2026-11-24
 - Eagles and taxis as models (2026-11-24): make_models.py eagle() (plinth, globe, raised wings, hooked beak; statue material) as prop_static on both top corners of the facade; taxi() (yellow sedan, dark glass, roof sign, tyres, lit headlamps; new model materials taxi, car_glass, tyre) x5 on 42nd Street, both lanes, solid 6. Cameras eagle, taxis. Clean full compile, shots/20261124-0917. No release (no new area).
 - Pershing Square portal (2026-11-24): the viaduct runs on through a stone-framed opening (bronze PERSHING SQUARE band, make_board.py plaque()) in the building across 42nd Street; inside, a 90 ft pocket (build_vmf.py pershing(), PX0/PX1/PZ/PD/PY0) with a deck ramping down 10 ft to a dark tunnel mouth, coffered ceiling, six brass wall lamps, and the Pershing Square Cafe's lit storefront under the deck at street level. The nodraw outer hull's south wall now follows PY0 (it cut the pocket in two: area 2, drawn as sky). Cameras pershing, pershing_ramp, pershing_in; shots/20261124-0949 (pershing_sheet.jpg). Unique verts 44,610. No release (no new area).
 - Rig: tools/shots.sh takes GARGS="..." for extra launch args; fps.txt flags "CAMERA IN SOLID".
-- NEXT: plan area 6 extras: the Biltmore Room (off the concourse's northwest corner, 43rd St), then a nav mesh. Statue could gain finer modelling (faces, drapery) if polywright/Blender becomes available.
+- Release 0.6.0 (2026-11-24): the Biltmore Room. Doorway BD0..BD1 (x -1404..-1236, 16 ft) in the concourse north wall (added to gedges in build()) into a 40x80x30 ft room north of the concourse, west of the shed (build_vmf.py biltmore(), BX*/BY*/BH): cream marble floor and walls, beamed ceiling with ceiling lights, dentil cornice, brass sconces, arrivals board (dark glass, brass frame and mullions) on the north wall, railed escalator well 8 ft deep (sealed). Decor in func_brush bilt_decor. Cameras bilt_door, biltmore, bilt_board. Clean full compile, unique verts 46,664, shots/20261124-0955 and -0959. Refs: 3 Commons photos (MTA CC BY 2.0, TheCatalyst31 CC BY-SA 4.0).
+- Biltmore polish (optional): the wall clock above the board (gcs/clock needs a face centred like USHIFT), board lettering (a NAME/DUE/TRACK texture from make_board.py), wider room (real one is larger; estimate), escalators down to the dining concourse.
+- NEXT: a nav mesh (nav_generate in GMod, ship the .nav in the gma), then lower-level tracks or roleplay spaces (plan area 6). Statue could gain finer modelling (faces, drapery) if polywright/Blender becomes available.
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

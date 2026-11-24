@@ -26,3 +26,6 @@ Wikimedia Commons, downloaded at 1600 px for colour, tone and pattern sampling. 
 | Metro_North_M7a_Rainbow_Heart_Sticker_Grand_Central.jpg | Lexcie | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Metro-North_M7a_Rainbow_Heart_Sticker_Grand_Central.jpg |
 | 42nd_Street_Facade_Grand_Central_Terminal_October_2025.jpg | TheCatalyst31 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:42nd_Street_Facade,_Grand_Central_Terminal,_October_2025.jpg |
 | Glory_of_Commence.jpg | NicoARicoA | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Glory_of_Commence_.jpg |
+| Biltmore_Room_at_Grand_Central_Terminal.jpg | MTAPhotos | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Biltmore_Room_at_Grand_Central_Terminal.jpg |
+| Biltmore_Room_schedule_board_and_clock_Grand_Central_Termina.jpg | TheCatalyst31 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Biltmore_Room_schedule_board_and_clock,_Grand_Central_Terminal.jpg |
+| MTA_Reopens_Biltmore_Room_at_Grand_Central_Terminal.jpg | MTAPhotos | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:MTA_Reopens_Biltmore_Room_at_Grand_Central_Terminal.jpg |
