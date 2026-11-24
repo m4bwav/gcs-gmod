@@ -105,5 +105,26 @@ def flag():
     save(img.resize((512, 256), Image.LANCZOS), "flag")
 
 
+def tickets():
+    # 1024x64 strip spanning one 16 ft window pitch; the bronze plaque with raised gold
+    # TICKETS lettering sits in texels 320..704 (the 6 ft plaque over each window).
+    W, H = 1024, 64
+    img = Image.new("RGB", (W, H), (60, 42, 22))
+    d = ImageDraw.Draw(img)
+    d.rectangle([320, 0, 703, H-1], fill=(34, 26, 18), outline=(196, 156, 72), width=4)
+    d.rectangle([328, 8, 695, H-9], outline=(120, 92, 44), width=1)
+    p, word = 5, "TICKETS"
+    x0 = 512 - (len(word)*6 - 1)*p/2
+    for k, ch in enumerate(word):
+        rows = [int(b, 16) for b in FONT[ch].split()]
+        for cy, bits in enumerate(rows):
+            for cx in range(5):
+                if bits >> (4 - cx) & 1:
+                    px, py = x0 + (k*6 + cx)*p, 14 + cy*p
+                    d.rectangle([px, py, px + p - 1, py + p - 1], fill=(230, 190, 96))
+    save(img, "tickets")
+
+
 board()
 flag()
+tickets()

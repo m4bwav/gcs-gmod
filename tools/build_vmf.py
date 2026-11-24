@@ -80,7 +80,14 @@ def _flag_uv(n):
         return "[%d 0 0 %g] %g" % (s, -s*(x0 if s > 0 else x1)/su, su), "[0 0 -1 %g] %g" % (z1/sv, sv)
 
 
-FACEUV = {"gcs/board": _board_uv, "gcs/flag": _flag_uv}
+def _tickets_uv(n):
+    # One 1024 px strip per 16 ft window pitch; plaque centre (window x + 3 ft) lands on texel 512.
+    su, sv = 16*FT/1024, 1.5*FT/64
+    if n[1] > 0.5:
+        return "[-1 0 0 704] %g" % su, "[0 0 -1 %g] %g" % (13.25*FT/sv, sv)
+
+
+FACEUV = {"gcs/board": _board_uv, "gcs/flag": _flag_uv, "gcs/tickets": _tickets_uv}
 
 
 def axes_for(n, s=0.25):
@@ -471,6 +478,9 @@ def build():
                 ents.append(ent("func_detail", solids=box(gx-1, -HY+4, 3.5*FT+2, gx+1, -HY+7, 10*FT, TEX_GOLD)))
             ents.append(ent("func_detail", solids=box(w0, -HY, 10*FT, w1, -HY+2*FT, 11*FT, TEX_GOLD)))
             ents.append(ent("func_detail", solids=box(w0, -HY, 11*FT, w1, -HY+18, 14*FT, TEX_CREAM)))
+            # Bronze TICKETS plaque centred on the lintel.
+            det([(x, -HY+18), (x+6*FT, -HY+18), (x+6*FT, -HY+20), (x, -HY+20)],
+                11.75*FT, 13.25*FT, "gcs/tickets", TEX_GOLD)
     ents.append(ent("func_detail", solids=box(-100*FT, -HY, 14*FT, 100*FT, -HY+4*FT, 16*FT, TEX_TRIM)))
     bx0, bx1, bz0, bz1 = BOARD
     det([(bx0, -HY), (bx1, -HY), (bx1, -HY+16), (bx0, -HY+16)], bz0, bz1, "gcs/board", TEX_GOLD)
