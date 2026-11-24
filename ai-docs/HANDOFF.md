@@ -58,8 +58,9 @@ Updated: 2026-11-23
 
 - Stairs and booth: each flight has solid cream balustrades with a brass handrail and newel posts at the foot; booth glass has a brass grille (two mullions per face, counter ledge at 4 ft, top rail at 7 ft). shots/20261123-1901.
 
+- End windows fill the great arch: centre head SPRING+29.5 ft (inner arch edge is +30), sides SPRING+22 ft. shots/20261123-1905.
+
 ## Next
-0. From shots/20261123-1851 compare: the end windows are still a little short of the arch.
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
 2. Booth glass is still flat blue-grey behind the new grille; could get ticket-window openings or a lit interior.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
@@ -70,7 +71,7 @@ Updated: 2026-11-23
 - Zodiac constellations are simplified stick figures, not the real ceiling's figure drawings; band curves are stylised sinusoids.
 - Vault rise 40 ft, estimated from photos (check against the HABS section).
 - Bay window bottom 42 ft estimated from photo.
-- Balcony arcade 14x14 ft openings, window sill BALC_Z+16 ft, centre end window head SPRING+26 ft are estimated from photos.
+- Balcony arcade 14x14 ft openings, window sill BALC_Z+16 ft, centre end window head SPRING+29.5 ft are estimated from photos.
 - Flag placement (north centre bay, 38x20 ft horizontal) and board size estimated, not measured.
 - Stairs placed at both ends with 12 u risers / 18 u treads.
 - Light levels (after surfaces v2): window point 45, window spot 225, booth 25, chandeliers 18, vault fill 10.
