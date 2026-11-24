@@ -198,6 +198,10 @@ def arcade_bay(W, ents, sgn, xin, xout, c, z0, r, top, roof):
     W(box(pa, c - r - WALL, top, pb, c + r + WALL, top + roof, TEX_CREAM))
     W(box(pa, c - r - WALL, z0, pb, c - r, top, TEX_CREAM))
     W(box(pa, c + r, z0, pb, c + r + WALL, top, TEX_CREAM))
+    # Cream barrel vault over the passage, continuing the opening's arch.
+    for i in range(8):
+        corner = (c + r, top) if i < 4 else (c - r, top)
+        ents.append(ent("func_detail", solids=xprism(ccw([corner, arc[i], arc[i+1]]), pa, pb, TEX_CREAM)))
     xback = xout + sgn*ARCH_D
     ba, bb = sorted((xback, xback + sgn*WALL))
     W(box(ba, c - r - WALL, z0 - WALL, bb, c + r + WALL, top + WALL, TEX_DOOR))
