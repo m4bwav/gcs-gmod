@@ -32,9 +32,11 @@ Updated: 2026-11-23
 
 - Lunettes: stepped cream hood (gcs/cream, tinted plaster003a, r 16-23 ft) with a gold outer edge; ashlar now 8x4 blocks (no wrap seam). shots/20261123-1803.
 
+- Booth and clock: tools/make_clock.py writes clock_face.vtf (opal dial, black ticks and hands, brass bezel); gcs/clock is UnlitGeneric. Booth now cream base, dark glass with brass posts, gold cornice; brass column carries a 30 u four-faced clock, gold cap and acorn. build_vmf.py USHIFT centres the dial. New `clock` camera in gcs_shots.lua. shots/20261123-1807.
+
 ## Next
 1. Zodiac figures could get drawn outlines (real ceiling has figure drawings, not only stick lines); lunette hoods could get relief carving (normal map or more steps).
-2. Clock block is a grey box (booth clock model, polywright).
+2. Booth glass is flat blue-grey; real booth has brass grilles and ticket windows. Clock dials mirror on the -x/-y faces (hands read 1:52); fine at distance.
 3. Measured references: HABS drawings for vault section and window/balcony heights; update refs/concourse-dimensions.md and build_vmf.py.
 4. Chandeliers (polywright), ticket-window departure board, flags; then the zodiac ceiling.
 5. Hammer++ for hand checks (optional).

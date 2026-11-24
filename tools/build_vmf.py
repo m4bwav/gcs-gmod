@@ -28,6 +28,7 @@ TEX_GOLD = "gcs/gold"
 TEX_GRID = "gcs/mullion"
 TEX_DIM = "gcs/window_dim"
 TEX_CREAM = "gcs/cream"
+TEX_CLOCK = "gcs/clock"
 NODRAW = "tools/toolsnodraw"
 
 _id = [0]
@@ -44,7 +45,9 @@ def dot(a, b): return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]
 
 
 # Texture scale per material (default 0.25); smaller floor tiles read closer to the photos.
-SCALE = {TEX_FLOOR: 0.1875}   # 512 px texture = 2x2 slabs of 4 ft
+SCALE = {TEX_FLOOR: 0.1875,   # 512 px texture = 2x2 slabs of 4 ft
+         TEX_CLOCK: 30/256}    # one 256 px dial per 30 u clock side
+USHIFT = {TEX_CLOCK: 128}      # centre the dial on faces spanning -15..15
 
 
 def axes_for(n, s=0.25):
@@ -63,6 +66,8 @@ def side(pts, n, tex, uv=None):
         p2, p3 = p3, p2
     f = lambda p: "(%g %g %g)" % p
     u, v = uv or axes_for(n, SCALE.get(tex, 0.25))
+    if not uv and tex in USHIFT:
+        u = u.replace(" 0] ", " %g] " % USHIFT[tex])
     return ('\tside\n\t{\n\t\t"id" "%d"\n\t\t"plane" "%s %s %s"\n\t\t"material" "%s"\n'
             '\t\t"uaxis" "%s"\n\t\t"vaxis" "%s"\n\t\t"rotation" "0"\n\t\t"lightmapscale" "16"\n'
             '\t\t"smoothing_groups" "0"\n\t}\n') % (nid(), f(p1), f(p2), f(p3), tex, u, v)
@@ -281,10 +286,22 @@ def build():
                 ents.append(ent("func_detail", solids=box(xa, y0, 0, xb, y1, (k+1)*rise, TEX_TRIM)))
 
     # Information booth with the four-faced clock above it.
-    W_booth = ngon(0, 0, 13*FT, 8, math.pi/8)
-    ents.append(ent("func_detail", solids=prism(W_booth, 0, 10*FT, TEX_TRIM)))
-    ents.append(ent("func_detail", solids=prism(ngon(0, 0, 2*FT, 8, math.pi/8), 10*FT, 13*FT, TEX_TRIM)))
-    ents.append(ent("func_detail", solids=prism(ngon(0, 0, 3*FT, 8, math.pi/8), 13*FT, 17*FT, TEX_GLOW)))
+    # Booth: cream marble base, dark glass with brass posts, gold cornice; the clock sits
+    # on a brass column: four opal dials (30 u = 2.5 ft) under a gold cap and acorn finial.
+    oct8 = lambda r: ngon(0, 0, r, 8, math.pi/8)
+    det = lambda *a: ents.append(ent("func_detail", solids=prism(*a)))
+    det(oct8(13*FT), 0, 3*FT, TEX_CREAM)
+    det(oct8(12.5*FT), 3*FT, 8*FT, TEX_DIM)
+    for x, y in oct8(13*FT):
+        det(ngon(x, y, 6, 4, math.pi/4), 3*FT, 8*FT, TEX_GOLD)
+    det(oct8(13.5*FT), 8*FT, 9*FT, TEX_GOLD)
+    det(oct8(12*FT), 9*FT, 10*FT, TEX_CREAM)
+    det(oct8(2.5*FT), 10*FT, 11*FT, TEX_GOLD)
+    det(oct8(1*FT), 11*FT, 150, TEX_GOLD)
+    det([(-15, -15), (15, -15), (15, 15), (-15, 15)], 150, 180, TEX_CLOCK, TEX_GOLD)
+    det(oct8(20), 180, 184, TEX_GOLD)
+    det(oct8(12), 184, 192, TEX_GOLD)
+    det(oct8(6), 192, 200, TEX_GOLD)
     ents.append(ent("light", (0, 0, 20*FT), _light="255 225 170 25"))
 
     # Ticket windows along the south wall: a row of recess frames.
