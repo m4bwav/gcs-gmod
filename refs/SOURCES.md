@@ -14,3 +14,8 @@ Wikimedia Commons, downloaded at 1600 px for colour, tone and pattern sampling. 
 | Grand_Central_main_concourse_facing_Apple_agr.jpg | ArnoldReinhold | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Grand_Central_main_concourse_facing_Apple.agr.jpg |
 | GCT_Main_Concourse_3.jpg | Ɱ | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:GCT_Main_Concourse_3.jpg |
 | Grand_Central_Terminal_2017_38116476404.jpg | Billie Grace Ward from New York, USA | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Grand_Central_Terminal_2017_(38116476404).jpg |
+| Grand_Central_Dining_Concourse_Info.jpg | Reading Tom from Reading, UK | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Grand_Central_Dining_Concourse_Info.jpg |
+| Grand_Central_dining_concourse_clock.jpg | Chris Sampson | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Grand_Central_dining_concourse_clock.jpg |
+| Whispering_Gallery.jpg | Ɱ | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Whispering_Gallery.jpg |
+| Grand_Central_Oyster_Bar_Grand_Central_Station_NYC.jpg | Tim Evanson | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Grand_Central_Oyster_Bar_-_Grand_Central_Station_NYC.jpg |
+| Oyster_Bar_Restaurant_Grand_Central_Terminal.jpg | Detroit Publishing Co. | Public domain | https://commons.wikimedia.org/wiki/File:Oyster_Bar_Restaurant,_Grand_Central_Terminal.jpg |

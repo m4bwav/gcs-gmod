@@ -1,0 +1,16 @@
+west_balcony    146 fps
+floor_east      147 fps
+booth           147 fps
+clock           146 fps
+board           147 fps
+flag            146 fps
+vault_up        146 fps
+east_balcony    147 fps
+stairs_west     147 fps
+arcade_west     147 fps
+balc_arcade     146 fps
+ramp_head       146 fps
+ramp_down       146 fps
+whisper         146 fps
+oyster          146 fps
+dining          147 fps

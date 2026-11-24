@@ -235,6 +235,8 @@ OB_X0 = OB_X1 - 4 * 288             # Oyster Bar, four 24 ft bays by four
 DIN_X0, DIN_X1, DIN_Y = -1000, 1000, 600   # dining concourse under the main floor
 TEX_TILE = "gcs/guastavino"
 TEX_WOOD = "gcs/wood"
+TEX_PALE = "gcs/guastavino_pale"   # Whispering Gallery glaze
+TEX_LOWF = "gcs/floor_low"         # darker mauve-grey tile floor of the lower level
 
 
 def groin(W, x0, x1, y0, y1, zs, rise, tex, n=8):
@@ -279,7 +281,7 @@ def lower_level(W, ents):
             t = (x - RAMP_X0) / (RAMP_XF - RAMP_X0)
             ents.append(ent("light", (x, s*(RAMP_Y0+RAMP_Y1)//2, Z*t + 150), _light="255 205 150 30"))
     # Corridor between the ramps from the gallery east to the dining concourse.
-    W(box(RAMP_XF, -COR_Y, Z - WALL, DIN_X0, COR_Y, Z, TEX_FLOOR))
+    W(box(RAMP_XF, -COR_Y, Z - WALL, DIN_X0, COR_Y, Z, TEX_LOWF))
     W(box(RAMP_XF, -COR_Y, -WALL - 16, DIN_X0, COR_Y, 0, TEX_CREAM))
     for s in (-1, 1):
         wa, wb = sorted((s*COR_Y, s*RAMP_Y0))
@@ -287,23 +289,60 @@ def lower_level(W, ents):
     for x in range(RAMP_XF + 160, DIN_X0, 320):
         ents.append(ent("light", (x, 0, -110), _light="255 210 160 25"))
 
-    # Whispering Gallery: a low groin vault of Guastavino tile where four arches meet.
+    # Whispering Gallery: a low groin vault of pale Guastavino tile where four arches meet,
+    # each opening framed by a cream stone arch, brass handrails along the walls.
     gx0, gx1, gy = GAL_X0, RAMP_XF, RAMP_Y1
-    W(box(gx0, -gy, Z - WALL, gx1, gy, Z, TEX_FLOOR))
+    W(box(gx0, -gy, Z - WALL, gx1, gy, Z, TEX_LOWF))
     for s in (-1, 1):
         ya, yb = sorted((s*gy, s*(gy + WALL)))
-        W(box(gx0 - WALL, ya, Z - WALL, gx1, yb, 64, TEX_TILE))
+        W(box(gx0 - WALL, ya, Z - WALL, gx1, yb, 64, TEX_PALE))
     for y0, y1 in ((-gy, -120), (120, gy)):
-        W(box(gx0 - WALL, y0, Z, gx0, y1, 64, TEX_TILE))
-    W(box(gx0 - WALL, -120, Z + 120, gx0, 120, 64, TEX_TILE))
-    groin(W, gx0, gx1, -gy, gy, Z + 10*FT, 9*FT, TEX_TILE)
-    ents.append(ent("light", ((gx0+gx1)//2, 0, Z + 140), _light="255 200 140 45"))
-    ents.append(ent("env_cubemap", ((gx0+gx1)//2, 0, Z + 72)))
+        W(box(gx0 - WALL, y0, Z, gx0, y1, 64, TEX_PALE))
+    W(box(gx0 - WALL, -120, Z + 120, gx0, 120, 64, TEX_PALE))
+    zs, rise = Z + 10*FT, 9*FT
+    groin(W, gx0, gx1, -gy, gy, zs, rise, TEX_PALE)
+    # Cream stone ribs: a band of the arch profile 16 u deep along each wall face.
+    gxc = (gx0 + gx1) / 2
+    hx = (gx1 - gx0) / 2
+    n = 8
+    for x in (gx0 + 12, gx1 - 12):
+        for i in range(n):
+            t0, t1 = math.pi*i/n, math.pi*(i+1)/n
+            a = (round(gy*math.cos(t0)), round(zs + rise*math.sin(t0)))
+            b = (round(gy*math.cos(t1)), round(zs + rise*math.sin(t1)))
+            a2 = (round((gy-30)*math.cos(t0)), round(zs + (rise-30)*math.sin(t0)))
+            b2 = (round((gy-30)*math.cos(t1)), round(zs + (rise-30)*math.sin(t1)))
+            det(xprism(ccw([a2, b2, b, a]), x - 12, x + 12, TEX_CREAM))
+    for y in (-gy + 12, gy - 12):
+        for i in range(n):
+            t0, t1 = math.pi*i/n, math.pi*(i+1)/n
+            a = (round(gxc + hx*math.cos(t0)), round(zs + rise*math.sin(t0)))
+            b = (round(gxc + hx*math.cos(t1)), round(zs + rise*math.sin(t1)))
+            a2 = (round(gxc + (hx-30)*math.cos(t0)), round(zs + (rise-30)*math.sin(t0)))
+            b2 = (round(gxc + (hx-30)*math.cos(t1)), round(zs + (rise-30)*math.sin(t1)))
+            det(yprism(ccw([a2, b2, b, a]), y - 12, y + 12, TEX_CREAM))
+    # Cream piers in the four corners carry the ribs down to the floor.
+    for x in (gx0, gx1 - 28):
+        for y in (-gy, gy - 28):
+            det(box(x, y, Z, x + 28, y + 28, zs, TEX_CREAM))
+    # Brass handrail on short posts along the solid walls (y = +-gy) between the piers.
+    for s in (-1, 1):
+        y = s*(gy - 6)
+        det(box(gx0 + 40, y - 2, Z + 34, gx1 - 40, y + 2, Z + 37, TEX_GOLD))
+        for x in range(gx0 + 60, gx1 - 40, 96):
+            det(box(x - 1, y - 1, Z + 4, x + 1, y + 1, Z + 34, TEX_GOLD))
+    # One lamp at the crown and warm fill under each arch.
+    det(box(gxc - 1, -1, zs + rise - 40, gxc + 1, 1, zs + rise + 2, TEX_GOLD))
+    det(prism(ngon(gxc, 0, 10, 8, math.pi/8), zs + rise - 58, zs + rise - 40, TEX_BULB))
+    ents.append(ent("light", (round(gxc), 0, zs + rise - 76), _light="255 210 165 70"))
+    for x, y in ((gxc, gy - 120), (gxc, -gy + 120), (gx0 + 120, 0), (gx1 - 120, 0)):
+        ents.append(ent("light", (round(x), y, Z + 90), _light="255 215 175 25"))
+    ents.append(ent("env_cubemap", (round(gxc), 0, Z + 72)))
 
     # Oyster Bar: 4 x 4 bays of shallow Guastavino groins on piers; a long oak counter.
     bx, by = 288, 240
     oy = 2*by
-    W(box(OB_X0, -oy, Z - WALL, OB_X1, oy, Z, TEX_FLOOR))
+    W(box(OB_X0, -oy, Z - WALL, OB_X1, oy, Z, TEX_LOWF))
     for s in (-1, 1):
         ya, yb = sorted((s*oy, s*(oy + WALL)))
         W(box(OB_X0 - WALL, ya, Z - WALL, OB_X1, yb, 64, TEX_CREAM))
@@ -333,7 +372,7 @@ def lower_level(W, ents):
     # Dining concourse under the main floor: cream walls, pylons, lit shop fronts round
     # the edge and a small brass-topped lower information booth in the middle.
     W(box(DIN_X0, -DIN_Y, Z - WALL, DIN_X1, DIN_Y, Z, TEX_FLOOR))
-    W(box(DIN_X0, -DIN_Y, -WALL - 16, DIN_X1, DIN_Y, -WALL, TEX_CREAM))
+    W(box(DIN_X0, -DIN_Y, -WALL - 16, DIN_X1, DIN_Y, -WALL, TEX_COFFER))
     for s in (-1, 1):
         ya, yb = sorted((s*DIN_Y, s*(DIN_Y + WALL)))
         W(box(DIN_X0 - WALL, ya, Z - WALL, DIN_X1 + WALL, yb, 0, TEX_CREAM))
@@ -347,8 +386,16 @@ def lower_level(W, ents):
             det(box(x - 90, ya, Z + 120, x + 90, yb, Z + 140, TEX_GOLD))
         for y in (-320, 320):
             det(box(x - 16, y - 16, Z, x + 16, y + 16, -WALL - 16, TEX_CREAM))
+        # Beams between the pylons; round brass lamps hung in the bays between them.
+        det(box(x - 12, -DIN_Y, -WALL - 40, x + 12, DIN_Y, -WALL - 16, TEX_CREAM))
         for y in (-440, 0, 440):
-            ents.append(ent("light", (x, y, -140), _light="255 215 170 35"))
+            lx = x + 120
+            if lx < DIN_X1 - 60:
+                det(prism(ngon(lx, y, 18, 8, math.pi/8), -WALL - 30, -WALL - 16, TEX_GOLD))
+                det(prism(ngon(lx, y, 14, 8, math.pi/8), -WALL - 38, -WALL - 30, TEX_BULB))
+                ents.append(ent("light", (lx, y, -WALL - 60), _light="255 215 170 40"))
+    for y in (-440, 0, 440):   # west end bay, so the first pylons are lit from both sides
+        ents.append(ent("light", (DIN_X0 + 60, y, -WALL - 60), _light="255 215 170 30"))
     oct8 = lambda r: ngon(0, 0, r, 8, math.pi/8)
     det(prism(oct8(7*FT), Z, Z + 42, TEX_CREAM))
     det(prism(oct8(7*FT + 4), Z + 42, Z + 46, TEX_GOLD))
@@ -588,6 +635,8 @@ def build():
     # Information booth with the four-faced clock above it.
     # Booth: cream marble base, dark glass with brass posts, gold cornice; the clock sits
     # on a brass column: four opal dials (30 u = 2.5 ft) under a gold cap and acorn finial.
+    for y in (-440, 0, 440):   # west end bay, so the first pylons are lit from both sides
+        ents.append(ent("light", (DIN_X0 + 60, y, -WALL - 60), _light="255 215 170 30"))
     oct8 = lambda r: ngon(0, 0, r, 8, math.pi/8)
     det = lambda *a: ents.append(ent("func_detail", solids=prism(*a)))
     det(oct8(13*FT), 0, 3*FT, TEX_CREAM)
