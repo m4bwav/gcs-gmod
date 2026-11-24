@@ -62,7 +62,7 @@ USHIFT = {TEX_CLOCK: 128}      # centre the dial on faces spanning -15..15
 # Departure board over the ticket windows (faces +y) and the flag hung from the crown
 # (faces +-x); both map their texture once over the front faces, the rest gets black/gold.
 BOARD = (-20*FT, 20*FT, 17*FT, 27*FT)         # x0, x1, z0, z1: 40 x 10 ft, inside the centre bay
-FLAG = (-19*FT, 19*FT, HY - 8*FT, HY - 8*FT + 2, SPRING - 28*FT, SPRING - 8*FT)   # x0, x1, y0, y1 (thin), z0, z1: north centre bay
+FLAG = (-24*FT, 24*FT, HY - 8*FT, HY - 8*FT + 2, SPRING - 33*FT, SPRING - 8*FT)   # x0, x1, y0, y1 (thin), z0, z1: north centre bay; 48 ft long (Gothamist), 1.9:1
 
 
 def _board_uv(n):
