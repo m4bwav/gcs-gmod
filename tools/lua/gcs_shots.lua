@@ -18,6 +18,11 @@ local CAMS = {
   { "stairs_west",  Vector(-700, -300, 72), Angle(-5, 160, 0) },
   { "arcade_west",  Vector(-1480, 0, 80), Angle(-6, 180, 0) },
   { "balc_arcade",  Vector(-1450, 140, 380), Angle(-2, 180, 0) },
+  { "ramp_head",    Vector(-950, 390, 90), Angle(12, 180, 0) },
+  { "ramp_down",    Vector(-1900, 390, -40), Angle(8, 180, 0) },
+  { "whisper",      Vector(-2720, -300, -200), Angle(-12, 155, 0) },
+  { "oyster",       Vector(-3420, -380, -200), Angle(-4, 170, 0) },
+  { "dining",       Vector(-960, -400, -200), Angle(-4, 20, 0) },
 }
 local i, cam, frames = 0, nil, 0
 local ft, fpslog = 0, {}  -- frame time summed over frames 31-89, one fps line per camera

@@ -67,3 +67,4 @@
 
 - 2026-11-23: tools/make_map.py draws docs/level-map.png (top-down plan from the VMF, chest-height brush footprints, spawns). README shows 10 final shots + map; Workshop 3845077025 now has 11 previews incl. the map. AddItemPreviewFile appends; it does not replace.
 - 2026-11-23: Mark raised the chain to 30 sessions: chain_loop pid 227140 (20) is followed by a 10-session run, log ai-docs/chain-loop-extra.log.
+- 2026-11-23: Area 2 blockout playable (ramps, Whispering Gallery groin vault, Oyster Bar, dining hall), clean compile, shots/20261123-2232. A light placed inside a func_detail lamp globe goes dark; put it below the globe. Sign-off askwright set consumed.
