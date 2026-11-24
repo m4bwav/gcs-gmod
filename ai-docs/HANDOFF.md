@@ -78,11 +78,13 @@ Updated: 2026-11-23
 
 - Ticket windows: each of the 12 south-wall windows has a cream counter with brass top, dim glass behind a brass grille (bars every 1 ft), gold rail and cream lintel. shots/20261123-2007/board.jpg.
 
+- TICKETS plaques: bronze plaque with gold 5x7 lettering centred on each ticket-window lintel (tickets.vtf from tools/make_board.py, gcs/tickets lit; FACEUV _tickets_uv maps one strip per 16 ft pitch, u flipped). shots/20261123-2014/tickets_crop.jpg.
+
 ## Next
 - FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
 1. Zodiac figures have outlines now; real animal/human drawings would be the next step. Lunette hoods have voussoirs and keystones; garland carving would be a normal map.
-2. Booth interior is in and brighter; clerks' props could follow. Ticket windows could get TICKETS signage and the arched marble surrounds.
+2. Booth interior is in and brighter; clerks' props could follow. Ticket windows have TICKETS plaques; arched marble surrounds could follow.
 3. Measured references: secondary-source check done (refs/concourse-dimensions.md, 2026-11-23): vault springline/rise agree with the build. Still open: a real HABS NY-5450 section or LPC report for balcony, sill and lunette heights; end windows maybe 33x60 ft (ours 26 ft wide, taller).
 4. Chandeliers could become a polywright model with globes later.
 5. Hammer++ for hand checks (optional).
