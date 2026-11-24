@@ -36,3 +36,4 @@
 - 2026-11-23: Sign-off set still unanswered. Sourced-dimension check (Wikipedia/secondary only; LoC searches gave photos, no HABS section): vault base 121.5 / crown 160.25 ft datum gives springline ~86 ft, rise ~38.75, matching SPRING 85 / VRISE 40. Logged in refs/concourse-dimensions.md.
 - 2026-11-23: Created private m4bwav/gcs-gmod and pushed main (there was never a remote; pass 23's 'push failed' was a misreport). Sessions push main after each merge.
 - 2026-11-23: Sign-off set still unanswered. Lunette relief: alternating proud voussoirs and a keystone per hood. Clean full compile, shots/20261123-1949.
+- 2026-11-23: A Bash 'wait for chain_loop' via ps/pgrep matched nothing on Windows and started a second loop at once; killed by PID. Wait on the loop's PID with PowerShell Wait-Process instead.
