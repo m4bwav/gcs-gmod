@@ -55,3 +55,5 @@
 - 2026-11-23: Sign-off set still unanswered, wiki repo still missing. Ticket-wall piers and cornice cream with gold edge (grey trim was the main mismatch in floor_east). Clean full compile, shots/20261123-2116. Worked in worktree ../gcs-gmod-ticketwall. First shots.sh run returned only 2 of 11 shots; rerun was complete.
 - 2026-11-23: Sign-off set still unanswered, wiki repo still missing. Zodiac figures are per-sign silhouettes (SHAPES in make_vault.py). Clean full compile, shots/20261123-2120. Worked in worktree ../gcs-gmod-zodiac because another session pushes main.
 - 2026-11-23: Sign-off set still unanswered, wiki repo still missing. Shot rig now writes fps.txt; 146-147 fps flat at all 11 cameras (capped). No map change, so no recompile. Worked in worktree ../gcs-gmod-fps (since removed).
+
+- 2026-11-23: UNCAP=1 option in tools/shots.sh; uncapped fps 676-896 per camera (shots/20261123-2124). Sign-off set still unanswered, wiki repo still absent.
