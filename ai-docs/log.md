@@ -81,3 +81,5 @@
 - 2026-11-24: MDL route works without Blender: tools/make_models.py writes SMD/QC from Python and runs studiomdl.exe (in GMod bin/). Concourse chandeliers became one model: brush verts 61,765 -> 49,311, fps unchanged. Python open(p,'w') on Windows turned LF files into CRLF; write with newline=''. Worktree ../gcs-gmod-models.
 - 2026-11-24: Vanderbilt Hall chandeliers moved to models/gcs/vh_chandelier.mdl; unique verts 44,286. Static props cast a dynamic shadow by default: set disableshadows=1 on lamp props or the light under them streaks the wall. shots/20261124-0854.
 - 2026-11-24: Glory of Commerce figures are now models/gcs/statue_group.mdl, built procedurally in make_models.py. A prop at angles 0 0 0 came out turned 90 deg: studiomdl maps SMD +x to model +y, so the prop uses yaw -90. Worktree ../gcs-gmod-statue.
+
+- 2026-11-24: eagle and taxi models (make_models.py) placed on the facade corners and 42nd Street; clean full compile, shots/20261124-0917.

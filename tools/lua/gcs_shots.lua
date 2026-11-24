@@ -50,6 +50,8 @@ local CAMS = {
   { "ext_viaduct",  Vector(-2076, -3400, 352), Angle(-5, 90, 0) },
   { "ext_west",     Vector(2200, -2900, 72), Angle(-10, 180, 0) },
   { "ext_terrace",  Vector(1300, -2316, 352), Angle(0, 180, 0) },
+  { "eagle",        Vector(1100, -3300, 600), Angle(-44, 69, 0) },
+  { "taxis",        Vector(-1200, -2700, 140), Angle(-10, -40, 0) },
 }
 if want ~= "go" then
   local keep, set = {}, {}
