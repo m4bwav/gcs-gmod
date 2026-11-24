@@ -1,7 +1,7 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.1.0 released: Workshop 3845077025 public, GitHub v0.1.0)
-Updated: 2026-11-23 (late)
+Status: in progress (0.2.0 released 2026-11-24: lower level; Workshop 3845077025, GitHub v0.2.0)
+Updated: 2026-11-24
 
 - Prompt: plans/2026-11-23-gcs-gmod-continue-prompt.md
 - Plan: plans/gcs-gmod-plan.md
@@ -114,10 +114,10 @@ Updated: 2026-11-23 (late)
 - True groin vaults (2026-11-23): groin() splits the plan along the diagonals and each triangle follows the barrel whose arch stands on its wall (_slab: convex xy polygon from a sloped plane up to a flat top). Gallery wall arches now read as lunettes; the Oyster Bar shows real groin lines. Clean full compile, shots/20261123-2304 (whisper.jpg, oyster.jpg).
 - Area 2 detail pass 2 (2026-11-23): dining booth has a brass column and four-faced opal clock (gcs/clock, z -150..-120 so the dial tiles align); Oyster Bar entrance has a bronze OYSTER BAR band in the opening head (oysterbar.vtf from make_board.py, FACEUV _oysterbar_uv), oak posts, transom and amber side lights; oak-topped cream counters with stools along both Oyster Bar long walls. Anything at the gallery wall above Z+120 sits inside the groin's springing; keep wall details below it. New cameras ob_entry, dining_clock, ob_counter. Clean full compile, shots/20261123-2259.
 - East ramps (2026-11-23): the ramp loop in lower_level() mirrors to the east end (e=-1); east ramps descend under the east wall's side arches to a coffered landing hall (EAST_D 40 ft) with three lit brass doors on its east wall (sealed until the platforms, area 4), and a corridor runs west into the dining concourse through a new opening in its east wall. Cameras east_ramp, east_down, east_land. Clean full compile, shots/20261123-2308.
-- Then: area 2 is playable end to end. Next: make_map.py labels for the lower level, README/wiki/Workshop update and release 0.2.0; then area 3 (Vanderbilt Hall).
+- Release 0.2.0 (2026-11-24): level map labels both levels incl. east ramps/landing hall; README lower-level shots (shots/20261124-0749), wiki Changelog/Roadmap, Workshop gma + description + 5 new previews (the old 0.1.0 map preview is still there: AddItemPreviewFile appends; remove it by hand or add a RemoveItemPreview call to workshop_update.py), tag v0.2.0 with the .gma. The build/ folder must be recreated per worktree: build/addon/addon.json + maps/gm_grand_central.bsp, then gmad create.
+- NEXT: area 3, Vanderbilt Hall and the 42nd Street passage (refs and a plan first; join it through a real opening on the concourse south side).
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
-- Update the wiki Changelog/Home with the Workshop link.
 - Wiki is live (notes/2026-11-23-github-wiki.md); update it from docs/wiki/ when the map changes.
 1. Zodiac figures are recognisable silhouettes now; finer line drawings inside them (eyes, fur, folds) could follow. Lunette hoods have voussoirs and keystones; garland carving would be a normal map.
 2. Booth interior is in and brighter; clerks' props could follow. Ticket windows have TICKETS plaques and marble reveals and segmental arched heads and bracket lamps; clerks could follow.

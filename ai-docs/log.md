@@ -73,3 +73,4 @@
 - 2026-11-23: groin() is now a true groin vault (diagonal split, _slab helper); gallery and Oyster Bar fixed. Clean full compile, shots/20261123-2304. Worktree ../gcs-gmod-area2b.
 - 2026-11-23: East ramps mirrored from the west ones, landing hall and corridor into the dining concourse; clean full compile, shots/20261123-2308. Worktree ../gcs-gmod-eastramps.
 - 2026-11-24: chain stopped after 5 sessions as "no-progress": chain_loop fingerprints the local HANDOFF.md, but sessions merge via worktrees so the shared clone never changes. Fix: tools/chain_stop.py (fingerprint = origin/main head) as --stop-cmd; restarted for the remaining 25. Chainwright gap: default check should follow the remote branch.
+- 2026-11-24: Release 0.2.0 (lower level). Full compile clean, shots/20261124-0749, map labels east side, README/wiki/Workshop updated. build/ is gitignored and lives per worktree, so it has to be rebuilt each release (addon.json type map, tags scenic+realism).
