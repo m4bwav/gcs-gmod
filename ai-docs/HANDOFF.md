@@ -73,6 +73,7 @@ Updated: 2026-11-23
 - Lunette relief: alternate voussoirs of the middle hood ring stand 6 u proud, cream keystone at each crown. shots/20261123-1949.
 
 ## Next
+- FIRST: the public-repo milestone (Directive below, steps 1-4), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
 1. Zodiac figures have outlines now; real animal/human drawings would be the next step. Lunette hoods have voussoirs and keystones; garland carving would be a normal map.
 2. Booth interior is in; could add clerks' props or brighter interior light.

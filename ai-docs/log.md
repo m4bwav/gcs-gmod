@@ -37,3 +37,4 @@
 - 2026-11-23: Created private m4bwav/gcs-gmod and pushed main (there was never a remote; pass 23's 'push failed' was a misreport). Sessions push main after each merge.
 - 2026-11-23: Sign-off set still unanswered. Lunette relief: alternating proud voussoirs and a keystone per hood. Clean full compile, shots/20261123-1949.
 - 2026-11-23: A Bash 'wait for chain_loop' via ps/pgrep matched nothing on Windows and started a second loop at once; killed by PID. Wait on the loop's PID with PowerShell Wait-Process instead.
+- 2026-11-23: Merge gotcha: when the shared clone has another session's uncommitted log.md line, `git stash; git merge --ff-only; git stash pop`, then keep both lines. `git worktree remove` after a failed merge in a `;` chain deletes the worktree but leaves the branch.
