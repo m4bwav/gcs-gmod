@@ -1,6 +1,6 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (repo public; wiki waits on Mark's first-page click; sign-off page waiting on Mark)
+Status: in progress (repo public, wiki live; sign-off page waiting on Mark)
 Updated: 2026-11-23
 
 - Prompt: plans/2026-11-23-gcs-gmod-continue-prompt.md
@@ -105,7 +105,7 @@ Updated: 2026-11-23
 - Uncapped fps: `UNCAP=1 sh tools/shots.sh` adds +fps_max 0 +mat_vsync 0. shots/20261123-2124: 676-896 fps (worst floor_east), so even a GPU at a fifth of the 5060 Ti clears 100 fps. Budget is not a concern at this detail level.
 
 ## Next
-- FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
+- Wiki is live (notes/2026-11-23-github-wiki.md); update it from docs/wiki/ when the map changes.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
 1. Zodiac figures are recognisable silhouettes now; finer line drawings inside them (eyes, fur, folds) could follow. Lunette hoods have voussoirs and keystones; garland carving would be a normal map.
 2. Booth interior is in and brighter; clerks' props could follow. Ticket windows have TICKETS plaques and marble reveals and segmental arched heads and bracket lamps; clerks could follow.
@@ -126,7 +126,6 @@ Updated: 2026-11-23
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.
 
 ## Waiting on Mark
-- One click: save any first page at https://github.com/m4bwav/gcs-gmod/wiki/_new (GitHub has no API to create a wiki repo). Then: `wikiwright.py preflight m4bwav/gcs-gmod --clone ../gcs-gmod.wiki`, copy docs/wiki/*.md into the clone (replace the placeholder Home), commit, push, `wikiwright.py live m4bwav/gcs-gmod ../gcs-gmod.wiki`, write ai-docs/notes/<date>-github-wiki.md.
 - askwright set ask/concourse-signoff (2 questions: upload now or keep detailing; which gaps first). Served at http://127.0.0.1:62012/ on 2026-11-23; `ask.py serve ask/concourse-signoff --detach` restarts it.
 
 ## Directive from Mark (2026-11-23)
@@ -143,4 +142,4 @@ Mark approved making m4bwav/gcs-gmod public. Do it as one milestone, before more
 4. GitHub wiki with wikiwright: Home, Building the map, Tools, Reference photos and accuracy, Roadmap (area order from the plan), Changelog. Check every page is live.
 Push main after every merge.
 
-Public-repo milestone steps 1-3 done 2026-11-23 (audit, README+banner+LICENSE+SECURITY, flipped public with topics and description). Step 4 (wiki) drafted in docs/wiki/, passes wikiwright check and everwrite; push waits on the first-page click.
+Public-repo milestone steps 1-3 done 2026-11-23 (audit, README+banner+LICENSE+SECURITY, flipped public with topics and description). Step 4 (wiki) live 2026-11-23, 6 pages, 0 failures.

@@ -57,3 +57,4 @@
 - 2026-11-23: Sign-off set still unanswered, wiki repo still missing. Shot rig now writes fps.txt; 146-147 fps flat at all 11 cameras (capped). No map change, so no recompile. Worked in worktree ../gcs-gmod-fps (since removed).
 
 - 2026-11-23: UNCAP=1 option in tools/shots.sh; uncapped fps 676-896 per camera (shots/20261123-2124). Sign-off set still unanswered, wiki repo still absent.
+- 2026-11-23: Mark saved the wiki's first page; pushed docs/wiki/ to the wiki, live check 6 pages 0 failures. Public-repo milestone done. Sign-off set still unanswered.
