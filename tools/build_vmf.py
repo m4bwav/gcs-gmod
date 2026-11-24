@@ -399,11 +399,13 @@ def build():
     # Balconies at both ends with a parapet.
     for sgn in (-1, 1):
         xa, xb = sorted((sgn*HX, sgn*(HX-BALC_D)))
-        ents.append(ent("func_detail", solids=box(xa, -HY, BALC_Z-24, xb, HY, BALC_Z, TEX_TRIM)))
+        ents.append(ent("func_detail", solids=box(xa, -HY, BALC_Z-24, xb, HY, BALC_Z, TEX_CREAM)))
         rx = sgn*(HX-BALC_D)
         ra, rb = sorted((rx, rx+sgn*-16))
         for y0, y1 in ((-HY, -24*FT), (24*FT, HY)):
-            ents.append(ent("func_detail", solids=box(ra, y0, BALC_Z, rb, y1, BALC_Z+42, TEX_TRIM)))
+            # Cream marble parapet with a brass handrail on top, like the stair balustrades.
+            ents.append(ent("func_detail", solids=box(ra, y0, BALC_Z, rb, y1, BALC_Z+42, TEX_CREAM)))
+            ents.append(ent("func_detail", solids=box(ra-2, y0, BALC_Z+42, rb+2, y1, BALC_Z+46, TEX_GOLD)))
 
     # Double staircases: two flights per end, landing on the balcony.
     rise, run = 12, 18
@@ -414,7 +416,7 @@ def build():
             for k in range(steps):
                 xs = sgn*(HX-BALC_D) - sgn*(steps-k)*run
                 xa, xb = sorted((xs, xs+sgn*run))
-                ents.append(ent("func_detail", solids=box(xa, y0, 0, xb, y1, (k+1)*rise, TEX_TRIM)))
+                ents.append(ent("func_detail", solids=box(xa, y0, 0, xb, y1, (k+1)*rise, TEX_CREAM)))
             # Solid cream balustrades on both sides with a brass handrail, newel at the foot.
             xf, xt = sgn*(HX-BALC_D) - sgn*steps*run, sgn*(HX-BALC_D)
             for ya, yb in ((y0-18, y0), (y1, y1+18)):
