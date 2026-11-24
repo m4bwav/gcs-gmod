@@ -247,8 +247,8 @@ def build():
     W(box(-HX, HY, SPRING, HX, HY+WALL, SPRING+8, TEX_TRIM))
 
     # End walls with three tall arched windows (blockout: rectangular openings into glowing alcoves).
-    win_w, win_z0, win_z1 = 26*FT, BALC_Z + 16*FT, SPRING + 20*FT
-    win_zc = SPRING + 28*FT                 # the centre window rises higher, under the crown
+    win_w, win_z0, win_z1 = 26*FT, BALC_Z + 16*FT, SPRING + 22*FT
+    win_zc = SPRING + 29*FT + 6                # the centre window rises higher, under the crown
     centres = [-31*FT, 0, 31*FT]            # close-set, as in the photos: narrow piers between
     for sgn in (-1, 1):
         xin, xout = sgn*HX, sgn*(HX+WALL)
