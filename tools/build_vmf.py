@@ -420,7 +420,17 @@ def build():
     oct8 = lambda r: ngon(0, 0, r, 8, math.pi/8)
     det = lambda *a: ents.append(ent("func_detail", solids=prism(*a)))
     det(oct8(13*FT), 0, 3*FT, TEX_CREAM)
-    det(oct8(12.5*FT), 3*FT, 8*FT, TEX_DIM)
+    # Glass is a thin translucent ring; inside, a cream counter runs round under the
+    # glass and a cream cabinet core holds up the clock column, lit warm.
+    ring = lambda ro, ri, z0, z1, tex: [det(ccw([ro[i], ro[(i+1) % 8], ri[(i+1) % 8], ri[i]]), z0, z1, tex)
+                                        for i in range(8)]
+    ring(oct8(12.5*FT), oct8(12.4*FT), 3*FT, 8*FT, "gcs/booth_glass")
+    ring(oct8(12.4*FT), oct8(10.5*FT), 3*FT, 4*FT, TEX_CREAM)
+    ring(oct8(12.4*FT), oct8(10.4*FT), 4*FT, 4*FT+2, TEX_GOLD)
+    det(oct8(4*FT), 3*FT, 8*FT, TEX_CREAM)
+    det(oct8(4.3*FT), 7*FT, 8*FT, TEX_GOLD)
+    ents.append(ent("light", (0, 7*FT, 7*FT), _light="255 215 150 30"))
+    ents.append(ent("light", (0, -7*FT, 7*FT), _light="255 215 150 30"))
     for x, y in oct8(13*FT):
         det(ngon(x, y, 6, 4, math.pi/4), 3*FT, 8*FT, TEX_GOLD)
     # Brass grille on the glass: two mullions per face, a counter ledge and a top rail.
