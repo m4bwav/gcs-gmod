@@ -43,4 +43,4 @@
 - 2026-11-23: Sign-off set still unanswered, wiki repo still missing (git ls-remote .wiki.git: not found). Flag resized to the sourced 48 ft (48x25). Clean compile, shots/20261123-2003.
 - 2026-11-23: Sign-off set still unanswered, wiki repo still missing. Ticket windows detailed (counter, brass grille, lintel). Clean full compile, shots/20261123-2007.
 - 2026-11-23: Sign-off set still unanswered, wiki repo still missing. TICKETS plaques on the ticket-window lintels; a +y face mapped with u [1 0 0] reads mirrored from the hall, use [-1 0 0]. Clean compile, shots/20261123-2014.
-- 2026-11-23: Sign-off set still unanswered, wiki repo still missing. Cream marble reveals framing each ticket window. Clean compile, shots/20261123-2018.
+- 2026-11-23: Sign-off set still unanswered, wiki repo still missing. Cream marble reveals framing each ticket window. Clean compile, shots/20261123-2022 (first run in a worktree; removing the worktree deleted its untracked shots, so take shots in the main clone).

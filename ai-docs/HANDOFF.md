@@ -80,7 +80,7 @@ Updated: 2026-11-23
 
 - TICKETS plaques: bronze plaque with gold 5x7 lettering centred on each ticket-window lintel (tickets.vtf from tools/make_board.py, gcs/tickets lit; FACEUV _tickets_uv maps one strip per 16 ft pitch, u flipped). shots/20261123-2014/tickets_crop.jpg.
 
-- Ticket-window reveals: 10 u cream marble jambs frame each window's glass. shots/20261123-2018/board.jpg.
+- Ticket-window reveals: 10 u cream marble jambs frame each window's glass. shots/20261123-2022/board.jpg.
 
 ## Next
 - FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
