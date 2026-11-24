@@ -88,6 +88,8 @@ Updated: 2026-11-23
 
 - Balconies: cream marble parapets with a brass handrail, cream balcony slabs and stair treads (were grey stock trim). shots/20261123-2041/east_balcony.jpg.
 
+- Cream marble: tools/make_walls.py writes cream_marble.vtf (seamless pale marble, thin warm veins); gcs/cream uses it (was stained stock plaster that read muddy on stair balustrades); pilaster plinths cream instead of grey trim. shots/20261123-2047/floor_east.jpg.
+
 ## Next
 - FIRST: publish the wiki once Mark has saved a first page (preflight below), unless the sign-off set is answered.
 0. Read ask/concourse-signoff (ask.py read); if Mark says upload, do the first Workshop upload (gmad + gmpublish, attribution for CC BY/BY-SA refs). Otherwise work his ticked gaps first.
