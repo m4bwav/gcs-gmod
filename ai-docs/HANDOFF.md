@@ -54,7 +54,7 @@ Updated: 2026-11-23
 
 - End windows close-set (26 ft wide at y=0/�31 ft, heads SPRING+20/+28 ft), window spots softened (110, cone 65), flag moved to the north centre bay hanging from a gold pole (camera flag looks north). shots/20261123-1851.
 
-- Flag horizontal like the photo: 38x20 ft, stripes across, union upper left (flag.vtf 512x256). shots/20261123-1855.
+- Flag horizontal like the photo: 38x20 ft, stripes across, union upper left (flag.vtf 512x256). shots/20261123-1857.
 
 ## Next
 0. From shots/20261123-1851 compare: the end windows are still a little short of the arch; the booth glass and the stairs read flat.

@@ -24,4 +24,5 @@
 - 2026-11-23: Taller end windows (centre one higher under the crown), deeper great arch soffit, cornice modillion band. Clean compile, shots/20261123-1844.
 - 2026-11-23: vault_up camera sat inside the booth clock column (black shot); moved to x=-600. Ashlar paler cream. Clean compile, shots/20261123-1847.
 - 2026-11-23: End windows moved closer together and taller, floor sun spots softened, flag moved into the north centre bay. Clean compile, shots/20261123-1851.
-- 2026-11-23: Flag now hangs horizontally (38x20 ft, texture no longer transposed). Clean compile, shots/20261123-1855. Python rewrites turned make_board.py LF into CRLF; strip CR after scripted edits.
+- 2026-11-23: Flag now hangs horizontally (38x20 ft, texture no longer transposed). Clean compile, shots/20261123-1857. Python rewrites turned make_board.py LF into CRLF; strip CR after scripted edits.
+- 2026-11-23: git worktree remove --force deletes untracked shots/ in the worktree; take shots from the main checkout after merging.
