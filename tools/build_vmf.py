@@ -17,6 +17,7 @@ BAYS = 5                                    # bays along each long wall, one lun
 WALL = 64
 BALC_Z = 26 * FT                            # balcony floor height
 BALC_D = 22 * FT                            # balcony depth from the end wall
+ARCH_W, ARCH_TOP, ARCH_D = 18 * FT, 21 * FT, 16 * FT   # floor arcade under each balcony
 
 # src/materials/gcs: stock HL2 textures tinted to colours sampled from refs/photos.
 TEX_FLOOR = "gcs/floor"
@@ -30,6 +31,7 @@ TEX_DIM = "gcs/window_dim"
 TEX_CREAM = "gcs/cream"
 TEX_CLOCK = "gcs/clock"
 TEX_BULB = "gcs/bulb"
+TEX_COFFER = "gcs/coffer"
 NODRAW = "tools/toolsnodraw"
 
 _id = [0]
@@ -47,6 +49,8 @@ def dot(a, b): return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]
 
 # Texture scale per material (default 0.25); smaller floor tiles read closer to the photos.
 SCALE = {TEX_FLOOR: 0.1875,   # 512 px texture = 2x2 slabs of 4 ft
+         TEX_WALL: 0.5,        # 8 courses x 4 blocks over 21 ft: 2.7 x 5.3 ft blocks
+         TEX_COFFER: 0.375,    # 2x2 coffers over 16 ft
          TEX_CLOCK: 30/256}    # one 256 px dial per 30 u clock side
 USHIFT = {TEX_CLOCK: 128}      # centre the dial on faces spanning -15..15
 
@@ -206,7 +210,34 @@ def build():
     for sgn in (-1, 1):
         xin, xout = sgn*HX, sgn*(HX+WALL)
         xa, xb = min(xin, xout), max(xin, xout)
-        W(box(xa, -HY, -WALL, xb, HY, win_z0, TEX_WALL))
+        # Floor-level arcade under the balcony: three arched openings into short dark passages.
+        W(box(xa, -HY, -WALL, xb, HY, 0, TEX_WALL))
+        W(box(xa, -HY, ARCH_TOP, xb, HY, win_z0, TEX_WALL))
+        aedges = [-HY] + [e for c in centres for e in (c-ARCH_W//2, c+ARCH_W//2)] + [HY]
+        for j in range(0, len(aedges), 2):
+            W(box(xa, aedges[j], 0, xb, aedges[j+1], ARCH_TOP, TEX_WALL))
+        for c in centres:
+            r = ARCH_W//2
+            arc = halfdisc(c, ARCH_TOP - r, r, 8)
+            for i in range(8):
+                corner = (c + r, ARCH_TOP) if i < 4 else (c - r, ARCH_TOP)
+                ents.append(ent("func_detail", solids=xprism(ccw([corner, arc[i], arc[i+1]]), xa, xb, TEX_WALL)))
+            # Cream archivolt proud of the wall, on cream jambs.
+            fa, fb = sorted((xin, xin - sgn*8))
+            outer, inner = halfdisc(c, ARCH_TOP - r, r + 18), halfdisc(c, ARCH_TOP - r, r)
+            for i in range(len(outer)-1):
+                ents.append(ent("func_detail", solids=xprism(ccw([outer[i], outer[i+1], inner[i+1], inner[i]]), fa, fb, TEX_CREAM)))
+            for y0 in (c - r - 18, c + r):
+                ents.append(ent("func_detail", solids=box(fa, y0, 0, fb, y0 + 18, ARCH_TOP - r, TEX_CREAM)))
+            # Passage behind, sealed: floor, ceiling, sides, dim glass doors at the back.
+            pa, pb = sorted((xout, xout + sgn*ARCH_D))
+            W(box(pa, c - r - WALL, -WALL, pb, c + r + WALL, 0, TEX_FLOOR))
+            W(box(pa, c - r - WALL, ARCH_TOP, pb, c + r + WALL, ARCH_TOP + WALL, TEX_TRIM))
+            W(box(pa, c - r - WALL, 0, pb, c - r, ARCH_TOP, TEX_WALL))
+            W(box(pa, c + r, 0, pb, c + r + WALL, ARCH_TOP, TEX_WALL))
+            ba, bb = sorted((xout + sgn*ARCH_D, xout + sgn*(ARCH_D + WALL)))
+            W(box(ba, c - r - WALL, -WALL, bb, c + r + WALL, ARCH_TOP + WALL, TEX_DIM))
+            ents.append(ent("light", (sgn*(HX + WALL + ARCH_D//2), c, ARCH_TOP - 48), _light="255 220 170 14"))
         W(box(xa, -HY, win_z1, xb, HY, CROWN+WALL, TEX_WALL))
         edges = [-HY] + [e for c in centres for e in (c-win_w//2, c+win_w//2)] + [HY]
         for j in range(0, len(edges), 2):
@@ -254,7 +285,7 @@ def build():
         for i in range(N):
             a0, a1 = math.pi*i/N, math.pi*(i+1)/N
             xa, xb = sorted((sgn*HX, sgn*(HX-6*FT)))
-            ents.append(ent("func_detail", solids=xprism(ccw([e(0, 0, a0), e(0, 0, a1), e(8*FT, 7*FT, a1), e(8*FT, 7*FT, a0)]), xa, xb, TEX_TRIM)))
+            ents.append(ent("func_detail", solids=xprism(ccw([e(0, 0, a0), e(0, 0, a1), e(8*FT, 7*FT, a1), e(8*FT, 7*FT, a0)]), xa, xb, TEX_COFFER)))
             xa, xb = sorted((sgn*(HX-5*FT), sgn*(HX-6*FT-8)))
             ents.append(ent("func_detail", solids=xprism(ccw([e(8*FT, 7*FT, a0), e(8*FT, 7*FT, a1), e(9*FT, 8*FT, a1), e(9*FT, 8*FT, a0)]), xa, xb, TEX_GOLD)))
 

@@ -44,18 +44,18 @@ for c in range(COURSES):
         x0, x1 = max(0, b*bw - off), min(N, (b+1)*bw - off)
         if x1 <= x0:
             continue
-        tint = 1 + rng.uniform(-.07, .07)
+        tint = 1 + rng.uniform(-.04, .04)
         warm = np.array([1, 1 + rng.uniform(-.03, .02), 1 + rng.uniform(-.06, .03)])
         img[c*ch:(c+1)*ch, x0:x1] = HONEY * warm * tint
 img *= (1 + grain * 0.12)[..., None]
 joint = np.zeros((N, N), bool)
 for c in range(COURSES):
-    joint[c*ch:c*ch+3, :] = True
+    joint[c*ch:c*ch+2, :] = True
     off = (bw // 2) * (c % 2)
     for b in range(BLOCKS + 1):
         x = (b*bw - off) % N
-        joint[c*ch:(c+1)*ch, x:x+3] = True
-img[joint] = HONEY * 1.08
+        joint[c*ch:(c+1)*ch, x:x+2] = True
+img[joint] = img[joint] * 0.6 + HONEY * 1.04 * 0.4
 save(np.clip(img, 0, 255).astype(np.uint8), "wall_ashlar")
 
 # Vault: dark teal with soft cloudiness and gold stars of a few sizes.
@@ -70,3 +70,19 @@ for _ in range(70):
     a = np.clip(1 - d / r, 0, 1)[..., None]
     img = img * (1 - a) + GOLD * a
 save(np.clip(img, 0, 255).astype(np.uint8), "vault_sky")
+
+# Coffers for the great end arch soffit: 2x2 cream panels, stepped shadowed frames, gold rosettes.
+CREAM = np.array([226, 208, 168], float)
+img = CREAM * (1 + fbm(N, 5) * 0.06)[..., None]
+y, x = np.mgrid[0:N, 0:N]
+cell = N // 2
+u, w = x % cell, y % cell
+edge = np.minimum(np.minimum(u, cell - 1 - u), np.minimum(w, cell - 1 - w))
+img[edge < 40] *= 0.82
+img[edge < 24] *= 1.12
+img[edge < 12] *= 0.9
+img[(edge < 40) & ((u < w) ^ (u < cell - w))] *= 0.92
+d = np.hypot(u - cell/2, w - cell/2)
+a = np.clip((34 - d) / 4, 0, 1)[..., None]
+img = img * (1 - a) + GOLD * (0.85 + 0.15*np.cos(d/2))[..., None] * a
+save(np.clip(img, 0, 255).astype(np.uint8), "coffer")
