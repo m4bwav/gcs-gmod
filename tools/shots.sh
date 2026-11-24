@@ -15,4 +15,5 @@ PID=$(python "$QW" pid gmod.exe 2>/dev/null | python -c "import json,sys; m=json
 [ -n "$PID" ] && taskkill //PID "$PID" //F
 rm -f "$G/garrysmod/lua/autorun/client/gcs_shots.lua" "$D/gcs_shots_go.txt"
 stamp=$(date +%Y%m%d-%H%M); mkdir -p "shots/$stamp"
-cp "$D"/gcs_shots/*.jpg "shots/$stamp/" 2>/dev/null; ls "shots/$stamp"
+cp "$D"/gcs_shots/*.jpg "$D"/gcs_shots/fps.txt "shots/$stamp/" 2>/dev/null; ls "shots/$stamp"
+cat "shots/$stamp/fps.txt" 2>/dev/null

@@ -20,6 +20,7 @@ local CAMS = {
   { "balc_arcade",  Vector(-1450, 140, 380), Angle(-2, 180, 0) },
 }
 local i, cam, frames = 0, nil, 0
+local ft, fpslog = 0, {}  -- frame time summed over frames 31-89, one fps line per camera
 
 hook.Add("CalcView", "gcs_shots", function()
   if cam then return { origin = cam[2], angles = cam[3], fov = 90, drawviewer = false } end
@@ -28,12 +29,16 @@ hook.Add("HUDShouldDraw", "gcs_shots", function() if cam then return false end e
 hook.Add("PostRender", "gcs_shots", function()
   if not cam then return end
   frames = frames + 1
+  if frames > 30 then ft = ft + RealFrameTime() end
   if frames < 90 then return end
+  fpslog[#fpslog + 1] = string.format("%-14s %4.0f fps", cam[1], 59 / math.max(ft, 1e-4))
+  ft = 0
   local data = render.Capture({ format = "jpg", quality = 92, x = 0, y = 0, w = ScrW(), h = ScrH() })
   file.Write("gcs_shots/" .. cam[1] .. ".jpg", data)
   i, frames = i + 1, 0
   cam = CAMS[i]
   if not cam then
+    file.Write("gcs_shots/fps.txt", table.concat(fpslog, "\n") .. "\n")
     file.Write("gcs_shots/done.txt", "done")
     timer.Simple(1, function() RunConsoleCommand("quit") end)
   end
