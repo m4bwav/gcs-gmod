@@ -6,7 +6,7 @@ This is the first release. The Main Concourse is done; more of the terminal (Van
 [h2]Details[/h2]
 [list]
 [*]Map name: gm_grand_central
-[*]Two spawns: the west balcony and the concourse floor
+[*]Two spawns: the west balcony and the concourse floor (see the level map in the screenshots)
 [*]Runs at hundreds of frames per second on a mid-range PC
 [*]Needs nothing else installed (Half-Life 2 textures ship with Garry's Mod)
 [/list]
