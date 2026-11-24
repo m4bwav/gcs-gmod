@@ -201,8 +201,8 @@ def build():
     W(box(-HX, HY, SPRING, HX, HY+WALL, SPRING+8, TEX_TRIM))
 
     # End walls with three tall arched windows (blockout: rectangular openings into glowing alcoves).
-    win_w, win_z0, win_z1 = 22*FT, BALC_Z + 8*FT, SPRING + 16*FT
-    centres = [-36*FT, 0, 36*FT]
+    win_w, win_z0, win_z1 = 28*FT, BALC_Z + 6*FT, SPRING + 16*FT
+    centres = [-38*FT, 0, 38*FT]
     for sgn in (-1, 1):
         xin, xout = sgn*HX, sgn*(HX+WALL)
         xa, xb = min(xin, xout), max(xin, xout)
@@ -233,14 +233,22 @@ def build():
     for sgn in (-1, 1):
         xm0, xm1 = sorted((sgn*(HX+WALL//2), sgn*(HX+WALL//2+4)))
         for c in centres:
-            for k in range(1, 6):
-                y = c - win_w//2 + k*win_w//6
+            for k in range(1, 8):
+                y = c - win_w//2 + k*win_w//8
                 ents.append(ent("func_detail", solids=box(xm0, y-3, win_z0, xm1, y+3, win_z1, TEX_GRID)))
             for z in range(win_z0 + 48, win_z1, 96):
                 ents.append(ent("func_detail", solids=box(xm0, c-win_w//2, z-3, xm1, c+win_w//2, z+3, TEX_GRID)))
         xa, xb = sorted((sgn*HX, sgn*(HX-24)))
         for j in range(0, len(edges), 2):
             ents.append(ent("func_detail", solids=box(xa, edges[j], SPRING-40, xb, edges[j+1], SPRING, TEX_GOLD)))
+        # Paired engaged columns on the piers between the windows, gilded capitals.
+        xc0, xc1 = sorted((sgn*HX, sgn*(HX-3*FT)))
+        for py in (-19*FT, 19*FT):
+            for dy in (-3*FT, 3*FT):
+                y = py + dy
+                ents.append(ent("func_detail", solids=box(xc0, y-18, BALC_Z+42, xc1, y+18, SPRING-64, TEX_CREAM)))
+                ents.append(ent("func_detail", solids=box(xc0, y-24, SPRING-64, xc1, y+24, SPRING-40, TEX_GOLD)))
+                ents.append(ent("func_detail", solids=box(xc0, y-24, BALC_Z+42, xc1, y+24, BALC_Z+60, TEX_TRIM)))
         # The great end arch: a deep soffit following the vault, gilded on its inner edge.
         e = lambda dy, dz, a: (round((HY-dy)*math.cos(a)), round(SPRING + (VRISE-dz)*math.sin(a)))
         for i in range(N):

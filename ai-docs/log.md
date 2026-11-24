@@ -16,3 +16,4 @@
 - 2026-11-23: Booth clock as brushes + procedural opal dial VTF (UnlitGeneric); per-material u shift (USHIFT) centres a texture on a face. Clean compile, shots/20261123-1807.
 - 2026-11-23: Brush chandeliers (gold drum, 16 bulbs each, gcs/bulb UnlitGeneric) on both long walls; clock dials on -x/+y faces unmirrored by negating u. Clean compile, shots/20261123-1811.
 - 2026-11-23: Departure board + hanging flag (tools/make_board.py, FACEUV in build_vmf.py). First 80 ft board was hidden behind the south pilasters; 40 ft fits the centre bay. Clean compile, shots/20261123-1818.
+- 2026-11-23: End walls v2 (wider windows, paired engaged columns), clean compile, shots/20261123-1821. Compare vs photos: next gaps are the balcony arcade, coffered arch soffit and brick-like ashlar.
