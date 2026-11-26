@@ -1006,7 +1006,11 @@ def platforms(W, ents):
     cx0, cx1 = CAR_X
     T_TR = "gcs/train"
 
-    def car(x0, x1, y0, y1, doors):
+    # Sides carry make_board.py train_side (windows, doors at L/4 and 3L/4, one car per
+    # 1024 px); one material per car (train_a/b/c, same vtf) so each car's u starts at y0.
+    def car(x0, x1, y0, y1, doors, side):
+        FACEUV[side] = lambda n, su=CAR_L / 1024, sv=150 / 256: None if abs(n[0]) < 0.5 else (
+            "[0 1 0 %g] %g" % (-y0 / su, su), "[0 0 -1 %g] %g" % (150 / sv, sv))
         det(box(x0, y0, -PIT + 8, x1, y1, 0, T_TR))                         # underframe
         det(box(x0 + 4, y0 + 4, 0, x1 - 4, y1 - 4, 1, "gcs/car_floor"))      # floor
         det(box(x0, y0, 150, x1, y1, 162, T_TR))                            # roof
@@ -1015,16 +1019,13 @@ def platforms(W, ents):
         for wx0, wx1, dd in ((x0, x0 + 4, ()), (x1 - 4, x1, doors)):
             cuts = [y0 + 4] + [e for d in dd for e in (d - 36, d + 36)] + [y1 - 4]
             for j in range(0, len(cuts), 2):
-                a, b = cuts[j], cuts[j + 1]
-                det(box(wx0, a, 0, wx1, b, 62, T_TR))
-                det(box(wx0, a, 62, wx1, b, 96, "gcs/vh_glass"))
-                det(box(wx0, a, 96, wx1, b, 150, T_TR))
+                det(box(wx0, cuts[j], 0, wx1, cuts[j + 1], 150, side))
             for d in dd:
-                det(box(wx0, d - 36, 88, wx1, d + 36, 150, T_TR))
+                det(box(wx0, d - 36, 88, wx1, d + 36, 150, side))
     d1, d2 = CAR_Y0 + CAR_L // 4, CAR_Y0 + 3 * CAR_L // 4
-    car(cx0, cx1, CAR_Y0, CAR_Y0 + CAR_L, (d1, d2))
-    car(cx0, cx1, CAR_Y0 + CAR_L + 24, CAR_Y0 + 2 * CAR_L + 24, ())
-    car(414, 534, CAR_Y0 + 10 * FT, CAR_Y0 + 10 * FT + CAR_L, ())
+    car(cx0, cx1, CAR_Y0, CAR_Y0 + CAR_L, (d1, d2), "gcs/train_a")
+    car(cx0, cx1, CAR_Y0 + CAR_L + 24, CAR_Y0 + 2 * CAR_L + 24, (), "gcs/train_b")
+    car(414, 534, CAR_Y0 + 10 * FT, CAR_Y0 + 10 * FT + CAR_L, (), "gcs/train_c")
     for y in range(CAR_Y0 + 60, CAR_Y0 + CAR_L - 40, 54):
         if any(abs(y - d) < 60 for d in (d1, d2)):
             continue

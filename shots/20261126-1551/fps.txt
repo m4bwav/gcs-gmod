@@ -1,0 +1,4 @@
+plat_head        20 fps
+plat_long        20 fps
+car_door         20 fps
+car_in           20 fps

@@ -1,11 +1,11 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.18.0 released 2026-11-26: Madison stainless escalators, mural and shops; Graybar stone walls and kiosks; Lexington shop windows; Market storefront; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 33)
+Updated: 2026-11-26 (session 34)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 33 of 60 (started 2026-11-25)
-- Budget 2026-11-26 (session 32): unique verts 52,999/65,536 (80.9%), faces 31,956 (48.8%), BSP 97.4 MB of 150 MB.
+- Chain: session 34 of 60 (started 2026-11-25)
+- Budget 2026-11-26 (session 34): unique verts 52,873/65,536 (80.7%), faces 31,870 (48.6%), BSP 100.5 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
 
@@ -167,7 +167,8 @@ Updated: 2026-11-26 (session 33)
 - Session 31 (2026-11-26): Graybar kiosks are newsstands (make_board.py gb_kiosk: magazine racks behind lit glass, bronze frame, counter; gcs/gb_kiosk UnlitGeneric, FACEUV 512 px = 120 u on all four walls). Biltmore Room wall clock above the arrivals board: Tiffany dial (gcs/bilt_clock reuses clock_out.vtf) 6 ft across in a gold ring, 20-gon prisms in bilt_decor. Full compile clean, 52,804 verts, BSP 97.3 MB, 139-147 fps, shots/20261126-1500 (gb_in, bilt_board). Not released.
 - Session 32 (2026-11-26): Market display window east of the door now bows 16 u into Lexington Passage (8 flat panes, sill and head follow the curve, gold mullions every other pane); brass guard rail in front is a model (make_models.py mk_rail, prop_static angles 0 -90 0). New camera mk_window. Full compile clean, 52,999 verts, 146 fps, shots/20261126-1513/mk_window.jpg. Not released.
 - Session 33 (2026-11-26): Market bow window panes show lit market stalls (make_board.py mk_display: green-striped awning, stall boards, tiers of fruit, bread, cheese; gcs/mk_display UnlitGeneric, FACEUV 1024 px over the 316 u run). Texture only. Full compile clean, 52,999 verts, BSP 99.5 MB, 146 fps, shots/20261126-1521/mk_window.jpg. Not released.
-- NEXT (session 34): compare.py over all areas and fix the worst mismatch. Conversion pass 2 if verts pass 55k. Release once a few detail passes stack up (BSP near 100 MB of 150: watch texture sizes).
+- Session 34 (2026-11-26): compare over all areas (shots/cmp34: newest shot per camera from every shots/ folder) put the upper-platform cars worst: blank white boxes with a continuous dark-green glass band. make_board.py train_side paints an M7 side (stainless panels, a window per bay, sliding doors at L/4 and 3L/4 with yellow sills, MTA roundel); each car side is now one brush per segment (glass band and spandrels gone) with gcs/train_a/b/c (one vmt per car, same vtf, so u starts at each car's y0). Full compile clean, 52,873 verts (-126), BSP 100.5 MB, shots/20261126-1551 (car_door). Shot rig printed 20 fps but the images are fine. Not released.
+- NEXT (session 35): compare.py again and fix the worst mismatch (candidates from cmp34: dining concourse pillars and bare walls, Oyster Bar entrance glass doors, platform head railing and ad light boxes). Conversion pass 2 if verts pass 55k. Release soon: sessions 31-34 are unreleased; BSP is 100.5 MB of 150, watch texture sizes. Conversion pass 2 if verts pass 55k. Release once a few detail passes stack up (BSP near 100 MB of 150: watch texture sizes).
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
