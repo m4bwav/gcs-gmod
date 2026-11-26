@@ -916,6 +916,12 @@ LZ = LC - 15 * FT                          # lower platform top, -308: 15 ft cle
 LSH_Y0 = DIN_Y + WALL + 40 * FT            # lower shed south face
 for _gx, _n in LGATES:
     FACEUV["gcs/track%d" % _n] = _sign_uv(_gx, LC + 28)
+# Track 61 (chamber 8): through the lower shed's north wall over the east platform and its two
+# tracks, a dim fenced stretch running on to the freight elevator that took cars up to the hotel
+# garage; an old steel car stands on Track 61 (refs: M42 photos only, no platform photo; layout is
+# a flagged ruling: the real Track 61 lies in the Lex yard under the Waldorf, off the upper level).
+T61_X0 = 300
+T61_Y1 = SH_Y1 + WALL + 120 * FT
 
 
 def platforms(W, ents):
@@ -1028,7 +1034,8 @@ def lower_tracks(W, ents):
     W(box(-SH_X - WALL, Y0 - WALL, LC, SH_X + WALL, Y1 + WALL, LC + 16, T_DARK))
     W(box(-SH_X - WALL, Y0, Z0 - PIT - WALL, -SH_X, Y1, LC, T_DARK))
     W(box(SH_X, Y0, Z0 - PIT - WALL, SH_X + WALL, Y1, LC, T_DARK))
-    W(box(-SH_X - WALL, Y1, Z0 - PIT - WALL, SH_X + WALL, Y1 + WALL, LC, T_DARK))
+    W(box(-SH_X - WALL, Y1, Z0 - PIT - WALL, T61_X0 - WALL, Y1 + WALL, LC, T_DARK))   # north wall, open
+    W(box(T61_X0 - WALL, Y1, LC - 16, SH_X + WALL, Y1 + WALL, LC, T_DARK))            # on Track 61
     W(box(-SH_X, Y0, Z0 - PIT - WALL, SH_X, Y0 + HEAD, Z0, T_TILE))
     for x0, x1 in PLATS:
         W(box(x0, Y0 + HEAD, Z0 - PIT - WALL, x1, Y1, Z0, T_TILE))
@@ -1466,6 +1473,42 @@ def madison(W, ents):
                     disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
+def track61(W, ents):
+    decor = []
+    det = decor.append
+    x0, x1, y0, y1, z = T61_X0, SH_X, SH_Y1 + WALL, T61_Y1, LZ
+    W(box(x0, SH_Y1, z - PIT - WALL, 540, y1, z - PIT, "gcs/ballast"))
+    W(box(540, SH_Y1, z - PIT - WALL, 780, y1, z, "gcs/plat_tile"))
+    W(box(780, SH_Y1, z - PIT - WALL, x1, y1, z - PIT, "gcs/ballast"))
+    W(box(x0 - WALL, SH_Y1, LC, x1 + WALL, y1 + WALL, LC + 16, "gcs/shed_dark"))
+    W(box(x0 - WALL, y0, z - PIT - WALL, x0, y1, LC, "gcs/shed_dark"))
+    W(box(x1, y0, z - PIT - WALL, x1 + WALL, y1, LC, "gcs/shed_dark"))
+    W(box(x0 - WALL, y1, z - PIT - WALL, x1 + WALL, y1 + WALL, LC, "gcs/shed_dark"))
+    # Rails carried on from the shed, bumpers at the north end; the freight elevator door.
+    for t in (474, 900):
+        for r in (-30, 26):
+            det(box(t + r, y0, z - PIT, t + r + 4, y1 - 60, z - PIT + 6, "gcs/steel"))
+        det(box(t - 40, y1 - 60, z - PIT, t + 40, y1 - 36, z - 12, "gcs/steel"))
+    det(box(570, y1 - 24, z, 750, y1, z + 150, "gcs/steel"))
+    det(box(580, y1 - 26, z, 740, y1 - 24, z + 140, "gcs/shed_dark"))
+    det(box(560, y1 - 30, z + 150, 760, y1, z + 162, "gcs/plat_edge"))
+    det(box(540, y0, z, 564, y1 - 30, z + 1, "gcs/plat_edge"))
+    det(box(756, y0, z, 780, y1 - 30, z + 1, "gcs/plat_edge"))
+    # The old steel car on Track 61.
+    det(box(840, y0 + 200, z - PIT + 8, 960, y0 + 200 + 60 * FT, z + 150, "gcs/train"))
+    # Cage lamps, dim.
+    for y in range(y0 + 200, y1 - 100, 420):
+        det(box(652, y - 8, LC - 20, 668, y + 8, LC, "gcs/bulb"))
+        ents.append(ent("light", (660, y, LC - 40), _light="255 200 140 22"))
+    ents.append(ent("env_cubemap", (660, (y0 + y1)//2, z + 64)))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="t61_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+    # Chain-link fence across the opening, a gate gap on the platform.
+    fence = (box(x0, y0 - 6, z - PIT, 620, y0 - 2, LC - 16, "metal/metalfence001a")
+             + box(700, y0 - 6, z - PIT, x1, y0 - 2, LC - 16, "metal/metalfence001a"))
+    ents.append(ent("func_brush", solids=fence, targetname="t61_fence", Solidity="2"))
+
+
 # The Biltmore Room (area 6 extra): the old arrival room off the concourse's northwest corner
 # (photos: Biltmore_Room_at_Grand_Central_Terminal, MTA_Reopens_Biltmore_Room, the schedule board
 # and clock). Cream marble walls and floor, a beamed and coffered ceiling, dentil cornice, the
@@ -1569,7 +1612,7 @@ def build():
 
     # Sealed outer hull (nodraw) so the interior can't leak while geometry is rough.
     O = 256
-    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, PY0 - 2*WALL - 128, SH_Y1+WALL+64, SKYZ+WALL+64
+    X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, PY0 - 2*WALL - 128, T61_Y1+WALL+64, SKYZ+WALL+64
     X0, X1 = min(X0, EX0 - 2*WALL - 128), max(X1, EX1 + 2*WALL + 128, LEX_X1 + WALL + 128, MK_X1 + WALL + 128)
     ZB = MD_Z - PIT - 2*WALL - 64
     W(box(X0, Y0, ZB, X1, Y1, ZB+64, NODRAW))
@@ -1608,6 +1651,7 @@ def build():
     transit_store(W, ents)
     vanderbilt_link(W, ents)
     madison(W, ents)
+    track61(W, ents)
     biltmore(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
