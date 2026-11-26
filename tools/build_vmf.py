@@ -498,6 +498,29 @@ def lower_level(W, ents):
             pyl.append(box(x - 20, y - 20, Z, x + 20, y + 20, Z + 30, TEX_TRIM))
             pyl.append(box(x - 19, y - 19, -WALL - 64, x + 19, y + 19, -WALL - 58, TEX_GOLD))
             pyl.append(box(x - 22, y - 22, -WALL - 58, x + 22, y + 22, -WALL - 40, TEX_CREAM))
+    # Lower information booth (like the real one): stone octagon with a marble counter,
+    # a brass-framed glass ring with posts at the corners, gold cornice and a stone cap
+    # under the brass clock column. In din_decor, so it costs no world vertices.
+    oc = lambda r: ngon(0, 0, r, 8, math.pi/8)
+    bp = lambda poly, z0, z1, tex: pyl.append(prism(poly, z0, z1, tex))
+    bp(oc(7*FT + 3), Z, Z + 6, TEX_TRIM)
+    bp(oc(7*FT), Z + 6, Z + 40, TEX_CREAM)
+    bp(oc(7*FT + 5), Z + 40, Z + 44, TEX_CREAM)
+    bp(oc(7*FT + 3), Z + 44, Z + 46, TEX_GOLD)
+    go, gi = oc(6.8*FT), oc(6.7*FT)
+    for i in range(8):
+        a, b = go[i], go[(i+1) % 8]
+        bp(ccw([a, b, gi[(i+1) % 8], gi[i]]), Z + 46, Z + 92, "gcs/booth_glass")
+        bp(ngon(a[0], a[1], 4, 4, math.pi/4), Z + 46, Z + 92, TEX_GOLD)
+        mx, my = (a[0] + b[0])/2, (a[1] + b[1])/2
+        bp(ngon(mx, my, 2, 4, math.pi/4), Z + 46, Z + 92, TEX_GOLD)
+    bp(oc(5*FT), Z + 46, Z + 92, TEX_CREAM)
+    bp(oc(7*FT + 4), Z + 92, Z + 96, TEX_GOLD)
+    bp(oc(7*FT + 1), Z + 96, Z + 104, TEX_CREAM)
+    bp(oc(5*FT), Z + 104, Z + 110, TEX_CREAM)
+    bp(oc(2*FT), Z + 110, Z + 113, TEX_GOLD)
+    for s_ in (-1, 1):
+        ents.append(ent("light", (0, s_*6*FT, Z + 80), _light="255 220 160 20"))
     ents.append(ent("func_brush", solids="".join(pyl), targetname="din_decor", Solidity="2",
                     disableshadows="1", vrad_brush_cast_shadows="1"))
     for x in range(DIN_X0 + 160, DIN_X1 - 100, 240):
@@ -522,11 +545,8 @@ def lower_level(W, ents):
     for y in (-440, 0, 440):   # west end bay, so the first pylons are lit from both sides
         ents.append(ent("light", (DIN_X0 + 60, y, -WALL - 60), _light="255 215 170 30"))
     oct8 = lambda r: ngon(0, 0, r, 8, math.pi/8)
-    det(prism(oct8(7*FT), Z, Z + 42, TEX_CREAM))
-    det(prism(oct8(7*FT + 4), Z + 42, Z + 46, TEX_GOLD))
-    det(prism(oct8(1*FT), Z + 46, Z + 90, TEX_GOLD))
     # Brass column with a four-faced opal clock, like the one upstairs.
-    det(prism(oct8(10), Z + 46, -150, TEX_GOLD))
+    det(prism(oct8(10), Z + 104, -150, TEX_GOLD))
     det(prism([(-15, -15), (15, -15), (15, 15), (-15, 15)], -150, -120, TEX_CLOCK, TEX_GOLD))
     det(prism(oct8(20), -120, -116, TEX_GOLD))
     det(prism(oct8(10), -116, -104, TEX_GOLD))
