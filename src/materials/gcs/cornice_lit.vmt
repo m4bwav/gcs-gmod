@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "gcs/cornice_lit"
+	"$selfillum" "1"
+	"$selfillumtint" "[2 2 2]"
+	"$surfaceprop" "metal"
+}

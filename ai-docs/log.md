@@ -135,3 +135,4 @@
 - 2026-11-26: Session 41 lesson: src/gm_grand_central.vmf, src/packlist.txt and src/models/gcs/* are tracked generated files; git add them (models need -f) before merging, and git fetch before cutting a new worktree after a merge (s41b was cut from stale origin/main; fixed in PR #73).
 - 2026-11-26: Session 42 (driver run): Market door side lights now gcs/mk_display instead of flat lit door glass. FACEUV entries apply at box() time, so define one before the first brush that uses it. shots/20261126-1651. Branch s42.
 - 2026-11-26: session 43 released 0.18.3 (sessions 40-42) from the session 42 BSP; Workshop updated, tag v0.18.3.
+- 2026-11-26: Session 44 (driver run): lit cornice bulbs texture replaces the modillion bracket brushes; 53,486 -> 50,222 verts. Modillions every 24 u had hidden a first bulb row at 12 mod 24: check what sits in front of a face before texturing it. Branch s44.

@@ -1,0 +1,3 @@
+west_balcony    140 fps
+floor_east      146 fps
+east_balcony    147 fps

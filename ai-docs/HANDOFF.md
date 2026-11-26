@@ -1,11 +1,11 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.18.3 released 2026-11-26: platform ads, pit-end rail models, Market door side lights; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 43)
+Updated: 2026-11-26 (session 44)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 43 of 60 (started 2026-11-25)
-- Budget 2026-11-26 (session 41): unique verts 53,474/65,536 (81.6%), faces 32,300 (49.3%), BSP 107.3 MB of 150 MB.
+- Chain: session 44 of 60 (started 2026-11-25)
+- Budget 2026-11-26 (session 44): unique verts 50,222/65,536 (76.6%), faces 31,178 (47.6%), BSP 107.6 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
 
@@ -177,7 +177,8 @@ Updated: 2026-11-26 (session 43)
 - Session 41 (2026-11-26): pit-end brass railings on the upper and lower platforms are models (make_models.py pit_rail(L): pit_rail_240/420, turned posts about every 48 u, top and mid rail; build_vmf.py pit_rail() places prop_static angles 0 -90 0 plus a tools/toolsplayerclip box 72 u high so nobody walks into the pits). Full compile clean, 53,474 verts (-878), faces 32,300, BSP 107.3 MB, 146 fps, shots/20261126-1642 (plat_head, low_head). Nav not regenerated (clip sits where the solid rail was). Not released.
 - Session 42 (2026-11-26): compare over all areas (shots/cmp42, newest shot per camera) put the Market door worst: its side lights were flat orange slabs. They now show gcs/mk_display (lit stalls) like the real glazed storefront; the mk_display FACEUV moved above them (FACEUV is read when a box is made). Texture only: 53,474 verts, faces 32,300, BSP 107.3 MB, 146 fps, shots/20261126-1651/mk_door.jpg. Not released.
 - Release 0.18.3 (session 43, 2026-11-26): ships sessions 40-42. BSP reused from the session 42 full compile (vbspinfo: 53,474 verts, faces 32,300, 107.3 MB); nav reused from 0.18.0 (14:47; session 41 clips sit where the solid rails were). README, wiki Changelog, Workshop description and plat_head preview updated; tag v0.18.3. Level map unchanged (no new rooms).
-- NEXT (session 44): compare again; concourse next worst: vault lunettes over the side windows and the dark cornice band read weak against GCT_Main_Concourse.jpg.
+- Session 44 (2026-11-26): concourse springline cornice now carries a row of lit bulbs like GCT_Main_Concourse.jpg: make_board.py cornice_lit() (gold band, egg-and-dart, painted cream modillion brackets, warm bulbs on a $selfillum alpha mask, $selfillumtint 2), mapped by FACEUV on the cornice front face (bulbs at x = 6 mod 24). The ~275 modillion bracket brushes are gone (painted into the texture): verts 53,486 -> 50,222. Full compile clean, shots/20261126-1719 (floor_east, west_balcony). Not released yet.
+- NEXT (session 45): compare again; next worst in the concourse: the lunettes (photo: taller, darker glass with a fine grille and carved spandrel sculpture beside each), then cut release 0.18.4 with the cornice.
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

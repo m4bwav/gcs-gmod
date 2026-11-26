@@ -556,6 +556,46 @@ def ob_door():
     save(img, "ob_lead")
 
 
+def cornice_lit():
+    # 256x64 RGBA for the concourse springline cornice (GCT_Main_Concourse photo: a row of bare bulbs
+    # along the gilded cornice). Gold band, dark egg-and-dart groove, 4 warm bulbs per tile; alpha is
+    # the $selfillum mask so only the bulbs and their halo glow.
+    W, H = 256, 64
+    img = Image.new("RGB", (W, H), (176, 138, 70))
+    d = ImageDraw.Draw(img)
+    d.rectangle([0, 0, W, 6], fill=(214, 178, 104))
+    d.rectangle([0, 6, W, 9], fill=(120, 90, 44))
+    for x in range(0, W, 16):
+        d.ellipse([x + 3, 11, x + 13, 21], fill=(150, 112, 54), outline=(98, 72, 34))
+        d.line([(x, 11), (x, 22)], fill=(98, 72, 34), width=2)
+    d.rectangle([0, 23, W, 26], fill=(214, 178, 104))
+    d.rectangle([0, H - 6, W, H], fill=(120, 90, 44))
+    for x in range(0, W + 1, 64):   # cream modillion brackets between the bulbs (were brushes)
+        d.rectangle([x - 12, 27, x + 12, H], fill=(96, 74, 40))
+        d.rectangle([x - 10, 27, x + 10, H - 2], fill=(226, 206, 160))
+        d.rectangle([x - 10, 27, x + 10, 31], fill=(246, 230, 190))
+        d.ellipse([x - 7, H - 16, x + 7, H - 4], outline=(150, 120, 74), width=2)
+    mask = Image.new("L", (W, H), 0)
+    m = ImageDraw.Draw(mask)
+    for k in range(4):
+        cx, cy = k * 64 + 32, 44
+        for r, c, a in ((19, (255, 214, 150), 90), (14, (255, 236, 190), 190), (10, (255, 250, 232), 255)):
+            d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=c)
+            m.ellipse([cx - r, cy - r, cx + r, cy + r], fill=a)
+    img.save("shots/tex/cornice_lit.png")
+    a = np.dstack([np.asarray(img), np.asarray(mask)])
+    tex = vtf.VTF(W, H, fmt=vtf.ImageFormats.RGBA8888)
+    tex.get().copy_from(a.tobytes(), vtf.ImageFormats.RGBA8888)
+    tex.compute_mipmaps()
+    with open("src/materials/gcs/cornice_lit.vtf", "wb") as f:
+        tex.save(f)
+    nl, tab = chr(10), chr(9)
+    with open("src/materials/gcs/cornice_lit.vmt", "w", newline="") as f:
+        f.write('"LightmappedGeneric"' + nl + "{" + nl + tab + '"$basetexture" "gcs/cornice_lit"' + nl
+                + tab + '"$selfillum" "1"' + nl + tab + '"$selfillumtint" "[2 2 2]"' + nl + tab + '"$surfaceprop" "metal"' + nl + "}" + nl)
+    print("wrote src/materials/gcs/cornice_lit.vtf")
+
+
 board()
 flag()
 tickets()
@@ -577,3 +617,4 @@ gb_kiosk()
 mk_display()
 ob_door()
 plat_ads()
+cornice_lit()
