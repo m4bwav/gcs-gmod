@@ -101,7 +101,7 @@ def fbm_tile(n, octaves=5):
 
 # Cream marble for balustrades, parapets, booth base and plinths: smooth pale field,
 # soft cloudy tone and a few thin warm-grey veins (sin of warped coordinates), no joints.
-CREAM = np.array([236, 222, 194], float)
+CREAM = np.array([196, 180, 152], float)  # session 49, was 236 222 194 (washed out vs photos)
 yy, xx = np.mgrid[0:N, 0:N] / N
 warp = fbm_tile(N, 5)
 vein = np.abs(np.sin(2*np.pi*(xx + yy) * 2 + warp * 9))
