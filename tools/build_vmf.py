@@ -604,7 +604,9 @@ def vanderbilt(W, ents):
         det(box(VH_X1 - d, VH_Y0 + d, z0, VH_X1, VH_Y1 - d, z1, tex))
     for x0, y0, x1, y1 in ((VH_X0, VH_Y1 - 6, VH_PX0 - 24, VH_Y1), (VH_PX1 + 24, VH_Y1 - 6, VH_X1, VH_Y1),
                            (VH_X0, VH_Y0, VS_X0, VH_Y0 + 6), (VS_X1, VH_Y0, VH_X1, VH_Y0 + 6),
-                           (VH_X0, VH_Y0 + 6, VH_X0 + 6, VH_Y1 - 6), (VH_X1 - 6, VH_Y0 + 6, VH_X1, VH_Y1 - 6)):
+                           (VH_X0, VH_Y0 + 6, VH_X0 + 6, VH_Y1 - 6),
+                           (VH_X1 - 6, VH_Y0 + 6, VH_X1, (VH_Y0 + VH_Y1) // 2 - 6 * FT),   # stops at the store door
+                           (VH_X1 - 6, (VH_Y0 + VH_Y1) // 2 + 6 * FT, VH_X1, VH_Y1 - 6)):
         det(box(x0, y0, 0, x1, y1, 8 * FT, TEX_CREAM))
     # Each end wall carries a large moulded panel frame (cream, gold inner bead) above the door height.
     for xw, s in ((VH_X0, 1), (VH_X1, -1)):
