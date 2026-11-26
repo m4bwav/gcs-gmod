@@ -1,10 +1,10 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.16.0 released 2026-11-26: Grand Hyatt entrance; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 15)
+Status: in progress (0.16.1 released 2026-11-26: Lexington detail; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
+Updated: 2026-11-26 (session 16)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 15 of 60 (started 2026-11-25)
+- Chain: session 16 of 60 (started 2026-11-25)
 - Budget 2026-11-25 (vbspinfo, 0.6.0): unique verts 46,661/65,536 (71%), faces 41%, planes 22%, brushes 6%, BSP 59.6 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
@@ -149,8 +149,9 @@ Updated: 2026-11-26 (session 15)
 - Release 0.16.0 (session 13, 2026-11-26): Grand Hyatt entrance: build_vmf.py hyatt(), HY_*/HA_*; door HY_D0..D1 (12x14 ft) in Lexington Passage's north wall east of Graybar (shop fronts there skipped), six-riser stair up 6 ft, atrium 60x60x40 ft with a window_glass roof, octagonal fountain with brass jet, wood reception desk, planters, glass panel west. Decor func_detail: as a func_brush it did not draw (second time, after transit_store: both small rooms behind a doorway; other func_brushes fine; investigate). Cameras hy_door, hy_atrium. 51,937 verts, 146 fps, shots/20261126-0125 (door) and -0132 (atrium). No refs fetched; placement and size are a flagged ruling.
 - Detail (session 14, 2026-11-26, not released yet): Lexington Passage ceiling 22 -> 15 ft (photos 10-12 ft; 15 clears the 14 ft Market and Hyatt doors; ruling flagged), west header box fills arch top to ceiling; the 36 u dado no longer runs across the Graybar, Hyatt and Market openings (it was a waist-high ledge blocking them). 51,902 verts, 146 fps, shots/20261126-0752 and -0757.
 - Detail (session 15, 2026-11-26, not released yet): sill check for the dado bug: Vanderbilt Hall's east-wall dado (6 u x 8 ft) ran across the Transit Museum store door; now split at the door (shots/20261126-0804/tm_door.jpg). Graybar, Biltmore and the other VH walls are clear. make_map.py labels Lexington, Graybar, Market, Hyatt, Transit store, One Vanderbilt link/lobby, Campbell, lower tracks, Track 61, Madison approach; west-of-concourse brushes standing on the main floor now draw. Full compile 51,899 verts (79%), faces 47.6%, BSP 70.3 MB.
+- Release 0.16.1 (session 16, 2026-11-26): ships sessions 14-16. Lexington Passage: gold cross beams every 20 ft (func_brush lex_decor) and brass dome pendants as a model (make_models.py lex_pendant, prop_static, replaces the brush bulbs). Nav regenerated (1,526 areas). Full compile 51,991 verts, BSP 70.4 MB, 146 fps, shots/20261126-0811/lex_in.jpg.
 - ALL NINE CHAMBERS from the prompt are in (lower tracks, Lexington + Graybar, Market, Campbell, Transit store, One Vanderbilt link, Madison, Track 61, Hyatt).
-- NEXT: detail lane: run compare.py against refs per area and fix the worst mismatch first (Lexington: coffer/beam bands and brass pendant domes, navy blade sign; check other door sills for the same dado-across-opening bug; Market and Campbell textures; Madison look: white panels, colour-coded light; Graybar painted vault murals; arrivals-board lettering in the Biltmore Room); investigate the func_brush-not-drawing bug; conversion pass 2 if verts pass 55k; Then the detail lane (compare.py) and conversion pass 2 (stair steps and balustrades, plat_decor, bilt_decor).
+- NEXT: detail lane: run compare.py against refs per area and fix the worst mismatch first (Lexington: navy blade sign; check other door sills for the same dado-across-opening bug; Market and Campbell textures; Madison look: white panels, colour-coded light; Graybar painted vault murals; arrivals-board lettering in the Biltmore Room); investigate the func_brush-not-drawing bug; conversion pass 2 if verts pass 55k; Then the detail lane (compare.py) and conversion pass 2 (stair steps and balustrades, plat_decor, bilt_decor).
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

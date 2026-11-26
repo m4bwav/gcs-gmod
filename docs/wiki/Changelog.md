@@ -1,3 +1,9 @@
+## 0.16.1 (2026-11-26)
+- Lexington Passage: ceiling lowered to 15 ft, beam bands every 20 ft and brass dome pendants (models).
+- The dado no longer runs across the Graybar, Hyatt, Market and Transit Museum store doorways.
+- Level map labels every chamber.
+- Nav mesh regenerated.
+
 ## 0.16.0 (2026-11-26)
 - Grand Hyatt entrance: a door in Lexington Passage's north wall leads up a short stair into a glass-roofed atrium lobby with a fountain, reception desk and planters.
 - Nav mesh regenerated.
