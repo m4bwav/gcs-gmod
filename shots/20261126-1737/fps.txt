@@ -1,0 +1,3 @@
+west_balcony    138 fps
+flag            146 fps
+vault_up        146 fps

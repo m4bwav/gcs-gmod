@@ -2038,8 +2038,10 @@ def build():
                 ents.append(ent("func_detail", solids=box(cx-w, ma, z-3, cx+w, mb, z+3, TEX_GRID)))
             # Lunette: half-disc glass standing on the cornice, poking through the vault.
             la, lb = inset(88, 92)
-            # gcs/lunette: blue-grey glass with the fine bronze grille painted in (was 5 mullion brushes).
-            FACEUV["gcs/lunette"] = lambda n, s=0.75: None if abs(n[1]) < 0.5 else ("[1 0 0 0] %g" % s, "[0 0 -1 0] %g" % s)
+            # gcs/lunette (512x256): one texture spans the whole half-disc (384x192 u at 0.75): low glass arc,
+            # carved cream tympanum above it (Flag_Ceiling photo; was 5 mullion brushes, then all glass).
+            FACEUV["gcs/lunette"] = lambda n, s=0.75, ox=-(cx - 16*FT)/0.75, oy=(SPRING + 16*FT)/0.75: None if abs(n[1]) < 0.5 else (
+                "[1 0 0 %g] %g" % (ox, s), "[0 0 -1 %g] %g" % (oy, s))
             ents.append(ent("func_detail", solids=yprism(halfdisc(cx, SPRING, 16*FT), la, lb, "gcs/lunette")))
             # Sculpted cream surround (Flag_Ceiling photo): a wide stepped hood, gold-edged.
             for r0, r1, d0, d1, tex in ((16, 19, 92, 112, TEX_CREAM), (19, 23, 92, 104, TEX_CREAM), (23, 24, 92, 100, TEX_GOLD)):

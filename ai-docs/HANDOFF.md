@@ -1,10 +1,10 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.18.4 released 2026-11-26: cornice bulbs, lunette glass; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 46)
+Updated: 2026-11-26 (session 47)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 46 of 60 (started 2026-11-25)
+- Chain: session 47 of 60 (started 2026-11-25)
 - Budget 2026-11-26 (session 45): unique verts 49,702/65,536 (75.8%), faces 30,988 (47.3%), BSP 107.9 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
@@ -180,7 +180,8 @@ Updated: 2026-11-26 (session 46)
 - Session 44 (2026-11-26): concourse springline cornice now carries a row of lit bulbs like GCT_Main_Concourse.jpg: make_board.py cornice_lit() (gold band, egg-and-dart, painted cream modillion brackets, warm bulbs on a $selfillum alpha mask, $selfillumtint 2), mapped by FACEUV on the cornice front face (bulbs at x = 6 mod 24). The ~275 modillion bracket brushes are gone (painted into the texture): verts 53,486 -> 50,222. Full compile clean, shots/20261126-1719 (floor_east, west_balcony). Not released yet.
 - Session 45 (2026-11-26): lunettes now show gcs/lunette (make_board.py lunette(): blue-grey glass, fine bronze grille with heavy bars every 64 px, faint $selfillum), FACEUV 0.75 on the y faces; the 5 mullion brushes per lunette are gone. Full compile clean, 49,702 verts (-520), faces 30,988, BSP 107.9 MB, 146 fps, shots/20261126-1727 (flag.jpg, vault_up.jpg). Not done: taller lunettes and the carved spandrel figures (would need vault rework; a normal-mapped relief texture on the spandrels is the cheap route).
 - Release 0.18.4 (session 46, 2026-11-26): ships sessions 44-45. BSP reused from the session 45 full compile (vbspinfo: 49,702 verts, faces 30,988, 107.9 MB); nav reused from 0.18.0 (decor only). README, wiki Changelog, Workshop description and vault_up preview updated; tag v0.18.4. Level map unchanged.
-- NEXT (session 47): compare again (tools/compare.py, newest shot per camera) for the next worst concourse mismatch; candidates: carved spandrel figures beside the lunettes (normal-mapped relief texture on the spandrels), taller lunettes.
+- Session 47 (2026-11-26): lunettes are now mostly carved tympanum like Grand_Central_Station_Flag_Ceiling.jpg: make_board.py lunette() is 512x256 RGBA (low glass arc with bronze grille, $selfillum on glass only via alpha; cream relief above: eagle with spread wings, garlands, cartouche, rosettes, a blurred height map shaded as lit from above), mapped once per lunette (FACEUV offsets from cx and SPRING). Texture only: 49,702 verts, faces 30,988, BSP 108.3 MB, 146 fps, shots/20261126-1737 (cmp_lunette.jpg, flag.jpg). Not released.
+- NEXT (session 48): compare again for the next worst concourse mismatch; candidates: pointed (not round) lunette hoods, finer relief carving, ceiling-colour/vault-lighting match (real vault is darker teal).
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
