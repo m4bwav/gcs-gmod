@@ -1619,12 +1619,15 @@ def build():
     # Mullion grid in the end windows, gilded band across each end at the springline.
     for sgn in (-1, 1):
         xm0, xm1 = sorted((sgn*(HX+WALL//2), sgn*(HX+WALL//2+4)))
-        for c in centres:
-            for k in range(1, 8):
-                y = c - win_w//2 + k*win_w//8
-                ents.append(ent("func_detail", solids=box(xm0, y-3, win_z0, xm1, y+3, win_zc if c == 0 else win_z1, TEX_GRID)))
-            for z in range(win_z0 + 48, win_zc if c == 0 else win_z1, 96):
-                ents.append(ent("func_detail", solids=box(xm0, c-win_w//2, z-3, xm1, c+win_w//2, z+3, TEX_GRID)))
+        # One alpha-tested grid panel per window (gcs/endwin_a/b/c share endwin_grid.vtf: 8 columns
+        # across the window, a bar every 96 u); was ~50 bar brushes per window (vertex budget).
+        for c, m in zip(centres, ("a", "b", "c")):
+            su, sv = win_w / 512, 1.5
+            FACEUV["gcs/endwin_" + m] = (lambda n, c=c, su=su, sv=sv: ("[0 1 0 %g] %g" % (-(c - win_w/2)/su, su),
+                                                                     "[0 0 -1 %g] %g" % ((win_z0 - 48)/sv, sv))
+                                         if abs(n[0]) > 0.5 else None)
+            ents.append(ent("func_detail", solids=box(xm0, c - win_w//2, win_z0, xm1, c + win_w//2,
+                                                      win_zc if c == 0 else win_z1, "gcs/endwin_" + m)))
         xa, xb = sorted((sgn*HX, sgn*(HX-24)))
         for j in range(0, len(edges), 2):
             ents.append(ent("func_detail", solids=box(xa, edges[j], SPRING-40, xb, edges[j+1], SPRING, TEX_GOLD)))
