@@ -1,0 +1,2 @@
+flag            146 fps
+vault_up        146 fps

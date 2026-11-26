@@ -596,6 +596,31 @@ def cornice_lit():
     print("wrote src/materials/gcs/cornice_lit.vtf")
 
 
+def lunette():
+    # 256x256 for the concourse lunettes (Flag_Ceiling / Main_Concourse photos: deep blue-grey glass
+    # behind a fine bronze grille, heavier bars every 64 px). Painted grille replaces the 5 mullion
+    # brushes per lunette (vertex budget); a faint $selfillum keeps the glass reading as daylight.
+    W = 256
+    rng = np.random.default_rng(45)
+    g = np.zeros((W, W, 3), np.float32)
+    y = np.linspace(0, 1, W)[:, None]
+    g[..., 0], g[..., 1], g[..., 2] = 70 + 40 * y, 86 + 40 * y, 104 + 36 * y
+    g += rng.normal(0, 6, (W, W, 1))
+    img = Image.fromarray(np.clip(g, 0, 255).astype(np.uint8), "RGB")
+    d = ImageDraw.Draw(img)
+    for k in range(0, W, 16):
+        d.line([(k, 0), (k, W)], fill=(58, 50, 38), width=2)
+        d.line([(0, k), (W, k)], fill=(58, 50, 38), width=2)
+    for k in range(0, W, 64):
+        d.rectangle([k - 4, 0, k + 3, W], fill=(44, 38, 28))
+        d.rectangle([0, k - 4, W, k + 3], fill=(44, 38, 28))
+    save(img, "lunette")
+    nl, tab = chr(10), chr(9)
+    with open("src/materials/gcs/lunette.vmt", "w", newline="") as f:
+        f.write('"LightmappedGeneric"' + nl + "{" + nl + tab + '"$basetexture" "gcs/lunette"' + nl
+                + tab + '"$selfillum" "1"' + nl + tab + '"$selfillumtint" "[0.55 0.6 0.7]"' + nl + tab + '"$surfaceprop" "glass"' + nl + "}" + nl)
+
+
 board()
 flag()
 tickets()
@@ -618,3 +643,4 @@ mk_display()
 ob_door()
 plat_ads()
 cornice_lit()
+lunette()

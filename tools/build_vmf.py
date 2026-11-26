@@ -2038,7 +2038,9 @@ def build():
                 ents.append(ent("func_detail", solids=box(cx-w, ma, z-3, cx+w, mb, z+3, TEX_GRID)))
             # Lunette: half-disc glass standing on the cornice, poking through the vault.
             la, lb = inset(88, 92)
-            ents.append(ent("func_detail", solids=yprism(halfdisc(cx, SPRING, 16*FT), la, lb, TEX_GLOW)))
+            # gcs/lunette: blue-grey glass with the fine bronze grille painted in (was 5 mullion brushes).
+            FACEUV["gcs/lunette"] = lambda n, s=0.75: None if abs(n[1]) < 0.5 else ("[1 0 0 0] %g" % s, "[0 0 -1 0] %g" % s)
+            ents.append(ent("func_detail", solids=yprism(halfdisc(cx, SPRING, 16*FT), la, lb, "gcs/lunette")))
             # Sculpted cream surround (Flag_Ceiling photo): a wide stepped hood, gold-edged.
             for r0, r1, d0, d1, tex in ((16, 19, 92, 112, TEX_CREAM), (19, 23, 92, 104, TEX_CREAM), (23, 24, 92, 100, TEX_GOLD)):
                 fa, fb = inset(d0, d1)
@@ -2050,10 +2052,6 @@ def build():
             # Keystone at the crown of the hood.
             ka, kb = inset(92, 118)
             ents.append(ent("func_detail", solids=box(cx - 2*FT, ka, SPRING + 15*FT, cx + 2*FT, kb, SPRING + 25*FT, TEX_CREAM)))
-            ra, rb = inset(92, 96)
-            for j in (-2, -1, 0, 1, 2):
-                top = SPRING + int(16*FT*math.sqrt(1 - (j*6/16)**2)) - 4
-                ents.append(ent("func_detail", solids=box(cx + j*6*FT - 3, ra, SPRING, cx + j*6*FT + 3, rb, top, TEX_GRID)))
             ents.append(ent("light", (cx, yw - sgn*200, SPRING + 80), _light="200 220 240 8"))
         ca, cb = inset(0, 88)
         # Front face carries the row of cornice bulbs (gcs/cornice_lit, a bulb every 24 u, shifted to
