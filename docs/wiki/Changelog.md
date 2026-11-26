@@ -1,3 +1,7 @@
+## 0.18.4 (2026-11-26)
+- Main Concourse: a row of lit bulbs runs along the cornice under the vault, with the brackets painted into its frieze.
+- Main Concourse: the lunettes in the vault show blue-grey glass behind a fine bronze grille.
+
 ## 0.18.3 (2026-11-26)
 - Track platforms: backlit ad boxes on the shed walls and hanging at each platform head.
 - Track platforms, upper and lower: the brass railings round the track ends are turned-post models.
