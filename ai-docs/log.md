@@ -131,3 +131,4 @@
 - 2026-11-26: session 37: lower info booth rebuilt (stone counter, brass-framed glass, cornice) in din_decor; 53,803 verts; shots/20261126-1614. A prism whose z0 equals z1 gives vbsp "bad normal": check column ends after moving a cap.
 - 2026-11-26: Session 38 (driver run): Oyster Bar entrance leaded-glass doors and side lights (ob_door/ob_lead textures). 53,815 verts, shots/20261126-1623. Branch s38.
 - 2026-11-26: Session 40: platform ad light boxes (plat_ads); 54,352 verts. make_board.py: a heredoc with backslash escapes is blocked by a hook, use Edit; srctools VTF needs power-of-two sizes.
+- 2026-11-26: Session 41: pit-end railings as pit_rail_240/420 models with player clips; 54,352 -> 53,474 verts. shots/20261126-1642. Branch s41.

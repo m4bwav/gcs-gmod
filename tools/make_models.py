@@ -364,6 +364,21 @@ def mk_rail():
     return m
 
 
+def pit_rail(L):
+    """Brass railing across a track pit end, origin at its west end on the platform floor,
+    running L u along +x: turned posts every 48 u or so, top rail and a lower rail."""
+    def build():
+        m = Mesh()
+        n = max(2, round(L / 48))
+        for i in range(n + 1):
+            x = L * i / n
+            m.lathe("gold", [(0, 0), (2.4, 0), (2.4, 2), (1, 4), (1, 40), (1.8, 42), (0, 43)], x, 0, 0, 8)
+        m.tube("gold", (0, 0, 42), (L, 0, 42), 1.8, 1.8, 10)
+        m.tube("gold", (0, 0, 21), (L, 0, 21), 1, 1, 8)
+        return m
+    return build
+
+
 def root_chandelier():
     """Grand Central Market's Root Chandelier (Donald Lipski, 1999): an upturned tree's roots in
     pale silver spreading from the dome crown, crystal drops on the tips. Origin at the ceiling,
@@ -392,7 +407,7 @@ def root_chandelier():
     return m
 
 
-MODELS = {"mk_rail": mk_rail, "root_chandelier": root_chandelier, "lex_pendant": lex_pendant, "eagle": eagle, "taxi": taxi, "statue_group": statue_group, "chandelier": chandelier, "vh_chandelier": vh_chandelier}
+MODELS = {"pit_rail_240": pit_rail(240), "pit_rail_420": pit_rail(420), "mk_rail": mk_rail, "root_chandelier": root_chandelier, "lex_pendant": lex_pendant, "eagle": eagle, "taxi": taxi, "statue_group": statue_group, "chandelier": chandelier, "vh_chandelier": vh_chandelier}
 
 
 def build():
