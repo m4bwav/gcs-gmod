@@ -1,3 +1,7 @@
+## 0.10.0 (2026-11-25)
+- Grand Central Market: through a brass-framed door off Lexington Passage, a 240 ft market hall with open counters and glass cases along both walls, drum pendants down the aisle, a raised centre dome with a chandelier, and Lexington Avenue doors at the east end.
+- Nav mesh regenerated.
+
 ## 0.9.0 (2026-11-25)
 - Graybar Passage: north off Lexington Passage, five groin-vaulted cream bays with a brass chandelier in each, pilasters with gold capitals, two glass kiosks and lit doors at the north end.
 - Nav mesh regenerated.

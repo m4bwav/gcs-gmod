@@ -92,3 +92,4 @@
 - 2026-11-25: chain session 3: lower tracks detail pass 1 + 0.7.0 (platforms raised for a 15 ft ceiling, gate lamps, nav regenerated). A shots run returned nothing after a nav run: game load passed shots.sh's 300 s wait; now WAIT (default 180 x 5 s).
 - 2026-11-25: chain session 4: Lexington Passage blockout, 0.8.0. Found 0.7.0 shipped an old BSP (vbsp failure hidden by a pipe); compile.sh now fails loudly. Overlapping background compile+shots jobs give wireframe 20 fps shots: one GMod job at a time.
 - 2026-11-25: chain session 5: Graybar Passage, 0.9.0 (51,435 verts). The 0.9.0 commit also holds the Market draft (market(), not in the 0.9.0 gma).
+- 2026-11-25: chain session 6: Grand Central Market, 0.10.0 (52,461 verts). Rule: never compile while nav.sh or shots.sh has GMod running (compile copies the BSP into garrysmod/maps).
