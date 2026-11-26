@@ -1,11 +1,11 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.16.1 released 2026-11-26: Lexington detail; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 20)
+Status: in progress (0.17.0 released 2026-11-26: detail pass, Biltmore board, Graybar vaults, Madison; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
+Updated: 2026-11-26 (session 21)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 20 of 60 (started 2026-11-25)
-- Budget 2026-11-25 (vbspinfo, 0.6.0): unique verts 46,661/65,536 (71%), faces 41%, planes 22%, brushes 6%, BSP 59.6 MB of 150 MB.
+- Chain: session 21 of 60 (started 2026-11-25)
+- Budget 2026-11-26 (vbspinfo, 0.17.0): unique verts 52,091/65,536 (79.5%), faces 47.8%, planes 23.7%, BSP 76.8 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
 
@@ -153,8 +153,9 @@ Updated: 2026-11-26 (session 20)
 - Detail (session 18, 2026-11-26, not released yet): Biltmore Room arrivals board has split-flap lettering (make_board.py arrivals(): four panels split by the mullions, ARRIVALS header, six trains each with short origin names; gcs/arrivals UnlitGeneric, FACEUV on the -y face). Texture only: 52,035 verts, BSP 71.5 MB, 146 fps, shots/20261126-1114/bilt_board.jpg.
 - Detail (session 19, 2026-11-26, not released yet): Graybar Passage painted vaults: tools/make_mural.py draws gcs/gb_mural in plan (pale sky field, gold ribs on the diagonals, ochre key border, crown sunburst, star wreath per cell); graybar() maps it top-down per bay (FACEUV, scale GB_BAY/512) so ribs land on the groins. Texture only: 52,035 verts, BSP 72.5 MB, 146 fps, shots/20261126-1121/gb_up.jpg. Ruling (flagged): stylised pattern, not a copy of the real murals (no ref fetched).
 - Detail (session 20, 2026-11-26, not released yet): Grand Central Madison look: tools/make_madison.py writes gcs/md_panel (white enamel wall panels) and gcs/md_ceil (white slats with a light strip); madison() uses them for walls and ceilings (was cream marble and coffers). Texture only: 52,035 verts, BSP 74.6 MB, 146 fps, shots/20261126-1128/md_conc.jpg. Still open there: pale terrazzo floor instead of plat_tile, colour-coded light, big screens.
+- Release 0.17.0 (session 21, 2026-11-26): ships sessions 18-21. Madison: pale terrazzo floor (gcs/md_floor, make_madison.py) and two navy LIRR departure screens on the concourse north wall either side of the escalators (make_board.py md_screen, gcs/md_screen UnlitGeneric, steel frame; one FACEUV mapping serves both, west screen 840 u = 3 widths west). New camera md_screens. 52,091 verts, 146 fps, shots/20261126-1139 and -1145. Nav from session 16 shipped (floors unchanged).
 - ALL NINE CHAMBERS from the prompt are in (lower tracks, Lexington + Graybar, Market, Campbell, Transit store, One Vanderbilt link, Madison, Track 61, Hyatt).
-- NEXT: detail lane: run compare.py against refs per area and fix the worst mismatch first (Lexington: navy blade sign; check other door sills for the same dado-across-opening bug; Market and Campbell textures; Madison: floor and screens (panels done session 20); Graybar vaults done session 19; arrivals-board lettering done session 18); conversion pass 2 if verts pass 55k; Then the detail lane (compare.py) and conversion pass 2 (stair steps and balustrades, plat_decor, bilt_decor).
+- NEXT: detail lane: run compare.py against refs per area and fix the worst mismatch first (Lexington: navy blade sign; check other door sills for the same dado-across-opening bug; Market and Campbell textures; Madison: colour-coded light (floor, panels, screens done); Graybar vaults done session 19; arrivals-board lettering done session 18); conversion pass 2 if verts pass 55k; Then the detail lane (compare.py) and conversion pass 2 (stair steps and balustrades, plat_decor, bilt_decor).
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

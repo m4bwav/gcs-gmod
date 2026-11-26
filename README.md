@@ -66,6 +66,7 @@ Drawn from the map source by `tools/make_map.py`: walls and fixtures at chest he
 - Track platforms (0.4.0): three brass-framed gates (Tracks 29, 30, 31) in the north wall lead to a low train shed with three island platforms in rose tile with yellow edges, riveted steel columns, fluorescent strips, a brass railing round the track ends, and three Metro-North cars; one stands open to walk through
 - The exterior (0.5.0): out through the Vanderbilt vestibule onto 42nd Street: the facade with three great arched windows between paired columns, oval windows, the GRAND CENTRAL TERMINAL attic inscription, the clock under the Glory of Commerce group, a balustraded terrace with a stair, the Park Avenue Viaduct across the street, office towers, the MetLife tower behind, and open sky
 - Grand Hyatt entrance (0.16.0): up a short stair from Lexington Passage, a glass-roofed atrium lobby with a fountain.
+- Detail pass (0.17.0): Biltmore arrivals lettering, painted Graybar vaults, a white-panelled Grand Central Madison with terrazzo floor and departure screens.
 - Lexington Passage detail (0.16.1): a lower beamed ceiling with brass dome pendants.
 - Track 61 (0.15.0): beyond a fence at the north end of the lower tracks, the dim secret platform and its freight elevator.
 - Grand Central Madison (0.14.0): from the dining concourse, long escalators down to the deep LIRR concourse, 140 ft below.

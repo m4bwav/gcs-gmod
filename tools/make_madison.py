@@ -1,4 +1,4 @@
-"""Grand Central Madison surfaces: gcs/md_panel (white enamel wall panels, 2 x 4 per tile,
+"""Grand Central Madison surfaces: gcs/md_floor (pale terrazzo), gcs/md_panel (white enamel wall panels, 2 x 4 per tile,
 thin grey joints, faint sheen streaks) and gcs/md_ceil (white ceiling slats with one bright
 linear light strip down the middle of each tile). At the default 0.25 scale a tile is
 128 u, so panels are about 5 x 2.7 ft and the light strips run every 10.7 ft.
@@ -37,6 +37,19 @@ for i in range(3):
 for j in range(5):
     d.line([(0, j * 128 % N), (N, j * 128 % N)], fill=(150, 154, 160), width=4)
 save(img.filter(ImageFilter.GaussianBlur(0.6)), "md_panel")
+
+# Floor: pale grey terrazzo, fine dark and white chips, faint joints every 256 px (8 ft at 0.25).
+base = np.full((N, N, 3), (206, 205, 200), np.float32) + rng.normal(0, 3, (N, N, 1))
+for col, n in (((120, 122, 126), 5000), ((250, 250, 246), 6000), ((168, 160, 150), 3000)):
+    ys, xs = rng.integers(0, N, n), rng.integers(0, N, n)
+    base[ys, xs] = col
+    base[(ys + 1) % N, xs] = col
+img = Image.fromarray(np.clip(base, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.5))
+d = ImageDraw.Draw(img)
+for i in range(3):
+    d.line([(i * 256 % N, 0), (i * 256 % N, N)], fill=(172, 172, 170), width=2)
+    d.line([(0, i * 256 % N), (N, i * 256 % N)], fill=(172, 172, 170), width=2)
+save(img, "md_floor")
 
 # Ceiling: white slats every 16 px, a glowing strip across the centre.
 img = Image.new("RGB", (N, N), (222, 224, 226))

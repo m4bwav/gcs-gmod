@@ -1448,7 +1448,7 @@ def madison(W, ents):
     det = decor.append
     x0, x1, hd = MD_X0, MD_X1, MD_HEAD
     zt, zm, zb = LOW_Z, LOW_Z - MD_DROP, MD_Z
-    T = "gcs/plat_tile"
+    T = "gcs/md_floor"
     # White enamel panels and slatted light ceilings (tools/make_madison.py), like the real hall.
     # Flat landing, run 1, mezzanine, run 2: floor and parallel ceiling slabs (xprism over y,z).
     flats = ((MD_Y0, MD_YA, zt), (MD_YB, MD_YC, zm))
@@ -1488,6 +1488,15 @@ def madison(W, ents):
         det(box(xx, -DIN_Y - 4, zt, xx + 10, -DIN_Y, zt + 16 * FT, TEX_GOLD))
     det(box(c0, py, zb, c1, py + 24, zb + 1, "gcs/plat_edge"))
     det(box(c0 + 100, y0 + 60, zb - PIT + 8, c1 - 100, y0 + 180, zb + 150, "gcs/train"))
+    # Departure screens (make_board.py md_screen) on the north wall either side of the escalators;
+    # 280 u wide, the west one 3 widths further west so one mapping serves both.
+    sz0, sz1, sx = zb + 7 * FT, zb + 7 * FT + 70, -200
+    FACEUV["gcs/md_screen"] = lambda n, su=280 / 1024, sv=70 / 256: (
+        ("[1 0 0 %g] %g" % (-sx / su, su), "[0 0 -1 %g] %g" % (sz1 / sv, sv)) if n[1] < -0.5 else None)
+    for a in (sx, sx - 840):
+        det(prism([(a, y1 - 4), (a + 280, y1 - 4), (a + 280, y1), (a, y1)], sz0, sz1, "gcs/md_screen", "gcs/steel"))
+        det(box(a - 6, y1 - 6, sz0 - 6, a + 286, y1, sz0, "gcs/steel"))
+        det(box(a - 6, y1 - 6, sz1, a + 286, y1, sz1 + 6, "gcs/steel"))
     for x in range(c0 + 100, c1, 200):
         det(box(x - 4, py + 60, zb + h - 8, x + 4, y1 - 60, zb + h, "gcs/fluor"))
     for x in range(c0 + 200, c1, 400):
