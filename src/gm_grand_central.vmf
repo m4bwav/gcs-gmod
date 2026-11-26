@@ -202378,9 +202378,9 @@ solid
 	{
 		"id" "19715"
 		"plane" "(-1540 1836 96) (-1180 1836 204) (-1180 1836 96)"
-		"material" "gcs/vh_glass"
-		"uaxis" "[1 0 0 0] 0.25"
-		"vaxis" "[0 0 -1 0] 0.25"
+		"material" "gcs/arrivals"
+		"uaxis" "[1 0 0 4380.44] 0.351562"
+		"vaxis" "[0 0 -1 483.556] 0.421875"
 		"rotation" "0"
 		"lightmapscale" "16"
 		"smoothing_groups" "0"
@@ -202389,7 +202389,7 @@ solid
 	{
 		"id" "19716"
 		"plane" "(-1180 1836 96) (-1180 1840 204) (-1180 1840 96)"
-		"material" "gcs/vh_glass"
+		"material" "gcs/arrivals"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -202400,7 +202400,7 @@ solid
 	{
 		"id" "19717"
 		"plane" "(-1180 1840 96) (-1540 1840 204) (-1540 1840 96)"
-		"material" "gcs/vh_glass"
+		"material" "gcs/arrivals"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -202411,7 +202411,7 @@ solid
 	{
 		"id" "19718"
 		"plane" "(-1540 1840 96) (-1540 1836 204) (-1540 1836 96)"
-		"material" "gcs/vh_glass"
+		"material" "gcs/arrivals"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
