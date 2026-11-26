@@ -1147,6 +1147,15 @@ LB_X0, LB_Y, LB_H = -3500, 300, 30 * FT
 # its west end, Lexington Avenue doors at the east (photos: GCT_Market*, Grand_Central_Mart_Lex_Av).
 # 240 x 28 ft, 15 ft flat ceiling rising to a shallow centre dome with a chandelier, open counters
 # along both walls, drum pendants down the aisle (estimates). Starts east of the east ramp soffits.
+# Grand Hyatt entrance (chamber 9): a door in Lexington Passage's north wall east of Graybar, a
+# short stair up 6 ft, and a glass-roofed atrium lobby 60 x 60 x 40 ft (the Hyatt, once the
+# Commodore, is joined to the terminal on the Lexington side; placement and sizes are a ruling).
+HY_D0, HY_D1 = LEX_X0 + 150 * FT, LEX_X0 + 162 * FT
+HY_Y0 = LEX_Y + WALL                       # 220
+HY_Y1 = HY_Y0 + 18 * FT                    # stair passage end, atrium south face
+HY_Z = 72
+HA_X0, HA_X1 = (HY_D0 + HY_D1)//2 - 30 * FT, (HY_D0 + HY_D1)//2 + 30 * FT
+HA_Y1, HA_H = HY_Y1 + 60 * FT, 40 * FT
 MK_X0, MK_X1 = 2720, 2720 + 240 * FT
 MK_Y1 = -LEX_Y - WALL                      # north face, Lexington Passage's south wall
 MK_Y0 = MK_Y1 - 28 * FT
@@ -1166,7 +1175,10 @@ def lex_passage(W, ents):
     W(box(MK_D1, -y - WALL, 0, x1, -y, h, TEX_CREAM))
     W(box(MK_D0, -y - WALL, MK_DOOR_H, MK_D1, -y, h, TEX_CREAM))
     W(box(x0, y, 0, GB_X0, y + WALL, h, TEX_CREAM))        # north wall, cut by Graybar Passage
-    W(box(GB_X1, y, 0, x1, y + WALL, h, TEX_CREAM))
+    W(box(GB_X1, y, 0, HY_D0, y + WALL, h, TEX_CREAM))
+    W(box(HY_D1, y, 0, x1, y + WALL, h, TEX_CREAM))
+    W(box(HY_D0, y, 14 * FT, HY_D1, y + WALL, h, TEX_CREAM))
+    W(box(HY_D0, y, -WALL, HY_D1, y + WALL, 0, TEX_FLOOR))
     W(box(GB_X0, y, h, GB_X1, y + WALL, GB_TOP + WALL, TEX_CREAM))
     # West wall round the arch opening, east wall with the Lexington doors.
     W(box(x0, -y, 0, x0 + WALL, -r, h, TEX_CREAM))
@@ -1186,6 +1198,8 @@ def lex_passage(W, ents):
         for k in range(6):
             sx = x0 + WALL + 160 + k*380
             if s > 0 and sx < GB_X1 + 16 and sx + 228 > GB_X0 - 16:
+                continue
+            if s > 0 and sx < HY_D1 + 16 and sx + 228 > HY_D0 - 16:
                 continue
             if s < 0 and sx < MK_D1 + 16 and sx + 228 > MK_D0 - 16:
                 continue
@@ -1509,6 +1523,47 @@ def track61(W, ents):
     ents.append(ent("func_brush", solids=fence, targetname="t61_fence", Solidity="2"))
 
 
+def hyatt(W, ents):
+    decor = []
+    det = decor.append
+    d0, d1, y0, y1, z = HY_D0, HY_D1, HY_Y0, HY_Y1, HY_Z
+    # Stair passage: six 12 u risers over the first 9 ft, then a landing.
+    for k in range(6):
+        ya, yb = y0 + k * 18, y0 + (k + 1) * 18
+        W(box(d0, ya, -WALL, d1, yb, (k + 1) * 12, TEX_CREAM))
+    W(box(d0, y0 + 108, -WALL, d1, y1, z, TEX_FLOOR))
+    W(box(d0 - WALL, y0, -WALL, d0, y1, z + 15 * FT, TEX_CREAM))
+    W(box(d1, y0, -WALL, d1 + WALL, y1, z + 15 * FT, TEX_CREAM))
+    W(box(d0, y0, 14 * FT, d1, y1, z + 15 * FT, TEX_CREAM))
+    # Atrium.
+    x0, x1, ya, yb, h = HA_X0, HA_X1, y1, HA_Y1, HA_H
+    W(box(x0 - WALL, ya, z - WALL, x1 + WALL, yb + WALL, z, "gcs/floor_low"))
+    W(box(x0 - WALL, ya - WALL, z + h, x1 + WALL, yb + WALL, z + h + WALL, "gcs/window_glass"))
+    W(box(x0 - WALL, ya, z, x0, yb, z + h, TEX_CREAM))
+    W(box(x1, ya, z, x1 + WALL, yb, z + h, TEX_CREAM))
+    W(box(x0 - WALL, yb, z, x1 + WALL, yb + WALL, z + h, TEX_CREAM))
+    W(box(x0 - WALL, ya - WALL, z, d0, ya, z + h, TEX_CREAM))
+    W(box(d1, ya - WALL, z, x1 + WALL, ya, z + h, TEX_CREAM))
+    W(box(d0, ya - WALL, z + 15 * FT, d1, ya, z + h, TEX_CREAM))
+    cx, cy = (x0 + x1)//2, (ya + yb)//2
+    # Fountain: cream octagonal basin with a dark pool and a brass jet; reception desk; planters.
+    det(prism(ngon(cx, cy, 120, 8, math.pi/8), z, z + 30, TEX_CREAM))
+    det(prism(ngon(cx, cy, 104, 8, math.pi/8), z + 30, z + 31, "gcs/vh_glass"))
+    det(prism(ngon(cx, cy, 10, 8, math.pi/8), z + 31, z + 90, TEX_GOLD))
+    det(box(x1 - 300, yb - 80, z, x1 - 60, yb - 40, z + 44, TEX_WOOD))
+    det(box(x1 - 304, yb - 84, z + 44, x1 - 56, yb - 36, z + 48, TEX_CREAM))
+    for px, py in ((x0 + 80, ya + 80), (x1 - 80, ya + 80), (x0 + 80, yb - 80)):
+        det(box(px - 30, py - 30, z, px + 30, py + 30, z + 36, TEX_CREAM))
+        det(box(px - 24, py - 24, z + 36, px + 24, py + 24, z + 90, "gcs/vh_grille"))
+    det(box(x0, ya + 40, z + h - 200, x0 + 4, yb - 40, z + h - 40, "gcs/window_glass"))
+    for lx in (x0 + 180, x1 - 180):
+        for ly in (ya + 180, yb - 180):
+            ents.append(ent("light", (lx, ly, z + h - 80), _light="255 240 220 90"))
+    ents.append(ent("light", ((d0 + d1)//2, (y0 + y1)//2, z + 12 * FT), _light="255 220 170 35"))
+    ents.append(ent("env_cubemap", (cx, cy, z + 72)))
+    ents.append(ent("func_detail", solids="".join(decor)))   # as func_brush it did not draw (see transit_store)
+
+
 # The Biltmore Room (area 6 extra): the old arrival room off the concourse's northwest corner
 # (photos: Biltmore_Room_at_Grand_Central_Terminal, MTA_Reopens_Biltmore_Room, the schedule board
 # and clock). Cream marble walls and floor, a beamed and coffered ceiling, dentil cornice, the
@@ -1652,6 +1707,7 @@ def build():
     vanderbilt_link(W, ents)
     madison(W, ents)
     track61(W, ents)
+    hyatt(W, ents)
     biltmore(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
