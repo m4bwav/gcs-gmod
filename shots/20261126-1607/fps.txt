@@ -1,0 +1,2 @@
+dining          146 fps
+dining_clock    147 fps

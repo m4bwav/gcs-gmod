@@ -486,6 +486,20 @@ def lower_level(W, ents):
         W(box(DIN_X1, y0, Z - WALL, DIN_X1 + WALL, y1, 0, TEX_CREAM))
     for y0, y1 in ((-DIN_Y, -COR_Y), (COR_Y, DIN_Y)):
         W(box(DIN_X0 - WALL, y0, Z - WALL, DIN_X0, y1, 0, TEX_CREAM))
+    # Shop glass (make_board.py din_shop): 1024 px per 240 u pitch, 180 u window at px 0..767,
+    # glass z Z+12..Z+110 (north faces -y: +x right; south faces +y: -x right).
+    xs, su, sv = DIN_X0 + 70, 240 / 1024, 98 / 512
+    FACEUV["gcs/din_shop_n"] = lambda n: ("[1 0 0 %g] %g" % (-xs / su, su), "[0 0 -1 %g] %g" % ((Z + 110) / sv, sv))
+    FACEUV["gcs/din_shop_s"] = lambda n: ("[-1 0 0 %g] %g" % ((xs + 180) / su, su), "[0 0 -1 %g] %g" % ((Z + 110) / sv, sv))
+    # Pylon plinths and moulded capitals (gold band under a cream flare), in one func_brush.
+    pyl = []
+    for x in range(DIN_X0 + 160, DIN_X1 - 100, 240):
+        for y in (-320, 320):
+            pyl.append(box(x - 20, y - 20, Z, x + 20, y + 20, Z + 30, TEX_TRIM))
+            pyl.append(box(x - 19, y - 19, -WALL - 64, x + 19, y + 19, -WALL - 58, TEX_GOLD))
+            pyl.append(box(x - 22, y - 22, -WALL - 58, x + 22, y + 22, -WALL - 40, TEX_CREAM))
+    ents.append(ent("func_brush", solids="".join(pyl), targetname="din_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
     for x in range(DIN_X0 + 160, DIN_X1 - 100, 240):
         for s in (-1, 1):
             if s > 0 and any(abs(x - gx) < 90 + GATE_W//2 + 16 for gx, _ in LGATES):
@@ -493,7 +507,7 @@ def lower_level(W, ents):
             if s < 0 and MD_X0 - 110 < x < MD_X1 + 110:
                 continue
             ya, yb = sorted((s*(DIN_Y - 4), s*DIN_Y))
-            det(box(x - 90, ya, Z + 12, x + 90, yb, Z + 110, TEX_DOOR))
+            det(box(x - 90, ya, Z + 12, x + 90, yb, Z + 110, "gcs/din_shop_%s" % ("n" if s > 0 else "s")))
             det(box(x - 90, ya, Z + 120, x + 90, yb, Z + 140, TEX_GOLD))
         for y in (-320, 320):
             det(box(x - 16, y - 16, Z, x + 16, y + 16, -WALL - 16, TEX_CREAM))
