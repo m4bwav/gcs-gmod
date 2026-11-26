@@ -107,3 +107,4 @@
 - 2026-11-26: session 17 resumed: func_brush decor draws once the shot rig moves the player to each camera (PVS); 52,035 verts. Shots need the player near the camera, not just a view override.
 - 2026-11-26: session 18: Biltmore arrivals board lettering (texture, 0 verts), 52,035 verts. Station names over 8 chars overflow a 256 px panel at p=3; use the SHORT list.
 - 2026-11-26: session 19: Graybar painted vaults (gcs/gb_mural, tools/make_mural.py), texture only, 52,035 verts. A tile drawn in plan and mapped top-down per bay (FACEUV) puts its diagonals on a groin vault's groins with no per-face UV work.
+- 2026-11-26: session 20: Madison white panels and slat ceilings (tools/make_madison.py), texture only, 52,035 verts. A full compile of this map takes well under a minute of vvis/vrad here.
