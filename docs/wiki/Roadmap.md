@@ -5,6 +5,6 @@ The areas get built in this order. Each one goes through blockout, a playable co
 3. **Vanderbilt Hall** (released in 0.3.0) and the 42nd Street entrance passage.
 4. **Upper-level track platforms** (released in 0.4.0), with a static train car to walk through.
 5. **The exterior** (released in 0.5.0): the 42nd Street facade with the Glory of Commerce group and its clock, the Park Avenue Viaduct, and a Midtown skybox.
-6. Extras if the budget allows: lower-level tracks, the Biltmore Room (released in 0.6.0), roleplay spaces and a nav mesh.
+6. Extras if the budget allows: lower-level tracks, the Biltmore Room (released in 0.6.0), roleplay spaces and a nav mesh (shipped in 0.6.1).
 
 The budgets: under about 150 MB packed for the Workshop, func_detail for decoration, areaportals between areas, and a cubemap per area.
