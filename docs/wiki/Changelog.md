@@ -1,3 +1,7 @@
+## 0.11.0 (2026-11-25)
+- The Campbell: behind the west balcony's south arch, John W. Campbell's old office as a bar: painted beams on gilt corbels, a big leaded window over the bar, a stone fireplace, a green banquette and sconces.
+- Nav mesh regenerated.
+
 ## 0.10.0 (2026-11-25)
 - Grand Central Market: through a brass-framed door off Lexington Passage, a 240 ft market hall with open counters and glass cases along both walls, drum pendants down the aisle, a raised centre dome with a chandelier, and Lexington Avenue doors at the east end.
 - Nav mesh regenerated.

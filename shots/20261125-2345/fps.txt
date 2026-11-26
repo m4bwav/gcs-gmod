@@ -1,0 +1,3 @@
+cb_door         146 fps
+cb_room         146 fps
+cb_bar          146 fps
