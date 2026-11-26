@@ -1642,9 +1642,11 @@ def biltmore(W, ents):
     for x in range(BX0 + 24, BX1 - 23, 12):
         for y0, y1 in ((BY0 + 14, BY0 + 18), (BY1 - 18, BY1 - 14)):
             det(box(x, y0, BH - 36, x + 6, y1, BH - 30, TEX_CREAM))
-    # The arrivals board: dark glass in a brass frame with three brass mullions, north wall.
+    # The arrivals board: split-flap lettering (make_board.py arrivals) in a brass frame with three brass mullions, north wall.
     cx, bw, z0, z1 = (BX0 + BX1) // 2, 15 * FT, 8 * FT, 17 * FT
-    det(box(cx - bw, BY1 - 4, z0, cx + bw, BY1, z1, T_DARK))
+    FACEUV["gcs/arrivals"] = lambda n, x0=cx - bw, su=2 * bw / 1024, sv=(z1 - z0) / 256: (
+        ("[1 0 0 %g] %g" % (-x0 / su, su), "[0 0 -1 %g] %g" % (z1 / sv, sv)) if n[1] < -0.5 else None)
+    det(prism([(cx - bw, BY1 - 4), (cx + bw, BY1 - 4), (cx + bw, BY1), (cx - bw, BY1)], z0, z1, "gcs/arrivals", T_DARK))
     for x in (cx - bw - 6, cx - bw // 2 - 2, cx - 2, cx + bw // 2 - 2, cx + bw):
         det(box(x, BY1 - 8, z0, x + (6 if abs(x - cx) > bw else 4), BY1 - 4, z1, TEX_GOLD))
     for z in (z0 - 6, z1):
