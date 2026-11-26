@@ -337,12 +337,13 @@ def lex_sign():
     save(img, "lex_sign")
 
 
-def lex_shop(name, seed):
+def lex_shop(name, seed, SW=593, streaks=40):
     # Lexington Passage shop front (refs: Lexington_Passage.jpg): bronze mullions over lit glass,
     # warm interior with shelves of goods, a glass door, a transom. 1024 px = 380 u along the
     # wall (the shop pitch); the 220 u window is px 0..593, the rest is wall behind the frames.
     rnd = random.Random(seed)
-    W, H, SW = 1024, 512, 593
+    # din_shop reuses it with SW 768: the dining concourse's 180 u glass on a 240 u pitch.
+    W, H = 1024, 512
     img = Image.new("RGB", (W, H), (205, 190, 160))
     d = ImageDraw.Draw(img)
     for y in range(H):                                  # interior: warm, brighter at the top
@@ -365,7 +366,7 @@ def lex_shop(name, seed):
                                 (200, 160, 60), (30, 30, 30), (150, 100, 160)])
                 d.rectangle([x, sy - hh, x + w, sy], fill=c)
                 x += w + rnd.randint(2, 8)
-    for k in range(SW // 40):                           # reflection streaks
+    for k in range(SW // streaks):                      # reflection streaks
         x = rnd.randint(0, SW)
         d.line([(x, H), (x + 160, 110)], fill=(255, 245, 225), width=rnd.randint(2, 6))
     br = (110, 80, 40)
@@ -473,5 +474,7 @@ md_screen()
 lex_sign()
 lex_shop("lex_shop_n", 11)
 lex_shop("lex_shop_s", 23)
+lex_shop("din_shop_n", 37, 768, 90)
+lex_shop("din_shop_s", 41, 768, 90)
 gb_kiosk()
 mk_display()
