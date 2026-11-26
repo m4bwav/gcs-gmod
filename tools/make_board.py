@@ -14,6 +14,9 @@ AMBER, WHITE, GREEN = (255, 176, 40), (235, 235, 225), (90, 220, 110)
 DEST = ["STAMFORD", "NEW HAVEN", "WHITE PLAINS", "POUGHKEEPSIE", "CROTON-HARMON", "NEW CANAAN",
         "DANBURY", "WASSAIC", "SOUTHEAST", "GREENWICH", "HARLEM-125 ST", "NORTH WHITE PL",
         "BREWSTER", "TARRYTOWN", "WATERBURY", "MOUNT KISCO"]
+SHORT = ["STAMFORD", "RYE", "DANBURY", "WASSAIC", "BREWSTER", "BEACON", "GREENWCH", "OSSINING",
+         "CROTON", "MT KISCO", "DOVER PL", "TARRYTWN", "NORWALK", "PELHAM", "SCARSDLE", "KATONAH",
+         "PEEKSKIL", "YONKERS", "HARRISON", "DARIEN", "WESTPORT", "FAIRFLD", "SOUTHPRT", "MILFORD"]
 LINE = ["NEW HAVEN", "HARLEM", "HUDSON"]
 
 
@@ -145,6 +148,38 @@ def plaque(word, name):
     save(img, name)
 
 
+def arrivals():
+    # Biltmore Room arrivals board, 1024x256: four panels split by the brass mullions, each a
+    # split-flap column (white letters on dark flap tiles with a hinge line): ARRIVALS header,
+    # then six trains (time, origin). Mapped once over the board glass (build_vmf _arrivals_uv).
+    W, H = 1024, 256
+    img = Image.new("RGB", (W, H), (14, 14, 16))
+    d = ImageDraw.Draw(img)
+    p = 3
+    def flap(x, y, s, col):
+        for k, ch in enumerate(s):
+            gx = x + k*6*p
+            d.rectangle([gx - 2, y - 3, gx + 5*p + 1, y + 7*p + 2], fill=(34, 34, 38))
+            rows = [int(b, 16) for b in FONT.get(ch, "00 00 00 00 00 00 00").split()]
+            for cy, bits in enumerate(rows):
+                for cx in range(5):
+                    if bits >> (4 - cx) & 1:
+                        d.rectangle([gx + cx*p, y + cy*p, gx + cx*p + p - 1, y + cy*p + p - 1], fill=col)
+            d.line([gx - 2, y + 3.5*p, gx + 5*p + 1, y + 3.5*p], fill=(8, 8, 8), width=1)
+    rng = random.Random(61)
+    t = 6*60 + 48
+    for q in range(4):
+        x0 = q*256 + 8
+        flap(x0 + (240 - (8*6 - 1)*p)//2, 14, "ARRIVALS", (240, 225, 170))
+        d.line([x0, 44, x0 + 240, 44], fill=(150, 112, 50), width=2)
+        for r in range(6):
+            t += rng.choice((2, 4, 6))
+            dest = SHORT[(q*6 + r)*5 % len(SHORT)]
+            flap(x0 + 2, 58 + r*32, "%d:%02d" % (t//60, t % 60), (235, 235, 225))
+            flap(x0 + 2 + 5*6*p, 58 + r*32, dest, (235, 235, 225))
+    save(img, "arrivals")
+
+
 def track_signs():
     # 512x128 black gate signs with white serif-less "TRACK nn" (photo: Grand_Central_Station_tracks).
     for n in (29, 30, 31, 108, 112):
@@ -210,3 +245,4 @@ plaque("PERSHING SQUARE", "pershing")
 track_signs()
 train_steel()
 endwin_grid()
+arrivals()
