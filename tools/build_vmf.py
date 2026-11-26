@@ -1449,28 +1449,29 @@ def madison(W, ents):
     x0, x1, hd = MD_X0, MD_X1, MD_HEAD
     zt, zm, zb = LOW_Z, LOW_Z - MD_DROP, MD_Z
     T = "gcs/plat_tile"
+    # White enamel panels and slatted light ceilings (tools/make_madison.py), like the real hall.
     # Flat landing, run 1, mezzanine, run 2: floor and parallel ceiling slabs (xprism over y,z).
     flats = ((MD_Y0, MD_YA, zt), (MD_YB, MD_YC, zm))
     runs = ((MD_YA, zt, MD_YB, zm), (MD_YC, zm, MD_YD, zb))
     for ya, yb, z in flats:
         W(box(x0, yb, z - WALL, x1, ya, z, T))
-        W(box(x0, yb, z + hd, x1, ya, z + hd + WALL, TEX_COFFER))
+        W(box(x0, yb, z + hd, x1, ya, z + hd + WALL, "gcs/md_ceil"))
     for ya, za, yb, zb_ in runs:
         W(xprism(ccw([(ya, za), (yb, zb_), (yb, zb_ - WALL), (ya, za - WALL)]), x0, x1, "gcs/steel"))
-        W(xprism(ccw([(ya, za + hd), (yb, zb_ + hd), (yb, zb_ + hd + WALL), (ya, za + hd + WALL)]), x0, x1, TEX_COFFER))
+        W(xprism(ccw([(ya, za + hd), (yb, zb_ + hd), (yb, zb_ + hd + WALL), (ya, za + hd + WALL)]), x0, x1, "gcs/md_ceil"))
     for a, b in ((x0 - WALL, x0), (x1, x1 + WALL)):
-        W(box(a, MD_YD, zb - WALL, b, MD_Y0, zt + hd + WALL, TEX_CREAM))
+        W(box(a, MD_YD, zb - WALL, b, MD_Y0, zt + hd + WALL, "gcs/md_panel"))
     # Concourse: low white hall, LIRR track pit along its south side.
     c0, c1, y0, y1, h = MC_X0, MC_X1, MC_Y0, MD_YD, 14 * FT
     py = y0 + 20 * FT
     W(box(c0 - WALL, py, zb - WALL, c1 + WALL, y1, zb, T))
     W(box(c0 - WALL, y0 - WALL, zb - PIT - WALL, c1 + WALL, py, zb - PIT, "gcs/ballast"))
-    W(box(c0 - WALL, y0 - WALL, zb + h, c1 + WALL, y1 + WALL, zb + h + WALL, TEX_COFFER))
-    W(box(c0 - WALL, y0 - WALL, zb - PIT - WALL, c1 + WALL, y0, zb + h, TEX_CREAM))
+    W(box(c0 - WALL, y0 - WALL, zb + h, c1 + WALL, y1 + WALL, zb + h + WALL, "gcs/md_ceil"))
+    W(box(c0 - WALL, y0 - WALL, zb - PIT - WALL, c1 + WALL, y0, zb + h, "gcs/md_panel"))
     for a, b in ((c0 - WALL, c0), (c1, c1 + WALL)):
-        W(box(a, y0, zb - PIT - WALL, b, y1, zb + h, TEX_CREAM))
-    W(box(c0, y1, zb, x0 - WALL, y1 + WALL, zb + h, TEX_CREAM))
-    W(box(x1 + WALL, y1, zb, c1, y1 + WALL, zb + h, TEX_CREAM))
+        W(box(a, y0, zb - PIT - WALL, b, y1, zb + h, "gcs/md_panel"))
+    W(box(c0, y1, zb, x0 - WALL, y1 + WALL, zb + h, "gcs/md_panel"))
+    W(box(x1 + WALL, y1, zb, c1, y1 + WALL, zb + h, "gcs/md_panel"))
     # Escalator lanes: four lanes split by steel balustrades with brass handrails, on both runs.
     for ya, za, yb, zb_ in runs:
         for xc in (x0 + 8, x0 + 112, x0 + 216, x0 + 320, x1 - 8):
