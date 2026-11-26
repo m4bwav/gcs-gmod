@@ -459,6 +459,45 @@ def gb_kiosk():
     save(img, "gb_kiosk")
 
 
+def leaded(img, x0, y0, x1, y1, c):
+    # Leaded glass: octagons of cell c with small square quarries between them, warm lit glass,
+    # dark lead cames. Fills the box x0,y0..x1,y1 of img (drawn apart, then pasted, so it clips).
+    w, h = x1 - x0, y1 - y0
+    g = Image.new("RGB", (w, h), (238, 214, 160))
+    d = ImageDraw.Draw(g)
+    k = c * 0.29
+    lead = (52, 42, 30)
+    for gy in range(0, h + c, c):
+        for gx in range(0, w + c, c):
+            pts = [(gx + k, gy), (gx + c - k, gy), (gx + c, gy + k), (gx + c, gy + c - k),
+                   (gx + c - k, gy + c), (gx + k, gy + c), (gx, gy + c - k), (gx, gy + k)]
+            t = (gx * 7 + gy * 3) // c % 5
+            d.polygon(pts, fill=(246 - 4*t, 226 - 3*t, 178 - 6*t), outline=lead)
+            d.polygon([(gx + c - k, gy + c), (gx + c, gy + c - k), (gx + c + k, gy + c), (gx + c, gy + c + k)],
+                      fill=(200, 150, 70), outline=lead)
+    d.rectangle([0, 0, w - 1, h - 1], outline=lead, width=3)
+    img.paste(g, (x0, y0))
+
+
+def ob_door():
+    # Oyster Bar entrance doors: oak leaf with a tall leaded-glass light (octagon quarries) and a
+    # brass kick plate; ob_door 256x512 maps once over a leaf. ob_lead 256x256 tiles the side lights.
+    W, H = 256, 512
+    img = Image.new("RGB", (W, H), (120, 78, 42))
+    d = ImageDraw.Draw(img)
+    for x in range(0, W, 3):                            # oak grain
+        d.line([(x, 0), (x, H)], fill=(112 + (x * 37) % 17, 72 + (x * 13) % 11, 38))
+    leaded(img, 30, 30, W - 30, 400, 49)
+    d.rectangle([22, 22, W - 22, 408], outline=(80, 50, 26), width=8)
+    d.rectangle([14, 440, W - 14, H - 10], fill=(196, 156, 78))        # brass kick plate
+    d.line([(14, 446), (W - 14, 446)], fill=(240, 210, 130), width=2)
+    d.rectangle([W - 40, 230, W - 30, 300], fill=(210, 170, 90))      # pull handle
+    save(img, "ob_door")
+    img = Image.new("RGB", (256, 256))
+    leaded(img, 0, 0, 256, 256, 64)
+    save(img, "ob_lead")
+
+
 board()
 flag()
 tickets()
@@ -478,3 +517,4 @@ lex_shop("din_shop_n", 37, 768, 90)
 lex_shop("din_shop_s", 41, 768, 90)
 gb_kiosk()
 mk_display()
+ob_door()

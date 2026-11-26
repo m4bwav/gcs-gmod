@@ -128,3 +128,4 @@
 - 2026-11-26: Session 35: release 0.18.1 (sessions 31-34). Full compile clean, 52,873 verts, BSP 100.5 MB; shots/20261126-1558; Workshop 3845077025 updated; tag v0.18.1.
 - 2026-11-26: Session 36: dining concourse shop fronts (gcs/din_shop_n/_s) and pylon plinths/capitals (func_brush din_decor). 53,321 verts, BSP 104.9 MB, shots/20261126-1607. Branch s36.
 - 2026-11-26: session 37: lower info booth rebuilt (stone counter, brass-framed glass, cornice) in din_decor; 53,803 verts; shots/20261126-1614. A prism whose z0 equals z1 gives vbsp "bad normal": check column ends after moving a cap.
+- 2026-11-26: Session 38 (driver run): Oyster Bar entrance leaded-glass doors and side lights (ob_door/ob_lead textures). 53,815 verts, shots/20261126-1623. Branch s38.

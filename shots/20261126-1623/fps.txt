@@ -1,0 +1,2 @@
+oyster          146 fps
+ob_entry        146 fps

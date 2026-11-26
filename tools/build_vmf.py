@@ -427,7 +427,14 @@ def lower_level(W, ents):
         det(box(gx0 - WALL, y0, Z, gx0 + 2, y0 + (16 if abs(y0) > 100 else 8), Z + 120, TEX_WOOD))
     det(box(gx0 - WALL, -120, Z + 92, gx0 + 2, 120, Z + 100, TEX_WOOD))
     for ya, yb in ((-104, -84), (84, 104)):
-        det(box(gx0 - 34, ya, Z, gx0 - 30, yb, Z + 92, TEX_DOOR))
+        det(box(gx0 - 34, ya, Z, gx0 - 30, yb, Z + 92, "gcs/ob_lead"))
+    # The two door leaves stand open into the bar against the jambs: oak with a leaded light of
+    # octagon quarries (make_board.py ob_door, mapped once over each 72 x 92 u face).
+    dx0 = gx0 - WALL - 72
+    FACEUV["gcs/ob_door"] = lambda n, su=72/256, sv=92/512: None if abs(n[1]) < 0.5 else (
+        "[1 0 0 %g] %g" % (-dx0/su, su), "[0 0 -1 %g] %g" % ((Z + 92)/sv, sv))
+    for s in (-1, 1):
+        det(box(dx0, s*76 - (3 if s > 0 else 0), Z, dx0 + 72, s*76 + (0 if s > 0 else 3), Z + 92, "gcs/ob_door"))
 
     # Oyster Bar: 4 x 4 bays of shallow Guastavino groins on piers; a long oak counter.
     bx, by = 288, 240
