@@ -147,7 +147,7 @@ def plaque(word, name):
 
 def track_signs():
     # 512x128 black gate signs with white serif-less "TRACK nn" (photo: Grand_Central_Station_tracks).
-    for n in (29, 30, 31):
+    for n in (29, 30, 31, 108, 112):
         W, H = 512, 128
         img = Image.new("RGB", (W, H), (22, 22, 24))
         d = ImageDraw.Draw(img)

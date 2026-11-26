@@ -12,8 +12,8 @@ mkdir -p "$D"; rm -rf "$D/gcs_shots"; echo "${CAMS:-go}" > "$D/gcs_shots_go.txt"
 "$G/gmod.exe" -windowed -w 1600 -h 900 -novid -nojoy -condebug $EXTRA +map gm_grand_central &
 for n in $(seq 1 60); do [ -f "$D/gcs_shots/done.txt" ] && break; sleep 5; done
 sleep 5
-PID=$(python "$QW" pid gmod.exe 2>/dev/null | python -c "import json,sys; m=json.load(sys.stdin)[\"matches\"]; print(m[0].get(\"pid\",\"\") if m else \"\")")
-[ -n "$PID" ] && taskkill //PID "$PID" //F
+# Every gmod.exe by PID (Lua quit is blocked in this GMod build; qw pid matched a helper process, not the game).
+for PID in $(tasklist //FI "IMAGENAME eq gmod.exe" //FO CSV //NH | cut -d'"' -f4); do taskkill //PID "$PID" //F >/dev/null 2>&1; done
 rm -f "$G/garrysmod/lua/autorun/client/gcs_shots.lua" "$D/gcs_shots_go.txt"
 stamp=$(date +%Y%m%d-%H%M); mkdir -p "shots/$stamp"
 cp "$D"/gcs_shots/*.jpg "$D"/gcs_shots/fps.txt "shots/$stamp/" 2>/dev/null; ls "shots/$stamp"

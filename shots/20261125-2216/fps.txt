@@ -1,0 +1,5 @@
+dining          147 fps
+low_gate        146 fps
+low_ramp        120 fps
+low_head        146 fps
+low_long        147 fps
