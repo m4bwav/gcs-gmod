@@ -1,11 +1,11 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.18.1 released 2026-11-26: Graybar newsstands, Biltmore wall clock, Market bow window, M7 car sides; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 36)
+Updated: 2026-11-26 (session 37)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 36 of 60 (started 2026-11-25)
-- Budget 2026-11-26 (session 36): unique verts 53,321/65,536 (81.4%), faces 32,190 (49.1%), BSP 104.9 MB of 150 MB.
+- Chain: session 37 of 60 (started 2026-11-25)
+- Budget 2026-11-26 (session 37): unique verts 53,803/65,536 (82.1%), faces 32,560 (49.7%), BSP 105.1 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
 
@@ -170,7 +170,8 @@ Updated: 2026-11-26 (session 36)
 - Session 34 (2026-11-26): compare over all areas (shots/cmp34: newest shot per camera from every shots/ folder) put the upper-platform cars worst: blank white boxes with a continuous dark-green glass band. make_board.py train_side paints an M7 side (stainless panels, a window per bay, sliding doors at L/4 and 3L/4 with yellow sills, MTA roundel); each car side is now one brush per segment (glass band and spandrels gone) with gcs/train_a/b/c (one vmt per car, same vtf, so u starts at each car's y0). Full compile clean, 52,873 verts (-126), BSP 100.5 MB, shots/20261126-1551 (car_door). Shot rig printed 20 fps but the images are fine. Not released.
 - Release 0.18.1 (session 35, 2026-11-26): ships sessions 31-34. Full compile clean, 52,873 verts, faces 31,870, BSP 100.5 MB; nav reused from 0.18.0 (14:47, no floor changes). Check shots/20261126-1558 (car_door, mk_window, gb_in, bilt_board, 146 fps). Workshop updated with car_door preview; tag v0.18.1.
 - Session 36 (2026-11-26): compare (shots/cmp36/compare_lower.jpg) put the dining concourse worst: flat orange shop panels, bare pylons. Shop glass is now gcs/din_shop_n/_s (make_board.py lex_shop with SW 768, fewer streaks: 1024 px per 240 u pitch, FACEUV from DIN_X0+70); every pylon has a trim plinth and a gold band + cream capital under the beam, in new func_brush din_decor. Full compile clean, 53,321 verts (+448), faces 32,190, BSP 104.9 MB, 146 fps, shots/20261126-1607 (sheet.jpg: dining, dining_clock). Not released.
-- NEXT (session 37): compare.py again and fix the worst mismatch (left from cmp34/36: Oyster Bar entrance glass doors with the leaded octagon panels, platform head railing and ad light boxes, dining booth is a plain cream octagon: the real one is stone with windows and a clock on top). Conversion pass 2 if verts pass 55k. Release once a few detail passes stack up (BSP 105 MB of 150: watch texture sizes).
+- Session 37 (2026-11-26): dining concourse info booth rebuilt like the real one: trim plinth, cream stone counter to Z+40 with a moulded ledge, brass-framed glass ring (gold corner posts and a mid mullion per face) round a cream core, gold cornice, stone cap, then the brass clock column; two warm lights inside the glass. All in func_brush din_decor (the old func_detail octagon is gone). The clock column first went zero-height (cap top = clock base, "bad normal"); it now starts at Z+104. Full compile clean, 53,803 verts (+482), faces 32,560, BSP 105.1 MB, 146 fps, shots/20261126-1614 (dining_clock). Not released.
+- NEXT (session 38): compare.py again and fix the worst mismatch (left: Oyster Bar entrance glass doors with leaded octagon panels, platform head railing and ad light boxes). Conversion pass 2 if verts pass 55k. Release soon (sessions 36-37 unreleased); BSP 105 MB of 150: watch texture sizes.
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
