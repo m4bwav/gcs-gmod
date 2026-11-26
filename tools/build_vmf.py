@@ -1514,7 +1514,7 @@ def madison(W, ents):
         W(box(x0, yb, z - WALL, x1, ya, z, T))
         W(box(x0, yb, z + hd, x1, ya, z + hd + WALL, "gcs/md_ceil"))
     for ya, za, yb, zb_ in runs:
-        W(xprism(ccw([(ya, za), (yb, zb_), (yb, zb_ - WALL), (ya, za - WALL)]), x0, x1, "gcs/steel"))
+        W(xprism(ccw([(ya, za), (yb, zb_), (yb, zb_ - WALL), (ya, za - WALL)]), x0, x1, "gcs/md_step"))
         W(xprism(ccw([(ya, za + hd), (yb, zb_ + hd), (yb, zb_ + hd + WALL), (ya, za + hd + WALL)]), x0, x1, "gcs/md_ceil"))
     for a, b in ((x0 - WALL, x0), (x1, x1 + WALL)):
         W(box(a, MD_YD, zb - WALL, b, MD_Y0, zt + hd + WALL, "gcs/md_panel"))
@@ -1529,13 +1529,14 @@ def madison(W, ents):
         W(box(a, y0, zb - PIT - WALL, b, y1, zb + h, "gcs/md_panel"))
     W(box(c0, y1, zb, x0 - WALL, y1 + WALL, zb + h, "gcs/md_panel"))
     W(box(x1 + WALL, y1, zb, c1, y1 + WALL, zb + h, "gcs/md_panel"))
-    # Escalator lanes: four lanes split by steel balustrades with brass handrails, on both runs.
+    # Escalator lanes: dark cleated steps, four lanes split by stainless balustrades with black
+    # handrails, and a wide lit band down each sloped ceiling, on both runs.
     for ya, za, yb, zb_ in runs:
         for xc in (x0 + 8, x0 + 112, x0 + 216, x0 + 320, x1 - 8):
-            det(xprism(ccw([(ya, za), (yb, zb_), (yb, zb_ + 36), (ya, za + 36)]), xc - 6, xc + 6, "gcs/steel"))
-            det(xprism(ccw([(ya, za + 36), (yb, zb_ + 36), (yb, zb_ + 42), (ya, za + 42)]), xc - 4, xc + 4, TEX_GOLD))
+            det(xprism(ccw([(ya, za), (yb, zb_), (yb, zb_ + 36), (ya, za + 36)]), xc - 6, xc + 6, "gcs/md_steel"))
+            det(xprism(ccw([(ya, za + 36), (yb, zb_ + 36), (yb, zb_ + 42), (ya, za + 42)]), xc - 4, xc + 4, "gcs/md_rail"))
         mid = (x0 + x1) // 2
-        det(xprism(ccw([(ya, za + hd - 8), (yb, zb_ + hd - 8), (yb, zb_ + hd), (ya, za + hd)]), mid - 6, mid + 6, "gcs/fluor"))
+        det(xprism(ccw([(ya, za + hd - 8), (yb, zb_ + hd - 8), (yb, zb_ + hd), (ya, za + hd)]), mid - 40, mid + 40, "gcs/fluor"))
         for k in range(1, 5):
             t = k / 5
             ents.append(ent("light", ((x0 + x1)//2, round(ya + (yb - ya)*t), round(za + (zb_ - za)*t + hd - 40)),

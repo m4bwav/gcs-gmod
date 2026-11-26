@@ -65423,7 +65423,7 @@ solid
 	{
 		"id" "18168"
 		"plane" "(-264 -1000 -264) (-264 -2226 -1036) (-264 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -65434,7 +65434,7 @@ solid
 	{
 		"id" "18169"
 		"plane" "(-696 -1000 -264) (-696 -2226 -972) (-696 -2226 -1036)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -65445,7 +65445,7 @@ solid
 	{
 		"id" "18170"
 		"plane" "(-696 -1000 -264) (-264 -2226 -972) (-696 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -65456,7 +65456,7 @@ solid
 	{
 		"id" "18171"
 		"plane" "(-696 -2226 -972) (-264 -2226 -1036) (-696 -2226 -1036)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -65467,7 +65467,7 @@ solid
 	{
 		"id" "18172"
 		"plane" "(-696 -2226 -1036) (-264 -1000 -328) (-696 -1000 -328)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -65478,7 +65478,7 @@ solid
 	{
 		"id" "18173"
 		"plane" "(-696 -1000 -328) (-264 -1000 -264) (-696 -1000 -264)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -65563,7 +65563,7 @@ solid
 	{
 		"id" "18182"
 		"plane" "(-264 -2526 -972) (-264 -3752 -1744) (-264 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -65574,7 +65574,7 @@ solid
 	{
 		"id" "18183"
 		"plane" "(-696 -2526 -972) (-696 -3752 -1680) (-696 -3752 -1744)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -65585,7 +65585,7 @@ solid
 	{
 		"id" "18184"
 		"plane" "(-696 -2526 -972) (-264 -3752 -1680) (-696 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -65596,7 +65596,7 @@ solid
 	{
 		"id" "18185"
 		"plane" "(-696 -3752 -1680) (-264 -3752 -1744) (-696 -3752 -1744)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -65607,7 +65607,7 @@ solid
 	{
 		"id" "18186"
 		"plane" "(-696 -3752 -1744) (-264 -2526 -1036) (-696 -2526 -1036)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -65618,7 +65618,7 @@ solid
 	{
 		"id" "18187"
 		"plane" "(-696 -2526 -1036) (-264 -2526 -972) (-696 -2526 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_step"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191154,7 +191154,7 @@ solid
 	{
 		"id" "18266"
 		"plane" "(-682 -1000 -228) (-682 -2226 -972) (-682 -2226 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191165,7 +191165,7 @@ solid
 	{
 		"id" "18267"
 		"plane" "(-694 -1000 -228) (-694 -2226 -936) (-694 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191176,7 +191176,7 @@ solid
 	{
 		"id" "18268"
 		"plane" "(-694 -1000 -228) (-682 -2226 -936) (-694 -2226 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191187,7 +191187,7 @@ solid
 	{
 		"id" "18269"
 		"plane" "(-694 -2226 -936) (-682 -2226 -972) (-694 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191198,7 +191198,7 @@ solid
 	{
 		"id" "18270"
 		"plane" "(-694 -2226 -972) (-682 -1000 -264) (-694 -1000 -264)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191209,7 +191209,7 @@ solid
 	{
 		"id" "18271"
 		"plane" "(-694 -1000 -264) (-682 -1000 -228) (-694 -1000 -228)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191224,7 +191224,7 @@ solid
 	{
 		"id" "18273"
 		"plane" "(-684 -1000 -222) (-684 -2226 -936) (-684 -2226 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191235,7 +191235,7 @@ solid
 	{
 		"id" "18274"
 		"plane" "(-692 -1000 -222) (-692 -2226 -930) (-692 -2226 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191246,7 +191246,7 @@ solid
 	{
 		"id" "18275"
 		"plane" "(-692 -1000 -222) (-684 -2226 -930) (-692 -2226 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191257,7 +191257,7 @@ solid
 	{
 		"id" "18276"
 		"plane" "(-692 -2226 -930) (-684 -2226 -936) (-692 -2226 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191268,7 +191268,7 @@ solid
 	{
 		"id" "18277"
 		"plane" "(-692 -2226 -936) (-684 -1000 -228) (-692 -1000 -228)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191279,7 +191279,7 @@ solid
 	{
 		"id" "18278"
 		"plane" "(-692 -1000 -228) (-684 -1000 -222) (-692 -1000 -222)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191294,7 +191294,7 @@ solid
 	{
 		"id" "18280"
 		"plane" "(-578 -1000 -228) (-578 -2226 -972) (-578 -2226 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191305,7 +191305,7 @@ solid
 	{
 		"id" "18281"
 		"plane" "(-590 -1000 -228) (-590 -2226 -936) (-590 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191316,7 +191316,7 @@ solid
 	{
 		"id" "18282"
 		"plane" "(-590 -1000 -228) (-578 -2226 -936) (-590 -2226 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191327,7 +191327,7 @@ solid
 	{
 		"id" "18283"
 		"plane" "(-590 -2226 -936) (-578 -2226 -972) (-590 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191338,7 +191338,7 @@ solid
 	{
 		"id" "18284"
 		"plane" "(-590 -2226 -972) (-578 -1000 -264) (-590 -1000 -264)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191349,7 +191349,7 @@ solid
 	{
 		"id" "18285"
 		"plane" "(-590 -1000 -264) (-578 -1000 -228) (-590 -1000 -228)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191364,7 +191364,7 @@ solid
 	{
 		"id" "18287"
 		"plane" "(-580 -1000 -222) (-580 -2226 -936) (-580 -2226 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191375,7 +191375,7 @@ solid
 	{
 		"id" "18288"
 		"plane" "(-588 -1000 -222) (-588 -2226 -930) (-588 -2226 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191386,7 +191386,7 @@ solid
 	{
 		"id" "18289"
 		"plane" "(-588 -1000 -222) (-580 -2226 -930) (-588 -2226 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191397,7 +191397,7 @@ solid
 	{
 		"id" "18290"
 		"plane" "(-588 -2226 -930) (-580 -2226 -936) (-588 -2226 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191408,7 +191408,7 @@ solid
 	{
 		"id" "18291"
 		"plane" "(-588 -2226 -936) (-580 -1000 -228) (-588 -1000 -228)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191419,7 +191419,7 @@ solid
 	{
 		"id" "18292"
 		"plane" "(-588 -1000 -228) (-580 -1000 -222) (-588 -1000 -222)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191434,7 +191434,7 @@ solid
 	{
 		"id" "18294"
 		"plane" "(-474 -1000 -228) (-474 -2226 -972) (-474 -2226 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191445,7 +191445,7 @@ solid
 	{
 		"id" "18295"
 		"plane" "(-486 -1000 -228) (-486 -2226 -936) (-486 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191456,7 +191456,7 @@ solid
 	{
 		"id" "18296"
 		"plane" "(-486 -1000 -228) (-474 -2226 -936) (-486 -2226 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191467,7 +191467,7 @@ solid
 	{
 		"id" "18297"
 		"plane" "(-486 -2226 -936) (-474 -2226 -972) (-486 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191478,7 +191478,7 @@ solid
 	{
 		"id" "18298"
 		"plane" "(-486 -2226 -972) (-474 -1000 -264) (-486 -1000 -264)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191489,7 +191489,7 @@ solid
 	{
 		"id" "18299"
 		"plane" "(-486 -1000 -264) (-474 -1000 -228) (-486 -1000 -228)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191504,7 +191504,7 @@ solid
 	{
 		"id" "18301"
 		"plane" "(-476 -1000 -222) (-476 -2226 -936) (-476 -2226 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191515,7 +191515,7 @@ solid
 	{
 		"id" "18302"
 		"plane" "(-484 -1000 -222) (-484 -2226 -930) (-484 -2226 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191526,7 +191526,7 @@ solid
 	{
 		"id" "18303"
 		"plane" "(-484 -1000 -222) (-476 -2226 -930) (-484 -2226 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191537,7 +191537,7 @@ solid
 	{
 		"id" "18304"
 		"plane" "(-484 -2226 -930) (-476 -2226 -936) (-484 -2226 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191548,7 +191548,7 @@ solid
 	{
 		"id" "18305"
 		"plane" "(-484 -2226 -936) (-476 -1000 -228) (-484 -1000 -228)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191559,7 +191559,7 @@ solid
 	{
 		"id" "18306"
 		"plane" "(-484 -1000 -228) (-476 -1000 -222) (-484 -1000 -222)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191574,7 +191574,7 @@ solid
 	{
 		"id" "18308"
 		"plane" "(-370 -1000 -228) (-370 -2226 -972) (-370 -2226 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191585,7 +191585,7 @@ solid
 	{
 		"id" "18309"
 		"plane" "(-382 -1000 -228) (-382 -2226 -936) (-382 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191596,7 +191596,7 @@ solid
 	{
 		"id" "18310"
 		"plane" "(-382 -1000 -228) (-370 -2226 -936) (-382 -2226 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191607,7 +191607,7 @@ solid
 	{
 		"id" "18311"
 		"plane" "(-382 -2226 -936) (-370 -2226 -972) (-382 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191618,7 +191618,7 @@ solid
 	{
 		"id" "18312"
 		"plane" "(-382 -2226 -972) (-370 -1000 -264) (-382 -1000 -264)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191629,7 +191629,7 @@ solid
 	{
 		"id" "18313"
 		"plane" "(-382 -1000 -264) (-370 -1000 -228) (-382 -1000 -228)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191644,7 +191644,7 @@ solid
 	{
 		"id" "18315"
 		"plane" "(-372 -1000 -222) (-372 -2226 -936) (-372 -2226 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191655,7 +191655,7 @@ solid
 	{
 		"id" "18316"
 		"plane" "(-380 -1000 -222) (-380 -2226 -930) (-380 -2226 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191666,7 +191666,7 @@ solid
 	{
 		"id" "18317"
 		"plane" "(-380 -1000 -222) (-372 -2226 -930) (-380 -2226 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191677,7 +191677,7 @@ solid
 	{
 		"id" "18318"
 		"plane" "(-380 -2226 -930) (-372 -2226 -936) (-380 -2226 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191688,7 +191688,7 @@ solid
 	{
 		"id" "18319"
 		"plane" "(-380 -2226 -936) (-372 -1000 -228) (-380 -1000 -228)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191699,7 +191699,7 @@ solid
 	{
 		"id" "18320"
 		"plane" "(-380 -1000 -228) (-372 -1000 -222) (-380 -1000 -222)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191714,7 +191714,7 @@ solid
 	{
 		"id" "18322"
 		"plane" "(-266 -1000 -228) (-266 -2226 -972) (-266 -2226 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191725,7 +191725,7 @@ solid
 	{
 		"id" "18323"
 		"plane" "(-278 -1000 -228) (-278 -2226 -936) (-278 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191736,7 +191736,7 @@ solid
 	{
 		"id" "18324"
 		"plane" "(-278 -1000 -228) (-266 -2226 -936) (-278 -2226 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191747,7 +191747,7 @@ solid
 	{
 		"id" "18325"
 		"plane" "(-278 -2226 -936) (-266 -2226 -972) (-278 -2226 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191758,7 +191758,7 @@ solid
 	{
 		"id" "18326"
 		"plane" "(-278 -2226 -972) (-266 -1000 -264) (-278 -1000 -264)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191769,7 +191769,7 @@ solid
 	{
 		"id" "18327"
 		"plane" "(-278 -1000 -264) (-266 -1000 -228) (-278 -1000 -228)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191784,7 +191784,7 @@ solid
 	{
 		"id" "18329"
 		"plane" "(-268 -1000 -222) (-268 -2226 -936) (-268 -2226 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191795,7 +191795,7 @@ solid
 	{
 		"id" "18330"
 		"plane" "(-276 -1000 -222) (-276 -2226 -930) (-276 -2226 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191806,7 +191806,7 @@ solid
 	{
 		"id" "18331"
 		"plane" "(-276 -1000 -222) (-268 -2226 -930) (-276 -2226 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191817,7 +191817,7 @@ solid
 	{
 		"id" "18332"
 		"plane" "(-276 -2226 -930) (-268 -2226 -936) (-276 -2226 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191828,7 +191828,7 @@ solid
 	{
 		"id" "18333"
 		"plane" "(-276 -2226 -936) (-268 -1000 -228) (-276 -1000 -228)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191839,7 +191839,7 @@ solid
 	{
 		"id" "18334"
 		"plane" "(-276 -1000 -228) (-268 -1000 -222) (-276 -1000 -222)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191853,7 +191853,7 @@ solid
 	side
 	{
 		"id" "18336"
-		"plane" "(-474 -1000 -72) (-474 -2226 -788) (-474 -2226 -780)"
+		"plane" "(-440 -1000 -72) (-440 -2226 -788) (-440 -2226 -780)"
 		"material" "gcs/fluor"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
@@ -191864,7 +191864,7 @@ solid
 	side
 	{
 		"id" "18337"
-		"plane" "(-486 -1000 -72) (-486 -2226 -780) (-486 -2226 -788)"
+		"plane" "(-520 -1000 -72) (-520 -2226 -780) (-520 -2226 -788)"
 		"material" "gcs/fluor"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
@@ -191875,7 +191875,7 @@ solid
 	side
 	{
 		"id" "18338"
-		"plane" "(-486 -1000 -72) (-474 -2226 -780) (-486 -2226 -780)"
+		"plane" "(-520 -1000 -72) (-440 -2226 -780) (-520 -2226 -780)"
 		"material" "gcs/fluor"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
@@ -191886,7 +191886,7 @@ solid
 	side
 	{
 		"id" "18339"
-		"plane" "(-486 -2226 -780) (-474 -2226 -788) (-486 -2226 -788)"
+		"plane" "(-520 -2226 -780) (-440 -2226 -788) (-520 -2226 -788)"
 		"material" "gcs/fluor"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
@@ -191897,7 +191897,7 @@ solid
 	side
 	{
 		"id" "18340"
-		"plane" "(-486 -2226 -788) (-474 -1000 -80) (-486 -1000 -80)"
+		"plane" "(-520 -2226 -788) (-440 -1000 -80) (-520 -1000 -80)"
 		"material" "gcs/fluor"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
@@ -191908,7 +191908,7 @@ solid
 	side
 	{
 		"id" "18341"
-		"plane" "(-486 -1000 -80) (-474 -1000 -72) (-486 -1000 -72)"
+		"plane" "(-520 -1000 -80) (-440 -1000 -72) (-520 -1000 -72)"
 		"material" "gcs/fluor"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
@@ -191924,7 +191924,7 @@ solid
 	{
 		"id" "18347"
 		"plane" "(-682 -2526 -936) (-682 -3752 -1680) (-682 -3752 -1644)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191935,7 +191935,7 @@ solid
 	{
 		"id" "18348"
 		"plane" "(-694 -2526 -936) (-694 -3752 -1644) (-694 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191946,7 +191946,7 @@ solid
 	{
 		"id" "18349"
 		"plane" "(-694 -2526 -936) (-682 -3752 -1644) (-694 -3752 -1644)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191957,7 +191957,7 @@ solid
 	{
 		"id" "18350"
 		"plane" "(-694 -3752 -1644) (-682 -3752 -1680) (-694 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191968,7 +191968,7 @@ solid
 	{
 		"id" "18351"
 		"plane" "(-694 -3752 -1680) (-682 -2526 -972) (-694 -2526 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -191979,7 +191979,7 @@ solid
 	{
 		"id" "18352"
 		"plane" "(-694 -2526 -972) (-682 -2526 -936) (-694 -2526 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -191994,7 +191994,7 @@ solid
 	{
 		"id" "18354"
 		"plane" "(-684 -2526 -930) (-684 -3752 -1644) (-684 -3752 -1638)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192005,7 +192005,7 @@ solid
 	{
 		"id" "18355"
 		"plane" "(-692 -2526 -930) (-692 -3752 -1638) (-692 -3752 -1644)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192016,7 +192016,7 @@ solid
 	{
 		"id" "18356"
 		"plane" "(-692 -2526 -930) (-684 -3752 -1638) (-692 -3752 -1638)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192027,7 +192027,7 @@ solid
 	{
 		"id" "18357"
 		"plane" "(-692 -3752 -1638) (-684 -3752 -1644) (-692 -3752 -1644)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192038,7 +192038,7 @@ solid
 	{
 		"id" "18358"
 		"plane" "(-692 -3752 -1644) (-684 -2526 -936) (-692 -2526 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192049,7 +192049,7 @@ solid
 	{
 		"id" "18359"
 		"plane" "(-692 -2526 -936) (-684 -2526 -930) (-692 -2526 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192064,7 +192064,7 @@ solid
 	{
 		"id" "18361"
 		"plane" "(-578 -2526 -936) (-578 -3752 -1680) (-578 -3752 -1644)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192075,7 +192075,7 @@ solid
 	{
 		"id" "18362"
 		"plane" "(-590 -2526 -936) (-590 -3752 -1644) (-590 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192086,7 +192086,7 @@ solid
 	{
 		"id" "18363"
 		"plane" "(-590 -2526 -936) (-578 -3752 -1644) (-590 -3752 -1644)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192097,7 +192097,7 @@ solid
 	{
 		"id" "18364"
 		"plane" "(-590 -3752 -1644) (-578 -3752 -1680) (-590 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192108,7 +192108,7 @@ solid
 	{
 		"id" "18365"
 		"plane" "(-590 -3752 -1680) (-578 -2526 -972) (-590 -2526 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192119,7 +192119,7 @@ solid
 	{
 		"id" "18366"
 		"plane" "(-590 -2526 -972) (-578 -2526 -936) (-590 -2526 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192134,7 +192134,7 @@ solid
 	{
 		"id" "18368"
 		"plane" "(-580 -2526 -930) (-580 -3752 -1644) (-580 -3752 -1638)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192145,7 +192145,7 @@ solid
 	{
 		"id" "18369"
 		"plane" "(-588 -2526 -930) (-588 -3752 -1638) (-588 -3752 -1644)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192156,7 +192156,7 @@ solid
 	{
 		"id" "18370"
 		"plane" "(-588 -2526 -930) (-580 -3752 -1638) (-588 -3752 -1638)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192167,7 +192167,7 @@ solid
 	{
 		"id" "18371"
 		"plane" "(-588 -3752 -1638) (-580 -3752 -1644) (-588 -3752 -1644)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192178,7 +192178,7 @@ solid
 	{
 		"id" "18372"
 		"plane" "(-588 -3752 -1644) (-580 -2526 -936) (-588 -2526 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192189,7 +192189,7 @@ solid
 	{
 		"id" "18373"
 		"plane" "(-588 -2526 -936) (-580 -2526 -930) (-588 -2526 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192204,7 +192204,7 @@ solid
 	{
 		"id" "18375"
 		"plane" "(-474 -2526 -936) (-474 -3752 -1680) (-474 -3752 -1644)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192215,7 +192215,7 @@ solid
 	{
 		"id" "18376"
 		"plane" "(-486 -2526 -936) (-486 -3752 -1644) (-486 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192226,7 +192226,7 @@ solid
 	{
 		"id" "18377"
 		"plane" "(-486 -2526 -936) (-474 -3752 -1644) (-486 -3752 -1644)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192237,7 +192237,7 @@ solid
 	{
 		"id" "18378"
 		"plane" "(-486 -3752 -1644) (-474 -3752 -1680) (-486 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192248,7 +192248,7 @@ solid
 	{
 		"id" "18379"
 		"plane" "(-486 -3752 -1680) (-474 -2526 -972) (-486 -2526 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192259,7 +192259,7 @@ solid
 	{
 		"id" "18380"
 		"plane" "(-486 -2526 -972) (-474 -2526 -936) (-486 -2526 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192274,7 +192274,7 @@ solid
 	{
 		"id" "18382"
 		"plane" "(-476 -2526 -930) (-476 -3752 -1644) (-476 -3752 -1638)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192285,7 +192285,7 @@ solid
 	{
 		"id" "18383"
 		"plane" "(-484 -2526 -930) (-484 -3752 -1638) (-484 -3752 -1644)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192296,7 +192296,7 @@ solid
 	{
 		"id" "18384"
 		"plane" "(-484 -2526 -930) (-476 -3752 -1638) (-484 -3752 -1638)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192307,7 +192307,7 @@ solid
 	{
 		"id" "18385"
 		"plane" "(-484 -3752 -1638) (-476 -3752 -1644) (-484 -3752 -1644)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192318,7 +192318,7 @@ solid
 	{
 		"id" "18386"
 		"plane" "(-484 -3752 -1644) (-476 -2526 -936) (-484 -2526 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192329,7 +192329,7 @@ solid
 	{
 		"id" "18387"
 		"plane" "(-484 -2526 -936) (-476 -2526 -930) (-484 -2526 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192344,7 +192344,7 @@ solid
 	{
 		"id" "18389"
 		"plane" "(-370 -2526 -936) (-370 -3752 -1680) (-370 -3752 -1644)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192355,7 +192355,7 @@ solid
 	{
 		"id" "18390"
 		"plane" "(-382 -2526 -936) (-382 -3752 -1644) (-382 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192366,7 +192366,7 @@ solid
 	{
 		"id" "18391"
 		"plane" "(-382 -2526 -936) (-370 -3752 -1644) (-382 -3752 -1644)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192377,7 +192377,7 @@ solid
 	{
 		"id" "18392"
 		"plane" "(-382 -3752 -1644) (-370 -3752 -1680) (-382 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192388,7 +192388,7 @@ solid
 	{
 		"id" "18393"
 		"plane" "(-382 -3752 -1680) (-370 -2526 -972) (-382 -2526 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192399,7 +192399,7 @@ solid
 	{
 		"id" "18394"
 		"plane" "(-382 -2526 -972) (-370 -2526 -936) (-382 -2526 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192414,7 +192414,7 @@ solid
 	{
 		"id" "18396"
 		"plane" "(-372 -2526 -930) (-372 -3752 -1644) (-372 -3752 -1638)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192425,7 +192425,7 @@ solid
 	{
 		"id" "18397"
 		"plane" "(-380 -2526 -930) (-380 -3752 -1638) (-380 -3752 -1644)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192436,7 +192436,7 @@ solid
 	{
 		"id" "18398"
 		"plane" "(-380 -2526 -930) (-372 -3752 -1638) (-380 -3752 -1638)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192447,7 +192447,7 @@ solid
 	{
 		"id" "18399"
 		"plane" "(-380 -3752 -1638) (-372 -3752 -1644) (-380 -3752 -1644)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192458,7 +192458,7 @@ solid
 	{
 		"id" "18400"
 		"plane" "(-380 -3752 -1644) (-372 -2526 -936) (-380 -2526 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192469,7 +192469,7 @@ solid
 	{
 		"id" "18401"
 		"plane" "(-380 -2526 -936) (-372 -2526 -930) (-380 -2526 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192484,7 +192484,7 @@ solid
 	{
 		"id" "18403"
 		"plane" "(-266 -2526 -936) (-266 -3752 -1680) (-266 -3752 -1644)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192495,7 +192495,7 @@ solid
 	{
 		"id" "18404"
 		"plane" "(-278 -2526 -936) (-278 -3752 -1644) (-278 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192506,7 +192506,7 @@ solid
 	{
 		"id" "18405"
 		"plane" "(-278 -2526 -936) (-266 -3752 -1644) (-278 -3752 -1644)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192517,7 +192517,7 @@ solid
 	{
 		"id" "18406"
 		"plane" "(-278 -3752 -1644) (-266 -3752 -1680) (-278 -3752 -1680)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192528,7 +192528,7 @@ solid
 	{
 		"id" "18407"
 		"plane" "(-278 -3752 -1680) (-266 -2526 -972) (-278 -2526 -972)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192539,7 +192539,7 @@ solid
 	{
 		"id" "18408"
 		"plane" "(-278 -2526 -972) (-266 -2526 -936) (-278 -2526 -936)"
-		"material" "gcs/steel"
+		"material" "gcs/md_steel"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192554,7 +192554,7 @@ solid
 	{
 		"id" "18410"
 		"plane" "(-268 -2526 -930) (-268 -3752 -1644) (-268 -3752 -1638)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192565,7 +192565,7 @@ solid
 	{
 		"id" "18411"
 		"plane" "(-276 -2526 -930) (-276 -3752 -1638) (-276 -3752 -1644)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192576,7 +192576,7 @@ solid
 	{
 		"id" "18412"
 		"plane" "(-276 -2526 -930) (-268 -3752 -1638) (-276 -3752 -1638)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192587,7 +192587,7 @@ solid
 	{
 		"id" "18413"
 		"plane" "(-276 -3752 -1638) (-268 -3752 -1644) (-276 -3752 -1644)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192598,7 +192598,7 @@ solid
 	{
 		"id" "18414"
 		"plane" "(-276 -3752 -1644) (-268 -2526 -936) (-276 -2526 -936)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
 		"rotation" "0"
@@ -192609,7 +192609,7 @@ solid
 	{
 		"id" "18415"
 		"plane" "(-276 -2526 -936) (-268 -2526 -930) (-276 -2526 -930)"
-		"material" "gcs/gold"
+		"material" "gcs/md_rail"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
 		"rotation" "0"
@@ -192623,7 +192623,7 @@ solid
 	side
 	{
 		"id" "18417"
-		"plane" "(-474 -2526 -780) (-474 -3752 -1496) (-474 -3752 -1488)"
+		"plane" "(-440 -2526 -780) (-440 -3752 -1496) (-440 -3752 -1488)"
 		"material" "gcs/fluor"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
@@ -192634,7 +192634,7 @@ solid
 	side
 	{
 		"id" "18418"
-		"plane" "(-486 -2526 -780) (-486 -3752 -1488) (-486 -3752 -1496)"
+		"plane" "(-520 -2526 -780) (-520 -3752 -1488) (-520 -3752 -1496)"
 		"material" "gcs/fluor"
 		"uaxis" "[0 1 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
@@ -192645,7 +192645,7 @@ solid
 	side
 	{
 		"id" "18419"
-		"plane" "(-486 -2526 -780) (-474 -3752 -1488) (-486 -3752 -1488)"
+		"plane" "(-520 -2526 -780) (-440 -3752 -1488) (-520 -3752 -1488)"
 		"material" "gcs/fluor"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
@@ -192656,7 +192656,7 @@ solid
 	side
 	{
 		"id" "18420"
-		"plane" "(-486 -3752 -1488) (-474 -3752 -1496) (-486 -3752 -1496)"
+		"plane" "(-520 -3752 -1488) (-440 -3752 -1496) (-520 -3752 -1496)"
 		"material" "gcs/fluor"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"
@@ -192667,7 +192667,7 @@ solid
 	side
 	{
 		"id" "18421"
-		"plane" "(-486 -3752 -1496) (-474 -2526 -788) (-486 -2526 -788)"
+		"plane" "(-520 -3752 -1496) (-440 -2526 -788) (-520 -2526 -788)"
 		"material" "gcs/fluor"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 -1 0 0] 0.25"
@@ -192678,7 +192678,7 @@ solid
 	side
 	{
 		"id" "18422"
-		"plane" "(-486 -2526 -788) (-474 -2526 -780) (-486 -2526 -780)"
+		"plane" "(-520 -2526 -788) (-440 -2526 -780) (-520 -2526 -780)"
 		"material" "gcs/fluor"
 		"uaxis" "[1 0 0 0] 0.25"
 		"vaxis" "[0 0 -1 0] 0.25"

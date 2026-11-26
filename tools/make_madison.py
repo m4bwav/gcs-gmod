@@ -124,3 +124,18 @@ base = np.full((N, N, 3), (70, 72, 76), np.float32) + rng.normal(0, 3, (N, N, 1)
 ys, xs = rng.integers(0, N, 7000), rng.integers(0, N, 7000)
 base[ys, xs] = (225, 225, 220)
 save(Image.fromarray(np.clip(base, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.5)), "md_band")
+
+
+# Escalator balustrade: brushed stainless, bright with fine streaks along the rail (gcs/md_steel).
+streak = (rng.random((N, 1)) * 40).astype(np.uint8)
+img = Image.fromarray(np.repeat(streak, N, axis=1) + 180, "L").resize((N, N)).filter(ImageFilter.GaussianBlur(0.8))
+save(Image.merge("RGB", [img, img.point(lambda s: s + 3), img.point(lambda s: s + 8)]), "md_steel")
+
+# Escalator steps: charcoal cleats, a groove every 8 px, a yellow comb line every 64 px (gcs/md_step).
+img = Image.new("RGB", (N, N), (46, 48, 52))
+d = ImageDraw.Draw(img)
+for x in range(0, N, 8):
+    d.line([(x, 0), (x, N)], fill=(24, 25, 28), width=3)
+for y in range(0, N, 64):
+    d.rectangle([0, y, N, y + 5], fill=(200, 170, 40))
+save(img, "md_step")
