@@ -1,3 +1,8 @@
+## 0.18.3 (2026-11-26)
+- Track platforms: backlit ad boxes on the shed walls and hanging at each platform head.
+- Track platforms, upper and lower: the brass railings round the track ends are turned-post models.
+- Grand Central Market: the door's side lights show the lit market stalls inside.
+
 ## 0.18.2 (2026-11-26)
 - Dining concourse: new shop-front glass, and every pylon has a plinth, gold band and cream capital.
 - Dining concourse: the information booth is rebuilt with a stone counter, a brass-framed glass ring, a gold cornice and lights inside, under the clock column.
