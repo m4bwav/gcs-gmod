@@ -43,3 +43,6 @@ Wikimedia Commons, downloaded at 1600 px for colour, tone and pattern sampling. 
 | GCT_Market_2.jpg | Ɱ | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:GCT_Market_2.jpg |
 | GCT_Market_3.jpg | Ɱ | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:GCT_Market_3.jpg |
 | Grand_Central_Mart_Lex_Av_food_corridor_jeh.jpg | Jim.henderson | CC0 | https://commons.wikimedia.org/wiki/File:Grand_Central_Mart_Lex_Av_food_corridor_jeh.jpg |
+| GCT_Campbell_1.jpg | Ɱ | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:GCT_Campbell_1.jpg |
+| GCT_Campbell_3.jpg | Ɱ | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:GCT_Campbell_3.jpg |
+| Campbell_Apartment_nyc1.jpg | Ceoil | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Campbell_Apartment_nyc1.jpg |
