@@ -98,7 +98,7 @@ The textures in `src/materials/gcs/` are already generated, so you only need the
 
 ## Credits and licences
 
-- Built with [modwright](https://github.com/m4bwav/modwright), a Claude Code plugin for modding games.
+- Built with [modwright](https://github.com/m4bwav/modwright), an agent plugin for modding games.
 - In-map textures are procedural (scripts in `tools/`) or stock Half-Life 2 materials; no AI-generated images are in the map.
 
 - Code (`tools/`): MIT, see [LICENSE](LICENSE).
