@@ -1388,11 +1388,16 @@ def market(W, ents):
         det(box(MK_D0 - 10, yy, 0, MK_D0, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
         det(box(MK_D1, yy, 0, MK_D1 + 10, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
         det(box(MK_D0, yy, MK_DOOR_H, MK_D1, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
+    wy, wx0, wx1 = -LEX_Y, MK_D1 + 24, MK_D1 + 340
+    # Goods behind the glass (make_board.py mk_display): 1024 px over the run, read from the
+    # passage (+y faces: -x to the right).
+    FACEUV["gcs/mk_display"] = lambda n, su=(wx1 - wx0) / 1024, sv=108 / 512: (
+        "[-1 0 0 %g] %g" % (wx1 / su, su), "[0 0 -1 %g] %g" % (132 / sv, sv))
     # Storefront: lit glass side lights in gold frames either side of the door, both faces
     # (the real entrance is a glazed shop front; the 15 ft ceilings leave no room for its arch).
     for ga, gb, fa, fb in ((-LEX_Y + 4, -LEX_Y + 6, -LEX_Y, -LEX_Y + 8), (y1 - 6, y1 - 4, y1 - 8, y1)):
         for sa, sb in ((MK_D0 - 10 - MK_SL, MK_D0 - 10), (MK_D1 + 10, MK_D1 + 10 + MK_SL)):
-            det(box(sa, ga, 14, sb, gb, 144, TEX_DOOR))
+            det(box(sa, ga, 14, sb, gb, 144, "gcs/mk_display"))  # stalls behind the glass, as in GCT_Market.jpg
             det(box(sa, fa, 0, sb, fb, 14, TEX_GOLD))
             det(box(sa, fa, 144, sb, fb, 156, TEX_GOLD))
             det(box(sa + MK_SL//2 - 2, fa, 14, sa + MK_SL//2 + 2, fb, 144, TEX_GOLD))
@@ -1404,15 +1409,10 @@ def market(W, ents):
         det(box(MK_D0, a, MK_DOOR_H - 20, MK_D1, a + 1, MK_DOOR_H, "gcs/mk_sign"))
     # Storefront east of the door on the passage face: lit display window, gold frame, two mullions
     # (the west side is taken by the next shop front).
-    wy, wx0, wx1 = -LEX_Y, MK_D1 + 24, MK_D1 + 340
     # The window bows out into the passage as a shallow curve of glass (8 flat panes),
     # sill and head following it; a brass guard rail on the floor in front.
     n, bow = 8, 16
     arc = [(wx0 + (wx1 - wx0) * i // n, wy + round(bow * math.sin(math.pi * i / n))) for i in range(n + 1)]
-    # Goods behind the glass (make_board.py mk_display): 1024 px over the run, read from the
-    # passage (+y faces: -x to the right).
-    FACEUV["gcs/mk_display"] = lambda n, su=(wx1 - wx0) / 1024, sv=108 / 512: (
-        "[-1 0 0 %g] %g" % (wx1 / su, su), "[0 0 -1 %g] %g" % (132 / sv, sv))
     for (ax, ay), (bx, by) in zip(arc, arc[1:]):
         det(prism(ccw([(ax, ay), (bx, by), (bx, by + 2), (ax, ay + 2)]), 24, 132, "gcs/mk_display"))
         det(prism(ccw([(ax, ay + 2), (bx, by + 2), (bx, by + 3), (ax, ay + 3)]), 24, 132, "gcs/booth_glass"))
