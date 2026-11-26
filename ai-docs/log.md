@@ -116,3 +116,5 @@
 - 2026-11-26: session 26: Market door storefront side lights, 52,476 verts, shots/20261126-1413. The first shots.sh run straight after a compile came out wireframe though no other GMod ran; rerunning fixed it. Check a shot before trusting it.
 
 - 2026-11-26 session 27: Lexington shop fronts textured (make_board.py lex_shop, gcs/lex_shop_n/_s); 52,616 verts; shots/20261126-1421. Next: Madison mural/escalators.
+
+- 2026-11-26 session 28: Madison concourse mural, shop band, terrazzo bands (texture + 1-u panels). 52,704 verts, BSP 93.1 MB. shots/20261126-1429.

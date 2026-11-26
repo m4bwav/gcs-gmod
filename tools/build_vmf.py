@@ -1554,6 +1554,19 @@ def madison(W, ents):
         det(prism([(a, y1 - 4), (a + 280, y1 - 4), (a + 280, y1), (a, y1)], sz0, sz1, "gcs/md_screen", "gcs/steel"))
         det(box(a - 6, y1 - 6, sz0 - 6, a + 286, y1, sz0, "gcs/steel"))
         det(box(a - 6, y1 - 6, sz1, a + 286, y1, sz1 + 6, "gcs/steel"))
+    # Mosaic mural on the west wall, glazed shop band on the east wall (make_madison.py; ruling:
+    # the real hall has them on its long walls, here the long walls hold the track and escalators),
+    # charcoal terrazzo bands across the floor.
+    mz0, mz1 = zb + 12, zb + h - 12
+    su, sv = (y1 - py) / 1024, (mz1 - mz0) / 256
+    FACEUV["gcs/md_mural"] = lambda n: (
+        ("[0 1 0 %g] %g" % (-py / su, su), "[0 0 -1 %g] %g" % (mz1 / sv, sv)) if n[0] > 0.5 else None)
+    FACEUV["gcs/md_shops"] = lambda n: (
+        ("[0 -1 0 %g] %g" % (y1 / su, su), "[0 0 -1 %g] %g" % (mz1 / sv, sv)) if n[0] < -0.5 else None)
+    det(box(c0, py, mz0, c0 + 2, y1, mz1, "gcs/md_mural"))
+    det(box(c1 - 2, py, mz0, c1, y1, mz1, "gcs/md_shops"))
+    for x in range(c0 + 150, c1 - 100, 300):
+        det(box(x - 24, py + 24, zb, x + 24, y1, zb + 1, "gcs/md_band"))
     for x in range(c0 + 100, c1, 200):
         det(box(x - 4, py + 60, zb + h - 8, x + 4, y1 - 60, zb + h, "gcs/fluor"))
     for x in range(c0 + 200, c1, 400):
