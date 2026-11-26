@@ -67,6 +67,7 @@ Drawn from the map source by `tools/make_map.py`: walls and fixtures at chest he
 - The exterior (0.5.0): out through the Vanderbilt vestibule onto 42nd Street: the facade with three great arched windows between paired columns, oval windows, the GRAND CENTRAL TERMINAL attic inscription, the clock under the Glory of Commerce group, a balustraded terrace with a stair, the Park Avenue Viaduct across the street, office towers, the MetLife tower behind, and open sky
 - Grand Hyatt entrance (0.16.0): up a short stair from Lexington Passage, a glass-roofed atrium lobby with a fountain.
 - Detail pass (0.17.1): Lexington blade sign, Campbell surfaces, Market door sign and Root Chandelier.
+- Detail pass (0.18.1): Graybar newsstands, Biltmore Room wall clock, Market bow window with lit stalls and brass rail, M7 car sides on the upper platforms.
 - Detail pass (0.18.0): Market storefront, Lexington shop windows, Madison mural, shop band and stainless escalators, Graybar stone walls and lit kiosks.
 - Detail pass (0.17.0): Biltmore arrivals lettering, painted Graybar vaults, a white-panelled Grand Central Madison with terrazzo floor and departure screens.
 - Lexington Passage detail (0.16.1): a lower beamed ceiling with brass dome pendants.

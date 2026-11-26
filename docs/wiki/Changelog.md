@@ -1,3 +1,9 @@
+## 0.18.1 (2026-11-26)
+- Graybar Passage: the kiosks are newsstands, magazine racks behind lit glass.
+- Biltmore Room: a Tiffany-style wall clock above the arrivals board.
+- Grand Central Market: the display window bows into Lexington Passage, shows lit market stalls and has a brass guard rail.
+- Upper platforms: the cars have M7 sides (stainless panels, windows, sliding doors, MTA roundel).
+
 ## 0.18.0 (2026-11-26)
 - Grand Central Market: the passage door is a storefront with lit glass side lights.
 - Lexington Passage: shop windows with lit shelves of goods.
