@@ -124,3 +124,4 @@
 - 2026-11-26 15:02: session 31 (s31): Graybar newsstand kiosk texture, Biltmore wall clock. 52,804 verts, BSP 97.3 MB, shots/20261126-1500.
 - 2026-11-26 session 32: Market window curved glass bay + mk_rail brass rail model; 52,999 verts; shots/20261126-1513.
 - 2026-11-26: Session 33: Market bow window goods texture (mk_display). Clean full compile, 52,999 verts, BSP 99.5 MB, shots/20261126-1521.
+- 2026-11-26: Session 34: platform cars got an M7 side texture (train_side, one material per car); 52,873 verts, shots/20261126-1551. Driver-started session.

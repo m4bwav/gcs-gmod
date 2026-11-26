@@ -247,6 +247,50 @@ def train_steel():
             d.ellipse([x + 5, y, x + 8, y + 3], fill=(150, 152, 156))
     save(img, "train_steel")
 
+def train_side():
+    # 1024x256 Metro-North M7 car side, one car (85 ft = 1020 u) by 150 u from floor to roof
+    # (photo: Metro_North_M7a_Rainbow_Heart_Sticker_Grand_Central): brushed stainless, a dark
+    # window per bay with rounded corners, sliding doors at L/4 and 3L/4 with tall windows,
+    # yellow door sills, MTA roundel and number beside each door, panel seams.
+    rng = np.random.default_rng(5)
+    W, H = 1024, 256
+    a = 182 + rng.normal(0, 5, (H, 1)) + rng.normal(0, 3, (H, W))
+    img = Image.fromarray(np.dstack([a, a + 2, a + 6]).clip(0, 255).astype(np.uint8))
+    d = ImageDraw.Draw(img)
+    u = W / 1020                                   # px per unit along the car
+    z = lambda h: int(H - h * H / 150)             # height in units -> row
+    doors = (255, 765)
+    for x in range(0, W, 64):
+        if all(abs(x - c * u) > 50 for c in doors):
+            d.line([(x, z(140)), (x, z(4))], fill=(150, 152, 156), width=1)
+    d.line([(0, z(140)), (W, z(140))], fill=(120, 122, 128), width=2)     # roof line
+    d.line([(0, z(6)), (W, z(6))], fill=(110, 112, 116), width=3)         # sill
+    for c in doors:
+        x0, x1 = int((c - 36) * u), int((c + 36) * u)
+        d.rectangle([x0 - 3, z(90) - 3, x1 + 3, H - 1], fill=(120, 122, 126))
+        d.rectangle([x0, z(88), x1, H - 1], fill=(196, 198, 202))
+        m = (x0 + x1) // 2
+        d.line([(m, z(88)), (m, H - 1)], fill=(80, 82, 86), width=2)
+        for wx in (x0 + 6, m + 6):
+            d.rounded_rectangle([wx, z(78), wx + (x1 - x0) // 2 - 12, z(40)], 4, fill=(22, 26, 32))
+        d.rectangle([x0, H - 6, x1, H - 1], fill=(230, 190, 30))
+        for k, x in ((0, x0 - 30), (1, x1 + 12)):
+            if k == 0:
+                d.ellipse([x, z(70), x + 16, z(70) + 16], fill=(20, 60, 160))
+                d.text((x + 3, z(70) + 3), "M", fill=(255, 255, 255))
+            else:
+                d.rectangle([x, z(64), x + 12, z(52)], fill=(250, 210, 40))
+    bays = [(18, 220), (292, 728), (802, 1002)]
+    for b0, b1 in bays:
+        n = max(1, round((b1 - b0) / 75))
+        w = (b1 - b0) / n
+        for i in range(n):
+            x0, x1 = int((b0 + i * w + 8) * u), int((b0 + (i + 1) * w - 8) * u)
+            d.rounded_rectangle([x0 - 2, z(98) - 2, x1 + 2, z(62) + 2], 6, fill=(60, 62, 66))
+            d.rounded_rectangle([x0, z(98), x1, z(62)], 5, fill=(26, 30, 38))
+            d.line([(x0 + 4, z(96)), (x0 + 16, z(66))], fill=(70, 78, 90), width=2)
+    save(img, "train_side")
+
 
 def endwin_grid():
     # 512x512 RGBA mullion grid for the concourse end windows: 8 x 8 clear cells (alpha 0) between
@@ -422,6 +466,7 @@ plaque("PERSHING SQUARE", "pershing")
 plaque("GRAND CENTRAL MARKET", "mk_sign", 5)
 track_signs()
 train_steel()
+train_side()
 endwin_grid()
 arrivals()
 md_screen()
