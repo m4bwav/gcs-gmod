@@ -20,7 +20,7 @@ Update 0.2.0 added the lower level: walk down the ramps from the concourse to th
 [h2]Source and credits[/h2]
 [list]
 [*]Source, build scripts and changelog: [url=https://github.com/m4bwav/gcs-gmod]github.com/m4bwav/gcs-gmod[/url]
-[*]Built with [url=https://github.com/m4bwav/modwright]modwright[/url], a Claude Code plugin for modding games, which drove the compile, screenshot and comparison tools.
+[*]Built with [url=https://github.com/m4bwav/modwright]modwright[/url], an agent plugin for modding games, which drove the compile, screenshot and comparison tools.
 [*]Textures are original and procedural (vault mural, marble, limestone, clock, board, flag, window glass), made by scripts in the repository, plus stock Half-Life 2 materials. No AI-generated images are in the map.
 [*]Colours and proportions were matched against photos from Wikimedia Commons, used for reference only and not included in the map: Ɱ (CC0), Billie Grace Ward (CC BY 2.0), Russ Allison Loar (CC BY 2.0), Charvey90 (CC BY-SA 4.0), ArnoldReinhold (CC BY 4.0), Reading Tom (CC BY 2.0), Chris Sampson (CC BY-SA 2.0), Tim Evanson (CC BY-SA 2.0), Detroit Publishing Co. (public domain), Chris Light (CC BY-SA 4.0), Lexcie (CC BY-SA 3.0), TheCatalyst31 (CC BY-SA 4.0), NicoARicoA (CC BY-SA 4.0), MTA (CC BY 2.0). Full list with links: refs/SOURCES.md in the repository.
 [*]The repository's banner image was made with the Z-Image Turbo model (Apache-2.0) and is labelled as AI art; it is not a screenshot.
