@@ -1236,8 +1236,12 @@ def graybar(W, ents):
     for a, b in ((x0 - WALL, x0), (x1, x1 + WALL)):
         W(box(a, y0, 0, b, y1, GB_TOP + WALL, TEX_CREAM))
     W(box(x0 - WALL, y1, 0, x1 + WALL, y1 + WALL, GB_TOP + WALL, TEX_CREAM))
+    # Painted vaults: gcs/gb_mural (tools/make_mural.py) is drawn in plan, one tile per bay,
+    # so it maps top-down on every vault face with the tile's diagonals on the groins.
+    sc = GB_BAY / 512
+    FACEUV["gcs/gb_mural"] = lambda n: ("[1 0 0 %g] %g" % (-x0 / sc % 512, sc), "[0 -1 0 %g] %g" % (y0 / sc % 512, sc))
     for k in range(GB_N):
-        groin(W, x0, x1, y0 + k*GB_BAY, y0 + (k + 1)*GB_BAY, GB_ZS, GB_RISE, TEX_CREAM, n=6)
+        groin(W, x0, x1, y0 + k*GB_BAY, y0 + (k + 1)*GB_BAY, GB_ZS, GB_RISE, "gcs/gb_mural", n=6)
     # Pilasters with gold capitals between bays, dado, lit doors north.
     for k in range(GB_N + 1):
         yk = y0 + k*GB_BAY
