@@ -1,3 +1,7 @@
+## 0.16.0 (2026-11-26)
+- Grand Hyatt entrance: a door in Lexington Passage's north wall leads up a short stair into a glass-roofed atrium lobby with a fountain, reception desk and planters.
+- Nav mesh regenerated.
+
 ## 0.15.0 (2026-11-26)
 - Track 61: past a chain-link fence at the north end of the lower-level tracks, a dim platform and two tracks run on to the old freight elevator, with a steel car standing on Track 61.
 - Nav mesh regenerated.
