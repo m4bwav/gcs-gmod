@@ -39,7 +39,7 @@ for pts, tex in solids:
     zs = [p[2] for p in pts]; lo, hi = min(zs), max(zs)
     xy = hull([(p[0], p[1]) for p in pts])
     if hi - lo > 2000 or len(xy) < 3: continue
-    if lo <= 4*FT <= hi and max(p[0] for p in pts) > -1714: floor.append(xy)   # west of the concourse is all lower level
+    if lo <= 4*FT <= hi and (max(p[0] for p in pts) > -1714 or lo >= -2*FT): floor.append(xy)   # west of the concourse: only brushes standing on the main floor
     elif lo <= 30*FT <= hi: balc.append(xy)
     if lo <= -18*FT <= hi: low.append(xy)   # lower level (floor -22 ft), cut at chest height
 allx = [x for h in floor + low for x, _ in h]; ally = [y for h in floor + low for _, y in h]
@@ -72,10 +72,14 @@ panel(130, ya1, PH1, floor, balc, "Main Concourse level (0 ft)",
        ("West balcony + stairs", cx0 + 360, 0), ("East balcony + stairs", -cx0 - 360, 0), ("Ramp wells", -1300, 390), ("Ramp wells", 1300, 390),
        ("Vanderbilt Hall", -360, -1456), ("Passage", -1302, -930), ("42nd St doors", -360, -2050),
        ("Track gates", 0, 830), ("Track platforms (shed)", 0, 2600), ("Metro-North cars", -186, 1900),
-       ("42nd Street facade", -360, -2400), ("42nd Street", 600, -2900), ("Park Ave Viaduct", -2076, -3000), ("Terrace stair", 1300, -2500), ("Biltmore Room", -1360, 1500)), spawn)
-panel(130 + PH1, yb1, PH2, low, (), "Lower level (-22 ft): ramps, Whispering Gallery, Oyster Bar, dining concourse, east landing hall",
+       ("42nd Street facade", -360, -2400), ("42nd Street", 600, -2900), ("Park Ave Viaduct", -2076, -3000), ("Terrace stair", 1300, -2500), ("Biltmore Room", -1360, 1500),
+       ("Lexington Passage", 3106, 156), ("Graybar Passage", 3106, 1500), ("Grand Central Market", 4160, -388),
+       ("Grand Hyatt atrium", 3778, 800), ("Transit Museum store", 1144, -1456), ("One Vanderbilt link", -2650, 120),
+       ("One Vanderbilt lobby", -3200, 450), ("The Campbell (balcony level)", -2315, -700)), spawn)
+panel(130 + PH1, yb1, PH2, low, (), "Lower level (-22 ft): ramps, Whispering Gallery, Oyster Bar, dining concourse, east landing hall, lower tracks",
       (("Dining concourse", 0, 0), ("Ramps", -2000, 390), ("Ramps", -2000, -390), ("Corridor", -1700, 0),
        ("Ramps", 2000, 390), ("Ramps", 2000, -390), ("Corridor", 1850, 0), ("East landing hall", 2924, 0),
-       ("Whispering Gallery", -2984, 0), ("Oyster Bar", -3950, 0)))
+       ("Whispering Gallery", -2984, 0), ("Oyster Bar", -3950, 0),
+       ("Lower track platforms", 0, 2800), ("Track 61 (fenced)", 660, 5300), ("To Grand Central Madison (escalators, -140 ft)", -480, -2300)))
 d.text((60, H-45), "Generated from src/gm_grand_central.vmf by tools/make_map.py", fill=(120, 110, 100), font=f)
 OUT.parent.mkdir(parents=True, exist_ok=True); img.save(OUT); print("wrote", OUT, len(floor), "+", len(low), "brushes")
