@@ -1088,6 +1088,15 @@ GB_BAY, GB_N = 32 * FT, 5
 GB_Y1 = GB_Y0 + GB_N * GB_BAY
 GB_ZS, GB_RISE = 16 * FT, 12 * FT
 GB_TOP = GB_ZS + GB_RISE + 16
+# The Campbell (chamber 4): John W. Campbell's office, now a bar, behind the west balcony's south
+# arch (stand-in for the real stair up from the southwest corner; flagged). Photos: GCT_Campbell_1/3,
+# Campbell_Apartment_nyc1. About 58 x 30 x 25 ft: dark beams painted ochre/red/green on gilt
+# corbels, a big leaded window over the bar on the south wall, stone fireplace on the west wall.
+CB_C = -31 * FT                            # the balcony arch's centre y
+CB_X1 = -(HX + WALL + ARCH_D + WALL)       # room's inner east face, -1970
+CB_X0 = CB_X1 - 690
+CB_Y0, CB_Y1 = CB_C - 180, CB_C + 180
+CB_Z, CB_H = BALC_Z, 25 * FT
 # Grand Central Market (chamber 3): a long hall south of Lexington Passage, entered by a door at
 # its west end, Lexington Avenue doors at the east (photos: GCT_Market*, Grand_Central_Mart_Lex_Av).
 # 240 x 28 ft, 15 ft flat ceiling rising to a shallow centre dome with a chandelier, open counters
@@ -1232,6 +1241,57 @@ def market(W, ents):
                     disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
+def campbell(W, ents):
+    decor = []
+    det = decor.append
+    x0, x1, y0, y1, z, h = CB_X0, CB_X1, CB_Y0, CB_Y1, CB_Z, CB_H
+    r, top = BARCH_W // 2, CB_Z + BARCH_H
+    W(box(x0 - WALL, y0 - WALL, z - WALL, x1 + WALL, y1 + WALL, z, TEX_WOOD))
+    W(box(x0 - WALL, y0 - WALL, z + h, x1 + WALL, y1 + WALL, z + h + WALL, "gcs/shed_dark"))
+    W(box(x0 - WALL, y0 - WALL, z, x1, y0, z + h, TEX_CREAM))
+    W(box(x0 - WALL, y1, z, x1, y1 + WALL, z + h, TEX_CREAM))
+    W(box(x0 - WALL, y0, z, x0, y1, z + h, TEX_CREAM))
+    # East wall from the balcony arch's back to the room, with the arch's opening through it.
+    xe0, xe1 = x1, -(HX + WALL + ARCH_D)
+    W(box(xe0, y0 - WALL, z, xe1, CB_C - r, z + h, TEX_CREAM))
+    W(box(xe0, CB_C + r, z, xe1, y1 + WALL, z + h, TEX_CREAM))
+    W(box(xe0, CB_C - r, top, xe1, CB_C + r, z + h, TEX_CREAM))
+    W(box(xe0, CB_C - r, z - WALL, xe1, CB_C + r, z, TEX_WOOD))
+    # Painted beams on gilt corbels across the room; ochre/red/green read from the coffer and trim.
+    for x in range(x0 + 60, x1, 115):
+        det(box(x - 10, y0, z + h - 30, x + 10, y1, z + h, TEX_WOOD))
+        det(box(x - 12, y0, z + h - 34, x + 12, y1, z + h - 30, TEX_GOLD))
+        for a, b in ((y0, y0 + 16), (y1 - 16, y1)):
+            det(box(x - 12, a, z + h - 60, x + 12, b, z + h - 30, TEX_GOLD))
+    # Leaded window on the south wall over the bar, glowing; bar counter under it.
+    wx0, wx1 = x0 + 160, x0 + 160 + 240
+    det(box(wx0, y0, z + 96, wx1, y0 + 4, z + 96 + 216, "gcs/window_glass"))
+    det(box(wx0 - 8, y0, z + 88, wx1 + 8, y0 + 6, z + 96, TEX_GOLD))
+    ents.append(ent("light", ((wx0 + wx1)//2, y0 + 60, z + 200), _light="255 220 170 60"))
+    det(box(x0 + 120, y0 + 60, z, x0 + 560, y0 + 96, z + 42, TEX_WOOD))
+    det(box(x0 + 116, y0 + 56, z + 42, x0 + 564, y0 + 100, z + 46, "gcs/plat_edge"))
+    det(box(x0 + 120, y0, z, x0 + 560, y0 + 16, z + 84, TEX_WOOD))
+    # Fireplace on the west wall: stone surround, dark opening, tall hood.
+    fc = (y0 + y1)//2
+    det(box(x0, fc - 70, z, x0 + 24, fc + 70, z + 80, TEX_CREAM))
+    det(box(x0, fc - 40, z, x0 + 26, fc + 40, z + 56, "gcs/shed_dark"))
+    det(box(x0, fc - 76, z + 80, x0 + 30, fc + 76, z + 90, TEX_GOLD))
+    det(box(x0, fc - 56, z + 90, x0 + 14, fc + 56, z + 220, TEX_CREAM))
+    # Green banquette along the north wall, small tables; sconces with warm lights.
+    det(box(x0 + 120, y1 - 40, z, x1 - 120, y1, z + 18, "gcs/vh_grille"))
+    det(box(x0 + 120, y1 - 12, z + 18, x1 - 120, y1, z + 44, "gcs/vh_grille"))
+    for x in range(x0 + 180, x1 - 120, 140):
+        det(box(x - 14, y1 - 90, z, x + 14, y1 - 62, z + 28, TEX_WOOD))
+    for x in range(x0 + 120, x1 - 60, 170):
+        for yy, d in ((y1, -1), (y0, 1)):
+            a, b = sorted((yy, yy + d*10))
+            det(box(x - 8, a, z + 110, x + 8, b, z + 128, TEX_BULB))
+            ents.append(ent("light", (x, yy + d*40, z + 120), _light="255 190 130 18"))
+    ents.append(ent("env_cubemap", ((x0 + x1)//2, fc, z + 64)))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="cb_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
 # The Biltmore Room (area 6 extra): the old arrival room off the concourse's northwest corner
 # (photos: Biltmore_Room_at_Grand_Central_Terminal, MTA_Reopens_Biltmore_Room, the schedule board
 # and clock). Cream marble walls and floor, a beamed and coffered ceiling, dentil cornice, the
@@ -1370,6 +1430,7 @@ def build():
     lex_passage(W, ents)
     graybar(W, ents)
     market(W, ents)
+    campbell(W, ents)
     biltmore(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
@@ -1414,7 +1475,8 @@ def build():
                 W(box(xa, aedges[j], z0, xb, aedges[j+1], top, TEX_WALL))
             for c in centres:
                 arcade_bay(W, ents, sgn, xin, xout, c, z0, aw//2, top, min(WALL, BALC_Z - ARCH_TOP) if z0 == 0 else WALL,
-                           ramp=(z0 == 0 and c != 0), open_=(z0 == 0 and c == 0 and sgn > 0))
+                           ramp=(z0 == 0 and c != 0),
+                           open_=(z0 == 0 and c == 0 and sgn > 0) or (z0 == BALC_Z and c == CB_C and sgn < 0))
         W(box(xa, -HY, win_zc, xb, HY, CROWN+WALL, TEX_WALL))
         W(box(xa, -HY, win_z1, xb, -win_w//2, win_zc, TEX_WALL))
         W(box(xa, win_w//2, win_z1, xb, HY, win_zc, TEX_WALL))
