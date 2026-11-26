@@ -1107,6 +1107,14 @@ CB_X1 = -(HX + WALL + ARCH_D + WALL)       # room's inner east face, -1970
 CB_X0 = CB_X1 - 690
 CB_Y0, CB_Y1 = CB_C - 180, CB_C + 180
 CB_Z, CB_H = BALC_Z, 25 * FT
+# One Vanderbilt link (chamber 6): the west floor arch opens on a link west (|y| < LK_Y, clear of
+# the ramp walls at |y| 168 and the Campbell's wall), an escalator run rising 20 ft over the
+# Whispering Gallery, and a 30 ft lobby at its top with glass Vanderbilt Avenue doors (flagged
+# ruling: the real link is a new hall reached from the concourse's west side; sizes estimated).
+LK_X0 = -(HX + WALL + ARCH_D)              # -1906, back of the west centre arch
+LK_E, LK_W = -2400, -2900                  # escalator foot and top
+LK_Y, LK_ZT, LK_C = 120, 20 * FT, 35 * FT
+LB_X0, LB_Y, LB_H = -3500, 300, 30 * FT
 # Grand Central Market (chamber 3): a long hall south of Lexington Passage, entered by a door at
 # its west end, Lexington Avenue doors at the east (photos: GCT_Market*, Grand_Central_Mart_Lex_Av).
 # 240 x 28 ft, 15 ft flat ceiling rising to a shallow centre dome with a chandelier, open counters
@@ -1338,6 +1346,49 @@ def transit_store(W, ents):
     ents.append(ent("func_detail", solids="".join(decor)))
 
 
+def vanderbilt_link(W, ents):
+    decor = []
+    det = decor.append
+    y, zt, c = LK_Y, LK_ZT, LK_C
+    W(box(LK_E, -y - WALL, -WALL, LK_X0, y + WALL, 0, TEX_FLOOR))
+    W(yprism(ccw([(LK_E, 0), (LK_W, zt), (LK_W, zt - WALL), (LK_E, -WALL)]), -y, y, "gcs/steel"))
+    for a, b in ((-y - WALL, -y), (y, y + WALL)):
+        W(box(LK_W, a, -WALL, LK_X0, b, c + WALL, TEX_CREAM))
+    W(box(LK_W, -y - WALL, c, LK_X0, y + WALL, c + WALL, TEX_COFFER))
+    # Lobby: stone floor at the escalator top, tall glass west wall over the street doors.
+    x0, x1, ly, top = LB_X0, LK_W, LB_Y, zt + LB_H
+    W(box(x0 - WALL, -ly - WALL, zt - WALL, x1, ly + WALL, zt, "gcs/floor_low"))
+    W(box(x0 - WALL, -ly - WALL, top, x1 + WALL, ly + WALL, top + WALL, TEX_COFFER))
+    for a, b in ((-ly - WALL, -ly), (ly, ly + WALL)):
+        W(box(x0 - WALL, a, zt - WALL, x1 + WALL, b, top, TEX_CREAM))
+    W(box(x0 - WALL, -ly, zt, x0, ly, top, TEX_CREAM))
+    W(box(x1, -ly, zt - WALL, x1 + WALL, -y - WALL, top, TEX_CREAM))
+    W(box(x1, y + WALL, zt - WALL, x1 + WALL, ly, top, TEX_CREAM))
+    W(box(x1, -y - WALL, c, x1 + WALL, y + WALL, top, TEX_CREAM))
+    # Escalator rails (sloped brass bars), a centre divider, steel skirts.
+    def rail(yc, w, z0, z1, tex):
+        det(yprism(ccw([(LK_E, z0), (LK_W, zt + z0), (LK_W, zt + z1), (LK_E, z1)]), yc - w, yc + w, tex))
+    for yc in (-y + 8, 0, y - 8):
+        rail(yc, 6, 0, 36, "gcs/steel")
+        rail(yc, 4, 36, 42, TEX_GOLD)
+    det(box(LK_E - 40, -y, 0, LK_E, y, 2, TEX_GOLD))
+    det(box(LK_W, -y, zt, LK_W + 40, y, zt + 2, TEX_GOLD))
+    # West glass wall: big glazed panel, lit doors below, a bronze band.
+    det(box(x0, -ly + 40, zt + 150, x0 + 4, ly - 40, top - 40, "gcs/window_glass"))
+    for cy in (-150, -50, 50, 150):
+        det(box(x0, cy - 40, zt, x0 + 6, cy + 40, zt + 120, TEX_GRID))
+        det(box(x0, cy - 34, zt, x0 + 8, cy + 34, zt + 114, TEX_DOOR))
+    det(box(x0, -ly, zt + 128, x0 + 8, ly, zt + 140, TEX_GOLD))
+    for x in (LK_X0 - 200, (LK_E + LK_W)//2, LK_W - 100, x0 + 150):
+        ents.append(ent("light", (x, 0, (c if x > LK_W else top) - 60), _light="255 235 210 60"))
+    for x in range(x0 + 120, x1, 200):
+        for yy in (-180, 180):
+            det(box(x - 10, yy - 10, top - 12, x + 10, yy + 10, top, TEX_BULB))
+    ents.append(ent("env_cubemap", ((x0 + x1)//2, 0, zt + 72)))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="vl_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
 # The Biltmore Room (area 6 extra): the old arrival room off the concourse's northwest corner
 # (photos: Biltmore_Room_at_Grand_Central_Terminal, MTA_Reopens_Biltmore_Room, the schedule board
 # and clock). Cream marble walls and floor, a beamed and coffered ceiling, dentil cornice, the
@@ -1478,6 +1529,7 @@ def build():
     market(W, ents)
     campbell(W, ents)
     transit_store(W, ents)
+    vanderbilt_link(W, ents)
     biltmore(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
@@ -1523,7 +1575,7 @@ def build():
             for c in centres:
                 arcade_bay(W, ents, sgn, xin, xout, c, z0, aw//2, top, min(WALL, BALC_Z - ARCH_TOP) if z0 == 0 else WALL,
                            ramp=(z0 == 0 and c != 0),
-                           open_=(z0 == 0 and c == 0 and sgn > 0) or (z0 == BALC_Z and c == CB_C and sgn < 0))
+                           open_=(z0 == 0 and c == 0) or (z0 == BALC_Z and c == CB_C and sgn < 0))
         W(box(xa, -HY, win_zc, xb, HY, CROWN+WALL, TEX_WALL))
         W(box(xa, -HY, win_z1, xb, -win_w//2, win_zc, TEX_WALL))
         W(box(xa, win_w//2, win_z1, xb, HY, win_zc, TEX_WALL))
