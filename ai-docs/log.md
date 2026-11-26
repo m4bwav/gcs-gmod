@@ -102,3 +102,4 @@
 - 2026-11-26: chain session 13: Grand Hyatt entrance, 0.16.0 (51,937 verts). All nine chambers in. Second func_brush that compiled and cast shadows but never drew (hy_decor); func_detail again.
 - 2026-11-26: chain session 14: Lexington ceiling lowered to 15 ft; found the passage dado ran across three door openings as a 36 u ledge (blocked the Market and Hyatt doors); split it. Not released.
 - 2026-11-26: chain session 15: VH east dado blocked the Transit store door, split; level map labels for all chambers. tools/compile.sh: FAST=0 still means fast (it tests ${FAST:+}); unset FAST for a full compile. Not released.
+- 2026-11-26: Session 16: Lexington beams + lex_pendant model (51,991 verts), nav regenerated (1,526 areas), release 0.16.1 with sessions 14-15 detail. A shot jpg read costs ~50k tokens: read one camera, not the sheet.

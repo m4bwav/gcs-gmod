@@ -336,7 +336,19 @@ def taxi():
     return m
 
 
-MODELS = {"eagle": eagle, "taxi": taxi, "statue_group": statue_group, "chandelier": chandelier, "vh_chandelier": vh_chandelier}
+def lex_pendant():
+    """Lexington Passage pendant, origin at the ceiling: gold canopy and rod, a brass dome
+    shade with a rim, a glowing bowl under it."""
+    m = Mesh()
+    m.lathe("gold", [(0, -4), (8, -4), (9, -1), (7, 0), (0, 0)], 0, 0, 0, 16)       # canopy
+    m.cyl("gold", 0, 0, 1, -30, -4, 8)                                              # rod
+    m.lathe("gold", [(0, -48), (16, -48), (18, -46), (17, -44), (13, -38), (7, -32), (3, -30), (0, -30)],
+            0, 0, 0, 24)                                                            # dome shade
+    m.lathe("bulb", [(0, -53), (10, -51), (15, -48), (0, -48)], 0, 0, 0, 24)        # glowing bowl
+    return m
+
+
+MODELS = {"lex_pendant": lex_pendant, "eagle": eagle, "taxi": taxi, "statue_group": statue_group, "chandelier": chandelier, "vh_chandelier": vh_chandelier}
 
 
 def build():

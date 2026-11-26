@@ -1215,9 +1215,12 @@ def lex_passage(W, ents):
             det(box(sx - 8, fa, 0, sx, fb, 150, TEX_GOLD))
             det(box(sx + 220, fa, 0, sx + 228, fb, 150, TEX_GOLD))
             det(box(sx - 8, fa, 120, sx + 228, fb, 150, "gcs/shed_dark"))
-    for x in range(x0 + 300, x1 - 100, 480):
-        det(box(x - 1, -1, h - 30, x + 1, 1, h, TEX_GOLD))
-        det(box(x - 10, -10, h - 50, x + 10, 10, h - 30, TEX_BULB))
+    # Cross beams every 20 ft (the coffer bands in the photos), a brass dome pendant between them.
+    for x in range(x0 + 240, x1 - 60, 240):
+        det(box(x - 8, -y, h - 14, x + 8, y, h, TEX_GOLD))
+    for x in range(x0 + 360, x1 - 100, 480):
+        ents.append(ent("prop_static", (x, 0, h), model="models/gcs/lex_pendant.mdl",
+                        angles="0 0 0", solid="0", disableshadows="1"))
         ents.append(ent("light", (x, 0, h - 70), _light="255 210 160 45"))
     ents.append(ent("env_cubemap", ((x0 + x1)//2, 0, 72)))
     ents.append(ent("func_brush", solids="".join(decor), targetname="lex_decor", Solidity="2",
