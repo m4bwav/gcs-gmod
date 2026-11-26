@@ -2056,15 +2056,17 @@ def build():
                 ents.append(ent("func_detail", solids=box(cx + j*6*FT - 3, ra, SPRING, cx + j*6*FT + 3, rb, top, TEX_GRID)))
             ents.append(ent("light", (cx, yw - sgn*200, SPRING + 80), _light="200 220 240 8"))
         ca, cb = inset(0, 88)
-        ents.append(ent("func_detail", solids=box(-HX, ca, SPRING-40, HX, cb, SPRING, TEX_GOLD)))
+        # Front face carries the row of cornice bulbs (gcs/cornice_lit, a bulb every 24 u, shifted to
+        # x = 6 mod 24 so they sit between the modillion brackets below).
+        FACEUV["gcs/cornice_lit"] = lambda n, su=96/256, sv=40/64: None if abs(n[1]) < 0.5 else (
+            "[%d 0 0 %d] %g" % ((1, 16, su) if n[1] < 0 else (-1, -16, su)), "[0 0 -1 %g] %g" % (SPRING / sv, sv))
+        ents.append(ent("func_detail", solids=box(-HX, ca, SPRING-40, HX, cb, SPRING, "gcs/cornice_lit")))
         ca, cb = inset(0, 72)
         ents.append(ent("func_detail", solids=box(-HX, ca, SPRING-72, HX, cb, SPRING-40, TEX_TRIM)))
         # Modillion band (east_balcony photo): cream brackets every 2 ft under an overhanging crown.
         ca, cb = inset(88, 104)
         ents.append(ent("func_detail", solids=box(-HX, ca, SPRING-10, HX, cb, SPRING, TEX_GOLD)))
-        ma, mb = inset(72, 100)
-        for x in range(-HX + 12, HX - 6, 24):
-            ents.append(ent("func_detail", solids=box(x-5, ma, SPRING-40, x+5, mb, SPRING-10, TEX_CREAM)))
+        # The brackets themselves are painted into gcs/cornice_lit between the bulbs (vertex budget).
 
     # Balconies at both ends with a parapet.
     for sgn in (-1, 1):
