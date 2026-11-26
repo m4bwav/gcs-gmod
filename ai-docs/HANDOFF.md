@@ -1,11 +1,11 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.18.0 released 2026-11-26: Madison stainless escalators, mural and shops; Graybar stone walls and kiosks; Lexington shop windows; Market storefront; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 30)
+Updated: 2026-11-26 (session 31)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 30 of 60 (started 2026-11-25)
-- Budget 2026-11-26 (session 29): unique verts 52,704/65,536 (80.4%), faces 31,776 (48.5%), planes 23.8%, BSP 96.2 MB of 150 MB.
+- Chain: session 31 of 60 (started 2026-11-25)
+- Budget 2026-11-26 (session 31): unique verts 52,804/65,536 (80.6%), faces 31,836 (48.6%), BSP 97.3 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
 
@@ -164,7 +164,8 @@ Updated: 2026-11-26 (session 30)
 - Session 28 (2026-11-26): Madison concourse look (make_madison.py): mosaic mural gcs/md_mural (river-of-light bands, 8 px tesserae) on the west end wall, lit shop band gcs/md_shops (four glazed fronts, sign strip) on the east end wall, charcoal terrazzo bands gcs/md_band across the floor every 25 ft; all in md_decor. Ruling (flagged): the real hall has mural and shops on its long walls; here the long walls carry the track pit and the escalators. Full compile clean, 52,704 verts, BSP 93.1 MB, 146 fps, shots/20261126-1429 (md_conc, md_plat). Not released.
 - Session 29 (2026-11-26): Madison escalators no longer read as wood (gcs/steel is brown-tinted metalwall): make_madison.py writes gcs/md_steel (brushed stainless, envmap) for the balustrades and gcs/md_step (charcoal cleats, yellow comb lines) for the run slabs; handrails gcs/md_rail (black); lit ceiling band 80 u wide. Full compile clean, 52,704 verts, BSP 95.1 MB, 145 fps, shots/20261126-1437/md_esc.jpg. Not released.
 - Release 0.18.0 (session 30, 2026-11-26): ships sessions 26-30. Graybar Passage walls are warm grey coursed ashlar (tools/make_graybar.py, gcs/gb_stone; was cream), kiosks lit inside under bronze roofs. Full compile clean, 52,704 verts, BSP 96.2 MB, 146 fps, shots/20261126-1444/gb_in.jpg. Nav regenerated (1,520 areas). Workshop updated with md_esc preview; tag v0.18.0.
-- NEXT (session 31): Market door curved glass + brass railing; Graybar kiosks could show goods (a kiosk texture: lex_shop FACEUV only maps x-facing faces); Biltmore wall clock; then compare.py over all areas and fix the worst. Conversion pass 2 if verts pass 55k.
+- Session 31 (2026-11-26): Graybar kiosks are newsstands (make_board.py gb_kiosk: magazine racks behind lit glass, bronze frame, counter; gcs/gb_kiosk UnlitGeneric, FACEUV 512 px = 120 u on all four walls). Biltmore Room wall clock above the arrivals board: Tiffany dial (gcs/bilt_clock reuses clock_out.vtf) 6 ft across in a gold ring, 20-gon prisms in bilt_decor. Full compile clean, 52,804 verts, BSP 97.3 MB, 139-147 fps, shots/20261126-1500 (gb_in, bilt_board). Not released.
+- NEXT (session 32): Market door curved glass + brass railing; then compare.py over all areas and fix the worst. Conversion pass 2 if verts pass 55k.
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

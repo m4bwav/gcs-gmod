@@ -1,0 +1,3 @@
+gb_in           146 fps
+biltmore        139 fps
+bilt_board      147 fps

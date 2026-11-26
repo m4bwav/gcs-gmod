@@ -334,6 +334,38 @@ def lex_shop(name, seed):
     save(img, name)
 
 
+def gb_kiosk():
+    # Graybar Passage newsstand kiosk: lit glass over racks of magazines, bronze frame and
+    # counter. 512 px = 120 u wide, 512 px = 96 u high (kiosk wall).
+    rnd = random.Random(7)
+    W = H = 512
+    img = Image.new("RGB", (W, H), (240, 220, 170))
+    d = ImageDraw.Draw(img)
+    for y in range(H):
+        t = y / H
+        d.line([(0, y), (W, y)], fill=(int(250 - 50*t), int(232 - 60*t), int(185 - 70*t)))
+    for sy in (150, 250, 340):                          # racks of magazines
+        d.rectangle([14, sy, W - 14, sy + 6], fill=(90, 70, 50))
+        x = 18
+        while x < W - 40:
+            w, hh = rnd.randint(26, 40), rnd.randint(40, 70)
+            c = rnd.choice([(190, 40, 40), (30, 60, 150), (240, 235, 220), (40, 130, 80),
+                            (230, 180, 40), (20, 20, 20), (170, 90, 170), (230, 120, 40)])
+            d.rectangle([x, sy - hh, x + w, sy], fill=c)
+            d.rectangle([x + 3, sy - hh + 4, x + w - 3, sy - hh + 12], fill=(250, 250, 245))
+            x += w + rnd.randint(3, 6)
+    br = (110, 80, 40)
+    d.rectangle([0, 360, W, H], fill=(70, 50, 30))      # counter front
+    d.rectangle([0, 360, W, 374], fill=(200, 160, 80))
+    for k in range(10):                                 # reflection streaks
+        x = rnd.randint(0, W)
+        d.line([(x, 360), (x + 90, 20)], fill=(255, 248, 230), width=rnd.randint(2, 4))
+    for a in (0, W // 2 - 5, W - 10):
+        d.rectangle([a, 0, a + 10, H], fill=br)
+    d.rectangle([0, 0, W, 10], fill=br)
+    save(img, "gb_kiosk")
+
+
 board()
 flag()
 tickets()
@@ -348,3 +380,4 @@ md_screen()
 lex_sign()
 lex_shop("lex_shop_n", 11)
 lex_shop("lex_shop_s", 23)
+gb_kiosk()

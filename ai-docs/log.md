@@ -121,3 +121,4 @@
 - 2026-11-26: session 29 Madison escalators stainless (md_steel/md_step/md_rail), shots/20261126-1437.
 - 2026-11-26: session 30 Graybar stone walls + lit kiosks; release 0.18.0 (Workshop updated, nav 1,520 areas).
 - 2026-11-26: repo text files are LF; Python open(...,'w') on Windows writes CRLF and turns README/wiki/workshop diffs into whole-file rewrites. Edit with open(f,'rb')/'wb' (or newline=''), check with git diff -w --stat.
+- 2026-11-26 15:02: session 31 (s31): Graybar newsstand kiosk texture, Biltmore wall clock. 52,804 verts, BSP 97.3 MB, shots/20261126-1500.
