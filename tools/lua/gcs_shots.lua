@@ -66,6 +66,8 @@ local CAMS = {
   { "md_esc",       Vector(-440, -900, -200), Angle(24, -90, 0) },
   { "md_conc",      Vector(-480, -3700, -1616), Angle(4, -90, 0) },
   { "md_plat",      Vector(-900, -4100, -1616), Angle(2, -20, 0) },
+  { "t61_fence",    Vector(660, 4200, -244), Angle(0, 90, 0) },
+  { "t61_in",       Vector(600, 4700, -244), Angle(-2, 80, 0) },
   { "low_long",     Vector(0, 1500, -244), Angle(0, 90, 0) },
   { "vest_out",     Vector(-360, -1972, 64), Angle(-3, -90, 0) },
   { "ext_door",     Vector(-360, -2616, 64), Angle(-8, 90, 0) },
