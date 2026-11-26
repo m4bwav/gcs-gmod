@@ -10,7 +10,7 @@ cp tools/lua/gcs_shots.lua "$G/garrysmod/lua/autorun/client/gcs_shots.lua"
 EXTRA=""; [ -n "$UNCAP" ] && EXTRA="+fps_max 0 +mat_vsync 0" ; EXTRA="$EXTRA $GARGS"   # GARGS: extra launch args, e.g. "+sv_cheats 1 +mat_fullbright 1"
 mkdir -p "$D"; rm -rf "$D/gcs_shots"; echo "${CAMS:-go}" > "$D/gcs_shots_go.txt"
 "$G/gmod.exe" -windowed -w 1600 -h 900 -novid -nojoy -condebug $EXTRA +map gm_grand_central &
-for n in $(seq 1 60); do [ -f "$D/gcs_shots/done.txt" ] && break; sleep 5; done
+for n in $(seq 1 ${WAIT:-180}); do [ -f "$D/gcs_shots/done.txt" ] && break; sleep 5; done
 sleep 5
 # Every gmod.exe by PID (Lua quit is blocked in this GMod build; qw pid matched a helper process, not the game).
 for PID in $(tasklist //FI "IMAGENAME eq gmod.exe" //FO CSV //NH | cut -d'"' -f4); do taskkill //PID "$PID" //F >/dev/null 2>&1; done

@@ -1,3 +1,7 @@
+## 0.7.0 (2026-11-25)
+- Lower-level track platforms: TRACK 108 and TRACK 112 gates in the dining concourse's north wall lead down short sloped passages to a second train shed under the upper one, with three island platforms, six tracks, riveted columns, a low steel ceiling and a waiting car.
+- Nav mesh regenerated to cover the new level.
+
 ## 0.6.1 (2026-11-25)
 - Nav mesh shipped (maps/gm_grand_central.nav, 1,268 areas from nav_generate), so nextbots and NPCs can walk the map. tools/nav.sh regenerates it after a compile.
 
