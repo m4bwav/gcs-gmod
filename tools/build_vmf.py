@@ -1331,7 +1331,7 @@ def market(W, ents):
         det(box(x - 12, yc - 12, h - 40, x + 12, yc + 12, h - 24, TEX_BULB))
         ents.append(ent("light", (x, yc, h - 60), _light="255 200 140 35"))
     cxd = (MK_DX0 + MK_DX1)//2
-    ents.append(ent("prop_static", (cxd, yc, dh - 90), model="models/gcs/vh_chandelier.mdl", angles="0 0 0", solid="0", disableshadows="1"))
+    ents.append(ent("prop_static", (cxd, yc, dh), model="models/gcs/root_chandelier.mdl", angles="0 0 0", solid="0", disableshadows="1"))
     ents.append(ent("light", (cxd, yc, h - 20), _light="255 210 160 60"))
     ents.append(ent("env_cubemap", (cxd, yc, 72)))
     ents.append(ent("func_brush", solids="".join(decor), targetname="mk_decor", Solidity="2",

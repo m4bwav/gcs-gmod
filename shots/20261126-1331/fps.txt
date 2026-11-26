@@ -1,0 +1,3 @@
+mk_door         147 fps
+mk_in           146 fps
+mk_dome         146 fps
