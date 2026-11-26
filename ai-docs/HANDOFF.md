@@ -1,11 +1,11 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.17.1 released 2026-11-26: Market Root Chandelier and door sign, Campbell surfaces, Lexington blade sign; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 26)
+Updated: 2026-11-26 (session 27)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 26 of 60 (started 2026-11-25)
-- Budget 2026-11-26 (vbspinfo, 0.17.1): unique verts 52,271/65,536 (79.8%), faces 31,471 (48.0%), planes 23.7%, BSP 85.6 MB of 150 MB.
+- Chain: session 27 of 60 (started 2026-11-25)
+- Budget 2026-11-26 (vbspinfo, session 27): unique verts 52,616/65,536 (80.3%), faces 31,722 (48.4%), planes 23.8%, BSP 85.7 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
 
@@ -160,7 +160,8 @@ Updated: 2026-11-26 (session 26)
 - ALL NINE CHAMBERS from the prompt are in (lower tracks, Lexington + Graybar, Market, Campbell, Transit store, One Vanderbilt link, Madison, Track 61, Hyatt).
 - Release 0.17.1 (session 25, 2026-11-26): ships sessions 22-24 (Lexington blade sign, Campbell surfaces, Market door sign, Root Chandelier). Full compile clean, 52,271 verts, BSP 85.6 MB; nav reused from 08:13 (no floor changes since). Workshop updated with mk_dome preview; tag v0.17.1.
 - Session 26 (2026-11-26): Market door is now a storefront: lit glass side lights (MK_SL 5 ft) in gold frames with a centre mullion either side of the door, both faces; door moved to MK_X0+120 so the market-side lights clear the west wall; Lexington dado and shop-front gaps widened. No arch: the 15 ft ceilings leave no room (ruling, flagged). Full compile clean, 52,476/65,536 verts (80.1%), faces 31,622, BSP 85.6 MB. shots/20261126-1413 (mk_door). First shots.sh run after the compile gave wireframe shots with no other GMod running; a rerun was fine. Not released.
-- NEXT (session 27): detail lane: run compare.py chambers with lex_in, gb_in, md_conc, md_esc shots; run compare.py against refs per area and fix the worst mismatch first (Lexington blade sign done session 22; check other door sills for the same dado-across-opening bug; Market and Campbell textures; Madison: colour-coded light (floor, panels, screens done); Graybar vaults done session 19; arrivals-board lettering done session 18); conversion pass 2 if verts pass 55k; Then the detail lane (compare.py) and conversion pass 2 (stair steps and balustrades, plat_decor, bilt_decor).
+- Session 27 (2026-11-26): compare.py chambers (shots/cmp27/compare_chambers.jpg, from existing shots) put Lexington Passage worst: shop glass was flat door_glow. make_board.py lex_shop writes gcs/lex_shop_n/_s (UnlitGeneric: bronze mullions, lit shelves of goods, glass door, reflection streaks); FACEUV maps 1024 px to the 380 u shop pitch so every shop lines up. Texture only. Full compile clean, 52,616 verts, 146 fps, shots/20261126-1421/lex_in.jpg. Not released. Streaks a little strong; tone down if touched again.
+- NEXT (session 28): detail lane from the same compare sheet: Madison concourse is bare (real: long colourful mosaic mural on one wall, dark storefront band on the other, banded terrazzo); Madison escalators read as wood (real: stainless balustrades, dark step bands, lit oval ceiling); Market door lacks the curved glass storefront look and brass railing; Graybar needs grey stone walls and kiosks. Conversion pass 2 if verts pass 55k. Release once two or three passes are in.
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

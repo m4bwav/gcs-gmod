@@ -1,0 +1,3 @@
+lex_door        147 fps
+lex_in          146 fps
+lex_end         146 fps
