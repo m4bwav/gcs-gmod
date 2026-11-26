@@ -9,6 +9,9 @@ Goal: carry `gm_grand_central` (Garry's Mod, Workshop 3845077025) through 60 ses
 ## Keep going (read first)
 A "session" below is one unit of work, not the end of the conversation. When an item finishes (merged, released, logged), bump the session number and start the next item in the same conversation straight away. Do not hand over after one item. Hand over only at a stop point (step 5 or 6), or when context is heavy; then start chainwright's unattended driver (`chain_loop.py --go`) yourself instead of printing a command and waiting.
 
+## Unattended runs
+When this runs headless (chainwright's chain_loop, `claude -p`), the session ends the moment your turn ends, and any background job dies with it. So run compiles, nav.sh, shots.sh and package.sh in the foreground (they fit under a 10-minute tool timeout; split a long chain into several calls), never with run_in_background, and do not end the turn while one runs. Before finishing, commit and push your branch even if the work is unfinished, and name the branch and what is left in HANDOFF.md. A worktree from an earlier session with unfinished work is not "another running session": resume it (its branch is on origin), unless a gmod/vbsp/vrad process is actually running.
+
 ## Budget rules (read before every change)
 The hard limit is vbsp's 65,536 unique vertices, plus the t-junction cap on the world model; current usage is in HANDOFF.md. The 150 MB file budget comes second.
 - After every compile, run `GarrysMod/bin/vbspinfo.exe` on the BSP. Log the unique vertices, faces and file size for each milestone in HANDOFF.md.

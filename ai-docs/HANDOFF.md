@@ -178,6 +178,9 @@ Updated: 2026-11-26 (session 16)
 - Light levels (after surfaces v2): window point 45, window spot 225, booth 25, chandeliers 18, vault fill 10.
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.
 
+## Resume first
+- Session 17 (2026-11-26, unattended) was cut off mid-compile: its turn ended while a background compile ran. Its work is pushed as branch s17 (worktree ../gcs-gmod-s17, commit "WIP session 17 (unverified)"): shots.lua/shots.sh move the player to each camera (suspected cause of the "decor never draws" bug: the player stayed at spawn, so out-of-PVS brush entities were never sent), Transit store and Hyatt decor back to func_brush, a lex_pendant model. Next session: resume that branch, compile in the foreground, shoot tm_in and hy_atrium, and merge if the decor draws.
+
 ## Grants
 - 2026-11-26, Mark: run this chain unattended with chainwright's chain_loop.py: --max-hours 24, no spending cap (the 5-hour usage window is the cap: wait out a limit with --limit-wait 1800 --max-waits 12), --max-sessions = sessions left. Started 2026-11-26 after session 13; driver PID 363264; stop check C:/Users/m4bwa/.chainwright/gcs_stop.py (reads HANDOFF from origin/main), log C:/Users/m4bwa/.chainwright/gcs-gmod-chain.log, ledger gcs-gmod-ledger.json there. Stop it by killing that PID.
 
