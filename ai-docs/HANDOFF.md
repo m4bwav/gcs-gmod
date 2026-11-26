@@ -1,10 +1,10 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.18.1 released 2026-11-26: Graybar newsstands, Biltmore wall clock, Market bow window, M7 car sides; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 38)
+Status: in progress (0.18.2 released 2026-11-26: dining shop fronts and pylons, lower info booth, Oyster Bar leaded doors; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
+Updated: 2026-11-26 (session 39)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 38 of 60 (started 2026-11-25)
+- Chain: session 39 of 60 (started 2026-11-25)
 - Budget 2026-11-26 (session 38): unique verts 53,815/65,536 (82.1%), faces 32,570 (49.7%), BSP 105.9 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
@@ -172,7 +172,8 @@ Updated: 2026-11-26 (session 38)
 - Session 36 (2026-11-26): compare (shots/cmp36/compare_lower.jpg) put the dining concourse worst: flat orange shop panels, bare pylons. Shop glass is now gcs/din_shop_n/_s (make_board.py lex_shop with SW 768, fewer streaks: 1024 px per 240 u pitch, FACEUV from DIN_X0+70); every pylon has a trim plinth and a gold band + cream capital under the beam, in new func_brush din_decor. Full compile clean, 53,321 verts (+448), faces 32,190, BSP 104.9 MB, 146 fps, shots/20261126-1607 (sheet.jpg: dining, dining_clock). Not released.
 - Session 37 (2026-11-26): dining concourse info booth rebuilt like the real one: trim plinth, cream stone counter to Z+40 with a moulded ledge, brass-framed glass ring (gold corner posts and a mid mullion per face) round a cream core, gold cornice, stone cap, then the brass clock column; two warm lights inside the glass. All in func_brush din_decor (the old func_detail octagon is gone). The clock column first went zero-height (cap top = clock base, "bad normal"); it now starts at Z+104. Full compile clean, 53,803 verts (+482), faces 32,560, BSP 105.1 MB, 146 fps, shots/20261126-1614 (dining_clock). Not released.
 - Session 38 (2026-11-26): Oyster Bar entrance doors: make_board.py ob_door (oak leaf, tall leaded light of octagon quarries with small amber squares, brass kick plate; gcs/ob_door UnlitGeneric, FACEUV once over each 72x92 u leaf face) on two leaves standing open into the bar against the jambs; side lights are gcs/ob_lead (tiling leaded glass). Full compile clean, 53,815 verts (+12), faces 32,570, BSP 105.9 MB, 146 fps, shots/20261126-1623/ob_entry.jpg. Not released.
-- NEXT (session 39): release 0.18.2 (sessions 36-38 unreleased; package.sh, nav reuse if no floor change). Then compare.py again (left: platform head railing, ad light boxes). Conversion pass 2 if verts pass 55k. BSP 106 MB of 150: watch texture sizes.
+- Release 0.18.2 (session 39, 2026-11-26): ships sessions 36-38. BSP reused from the session 38 full compile (faces 32,570 checked with vbspinfo, 105.9 MB); nav reused from 0.18.0 (decor only). Workshop updated with ob_entry and dining_clock previews; tag v0.18.2.
+- NEXT (session 40): compare.py again (left: platform head railing, ad light boxes). Conversion pass 2 if verts pass 55k. BSP 106 MB of 150: watch texture sizes.
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

@@ -1,3 +1,8 @@
+## 0.18.2 (2026-11-26)
+- Dining concourse: new shop-front glass, and every pylon has a plinth, gold band and cream capital.
+- Dining concourse: the information booth is rebuilt with a stone counter, a brass-framed glass ring, a gold cornice and lights inside, under the clock column.
+- Oyster Bar: the entrance has open oak doors with leaded glass and brass kick plates, and leaded side lights.
+
 ## 0.18.1 (2026-11-26)
 - Graybar Passage: the kiosks are newsstands, magazine racks behind lit glass.
 - Biltmore Room: a Tiffany-style wall clock above the arrivals board.
