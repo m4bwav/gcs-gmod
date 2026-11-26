@@ -293,6 +293,47 @@ def lex_sign():
     save(img, "lex_sign")
 
 
+def lex_shop(name, seed):
+    # Lexington Passage shop front (refs: Lexington_Passage.jpg): bronze mullions over lit glass,
+    # warm interior with shelves of goods, a glass door, a transom. 1024 px = 380 u along the
+    # wall (the shop pitch); the 220 u window is px 0..593, the rest is wall behind the frames.
+    rnd = random.Random(seed)
+    W, H, SW = 1024, 512, 593
+    img = Image.new("RGB", (W, H), (205, 190, 160))
+    d = ImageDraw.Draw(img)
+    for y in range(H):                                  # interior: warm, brighter at the top
+        t = y / H
+        d.line([(0, y), (SW, y)], fill=(int(250 - 70*t), int(225 - 75*t), int(175 - 70*t)))
+    door = rnd.choice((0, 1, 2))
+    bays = [(i * SW // 3, (i + 1) * SW // 3) for i in range(3)]
+    for i, (a, b) in enumerate(bays):
+        if i == door:                                   # glass door: deeper shop behind
+            d.rectangle([a + 20, 120, b - 20, H], fill=(120, 95, 70))
+            d.rectangle([a + 40, 150, b - 40, H - 40], fill=(150, 120, 85))
+            d.line([(b - 46, 300), (b - 46, 380)], fill=(200, 170, 90), width=6)
+            continue
+        for sy in (210, 320, 430):                      # shelves with goods
+            d.rectangle([a + 10, sy, b - 10, sy + 8], fill=(90, 70, 50))
+            x = a + 14
+            while x < b - 24:
+                w, hh = rnd.randint(10, 30), rnd.randint(30, 80)
+                c = rnd.choice([(170, 40, 40), (40, 70, 140), (230, 220, 200), (60, 120, 70),
+                                (200, 160, 60), (30, 30, 30), (150, 100, 160)])
+                d.rectangle([x, sy - hh, x + w, sy], fill=c)
+                x += w + rnd.randint(2, 8)
+    for k in range(SW // 40):                           # reflection streaks
+        x = rnd.randint(0, SW)
+        d.line([(x, H), (x + 160, 110)], fill=(255, 245, 225), width=rnd.randint(2, 6))
+    br = (110, 80, 40)
+    d.rectangle([0, 0, SW, 110], fill=(40, 34, 30))     # transom / dark name band
+    d.rectangle([0, 104, SW, 116], fill=br)
+    for a, b in bays:
+        d.rectangle([a, 0, a + 10, H], fill=br)
+    d.rectangle([SW - 10, 0, SW, H], fill=br)
+    d.rectangle([0, H - 14, SW, H], fill=br)
+    save(img, name)
+
+
 board()
 flag()
 tickets()
@@ -305,3 +346,5 @@ endwin_grid()
 arrivals()
 md_screen()
 lex_sign()
+lex_shop("lex_shop_n", 11)
+lex_shop("lex_shop_s", 23)

@@ -1212,6 +1212,11 @@ def lex_passage(W, ents):
             xa = g1
         ca, cb = sorted((s*(y - 10), s*y))
         det(box(x0 + WALL, ca, h - 20, x1, cb, h - 8, TEX_GOLD))
+        # Shop glass (make_board.py lex_shop): 1024 px per 380 u shop pitch, window at px 0..593,
+        # read from the passage (north faces -y: +x right; south faces +y: -x right).
+        xs, su, sv = x0 + WALL + 160, 380 / 1024, 108 / 512
+        FACEUV["gcs/lex_shop_n"] = lambda n: ("[1 0 0 %g] %g" % (-xs / su, su), "[0 0 -1 %g] %g" % (120 / sv, sv))
+        FACEUV["gcs/lex_shop_s"] = lambda n: ("[-1 0 0 %g] %g" % ((xs + 220) / su, su), "[0 0 -1 %g] %g" % (120 / sv, sv))
         for k in range(6):
             sx = x0 + WALL + 160 + k*380
             if s > 0 and sx < GB_X1 + 16 and sx + 228 > GB_X0 - 16:
@@ -1221,7 +1226,7 @@ def lex_passage(W, ents):
             if s < 0 and sx < MK_D1 + 36 + MK_SL and sx + 228 > MK_D0 - 36 - MK_SL:
                 continue
             ga, gb = sorted((s*(y - 6), s*(y - 4)))
-            det(box(sx, ga, 12, sx + 220, gb, 120, TEX_DOOR))
+            det(box(sx, ga, 12, sx + 220, gb, 120, "gcs/lex_shop_%s" % ("n" if s > 0 else "s")))
             fa, fb = sorted((s*(y - 8), s*(y - 4)))
             det(box(sx - 8, fa, 0, sx, fb, 150, TEX_GOLD))
             det(box(sx + 220, fa, 0, sx + 228, fb, 150, TEX_GOLD))
