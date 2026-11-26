@@ -351,6 +351,19 @@ def lex_pendant():
     return m
 
 
+def mk_rail():
+    """Brass guard rail for the Market display window, origin at its west end on the floor,
+    running 332 u along +x: turned posts, top rail and a lower rail."""
+    m = Mesh()
+    L = 332
+    for i in range(5):
+        x = L * i / 4
+        m.lathe("gold", [(0, 0), (3, 0), (3, 2), (1.2, 4), (1.2, 34), (2, 36), (0, 37)], x, 0, 0, 10)
+    m.tube("gold", (0, 0, 36), (L, 0, 36), 1.6, 1.6, 10)
+    m.tube("gold", (0, 0, 12), (L, 0, 12), 0.9, 0.9, 8)
+    return m
+
+
 def root_chandelier():
     """Grand Central Market's Root Chandelier (Donald Lipski, 1999): an upturned tree's roots in
     pale silver spreading from the dome crown, crystal drops on the tips. Origin at the ceiling,
@@ -379,7 +392,7 @@ def root_chandelier():
     return m
 
 
-MODELS = {"root_chandelier": root_chandelier, "lex_pendant": lex_pendant, "eagle": eagle, "taxi": taxi, "statue_group": statue_group, "chandelier": chandelier, "vh_chandelier": vh_chandelier}
+MODELS = {"mk_rail": mk_rail, "root_chandelier": root_chandelier, "lex_pendant": lex_pendant, "eagle": eagle, "taxi": taxi, "statue_group": statue_group, "chandelier": chandelier, "vh_chandelier": vh_chandelier}
 
 
 def build():

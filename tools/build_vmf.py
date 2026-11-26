@@ -1336,12 +1336,21 @@ def market(W, ents):
     # Storefront east of the door on the passage face: lit display window, gold frame, two mullions
     # (the west side is taken by the next shop front).
     wy, wx0, wx1 = -LEX_Y, MK_D1 + 24, MK_D1 + 340
-    det(box(wx0, wy, 24, wx1, wy + 2, 132, TEX_DOOR))
-    det(box(wx0, wy + 2, 24, wx1, wy + 3, 132, "gcs/booth_glass"))
-    det(box(wx0 - 8, wy, 0, wx1 + 8, wy + 6, 24, TEX_WOOD))
-    det(box(wx0 - 8, wy, 132, wx1 + 8, wy + 6, 140, TEX_GOLD))
-    for fx in (wx0 - 8, wx0 + 101, wx0 + 210, wx1):
-        det(box(fx, wy, 24, fx + 8 if fx in (wx0 - 8, wx1) else fx + 4, wy + 6, 132, TEX_GOLD))
+    # The window bows out into the passage as a shallow curve of glass (8 flat panes),
+    # sill and head following it; a brass guard rail on the floor in front.
+    n, bow = 8, 16
+    arc = [(wx0 + (wx1 - wx0) * i // n, wy + round(bow * math.sin(math.pi * i / n))) for i in range(n + 1)]
+    for (ax, ay), (bx, by) in zip(arc, arc[1:]):
+        det(prism(ccw([(ax, ay), (bx, by), (bx, by + 2), (ax, ay + 2)]), 24, 132, TEX_DOOR))
+        det(prism(ccw([(ax, ay + 2), (bx, by + 2), (bx, by + 3), (ax, ay + 3)]), 24, 132, "gcs/booth_glass"))
+        det(prism(ccw([(ax, wy), (bx, wy), (bx, by + 6), (ax, ay + 6)]), 0, 24, TEX_WOOD))
+        det(prism(ccw([(ax, wy), (bx, wy), (bx, by + 6), (ax, ay + 6)]), 132, 140, TEX_GOLD))
+    for i, (fx, fy) in enumerate(arc):
+        if i % 2 == 0:
+            det(box(fx - (4 if 0 < i < n else 0) - (8 if i == n else 0), fy, 24,
+                    fx + (4 if 0 < i < n else 0) + (8 if i == 0 else 0), fy + 6, 132, TEX_GOLD))
+    ents.append(ent("prop_static", (wx0 - 8, wy + bow + 30, 0), model="models/gcs/mk_rail.mdl",
+                    angles="0 -90 0", solid="0", disableshadows="1"))
     # Name band above it at a whole sign width from the door band, so _mk_sign_uv tiles into place.
     det(box(MK_D0 + 288, wy, MK_DOOR_H - 20, MK_D0 + 432, wy + 4, MK_DOOR_H, TEX_GOLD))
     det(box(MK_D0 + 288, wy + 4, MK_DOOR_H - 20, MK_D0 + 432, wy + 5, MK_DOOR_H, "gcs/mk_sign"))

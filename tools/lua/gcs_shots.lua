@@ -52,6 +52,7 @@ local CAMS = {
   { "gb_in",        Vector(3106, 100, 64), Angle(-8, 90, 0) },
   { "gb_up",        Vector(3106, 900, 64), Angle(-22, 90, 0) },
   { "mk_door",      Vector(2912, -40, 64), Angle(0, -90, 0) },
+  { "mk_window",    Vector(3330, 60, 80), Angle(8, -125, 0) },
   { "mk_sign",      Vector(2832, 60, 64), Angle(-25, -90, 0) },
   { "mk_front",     Vector(3100, 140, 72), Angle(5, -110, 0) },
   { "mk_in",        Vector(2850, -388, 64), Angle(-4, 0, 0) },
