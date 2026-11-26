@@ -1,3 +1,7 @@
+## 0.12.0 (2026-11-26)
+- Transit Museum store: Vanderbilt Hall's pedimented east door now opens on a small museum shop with lit shelving, glass cases, a counter and the cab end of a vintage subway car.
+- Nav mesh regenerated.
+
 ## 0.11.0 (2026-11-25)
 - The Campbell: behind the west balcony's south arch, John W. Campbell's old office as a bar: painted beams on gilt corbels, a big leaded window over the bar, a stone fireplace, a green banquette and sconces.
 - Nav mesh regenerated.
