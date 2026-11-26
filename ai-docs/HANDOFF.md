@@ -1,11 +1,11 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.18.2 released 2026-11-26: dining shop fronts and pylons, lower info booth, Oyster Bar leaded doors; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 40)
+Updated: 2026-11-26 (session 41)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 40 of 60 (started 2026-11-25)
-- Budget 2026-11-26 (session 40): unique verts 54,352/65,536 (82.9%), faces 32,949 (50.3%), BSP 108.2 MB of 150 MB.
+- Chain: session 41 of 60 (started 2026-11-25)
+- Budget 2026-11-26 (session 41): unique verts 53,474/65,536 (81.6%), faces 32,300 (49.3%), BSP 107.3 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
 
@@ -174,7 +174,8 @@ Updated: 2026-11-26 (session 40)
 - Session 38 (2026-11-26): Oyster Bar entrance doors: make_board.py ob_door (oak leaf, tall leaded light of octagon quarries with small amber squares, brass kick plate; gcs/ob_door UnlitGeneric, FACEUV once over each 72x92 u leaf face) on two leaves standing open into the bar against the jambs; side lights are gcs/ob_lead (tiling leaded glass). Full compile clean, 53,815 verts (+12), faces 32,570, BSP 105.9 MB, 146 fps, shots/20261126-1623/ob_entry.jpg. Not released.
 - Release 0.18.2 (session 39, 2026-11-26): ships sessions 36-38. BSP reused from the session 38 full compile (faces 32,570 checked with vbspinfo, 105.9 MB); nav reused from 0.18.0 (decor only). Workshop updated with ob_entry and dining_clock previews; tag v0.18.2.
 - Session 40 (2026-11-26): upper platforms get backlit ad boxes (make_board.py plat_ads: four invented posters ad_hudson/show/coffee/city, UnlitGeneric, 72x144 u, world-tiled so each box starts on a multiple of 72): one per beam bay on both side walls in a steel frame, and one hanging off-centre at each platform head on two steel rods, as in Grand_Central_Station_tracks.jpg. Full compile clean, 54,352 verts (+537), faces 32,949, BSP 108.2 MB, 146 fps, shots/20261126-1635/ads.jpg. Not released.
-- NEXT (session 41): compare.py again (left: platform head railing as a model or texture, which also frees verts). Conversion pass 2 if verts pass 55k (54,352 now). BSP 108 MB of 150: watch texture sizes.
+- Session 41 (2026-11-26): pit-end brass railings on the upper and lower platforms are models (make_models.py pit_rail(L): pit_rail_240/420, turned posts about every 48 u, top and mid rail; build_vmf.py pit_rail() places prop_static angles 0 -90 0 plus a tools/toolsplayerclip box 72 u high so nobody walks into the pits). Full compile clean, 53,474 verts (-878), faces 32,300, BSP 107.3 MB, 146 fps, shots/20261126-1642 (plat_head, low_head). Nav not regenerated (clip sits where the solid rail was). Not released.
+- NEXT (session 42): compare.py again and fix the worst mismatch; or conversion pass 2 (platform columns/beams? stair balustrades in the concourse, booth grilles) if verts pass 55k. Release 0.18.3 due after one more pass (sessions 40-41 unreleased).
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

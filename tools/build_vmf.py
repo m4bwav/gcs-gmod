@@ -977,6 +977,13 @@ T61_X0 = 300
 T61_Y1 = SH_Y1 + WALL + 120 * FT
 
 
+def pit_rail(W, ents, x0, x1, y, z):
+    """Brass railing across a pit end as a model (no brush verts), with a player clip behind it."""
+    ents.append(ent("prop_static", (x0, y, z), model="models/gcs/pit_rail_%d.mdl" % (x1 - x0),
+                    angles="0 -90 0", solid="0", disableshadows="1"))
+    W(box(x0, y - 2, z, x1, y + 2, z + 72, "tools/toolsplayerclip"))
+
+
 def platforms(W, ents):
     # Decor goes into one func_brush (world model is at vbsp's t-junction cap).
     decor = []
@@ -1012,11 +1019,7 @@ def platforms(W, ents):
         det(box(gx - 2, sy, 184, gx + 2, sy + 3, SH_H, T_STEEL))
     # Brass railing round the pit ends, bumpers and rails.
     for x0, x1 in PITS:
-        y = SH_Y0 + HEAD
-        det(box(x0, y - 2, 40, x1, y + 2, 44, TEX_GOLD))
-        det(box(x0, y - 2, 20, x1, y + 2, 22, TEX_GOLD))
-        for x in range(x0 + 4, x1, 48):
-            det(box(x - 1, y - 1, 0, x + 1, y + 1, 40, TEX_GOLD))
+        pit_rail(W, ents, x0, x1, SH_Y0 + HEAD, 0)
     for t in TRACKS:
         det(box(t - 40, SH_Y0 + HEAD, -PIT, t + 40, SH_Y0 + HEAD + 24, -12, T_STEEL))
         for r in (-30, 26):
@@ -1145,10 +1148,7 @@ def lower_tracks(W, ents):
         det(box(gx - 2, sy, LC - 20, gx + 2, sy + 3, LC, T_STEEL))
     # Pit-end rails, bumpers, rails, yellow edges.
     for x0, x1 in PITS:
-        y = Y0 + HEAD
-        det(box(x0, y - 2, Z0 + 40, x1, y + 2, Z0 + 44, TEX_GOLD))
-        for x in range(x0 + 4, x1, 96):
-            det(box(x - 1, y - 1, Z0, x + 1, y + 1, Z0 + 40, TEX_GOLD))
+        pit_rail(W, ents, x0, x1, Y0 + HEAD, Z0)
     for t in TRACKS:
         det(box(t - 40, Y0 + HEAD, Z0 - PIT, t + 40, Y0 + HEAD + 24, Z0 - 12, T_STEEL))
         for r in (-30, 26):
