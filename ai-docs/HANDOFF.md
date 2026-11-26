@@ -1,10 +1,10 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.6.1 released 2026-11-25: nav mesh; Workshop 3845077025, GitHub v0.6.0)
+Status: in progress (0.7.0 released 2026-11-25: lower-level tracks; Workshop 3845077025, GitHub v0.6.0)
 Updated: 2026-11-24
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 2 of 60 (started 2026-11-25)
+- Chain: session 3 of 60 (started 2026-11-25)
 - Budget 2026-11-25 (vbspinfo, 0.6.0): unique verts 46,661/65,536 (71%), faces 41%, planes 22%, brushes 6%, BSP 59.6 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
@@ -135,7 +135,8 @@ Updated: 2026-11-24
 - Release 0.6.1 (2026-11-25, chain session 1): nav mesh. tools/nav.sh launches GMod with sv_cheats, tools/lua/gcs_nav.lua (server autorun, gated by data/gcs_nav_go.txt) runs nav_quicksave 1 + nav_generate, reports the area count after the reload and quits; nav.sh copies maps/gm_grand_central.nav to src/ (gitignored) and package.sh ships it. 1,268 areas, 0.8 MB, about 8 min incl. addon load. Coverage per area not yet checked by eye (nav_edit 1); re-run nav.sh after every compile that changes walkable floors. BSP unchanged from 0.6.0 (46,661 verts).
 - Chamber order (session 2 ruling, flagged): 1 lower-level track platforms; 2 Lexington Passage + Graybar Passage shops; 3 Grand Central Market; 4 the Campbell; 5 Transit Museum store; 6 Vanderbilt Ave / One Vanderbilt link; 7 Grand Central Madison deep concourse + escalators (likely needs a level split: depth and vertices); 8 Track 61 / M42 (fenced, dim); 9 Grand Hyatt / Lexington entrance. Reason: cheapest joins first (all off existing walls), the deep LIRR hall last.
 - Lower-level tracks blockout, playable (session 2, 2026-11-25): build_vmf.py lower_tracks(), LGATES/LZ/LC/LSH_Y0. Two gates (TRACK 108 at x -480, TRACK 112 at x 480) in the dining concourse north wall (shop fronts there skipped), sloped passages 1:5 down 8 ft to a shed under the upper one (same PLATS/PITS/TRACKS, platform top LZ=-360, ceiling LC=-128 just under the upper ballast pits, 19 ft), riveted columns and beams, one fluor strip per platform, a closed car on track 474. Decor in func_brush low_decor. Hull ZB lowered. Cameras low_gate, low_ramp, low_head, low_long. Clean full compile, 49,781 unique verts, BSP 62.5 MB, 146 fps; shots/20261125-2216/low.jpg. Refs: 5 Commons (refs/SOURCES.md), facts in refs/concourse-dimensions.md.
-- NEXT: lower tracks detail: real gate look (marble surround, carved oak-leaf half-round over a bronze door, pendant globe, "108 TRACKS 107" serif sign: make_board), lower ceiling (photos say 12-15 ft; ours 19), passage lights, hanging blue Metro-North signs, more cars as MDL models (make_models.py, M7). Then rerun tools/nav.sh, release 0.7.0. Then chamber 2.
+- Release 0.7.0 (session 3, 2026-11-25): lower tracks detail pass 1: platforms raised to LZ=-308 (15 ft clear under LC), passages two lights each and a pendant globe at the gate; nav regenerated (1.06 MB). shots/20261125-2244. Verts 49,781. shots.sh waits WAIT*5 s (default 180 = 15 min) since addon load can pass 5 min. Level map not yet labelled for the lower tracks.
+- NEXT: lower tracks detail pass 2: real gate look (marble surround, carved oak-leaf half-round over a bronze door, pendant globe, "108 TRACKS 107" serif sign: make_board), lower ceiling (photos say 12-15 ft; ours 19), passage lights, hanging blue Metro-North signs, more cars as MDL models (make_models.py, M7). Label them on docs/level-map.png (make_map.py). Then chamber 2 (Lexington + Graybar passages).
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

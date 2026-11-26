@@ -887,11 +887,11 @@ for _gx, _n in GATES:
     FACEUV["gcs/track%d" % _n] = _sign_uv(_gx)
 
 # Lower-level track platforms (chamber 1 of the 60-session chain). Two gates in the dining
-# concourse's north wall open on sloped passages (1:5) down 8 ft to a second shed under the
+# concourse's north wall open on sloped passages down 44 u to a second shed under the
 # upper one: same platform plan, lower and darker, ceiling just under the upper ballast pits.
 LGATES = ((-480, 108), (480, 112))
-LZ = LOW_Z - 8 * FT                        # lower platform top, -360
-LC = -PIT - WALL - 16                      # lower ceiling underside, -128
+LC = -PIT - WALL - 16                      # lower ceiling underside, -128 (under the upper pits)
+LZ = LC - 15 * FT                          # lower platform top, -308: 15 ft clear (photos: 12-15 ft)
 LSH_Y0 = DIN_Y + WALL + 40 * FT            # lower shed south face
 for _gx, _n in LGATES:
     FACEUV["gcs/track%d" % _n] = _sign_uv(_gx, LC + 28)
@@ -1023,7 +1023,11 @@ def lower_tracks(W, ents):
         W(box(g0, DIN_Y + WALL, LC, g1, Y0 - WALL, LC + 16, TEX_CREAM))
         for a, b in ((g0 - WALL, g0), (g1, g1 + WALL)):
             W(box(a, DIN_Y + WALL, Z0 - WALL, b, Y0 - WALL, LC + 16, TEX_CREAM))
-        ents.append(ent("light", (gx, (DIN_Y + Y0)//2, LC - 24), _light="255 215 160 22"))
+        for k in (1, 3):
+            ents.append(ent("light", (gx, DIN_Y + k*(Y0 - DIN_Y)//4, LC - 24), _light="255 215 160 20"))
+        gy = DIN_Y + WALL + 48
+        det(box(gx - 1, gy - 1, LC - 30, gx + 1, gy + 1, LC, TEX_GOLD))
+        det(box(gx - 10, gy - 10, LC - 50, gx + 10, gy + 10, LC - 30, TEX_BULB))
         det(box(g0 - 10, DIN_Y - 4, LOW_Z, g0, DIN_Y, LC + 10, TEX_GOLD))
         det(box(g1, DIN_Y - 4, LOW_Z, g1 + 10, DIN_Y, LC + 10, TEX_GOLD))
         det(box(gx - 48, DIN_Y - 3, LC + 4, gx + 48, DIN_Y, LC + 28, "gcs/track%d" % n))
