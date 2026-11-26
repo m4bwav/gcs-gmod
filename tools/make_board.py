@@ -180,6 +180,40 @@ def arrivals():
     save(img, "arrivals")
 
 
+def md_screen():
+    # Grand Central Madison departure screen, 1024x256: navy LCD with a white header strip
+    # (DEPARTURES, TRACK), then six LIRR trains (time, destination, track) in white text and
+    # one amber status column. Mapped over 280 u wide screens (build_vmf madison).
+    W, H = 1024, 256
+    img = Image.new("RGB", (W, H), (10, 26, 64))
+    d = ImageDraw.Draw(img)
+    p = 3
+    def text(x, y, s, col, q=p):
+        for k, ch in enumerate(s):
+            rows = [int(b, 16) for b in FONT.get(ch, "00 00 00 00 00 00 00").split()]
+            for cy, bits in enumerate(rows):
+                for cx in range(5):
+                    if bits >> (4 - cx) & 1:
+                        d.rectangle([x + (k*6 + cx)*q, y + cy*q, x + (k*6 + cx)*q + q - 1, y + cy*q + q - 1], fill=col)
+    d.rectangle([0, 0, W, 40], fill=(232, 236, 242))
+    text(16, 9, "DEPARTURES", (10, 26, 64), 3)
+    text(W - 16 - 5*6*3, 9, "TRACK", (10, 26, 64), 3)
+    dests = ["BABYLON", "HUNTINGTON", "RONKONKOMA", "PORT WASH", "HEMPSTEAD", "FAR ROCKAWAY",
+             "LONG BEACH", "OYSTER BAY"]
+    rng = random.Random(1680)
+    t = 7*60 + 3
+    for r in range(6):
+        y = 54 + r*34
+        if r % 2:
+            d.rectangle([0, y - 6, W, y + 27], fill=(16, 36, 80))
+        t += rng.choice((4, 7, 11))
+        text(16, y, "%d:%02d" % (t//60, t % 60), (240, 240, 240))
+        text(150, y, dests[r], (240, 240, 240))
+        text(620, y, "ON TIME" if r != 3 else "BOARDING", (250, 190, 60))
+        text(W - 16 - 2*6*p - 40, y, "%d" % (201 + r*3 % 10), (240, 240, 240))
+    save(img, "md_screen")
+
+
 def track_signs():
     # 512x128 black gate signs with white serif-less "TRACK nn" (photo: Grand_Central_Station_tracks).
     for n in (29, 30, 31, 108, 112):
@@ -246,3 +280,4 @@ track_signs()
 train_steel()
 endwin_grid()
 arrivals()
+md_screen()

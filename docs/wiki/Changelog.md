@@ -1,3 +1,8 @@
+## 0.17.0 (2026-11-26)
+- Biltmore Room: split-flap lettering on the arrivals board.
+- Graybar Passage: painted vaults (pale sky, gold ribs on the groins, star wreaths).
+- Grand Central Madison: white enamel wall panels, slatted light ceilings, a pale terrazzo floor and two LIRR departure screens.
+
 ## 0.16.1 (2026-11-26)
 - Lexington Passage: ceiling lowered to 15 ft, beam bands every 20 ft and brass dome pendants (models).
 - The dado no longer runs across the Graybar, Hyatt, Market and Transit Museum store doorways.
