@@ -1,5 +1,6 @@
 """Side-by-side sheet: each screenshot beside the reference photo from about the same viewpoint.
 Usage: python tools/compare.py shots/<stamp> [lower|plat|chambers]  -> shots/<stamp>/compare.jpg (compare_<set>.jpg)"""
+import os
 import sys
 from PIL import Image, ImageDraw
 
@@ -32,6 +33,7 @@ d, W, H = sys.argv[1], 640, 400
 lower = sys.argv[2:3] and sys.argv[2]
 if lower:
     PAIRS = {"lower": LOWER, "plat": PLAT, "chambers": CHAMBERS}[lower]
+PAIRS = {k: v for k, v in PAIRS.items() if os.path.exists(f"{d}/{k}.jpg")}  # shots.sh CAMS= may shoot only some
 sheet = Image.new("RGB", (W * 2, (H + 18) * len(PAIRS)))
 draw = ImageDraw.Draw(sheet)
 for i, (shot, ref) in enumerate(PAIRS.items()):
