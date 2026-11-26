@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "gcs/clock_out"
+	"$selfillum" "1"
+	"$surfaceprop" "metal"
+}

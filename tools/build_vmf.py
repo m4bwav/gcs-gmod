@@ -1279,10 +1279,13 @@ def graybar(W, ents):
     for c in (cx - 84, cx, cx + 84):
         det(box(c - 36, y1 - 6, 0, c + 36, y1, 120, TEX_GRID))
         det(box(c - 30, y1 - 8, 0, c + 30, y1 - 6, 114, TEX_DOOR))
+    # Kiosk walls (make_board.py gb_kiosk): 512 px = 120 u across, 96 u high; tops keep the default.
+    FACEUV["gcs/gb_kiosk"] = lambda n, s=120 / 512, sv=96 / 512: None if abs(n[2]) > 0.5 else (
+        ("[0 1 0 0] %g" if abs(n[0]) > 0.5 else "[1 0 0 0] %g") % s, "[0 0 -1 512] %g" % sv)
     # Lit glass kiosks with bronze roofs in bays 2 and 4, a chandelier and a light per bay.
     for k in (1, 3):
         yc = y0 + k*GB_BAY + GB_BAY//2
-        det(box(cx - 48, yc - 60, 0, cx + 48, yc + 60, 96, "gcs/booth_glass"))
+        det(box(cx - 48, yc - 60, 0, cx + 48, yc + 60, 96, "gcs/gb_kiosk"))
         det(box(cx - 52, yc - 64, 96, cx + 52, yc + 64, 108, "gcs/bronze"))
         ents.append(ent("light", (cx, yc, 80), _light="255 220 170 30"))
     for k in range(GB_N):
@@ -1738,6 +1741,12 @@ def biltmore(W, ents):
     for z in (z0 - 6, z1):
         det(box(cx - bw - 6, BY1 - 8, z, cx + bw + 6, BY1 - 4, z + 6, TEX_GOLD))
     det(box(cx - bw - 12, BY1 - 14, z0 - 14, cx + bw + 12, BY1, z0 - 6, TEX_CREAM))
+    # Wall clock above the board: the Tiffany dial (clock_out.vtf) in a gold ring.
+    cz, cr = z1 + 6 * FT, 3 * FT
+    FACEUV["gcs/bilt_clock"] = lambda n, x0=cx - cr, z=cz + cr, su=2 * cr / 512: (
+        ("[1 0 0 %g] %g" % (-x0 / su, su), "[0 0 -1 %g] %g" % (z / su, su)) if n[1] < -0.5 else None)
+    det(yprism(ngon_xz(cx, cz, cr + 6, 20), BY1 - 6, BY1, TEX_GOLD))
+    det(yprism(ngon_xz(cx, cz, cr, 20), BY1 - 8, BY1 - 6, TEX_GOLD, ends="gcs/bilt_clock"))
     # Brass sconces with glowing globes on the long walls, a lamp each side of the board.
     sc = [(BX0, y, 1) for y in range(BY0 + 96, BY1 - 95, 192)] + [(BX1, y, -1) for y in range(BY0 + 96, BY1 - 95, 192)]
     for xw, y, s in sc:
