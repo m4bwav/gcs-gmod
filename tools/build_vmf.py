@@ -87,6 +87,16 @@ def _tickets_uv(n):
         return "[-1 0 0 704] %g" % su, "[0 0 -1 %g] %g" % (13.25*FT/sv, sv)
 
 
+def _mk_sign_uv(n):
+    # GRAND CENTRAL MARKET band in the market door head, read from the passage (+y) and the market (-y).
+    su, sv = (MK_D1 - MK_D0)/1024, 20/64
+    v = "[0 0 -1 %g] %g" % (MK_DOOR_H/sv, sv)
+    if n[1] > 0.5:
+        return "[-1 0 0 %g] %g" % (MK_D1/su, su), v
+    if n[1] < -0.5:
+        return "[1 0 0 %g] %g" % (-MK_D0/su, su), v
+
+
 def _oysterbar_uv(n):
     # OYSTER BAR band over the gallery's west opening, y -120..120, faces +x.
     su, sv = 240/1024, 20/64
@@ -96,7 +106,7 @@ def _oysterbar_uv(n):
 
 FACEUV = {"gcs/facade_win": lambda n: ("[1 0 0 0] 0.375", "[0 0 -1 0] 0.5625"), "gcs/inscription": lambda n: _ext_uv(n, "ins"), "gcs/clock_out": lambda n: _ext_uv(n, "clock"),
           "gcs/pershing": lambda n: _ext_uv(n, "pershing"),
-          "gcs/oysterbar": _oysterbar_uv, "gcs/board": _board_uv, "gcs/flag": _flag_uv, "gcs/tickets": _tickets_uv}
+          "gcs/oysterbar": _oysterbar_uv, "gcs/mk_sign": _mk_sign_uv, "gcs/board": _board_uv, "gcs/flag": _flag_uv, "gcs/tickets": _tickets_uv}
 
 
 def axes_for(n, s=0.25):
@@ -1299,6 +1309,10 @@ def market(W, ents):
         det(box(MK_D0 - 10, yy, 0, MK_D0, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
         det(box(MK_D1, yy, 0, MK_D1 + 10, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
         det(box(MK_D0, yy, MK_DOOR_H, MK_D1, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
+    # Lettering on 1 u skins only, so the band's underside stays plain gold.
+    det(box(MK_D0, y1 + 1, MK_DOOR_H - 20, MK_D1, -LEX_Y - 1, MK_DOOR_H, TEX_GOLD))
+    for a in (y1, -LEX_Y - 1):
+        det(box(MK_D0, a, MK_DOOR_H - 20, MK_D1, a + 1, MK_DOOR_H, "gcs/mk_sign"))
     yc = (y0 + y1)//2
     for c in (yc - 84, yc, yc + 84):
         det(box(x1 - 6, c - 36, 0, x1, c + 36, 120, TEX_GRID))
@@ -1330,16 +1344,21 @@ def campbell(W, ents):
     x0, x1, y0, y1, z, h = CB_X0, CB_X1, CB_Y0, CB_Y1, CB_Z, CB_H
     r, top = BARCH_W // 2, CB_Z + BARCH_H
     W(box(x0 - WALL, y0 - WALL, z - WALL, x1 + WALL, y1 + WALL, z, TEX_WOOD))
-    W(box(x0 - WALL, y0 - WALL, z + h, x1 + WALL, y1 + WALL, z + h + WALL, "gcs/shed_dark"))
-    W(box(x0 - WALL, y0 - WALL, z, x1, y0, z + h, TEX_CREAM))
-    W(box(x0 - WALL, y1, z, x1, y1 + WALL, z + h, TEX_CREAM))
-    W(box(x0 - WALL, y0, z, x0, y1, z + h, TEX_CREAM))
+    W(box(x0 - WALL, y0 - WALL, z + h, x1 + WALL, y1 + WALL, z + h + WALL, "gcs/cb_ceil"))
+    W(box(x0 - WALL, y0 - WALL, z, x1, y0, z + h, "gcs/cb_wall"))
+    W(box(x0 - WALL, y1, z, x1, y1 + WALL, z + h, "gcs/cb_wall"))
+    W(box(x0 - WALL, y0, z, x0, y1, z + h, "gcs/cb_wall"))
     # East wall from the balcony arch's back to the room, with the arch's opening through it.
     xe0, xe1 = x1, -(HX + WALL + ARCH_D)
-    W(box(xe0, y0 - WALL, z, xe1, CB_C - r, z + h, TEX_CREAM))
-    W(box(xe0, CB_C + r, z, xe1, y1 + WALL, z + h, TEX_CREAM))
-    W(box(xe0, CB_C - r, top, xe1, CB_C + r, z + h, TEX_CREAM))
+    W(box(xe0, y0 - WALL, z, xe1, CB_C - r, z + h, "gcs/cb_wall"))
+    W(box(xe0, CB_C + r, z, xe1, y1 + WALL, z + h, "gcs/cb_wall"))
+    W(box(xe0, CB_C - r, top, xe1, CB_C + r, z + h, "gcs/cb_wall"))
     W(box(xe0, CB_C - r, z - WALL, xe1, CB_C + r, z, TEX_WOOD))
+    # Dark oak wainscot, 4 ft, round the room; the east wall's run stops at the arch.
+    for bx in ((x0, y0, x1, y0 + 4), (x0, y1 - 4, x1, y1), (x0, y0, x0 + 4, y1),
+               (x1 - 4, y0, x1, CB_C - r), (x1 - 4, CB_C + r, x1, y1)):
+        det(box(bx[0], bx[1], z, bx[2], bx[3], z + 48, "gcs/cb_wain"))
+        det(box(bx[0], bx[1], z + 48, bx[2], bx[3], z + 52, TEX_GOLD))
     # Painted beams on gilt corbels across the room; ochre/red/green read from the coffer and trim.
     for x in range(x0 + 60, x1, 115):
         det(box(x - 10, y0, z + h - 30, x + 10, y1, z + h, TEX_WOOD))
@@ -1348,7 +1367,7 @@ def campbell(W, ents):
             det(box(x - 12, a, z + h - 60, x + 12, b, z + h - 30, TEX_GOLD))
     # Leaded window on the south wall over the bar, glowing; bar counter under it.
     wx0, wx1 = x0 + 160, x0 + 160 + 240
-    det(box(wx0, y0, z + 96, wx1, y0 + 4, z + 96 + 216, "gcs/window_glass"))
+    det(box(wx0, y0, z + 96, wx1, y0 + 4, z + 96 + 216, "gcs/cb_leaded"))
     det(box(wx0 - 8, y0, z + 88, wx1 + 8, y0 + 6, z + 96, TEX_GOLD))
     ents.append(ent("light", ((wx0 + wx1)//2, y0 + 60, z + 200), _light="255 220 170 60"))
     det(box(x0 + 120, y0 + 60, z, x0 + 560, y0 + 96, z + 42, TEX_WOOD))
@@ -1356,10 +1375,10 @@ def campbell(W, ents):
     det(box(x0 + 120, y0, z, x0 + 560, y0 + 16, z + 84, TEX_WOOD))
     # Fireplace on the west wall: stone surround, dark opening, tall hood.
     fc = (y0 + y1)//2
-    det(box(x0, fc - 70, z, x0 + 24, fc + 70, z + 80, TEX_CREAM))
+    det(box(x0, fc - 70, z, x0 + 24, fc + 70, z + 80, "gcs/cb_wall"))
     det(box(x0, fc - 40, z, x0 + 26, fc + 40, z + 56, "gcs/shed_dark"))
     det(box(x0, fc - 76, z + 80, x0 + 30, fc + 76, z + 90, TEX_GOLD))
-    det(box(x0, fc - 56, z + 90, x0 + 14, fc + 56, z + 220, TEX_CREAM))
+    det(box(x0, fc - 56, z + 90, x0 + 14, fc + 56, z + 220, "gcs/cb_wall"))
     # Green banquette along the north wall, small tables; sconces with warm lights.
     det(box(x0 + 120, y1 - 40, z, x1 - 120, y1, z + 18, "gcs/vh_grille"))
     det(box(x0 + 120, y1 - 12, z + 18, x1 - 120, y1, z + 44, "gcs/vh_grille"))

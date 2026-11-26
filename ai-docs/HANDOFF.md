@@ -1,11 +1,11 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.17.0 released 2026-11-26: detail pass, Biltmore board, Graybar vaults, Madison; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 22)
+Updated: 2026-11-26 (session 23)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 22 of 60 (started 2026-11-25)
-- Budget 2026-11-26 (vbspinfo, 0.17.0): unique verts 52,127/65,536 (79.5%, session 22), faces 47.9%, planes 23.7%, BSP 77.8 MB of 150 MB.
+- Chain: session 23 of 60 (started 2026-11-25)
+- Budget 2026-11-26 (vbspinfo, 0.17.0): unique verts 52,271/65,536 (79.8%, session 23), faces 48.0%, planes 23.7%, BSP 82.3 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
 
@@ -155,6 +155,7 @@ Updated: 2026-11-26 (session 22)
 - Detail (session 20, 2026-11-26, not released yet): Grand Central Madison look: tools/make_madison.py writes gcs/md_panel (white enamel wall panels) and gcs/md_ceil (white slats with a light strip); madison() uses them for walls and ceilings (was cream marble and coffers). Texture only: 52,035 verts, BSP 74.6 MB, 146 fps, shots/20261126-1128/md_conc.jpg. Still open there: pale terrazzo floor instead of plat_tile, colour-coded light, big screens.
 - Release 0.17.0 (session 21, 2026-11-26): ships sessions 18-21. Madison: pale terrazzo floor (gcs/md_floor, make_madison.py) and two navy LIRR departure screens on the concourse north wall either side of the escalators (make_board.py md_screen, gcs/md_screen UnlitGeneric, steel frame; one FACEUV mapping serves both, west screen 840 u = 3 widths west). New camera md_screens. 52,091 verts, 146 fps, shots/20261126-1139 and -1145. Nav from session 16 shipped (floors unchanged).
 - Detail (session 22, 2026-11-26, not released yet): Lexington Passage navy blade sign (make_board.py lex_sign: Lexington Av, Subway 4 5 6 bullets, arrow; gcs/lex_sign UnlitGeneric) hung across the passage 120 u in from the west end on two brass rods, in lex_decor; both faces read left to right. New camera lex_sign. 52,127 verts, BSP 77.8 MB, 146 fps, shots/20261126-1159/lex_sign_small.jpg.
+- Detail (session 23, 2026-11-26, not released yet): the Campbell matched to refs/photos/GCT_Campbell_1/_3: tools/make_campbell.py writes gcs/cb_wall (warm tan sandstone, was cream marble), cb_wain (dark oak wainscot, 4 ft run round the room with a gold cap, stops at the east arch), cb_ceil (painted ceiling panels, was shed_dark), cb_leaded (amber leaded window, UnlitGeneric). Grand Central Market: GRAND CENTRAL MARKET bronze band (make_board.py plaque(p=5), gcs/mk_sign, FACEUV _mk_sign_uv) in the passage door head, reads from both sides (lettering on 1 u skins: a band textured all round showed it mirrored on its underside). New camera mk_sign. 52,271 verts, BSP 82.3 MB.
 - ALL NINE CHAMBERS from the prompt are in (lower tracks, Lexington + Graybar, Market, Campbell, Transit store, One Vanderbilt link, Madison, Track 61, Hyatt).
 - NEXT: detail lane: run compare.py against refs per area and fix the worst mismatch first (Lexington blade sign done session 22; check other door sills for the same dado-across-opening bug; Market and Campbell textures; Madison: colour-coded light (floor, panels, screens done); Graybar vaults done session 19; arrivals-board lettering done session 18); conversion pass 2 if verts pass 55k; Then the detail lane (compare.py) and conversion pass 2 (stair steps and balustrades, plat_decor, bilt_decor).
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
