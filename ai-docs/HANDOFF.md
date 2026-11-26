@@ -3,7 +3,9 @@
 Status: in progress (0.6.0 released 2026-11-24: the Biltmore Room; Workshop 3845077025, GitHub v0.6.0)
 Updated: 2026-11-24
 
-- Prompt: plans/2026-11-23-gcs-gmod-continue-prompt.md
+- Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
+- Chain: session 0 of 60 (started 2026-11-25)
+- Budget 2026-11-25 (vbspinfo, 0.6.0): unique verts 46,661/65,536 (71%), faces 41%, planes 22%, brushes 6%, BSP 59.6 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
 
