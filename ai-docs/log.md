@@ -133,3 +133,4 @@
 - 2026-11-26: Session 40: platform ad light boxes (plat_ads); 54,352 verts. make_board.py: a heredoc with backslash escapes is blocked by a hook, use Edit; srctools VTF needs power-of-two sizes.
 - 2026-11-26: Session 41: pit-end railings as pit_rail_240/420 models with player clips; 54,352 -> 53,474 verts. shots/20261126-1642. Branch s41.
 - 2026-11-26: Session 41 lesson: src/gm_grand_central.vmf, src/packlist.txt and src/models/gcs/* are tracked generated files; git add them (models need -f) before merging, and git fetch before cutting a new worktree after a merge (s41b was cut from stale origin/main; fixed in PR #73).
+- 2026-11-26: Session 42 (driver run): Market door side lights now gcs/mk_display instead of flat lit door glass. FACEUV entries apply at box() time, so define one before the first brush that uses it. shots/20261126-1651. Branch s42.

@@ -1,0 +1,2 @@
+mk_door         146 fps
+mk_window       147 fps
