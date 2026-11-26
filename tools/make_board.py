@@ -180,6 +180,28 @@ def train_steel():
     save(img, "train_steel")
 
 
+def endwin_grid():
+    # 512x512 RGBA mullion grid for the concourse end windows: 8 x 8 clear cells (alpha 0) between
+    # 8 px dark bronze bars, so one alpha-tested panel replaces ~50 bar brushes per window (vertex budget).
+    a = np.zeros((512, 512, 4), np.uint8)
+    for k in range(9):
+        p = min(k * 64, 511)
+        a[max(p - 4, 0):p + 4, :, :] = (52, 50, 44, 255)
+        a[:, max(p - 4, 0):p + 4, :] = (52, 50, 44, 255)
+    Image.fromarray(a, "RGBA").save("shots/tex/endwin_grid.png")
+    tex = vtf.VTF(512, 512, fmt=vtf.ImageFormats.RGBA8888)
+    tex.get().copy_from(a.tobytes(), vtf.ImageFormats.RGBA8888)
+    tex.compute_mipmaps()
+    with open("src/materials/gcs/endwin_grid.vtf", "wb") as f:
+        tex.save(f)
+    nl, tab = chr(10), chr(9)
+    for name in ("endwin_a", "endwin_b", "endwin_c"):
+        with open("src/materials/gcs/%s.vmt" % name, "w", newline="") as f:
+            f.write('"LightmappedGeneric"' + nl + "{" + nl + tab + '"$basetexture" "gcs/endwin_grid"' + nl
+                    + tab + '"$alphatest" "1"' + nl + tab + '"$surfaceprop" "metal"' + nl + "}" + nl)
+    print("wrote src/materials/gcs/endwin_grid.vtf")
+
+
 board()
 flag()
 tickets()
@@ -187,3 +209,4 @@ plaque("OYSTER BAR", "oysterbar")
 plaque("PERSHING SQUARE", "pershing")
 track_signs()
 train_steel()
+endwin_grid()

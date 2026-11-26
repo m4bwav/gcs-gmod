@@ -96,4 +96,5 @@
 - 2026-11-25: chain session 7: the Campbell, 0.11.0 (52,843 verts).
 - 2026-11-26: chain session 8: Transit Museum store, 0.12.0. A func_brush decor entity (tm_decor) compiled and cast shadows but never drew; func_detail fixed it. Cause unknown.
 - 2026-11-26: chain session 9: One Vanderbilt link, 0.13.0 (53,494 verts).
-- 2026-11-26: chain session 11: Grand Central Madison, 0.14.0 (54,771 verts). A gate cut through a wall needs its own floor across the wall's thickness (the dining floor stops at the wall face).
+- 2026-11-26: chain session 11: Grand Central Madison, 0.14.0 (51,179 verts). Branch was cut from a stale origin/main (no fetch after the previous merge): always git fetch before checkout -B. A gate cut through a wall needs its own floor across the wall's thickness (the dining floor stops at the wall face).
+- 2026-11-26: chain session 10: conversion pass 1, end-window mullions to an alpha-tested grid texture: 53,494 -> 49,902 verts.

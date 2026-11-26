@@ -34,6 +34,14 @@ materials/gcs/cream_marble.vtf
 D:\m4bwa\Claude\Projects\Ai\gcs-gmod-lowtracks\src\materials\gcs\cream_marble.vtf
 materials/gcs/door_glow.vmt
 D:\m4bwa\Claude\Projects\Ai\gcs-gmod-lowtracks\src\materials\gcs\door_glow.vmt
+materials/gcs/endwin_a.vmt
+D:\m4bwa\Claude\Projects\Ai\gcs-gmod-lowtracks\src\materials\gcs\endwin_a.vmt
+materials/gcs/endwin_b.vmt
+D:\m4bwa\Claude\Projects\Ai\gcs-gmod-lowtracks\src\materials\gcs\endwin_b.vmt
+materials/gcs/endwin_c.vmt
+D:\m4bwa\Claude\Projects\Ai\gcs-gmod-lowtracks\src\materials\gcs\endwin_c.vmt
+materials/gcs/endwin_grid.vtf
+D:\m4bwa\Claude\Projects\Ai\gcs-gmod-lowtracks\src\materials\gcs\endwin_grid.vtf
 materials/gcs/facade_stone.vmt
 D:\m4bwa\Claude\Projects\Ai\gcs-gmod-lowtracks\src\materials\gcs\facade_stone.vmt
 materials/gcs/facade_stone.vtf
