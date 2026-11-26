@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "gcs/ob_lead"
+	"$surfaceprop" "glass"
+}
