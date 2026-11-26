@@ -176,7 +176,7 @@ Updated: 2026-11-24
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.
 
 ## Grants
-- 2026-11-26, Mark: run this chain unattended with chainwright's chain_loop.py: --max-hours 24, no spending cap (the 5-hour usage window is the cap: wait out a limit with --limit-wait 1800 --max-waits 12), --max-sessions = sessions left. Started 2026-11-26 after session 13; log at ai-docs/notes/chain-loop.log.
+- 2026-11-26, Mark: run this chain unattended with chainwright's chain_loop.py: --max-hours 24, no spending cap (the 5-hour usage window is the cap: wait out a limit with --limit-wait 1800 --max-waits 12), --max-sessions = sessions left. Started 2026-11-26 after session 13; driver PID 363264; stop check C:/Users/m4bwa/.chainwright/gcs_stop.py (reads HANDOFF from origin/main), log C:/Users/m4bwa/.chainwright/gcs-gmod-chain.log, ledger gcs-gmod-ledger.json there. Stop it by killing that PID.
 
 ## Waiting on Mark
 - Nothing.
