@@ -1,0 +1,3 @@
+mk_door          20 fps
+mk_front         20 fps
+mk_in            20 fps

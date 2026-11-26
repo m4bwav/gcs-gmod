@@ -113,3 +113,4 @@
 - 2026-11-26: session 23 (run by hand: the chain driver had died on a usage limit at 12:32): Campbell surfaces (make_campbell.py) and Market door sign, 52,271 verts, shots/20261126-1313 and -1323. A 20-letter plaque overflows 1024 px at p=6; plaque() takes p. refs/photos/Campbell_Apartment_Entrance_WTM_*.jpg is not a readable image.
 - 2026-11-26 (session 24): resumed the s24 worktree WIP; Root Chandelier verified by full compile (52,271 verts, 85.6 MB) and compare_chambers sheet; compare.py skips missing shots.
 - 2026-11-26: Session 25: release 0.17.1 (sessions 22-24). In a worktree src/packlist.txt is rewritten by compile.sh with that worktree's paths; revert it before committing.
+- 2026-11-26: session 26: Market door storefront side lights, 52,476 verts, shots/20261126-1413. The first shots.sh run straight after a compile came out wireframe though no other GMod ran; rerunning fixed it. Check a shot before trusting it.
