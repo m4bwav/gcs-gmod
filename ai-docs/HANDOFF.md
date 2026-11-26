@@ -1,10 +1,10 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.16.1 released 2026-11-26: Lexington detail; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 16)
+Updated: 2026-11-26 (session 17)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 16 of 60 (started 2026-11-25)
+- Chain: session 17 of 60 (started 2026-11-25)
 - Budget 2026-11-25 (vbspinfo, 0.6.0): unique verts 46,661/65,536 (71%), faces 41%, planes 22%, brushes 6%, BSP 59.6 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
@@ -179,7 +179,8 @@ Updated: 2026-11-26 (session 16)
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.
 
 ## Resume first
-- Session 17 (2026-11-26, unattended) was cut off mid-compile: its turn ended while a background compile ran. Its work is pushed as branch s17 (worktree ../gcs-gmod-s17, commit "WIP session 17 (unverified)"): shots.lua/shots.sh move the player to each camera (suspected cause of the "decor never draws" bug: the player stayed at spawn, so out-of-PVS brush entities were never sent), Transit store and Hyatt decor back to func_brush, a lex_pendant model. Next session: resume that branch, compile in the foreground, shoot tm_in and hy_atrium, and merge if the decor draws.
+- Session 17 (2026-11-26): the "func_brush never draws" bug was the shot rig, not the map: the player stayed at spawn, so brush entities outside its PVS were never networked. gcs_shots.lua now moves the player to each camera. Transit store and Hyatt decor are func_brush again and draw (shots/20261126-1058 tm_in, hy_atrium); lex_pendant model in. Full compile clean, 52,035/65,536 verts (79%), faces 31,316, BSP 70.4 MB. Not released (ships with the next release).
+- NEXT (session 18): detail lane per the list above (Lexington navy blade sign, Market and Campbell textures, Madison look, Graybar murals, Biltmore arrivals-board lettering); move other area decor still in func_detail back to one func_brush per area (saves world verts); conversion pass 2 if verts pass 55k.
 
 ## Grants
 - 2026-11-26, Mark: run this chain unattended with chainwright's chain_loop.py: --max-hours 24, no spending cap (the 5-hour usage window is the cap: wait out a limit with --limit-wait 1800 --max-waits 12), --max-sessions = sessions left. Started 2026-11-26 after session 13; driver PID 363264; stop check C:/Users/m4bwa/.chainwright/gcs_stop.py (reads HANDOFF from origin/main), log C:/Users/m4bwa/.chainwright/gcs-gmod-chain.log, ledger gcs-gmod-ledger.json there. Stop it by killing that PID.
