@@ -110,3 +110,4 @@
 - 2026-11-26: session 20: Madison white panels and slat ceilings (tools/make_madison.py), texture only, 52,035 verts. A full compile of this map takes well under a minute of vvis/vrad here.
 - 2026-11-26: session 21: Madison terrazzo floor and departure screens, release 0.17.0 (52,091 verts). Python open(p,'w') on Windows writes CRLF into LF files: pass newline set to LF, or strip CR with sed before committing.
 - 2026-11-26: session 22: Lexington Passage blade sign (gcs/lex_sign, Arial Bold via PIL ImageFont, not the 5x7 font), 52,127 verts. Next: Market and Campbell textures.
+- 2026-11-26: session 23 (run by hand: the chain driver had died on a usage limit at 12:32): Campbell surfaces (make_campbell.py) and Market door sign, 52,271 verts, shots/20261126-1313 and -1323. A 20-letter plaque overflows 1024 px at p=6; plaque() takes p. refs/photos/Campbell_Apartment_Entrance_WTM_*.jpg is not a readable image.

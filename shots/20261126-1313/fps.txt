@@ -1,0 +1,5 @@
+mk_door         143 fps
+mk_in           146 fps
+cb_door         147 fps
+cb_room         145 fps
+cb_bar          146 fps

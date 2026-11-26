@@ -128,13 +128,12 @@ def tickets():
     save(img, "tickets")
 
 
-def plaque(word, name):
+def plaque(word, name, p=6):
     # 1024x64 bronze band, raised gold 5x7 lettering (OYSTER BAR, PERSHING SQUARE).
     W, H = 1024, 64
     img = Image.new("RGB", (W, H), (40, 30, 20))
     d = ImageDraw.Draw(img)
     d.rectangle([0, 0, W-1, H-1], outline=(196, 156, 72), width=4)
-    p = 6
     x0 = 512 - (len(word)*6 - 1)*p*1.5/2
     for k, ch in enumerate(word):
         if ch == " ":
@@ -299,6 +298,7 @@ flag()
 tickets()
 plaque("OYSTER BAR", "oysterbar")
 plaque("PERSHING SQUARE", "pershing")
+plaque("GRAND CENTRAL MARKET", "mk_sign", 5)
 track_signs()
 train_steel()
 endwin_grid()
