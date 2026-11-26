@@ -1,3 +1,7 @@
+## 0.9.0 (2026-11-25)
+- Graybar Passage: north off Lexington Passage, five groin-vaulted cream bays with a brass chandelier in each, pilasters with gold capitals, two glass kiosks and lit doors at the north end.
+- Nav mesh regenerated.
+
 ## 0.8.0 (2026-11-25)
 - Lexington Passage: the doors behind the concourse's east floor arch now open on a 200 ft shop-lined passage (coffered ceiling, brass pendant lamps, lit shop fronts) ending at the Lexington Avenue doors.
 - Lower-level tracks detail: platforms raised for a 15 ft ceiling, gate lamps. 0.7.0 had shipped the earlier blockout build by mistake (a failed vbsp run went unnoticed); 0.8.0 carries the real one.
