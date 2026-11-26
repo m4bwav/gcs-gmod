@@ -1,0 +1,2 @@
+gb_in           146 fps
+gb_up           146 fps
