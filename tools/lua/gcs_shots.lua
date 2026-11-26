@@ -95,6 +95,12 @@ if want ~= "go" then
   CAMS = keep
 end
 local i, cam, frames = 0, nil, 0
+-- The view moves by CalcView but the server sends entities by the player's PVS: move the player
+-- to each camera (setpos needs sv_cheats, shots.sh sets it), else brush entities in rooms out of
+-- sight of the spawn (tm_decor, hy_decor) are never networked and never drawn.
+local function goto_cam()
+  if cam then RunConsoleCommand("setpos", cam[2].x, cam[2].y, cam[2].z - 64) end
+end
 local ft, fpslog = 0, {}  -- frame time summed over frames 31-89, one fps line per camera
 
 hook.Add("CalcView", "gcs_shots", function()
@@ -113,6 +119,7 @@ hook.Add("PostRender", "gcs_shots", function()
   file.Write("gcs_shots/" .. cam[1] .. ".jpg", data)
   i, frames = i + 1, 0
   cam = CAMS[i]
+  goto_cam()
   if not cam then
     file.Write("gcs_shots/fps.txt", table.concat(fpslog, "\n") .. "\n")
     file.Write("gcs_shots/done.txt", "done")
@@ -121,5 +128,5 @@ hook.Add("PostRender", "gcs_shots", function()
 end)
 timer.Simple(8, function()
   RunConsoleCommand("mat_autoexposure_max", "1.5")
-  i = 1; cam = CAMS[1]
+  i = 1; cam = CAMS[1]; goto_cam()
 end)

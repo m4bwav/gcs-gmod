@@ -1392,9 +1392,8 @@ def transit_store(W, ents):
             det(box(x - 8, yy - 8, h - 14, x + 8, yy + 8, h, TEX_BULB))
             ents.append(ent("light", (x, yy, h - 40), _light="255 225 190 80"))
     ents.append(ent("env_cubemap", ((x0 + x1)//2, cy, 72)))
-    # func_detail, not func_brush: as a func_brush (tm_decor) it compiled and cast shadows but
-    # never drew in game (2026-11-26, cause not found). Small enough for the world model.
-    ents.append(ent("func_detail", solids="".join(decor)))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="tm_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
 def vanderbilt_link(W, ents):
@@ -1570,7 +1569,8 @@ def hyatt(W, ents):
             ents.append(ent("light", (lx, ly, z + h - 80), _light="255 240 220 90"))
     ents.append(ent("light", ((d0 + d1)//2, (y0 + y1)//2, z + 12 * FT), _light="255 220 170 35"))
     ents.append(ent("env_cubemap", (cx, cy, z + 72)))
-    ents.append(ent("func_detail", solids="".join(decor)))   # as func_brush it did not draw (see transit_store)
+    ents.append(ent("func_brush", solids="".join(decor), targetname="hy_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
 # The Biltmore Room (area 6 extra): the old arrival room off the concourse's northwest corner
