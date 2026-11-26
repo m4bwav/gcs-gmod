@@ -1,6 +1,6 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.13.0 released 2026-11-26: One Vanderbilt link; Workshop 3845077025, GitHub v0.6.0)
+Status: in progress (0.14.0 released 2026-11-26: Grand Central Madison; Workshop 3845077025, GitHub v0.6.0)
 Updated: 2026-11-24
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
