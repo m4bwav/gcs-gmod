@@ -1,3 +1,7 @@
+## 0.13.0 (2026-11-26)
+- One Vanderbilt link: the west floor arch opens on a link corridor and an escalator run rising 20 ft to a tall lobby with a glass wall over the Vanderbilt Avenue doors.
+- Nav mesh regenerated.
+
 ## 0.12.0 (2026-11-26)
 - Transit Museum store: Vanderbilt Hall's pedimented east door now opens on a small museum shop with lit shelving, glass cases, a counter and the cab end of a vintage subway car.
 - Nav mesh regenerated.
