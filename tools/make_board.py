@@ -597,28 +597,67 @@ def cornice_lit():
 
 
 def lunette():
-    # 256x256 for the concourse lunettes (Flag_Ceiling / Main_Concourse photos: deep blue-grey glass
-    # behind a fine bronze grille, heavier bars every 64 px). Painted grille replaces the 5 mullion
-    # brushes per lunette (vertex budget); a faint $selfillum keeps the glass reading as daylight.
-    W = 256
+    # 512x256 RGBA, one texture across a whole lunette (half-disc radius 192 u at scale 0.75, mapped per
+    # lunette in build_vmf.py). Flag_Ceiling photo: only a low arc is glass (blue-grey behind a bronze
+    # grille); the rest of the arch is a carved cream tympanum, an eagle with spread wings over garlands.
+    # The carving is a height map shaded as lit from above; alpha is the $selfillum mask (glass only).
+    from PIL import ImageFilter
+    W, H = 512, 256
     rng = np.random.default_rng(45)
-    g = np.zeros((W, W, 3), np.float32)
-    y = np.linspace(0, 1, W)[:, None]
-    g[..., 0], g[..., 1], g[..., 2] = 70 + 40 * y, 86 + 40 * y, 104 + 36 * y
-    g += rng.normal(0, 6, (W, W, 1))
-    img = Image.fromarray(np.clip(g, 0, 255).astype(np.uint8), "RGB")
-    d = ImageDraw.Draw(img)
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    up, dx = H - yy, xx - W / 2                  # height above the springline, offset from the centre
+    glass = (dx / 214) ** 2 + (up / 104) ** 2 < 1
+    frame = ((dx / 226) ** 2 + (up / 116) ** 2 < 1) & ~glass
+    g = np.zeros((H, W, 3), np.float32)
+    g[..., 0], g[..., 1], g[..., 2] = 70 + 40 * up / H, 86 + 40 * up / H, 104 + 36 * up / H
+    gi = Image.fromarray(np.clip(g, 0, 255).astype(np.uint8), "RGB")
+    d = ImageDraw.Draw(gi)
     for k in range(0, W, 16):
-        d.line([(k, 0), (k, W)], fill=(58, 50, 38), width=2)
-        d.line([(0, k), (W, k)], fill=(58, 50, 38), width=2)
-    for k in range(0, W, 64):
-        d.rectangle([k - 4, 0, k + 3, W], fill=(44, 38, 28))
-        d.rectangle([0, k - 4, W, k + 3], fill=(44, 38, 28))
-    save(img, "lunette")
+        d.line([(k, 0), (k, H)], fill=(58, 50, 38), width=2)
+    for r in range(18, 110, 18):                 # grille follows the arc
+        d.ellipse([W / 2 - r * 2.06, H - r, W / 2 + r * 2.06, H + r], outline=(58, 50, 38), width=2)
+    for k in range(-192, 193, 64):
+        d.rectangle([W / 2 + k - 4, 0, W / 2 + k + 3, H], fill=(44, 38, 28))
+    # Relief height map.
+    hm = Image.new("L", (W, H), 0)
+    h = ImageDraw.Draw(hm)
+    cx, cy = W // 2, 70
+    for side in (-1, 1):                         # spread wings: fans of feathers
+        for k in range(9):
+            ang = np.radians(8 + k * 9)
+            L = 120 - k * 6
+            x1, y1 = cx + side * L * np.cos(ang), cy + 20 - L * np.sin(ang) * 0.55
+            h.line([(cx + side * 14, cy + 10), (x1, y1)], fill=150 + k * 8, width=11)
+        for k in range(7):                       # garland swags toward the springing
+            x = cx + side * (70 + k * 22)
+            h.ellipse([x - 13, 118 + k * 7 - 13, x + 13, 118 + k * 7 + 13], fill=170)
+        h.polygon([(cx + side * 40, 150), (cx + side * 120, 112), (cx + side * 200, 150)], outline=120)
+        h.ellipse([cx + side * 230 - 18, 128, cx + side * 230 + 18, 164], fill=190)   # rosettes at the feet
+    h.ellipse([cx - 22, cy - 6, cx + 22, cy + 46], fill=230)                          # eagle body
+    h.ellipse([cx - 11, cy - 26, cx + 11, cy - 4], fill=240)                          # head
+    h.polygon([(cx - 26, cy + 44), (cx + 26, cy + 44), (cx, cy + 72)], fill=210)       # tail
+    h.ellipse([cx - 40, 112, cx + 40, 150], fill=200)                                 # cartouche
+    h.ellipse([cx - 30, 120, cx + 30, 142], fill=150)
+    hm = hm.filter(ImageFilter.GaussianBlur(2))
+    hv = np.asarray(hm, np.float32) / 255 + rng.normal(0, 0.004, (H, W))
+    shade = 0.86 + 0.25 * hv + 1.8 * (np.roll(hv, -2, 0) - np.roll(hv, 2, 0)) + 0.6 * (np.roll(hv, -2, 1) - np.roll(hv, 2, 1))
+    cream = np.array([224, 208, 172], np.float32) * np.clip(shade, 0.45, 1.3)[..., None]
+    cream *= (0.93 + 0.07 * np.clip(up / H, 0, 1))[..., None]
+    out = np.where(glass[..., None], np.asarray(gi, np.float32), cream)
+    out = np.where(frame[..., None], np.array([150, 116, 60], np.float32), out)
+    rgb = np.clip(out, 0, 255).astype(np.uint8)
+    alpha = np.where(glass, 255, 0).astype(np.uint8)
+    Image.fromarray(rgb, "RGB").save("shots/tex/lunette.png")
+    tex = vtf.VTF(W, H, fmt=vtf.ImageFormats.RGBA8888)
+    tex.get().copy_from(np.dstack([rgb, alpha]).tobytes(), vtf.ImageFormats.RGBA8888)
+    tex.compute_mipmaps()
+    with open("src/materials/gcs/lunette.vtf", "wb") as f:
+        tex.save(f)
     nl, tab = chr(10), chr(9)
     with open("src/materials/gcs/lunette.vmt", "w", newline="") as f:
         f.write('"LightmappedGeneric"' + nl + "{" + nl + tab + '"$basetexture" "gcs/lunette"' + nl
-                + tab + '"$selfillum" "1"' + nl + tab + '"$selfillumtint" "[0.55 0.6 0.7]"' + nl + tab + '"$surfaceprop" "glass"' + nl + "}" + nl)
+                + tab + '"$selfillum" "1"' + nl + tab + '"$selfillumtint" "[0.55 0.6 0.7]"' + nl + tab + '"$surfaceprop" "plaster"' + nl + "}" + nl)
+    print("wrote src/materials/gcs/lunette.vtf")
 
 
 board()
