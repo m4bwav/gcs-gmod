@@ -10,6 +10,7 @@ NOTE="${1:-Update}"
 [ $# -gt 0 ] && shift
 rm -rf build/addon && mkdir -p build/addon/maps
 cp src/gm_grand_central.bsp build/addon/maps/
+[ -f src/gm_grand_central.nav ] && cp src/gm_grand_central.nav build/addon/maps/   # from tools/nav.sh
 cat > build/addon/addon.json <<'EOF'
 {
 	"title": "gm_grand_central",

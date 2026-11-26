@@ -1,3 +1,6 @@
+## 0.6.1 (2026-11-25)
+- Nav mesh shipped (maps/gm_grand_central.nav, 1,268 areas from nav_generate), so nextbots and NPCs can walk the map. tools/nav.sh regenerates it after a compile.
+
 ## 0.6.0 (2026-11-24)
 
 - The Biltmore Room: a marble doorway in the northwest of the concourse north wall opens into the old arrival room, 40 x 80 ft, with cream marble walls and floor, a beamed ceiling with a dentil cornice, brass sconces, the arrivals board (dark glass in a brass frame) and a railed escalator well.

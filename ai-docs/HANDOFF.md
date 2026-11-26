@@ -1,10 +1,10 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.6.0 released 2026-11-24: the Biltmore Room; Workshop 3845077025, GitHub v0.6.0)
+Status: in progress (0.6.1 released 2026-11-25: nav mesh; Workshop 3845077025, GitHub v0.6.0)
 Updated: 2026-11-24
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 0 of 60 (started 2026-11-25)
+- Chain: session 1 of 60 (started 2026-11-25)
 - Budget 2026-11-25 (vbspinfo, 0.6.0): unique verts 46,661/65,536 (71%), faces 41%, planes 22%, brushes 6%, BSP 59.6 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
@@ -132,7 +132,8 @@ Updated: 2026-11-24
 - Rig: tools/shots.sh takes GARGS="..." for extra launch args; fps.txt flags "CAMERA IN SOLID".
 - Release 0.6.0 (2026-11-24): the Biltmore Room. Doorway BD0..BD1 (x -1404..-1236, 16 ft) in the concourse north wall (added to gedges in build()) into a 40x80x30 ft room north of the concourse, west of the shed (build_vmf.py biltmore(), BX*/BY*/BH): cream marble floor and walls, beamed ceiling with ceiling lights, dentil cornice, brass sconces, arrivals board (dark glass, brass frame and mullions) on the north wall, railed escalator well 8 ft deep (sealed). Decor in func_brush bilt_decor. Cameras bilt_door, biltmore, bilt_board. Clean full compile, unique verts 46,664, shots/20261124-0955 and -0959. Refs: 3 Commons photos (MTA CC BY 2.0, TheCatalyst31 CC BY-SA 4.0).
 - Biltmore polish (optional): the wall clock above the board (gcs/clock needs a face centred like USHIFT), board lettering (a NAME/DUE/TRACK texture from make_board.py), wider room (real one is larger; estimate), escalators down to the dining concourse.
-- NEXT: a nav mesh (nav_generate in GMod, ship the .nav in the gma), then lower-level tracks or roleplay spaces (plan area 6). Statue could gain finer modelling (faces, drapery) if polywright/Blender becomes available.
+- Release 0.6.1 (2026-11-25, chain session 1): nav mesh. tools/nav.sh launches GMod with sv_cheats, tools/lua/gcs_nav.lua (server autorun, gated by data/gcs_nav_go.txt) runs nav_quicksave 1 + nav_generate, reports the area count after the reload and quits; nav.sh copies maps/gm_grand_central.nav to src/ (gitignored) and package.sh ships it. 1,268 areas, 0.8 MB, about 8 min incl. addon load. Coverage per area not yet checked by eye (nav_edit 1); re-run nav.sh after every compile that changes walkable floors. BSP unchanged from 0.6.0 (46,661 verts).
+- NEXT (session 2): chamber lane starts: refs and a plan for the chamber order (prompt list), log the order in plans/gcs-gmod-plan.md, then refs + blockout of the first (lower-level track platforms under the dining concourse). Detail lane alternative: compare.py worst mismatch. Statue could gain finer modelling (faces, drapery) if polywright/Blender becomes available.
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

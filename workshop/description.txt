@@ -1,7 +1,7 @@
 [h1]Grand Central Terminal[/h1]
 The Main Concourse of New York's Grand Central Terminal at true scale: the green zodiac vault, the end windows with light shafts, the double staircases and balconies, the four-faced clock on the information booth, the ticket windows, the departure board, the flag and the chandeliers.
 
-Update 0.6.0 adds the Biltmore Room: step through the marble doorway at the northwest corner of the concourse into the old arrival room with its beamed ceiling, brass sconces and the old arrivals board.
+Update 0.6.1 ships a nav mesh, so nextbots and NPCs can walk the station. Update 0.6.0 added the Biltmore Room: step through the marble doorway at the northwest corner of the concourse into the old arrival room with its beamed ceiling, brass sconces and the old arrivals board.
 
 Update 0.5.0 added the exterior: walk out through the Vanderbilt Hall vestibule onto 42nd Street and look up at the facade, its great arched windows, the clock and the Glory of Commerce group, then climb the terrace stair or cross the Park Avenue Viaduct.
 
