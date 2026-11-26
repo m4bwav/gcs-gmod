@@ -118,3 +118,4 @@
 - 2026-11-26 session 27: Lexington shop fronts textured (make_board.py lex_shop, gcs/lex_shop_n/_s); 52,616 verts; shots/20261126-1421. Next: Madison mural/escalators.
 
 - 2026-11-26 session 28: Madison concourse mural, shop band, terrazzo bands (texture + 1-u panels). 52,704 verts, BSP 93.1 MB. shots/20261126-1429.
+- 2026-11-26: session 29 Madison escalators stainless (md_steel/md_step/md_rail), shots/20261126-1437.

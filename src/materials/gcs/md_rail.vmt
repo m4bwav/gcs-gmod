@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "gcs/md_steel"
+	"$color" "[0.08 0.08 0.09]"
+	"$surfaceprop" "rubber"
+}

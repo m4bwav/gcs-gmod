@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "gcs/md_steel"
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[0.35 0.35 0.38]"
+	"$surfaceprop" "metal"
+}
