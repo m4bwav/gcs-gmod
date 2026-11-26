@@ -1,3 +1,8 @@
+## 0.14.0 (2026-11-26)
+- Grand Central Madison: a gate in the dining concourse's south wall opens on a four-lane escalator bank dropping 118 ft in two runs to a low modern concourse 140 ft below the main floor, with an LIRR track edge and a waiting car.
+- The concourse end windows' mullion grids are now a texture (frees vertex budget for new rooms).
+- Nav mesh regenerated.
+
 ## 0.13.0 (2026-11-26)
 - One Vanderbilt link: the west floor arch opens on a link corridor and an escalator run rising 20 ft to a tall lobby with a glass wall over the Vanderbilt Avenue doors.
 - Nav mesh regenerated.

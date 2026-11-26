@@ -463,7 +463,10 @@ def lower_level(W, ents):
     # the edge and a small brass-topped lower information booth in the middle.
     W(box(DIN_X0, -DIN_Y, Z - WALL, DIN_X1, DIN_Y, Z, TEX_FLOOR))
     W(box(DIN_X0, -DIN_Y, -WALL - 16, DIN_X1, DIN_Y, -WALL, TEX_COFFER))
-    W(box(DIN_X0 - WALL, -DIN_Y - WALL, Z - WALL, DIN_X1 + WALL, -DIN_Y, 0, TEX_CREAM))
+    W(box(DIN_X0 - WALL, -DIN_Y - WALL, Z - WALL, MD_X0 - WALL, -DIN_Y, 0, TEX_CREAM))   # south wall, cut by the
+    W(box(MD_X1 + WALL, -DIN_Y - WALL, Z - WALL, DIN_X1 + WALL, -DIN_Y, 0, TEX_CREAM))   # Madison escalator gate
+    W(box(MD_X0 - WALL, -DIN_Y - WALL, Z + 16 * FT, MD_X1 + WALL, -DIN_Y, 0, TEX_CREAM))
+    W(box(MD_X0 - WALL, -DIN_Y - WALL, Z - WALL, MD_X1 + WALL, -DIN_Y, Z, TEX_LOWF))
     ned = [DIN_X0 - WALL] + [e for gx, _ in LGATES for e in (gx - GATE_W//2, gx + GATE_W//2)] + [DIN_X1 + WALL]
     for j in range(0, len(ned), 2):
         W(box(ned[j], DIN_Y, Z - WALL, ned[j + 1], DIN_Y + WALL, 0, TEX_CREAM))
@@ -476,6 +479,8 @@ def lower_level(W, ents):
     for x in range(DIN_X0 + 160, DIN_X1 - 100, 240):
         for s in (-1, 1):
             if s > 0 and any(abs(x - gx) < 90 + GATE_W//2 + 16 for gx, _ in LGATES):
+                continue
+            if s < 0 and MD_X0 - 110 < x < MD_X1 + 110:
                 continue
             ya, yb = sorted((s*(DIN_Y - 4), s*DIN_Y))
             det(box(x - 90, ya, Z + 12, x + 90, yb, Z + 110, TEX_DOOR))
@@ -1085,6 +1090,22 @@ def lower_tracks(W, ents):
 # Lexington Passage (chamber 2): the east floor arch's back opens on a shop-lined passage
 # running east under the Graybar Building to lit Lexington Avenue doors. Width and height are
 # estimates from photos (refs/SOURCES.md); shop fronts are lit glass under a dark sign band.
+# Grand Central Madison (chamber 7): from a gate in the dining concourse's south wall, a 36 ft
+# escalator bank drops 118 ft in two 30-degree runs with a mezzanine between (real banks run up
+# to 180 ft and drop 90 ft each; Madison lies over 140 ft below Park Avenue: refs/concourse-
+# dimensions.md) to a low modern concourse with an LIRR track edge. Runs south under Vanderbilt
+# Hall and 42nd Street. Sizes besides the depth are estimates.
+MD_X0, MD_X1 = -696, -264                  # shaft, 36 ft wide
+MD_Y0 = -DIN_Y - WALL                      # gate, -664
+MD_YA = MD_Y0 - 28 * FT                    # top of run 1
+MD_DROP = 708                              # per run (59 ft)
+MD_RUN = round(MD_DROP * 3 ** 0.5)         # 30 degrees
+MD_YB = MD_YA - MD_RUN                     # foot of run 1 / mezzanine
+MD_YC = MD_YB - 25 * FT                    # top of run 2
+MD_YD = MD_YC - MD_RUN                     # foot of run 2, concourse north face
+MD_Z = LOW_Z - 2 * MD_DROP                 # -1680: 140 ft below the main floor
+MC_X0, MC_X1, MC_Y0 = -1080, 120, MD_YD - 67 * FT
+MD_HEAD = 16 * FT
 LEX_X0 = HX + WALL + ARCH_D                # 1906, back of the east centre arch
 LEX_X1 = LEX_X0 + 200 * FT
 LEX_Y = 13 * FT                            # half-width 156: clear of the east ramp walls (|y| 168)
@@ -1389,6 +1410,62 @@ def vanderbilt_link(W, ents):
                     disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
+def madison(W, ents):
+    decor = []
+    det = decor.append
+    x0, x1, hd = MD_X0, MD_X1, MD_HEAD
+    zt, zm, zb = LOW_Z, LOW_Z - MD_DROP, MD_Z
+    T = "gcs/plat_tile"
+    # Flat landing, run 1, mezzanine, run 2: floor and parallel ceiling slabs (xprism over y,z).
+    flats = ((MD_Y0, MD_YA, zt), (MD_YB, MD_YC, zm))
+    runs = ((MD_YA, zt, MD_YB, zm), (MD_YC, zm, MD_YD, zb))
+    for ya, yb, z in flats:
+        W(box(x0, yb, z - WALL, x1, ya, z, T))
+        W(box(x0, yb, z + hd, x1, ya, z + hd + WALL, TEX_COFFER))
+    for ya, za, yb, zb_ in runs:
+        W(xprism(ccw([(ya, za), (yb, zb_), (yb, zb_ - WALL), (ya, za - WALL)]), x0, x1, "gcs/steel"))
+        W(xprism(ccw([(ya, za + hd), (yb, zb_ + hd), (yb, zb_ + hd + WALL), (ya, za + hd + WALL)]), x0, x1, TEX_COFFER))
+    for a, b in ((x0 - WALL, x0), (x1, x1 + WALL)):
+        W(box(a, MD_YD, zb - WALL, b, MD_Y0, zt + hd + WALL, TEX_CREAM))
+    # Concourse: low white hall, LIRR track pit along its south side.
+    c0, c1, y0, y1, h = MC_X0, MC_X1, MC_Y0, MD_YD, 14 * FT
+    py = y0 + 20 * FT
+    W(box(c0 - WALL, py, zb - WALL, c1 + WALL, y1, zb, T))
+    W(box(c0 - WALL, y0 - WALL, zb - PIT - WALL, c1 + WALL, py, zb - PIT, "gcs/ballast"))
+    W(box(c0 - WALL, y0 - WALL, zb + h, c1 + WALL, y1 + WALL, zb + h + WALL, TEX_COFFER))
+    W(box(c0 - WALL, y0 - WALL, zb - PIT - WALL, c1 + WALL, y0, zb + h, TEX_CREAM))
+    for a, b in ((c0 - WALL, c0), (c1, c1 + WALL)):
+        W(box(a, y0, zb - PIT - WALL, b, y1, zb + h, TEX_CREAM))
+    W(box(c0, y1, zb, x0 - WALL, y1 + WALL, zb + h, TEX_CREAM))
+    W(box(x1 + WALL, y1, zb, c1, y1 + WALL, zb + h, TEX_CREAM))
+    # Escalator lanes: four lanes split by steel balustrades with brass handrails, on both runs.
+    for ya, za, yb, zb_ in runs:
+        for xc in (x0 + 8, x0 + 112, x0 + 216, x0 + 320, x1 - 8):
+            det(xprism(ccw([(ya, za), (yb, zb_), (yb, zb_ + 36), (ya, za + 36)]), xc - 6, xc + 6, "gcs/steel"))
+            det(xprism(ccw([(ya, za + 36), (yb, zb_ + 36), (yb, zb_ + 42), (ya, za + 42)]), xc - 4, xc + 4, TEX_GOLD))
+        mid = (x0 + x1) // 2
+        det(xprism(ccw([(ya, za + hd - 8), (yb, zb_ + hd - 8), (yb, zb_ + hd), (ya, za + hd)]), mid - 6, mid + 6, "gcs/fluor"))
+        for k in range(1, 5):
+            t = k / 5
+            ents.append(ent("light", ((x0 + x1)//2, round(ya + (yb - ya)*t), round(za + (zb_ - za)*t + hd - 40)),
+                            _light="225 235 255 40"))
+    # Gate frame in the dining wall, yellow platform edge, a waiting LIRR car, ceiling strips.
+    for xx in (x0 - 10, x1):
+        det(box(xx, -DIN_Y - 4, zt, xx + 10, -DIN_Y, zt + 16 * FT, TEX_GOLD))
+    det(box(c0, py, zb, c1, py + 24, zb + 1, "gcs/plat_edge"))
+    det(box(c0 + 100, y0 + 60, zb - PIT + 8, c1 - 100, y0 + 180, zb + 150, "gcs/train"))
+    for x in range(c0 + 100, c1, 200):
+        det(box(x - 4, py + 60, zb + h - 8, x + 4, y1 - 60, zb + h, "gcs/fluor"))
+    for x in range(c0 + 200, c1, 400):
+        for y in (py + 150, (py + y1)//2, y1 - 150):
+            ents.append(ent("light", (x, y, zb + h - 40), _light="230 238 255 45"))
+    for y, z in ((MD_Y0 - 150, zt), ((MD_YB + MD_YC)//2, zm)):
+        ents.append(ent("light", ((x0 + x1)//2, y, z + hd - 40), _light="230 238 255 40"))
+    ents.append(ent("env_cubemap", ((c0 + c1)//2, (py + y1)//2, zb + 64)))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="md_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
 # The Biltmore Room (area 6 extra): the old arrival room off the concourse's northwest corner
 # (photos: Biltmore_Room_at_Grand_Central_Terminal, MTA_Reopens_Biltmore_Room, the schedule board
 # and clock). Cream marble walls and floor, a beamed and coffered ceiling, dentil cornice, the
@@ -1494,7 +1571,7 @@ def build():
     O = 256
     X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, PY0 - 2*WALL - 128, SH_Y1+WALL+64, SKYZ+WALL+64
     X0, X1 = min(X0, EX0 - 2*WALL - 128), max(X1, EX1 + 2*WALL + 128, LEX_X1 + WALL + 128, MK_X1 + WALL + 128)
-    ZB = LZ - PIT - 2*WALL - 64
+    ZB = MD_Z - PIT - 2*WALL - 64
     W(box(X0, Y0, ZB, X1, Y1, ZB+64, NODRAW))
     W(box(X0, Y0, Z1, X1, Y1, Z1+64, NODRAW))
     W(box(X0, Y0-64, ZB, X1, Y0, Z1+64, NODRAW))
@@ -1530,6 +1607,7 @@ def build():
     campbell(W, ents)
     transit_store(W, ents)
     vanderbilt_link(W, ents)
+    madison(W, ents)
     biltmore(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
