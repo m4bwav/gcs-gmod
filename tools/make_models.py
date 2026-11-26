@@ -10,6 +10,7 @@ compile.sh copies both into garrysmod/ and packs them into the BSP.
 """
 import math
 import os
+import random
 import shutil
 import subprocess
 from pathlib import Path
@@ -29,6 +30,8 @@ VMTS = {
             '\t"$envmap" "env_cubemap"\n\t"$envmaptint" "[0.25 0.2 0.1]"\n\t"$surfaceprop" "metal"\n}\n',
     "bronze": '"VertexLitGeneric"\n{\n\t"$basetexture" "metal/metalwall001a"\n\t"$color2" "[0.45 0.33 0.18]"\n'
               '\t"$envmap" "env_cubemap"\n\t"$envmaptint" "[0.25 0.2 0.12]"\n\t"$surfaceprop" "metal"\n}\n',
+    "root": '"VertexLitGeneric"\n{\n\t"$basetexture" "metal/metalwall001a"\n\t"$color2" "[0.85 0.83 0.8]"\n'
+            '\t"$envmap" "env_cubemap"\n\t"$envmaptint" "[0.3 0.3 0.3]"\n\t"$surfaceprop" "metal"\n}\n',
     "bulb": '"UnlitGeneric"\n{\n\t"$basetexture" "lights/white002"\n\t"$color2" "[1.0 0.86 0.6]"\n\t"$model" "1"\n}\n',
     "statue": '"VertexLitGeneric"\n{\n\t"$basetexture" "gcs/facade_stone"\n\t"$color2" "[0.8 0.76 0.7]"\n'
               '\t"$nocull" "1"\n\t"$surfaceprop" "stone"\n}\n',
@@ -348,7 +351,35 @@ def lex_pendant():
     return m
 
 
-MODELS = {"lex_pendant": lex_pendant, "eagle": eagle, "taxi": taxi, "statue_group": statue_group, "chandelier": chandelier, "vh_chandelier": vh_chandelier}
+def root_chandelier():
+    """Grand Central Market's Root Chandelier (Donald Lipski, 1999): an upturned tree's roots in
+    pale silver spreading from the dome crown, crystal drops on the tips. Origin at the ceiling,
+    about 25 ft across and 9 ft deep. Seeded, so every build is the same."""
+    rnd = random.Random(1999)
+    m = Mesh()
+    m.lathe("root", [(0, -6), (14, -6), (16, -2), (12, 0), (0, 0)], 0, 0, 0, 16)    # crown plate
+    m.tube("root", (0, 0, -4), (0, 0, -30), 9, 7, 8)                               # trunk
+    m.lathe("bulb", [(0, -10), (18, -10), (18, -8), (0, -8)], 0, 0, 0, 16)        # uplight ring
+
+    def grow(p, yaw, pitch, ln, r, depth):
+        d = (math.cos(pitch) * math.cos(yaw), math.cos(pitch) * math.sin(yaw), math.sin(pitch))
+        q = (p[0] + d[0] * ln, p[1] + d[1] * ln, p[2] + d[2] * ln)
+        m.tube("root", p, q, r, r * 0.65, 6)
+        if depth == 0 or math.hypot(q[0], q[1]) > 150:
+            # Crystal drop on a short wire under each tip.
+            m.blob("bulb", (q[0], q[1], q[2] - 5), 1.6, 1.6, 3.2, 4)
+            return
+        for _ in range(2 if depth < 3 else rnd.choice((2, 3))):
+            grow(q, yaw + rnd.uniform(-0.6, 0.6), max(-1.3, pitch + rnd.uniform(-0.45, 0.15)),
+                 ln * rnd.uniform(0.6, 0.8), r * 0.65, depth - 1)
+
+    for k in range(9):
+        yaw = 2 * math.pi * k / 9 + rnd.uniform(-0.15, 0.15)
+        grow((0, 0, -24), yaw, rnd.uniform(-0.35, -0.15), rnd.uniform(48, 60), 5, 4)
+    return m
+
+
+MODELS = {"root_chandelier": root_chandelier, "lex_pendant": lex_pendant, "eagle": eagle, "taxi": taxi, "statue_group": statue_group, "chandelier": chandelier, "vh_chandelier": vh_chandelier}
 
 
 def build():
