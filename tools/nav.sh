@@ -13,8 +13,8 @@ rm -rf "$D/gcs_nav" "$G/garrysmod/maps/gm_grand_central.nav"; echo go > "$D/gcs_
 "$G/gmod.exe" -windowed -w 1280 -h 720 -novid -nojoy -condebug +sv_cheats 1 +map gm_grand_central &
 for n in $(seq 1 240); do [ -f "$D/gcs_nav/done.txt" ] && break; sleep 5; done
 sleep 5
-PID=$(python "$QW" pid gmod.exe 2>/dev/null | python -c "import json,sys; m=json.load(sys.stdin)[\"matches\"]; print(m[0].get(\"pid\",\"\") if m else \"\")")
-[ -n "$PID" ] && taskkill //PID "$PID" //F
+# Every gmod.exe by PID (Lua quit is blocked in this GMod build; qw pid matched a helper process, not the game).
+for PID in $(tasklist //FI "IMAGENAME eq gmod.exe" //FO CSV //NH | cut -d'"' -f4); do taskkill //PID "$PID" //F >/dev/null 2>&1; done
 rm -f "$G/garrysmod/lua/autorun/server/gcs_nav.lua" "$D/gcs_nav_go.txt"
 cat "$D/gcs_nav/done.txt" 2>/dev/null || { echo "no nav: see $G/garrysmod/console.log"; exit 1; }
 cp "$G/garrysmod/maps/gm_grand_central.nav" src/

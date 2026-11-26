@@ -6,6 +6,9 @@ Goal: carry `gm_grand_central` (Garry's Mod, Workshop 3845077025) through 60 ses
 - **Detail:** make every existing area read like the real terminal (concourse, ramps, Whispering Gallery, Oyster Bar, dining concourse, Vanderbilt Hall, platforms, exterior, Pershing Square, Biltmore Room). After each compile, compare screenshots with photos taken from the same viewpoints (`tools/compare.py`) and fix the worst mismatch first.
 - **Chambers:** add rooms joined to the existing map through real openings. Rough order (refs and a plan first, then decide the order and log it): lower-level track platforms under the dining concourse; Lexington Passage and Graybar Passage with shops; the Campbell (Campbell Apartment bar); Grand Central Market; the Transit Museum store; the Vanderbilt Avenue / One Vanderbilt link; the Grand Central Madison (LIRR) deep concourse with its long escalators; Track 61 and the M42 substation (fenced, dim); the Grand Hyatt / Lexington entrance. Add nav mesh and roleplay spaces where they fit.
 
+## Keep going (read first)
+A "session" below is one unit of work, not the end of the conversation. When an item finishes (merged, released, logged), bump the session number and start the next item in the same conversation straight away. Do not hand over after one item. Hand over only at a stop point (step 5 or 6), or when context is heavy; then start chainwright's unattended driver (`chain_loop.py --go`) yourself instead of printing a command and waiting.
+
 ## Budget rules (read before every change)
 The hard limit is vbsp's 65,536 unique vertices, plus the t-junction cap on the world model; current usage is in HANDOFF.md. The 150 MB file budget comes second.
 - After every compile, run `GarrysMod/bin/vbspinfo.exe` on the BSP. Log the unique vertices, faces and file size for each milestone in HANDOFF.md.

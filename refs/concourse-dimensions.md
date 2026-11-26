@@ -17,3 +17,11 @@ Secondary sources only; no HABS section or LPC report read yet (next: HABS NY-54
 | Booth clock | four faces, 24 in each | Wikipedia citing NYT 1954-01-20 | 30 u (2.5 ft) block, fine |
 | Flag | ~48 ft long (width not found) | https://gothamist.com/news/the-flag-in-grand-central-terminal | 48 x 25 ft (2026-11-23) |
 | Balcony height, sill, lunette windows, booth size | not found | | photo estimates |
+
+## Lower-level tracks (100-117), blockout facts (2026-11-25, approximate, from photos and general sources)
+- Lower (suburban) level sits about 28-30 ft (8.5-9 m) below the upper track level; dining concourse is at this level.
+- Gates on the dining concourse north side: marble surround, carved oak-leaf lunette over a bronze-framed doorway, single pendant globe lamp, serif gilt-black lettering "108 TRACKS 107" (refs: Tracks_107_and_108..., Awesome_track_number...).
+- Behind the gate a narrow ramp/walkway leads down to island platforms about 15-20 ft (4.5-6 m) wide; high-level platforms, light grey concrete/terrazzo tile floor, tubular steel railings.
+- Ceiling about 12-15 ft (3.7-4.5 m) above platform: the upper track deck's steel frame, dark riveted girders and concrete, columns at roughly 15-20 ft spacing along the platform edges.
+- Lighting: continuous linear fluorescent/LED strips along the platform centre, plus hanging blue-and-white Metro-North track and departure signs; walls dark grey concrete, white-painted soffits near gates.
+- Plan: RailUS_GCT_lowerTracksPlan.jpg (Wilgus, PD) shows the suburban-level loop and track fan.

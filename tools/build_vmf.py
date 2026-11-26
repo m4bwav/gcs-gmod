@@ -457,15 +457,20 @@ def lower_level(W, ents):
     # the edge and a small brass-topped lower information booth in the middle.
     W(box(DIN_X0, -DIN_Y, Z - WALL, DIN_X1, DIN_Y, Z, TEX_FLOOR))
     W(box(DIN_X0, -DIN_Y, -WALL - 16, DIN_X1, DIN_Y, -WALL, TEX_COFFER))
-    for s in (-1, 1):
-        ya, yb = sorted((s*DIN_Y, s*(DIN_Y + WALL)))
-        W(box(DIN_X0 - WALL, ya, Z - WALL, DIN_X1 + WALL, yb, 0, TEX_CREAM))
+    W(box(DIN_X0 - WALL, -DIN_Y - WALL, Z - WALL, DIN_X1 + WALL, -DIN_Y, 0, TEX_CREAM))
+    ned = [DIN_X0 - WALL] + [e for gx, _ in LGATES for e in (gx - GATE_W//2, gx + GATE_W//2)] + [DIN_X1 + WALL]
+    for j in range(0, len(ned), 2):
+        W(box(ned[j], DIN_Y, Z - WALL, ned[j + 1], DIN_Y + WALL, 0, TEX_CREAM))
+    for gx, _ in LGATES:
+        W(box(gx - GATE_W//2, DIN_Y, LC, gx + GATE_W//2, DIN_Y + WALL, 0, TEX_CREAM))
     for y0, y1 in ((-DIN_Y, -COR_Y), (COR_Y, DIN_Y)):
         W(box(DIN_X1, y0, Z - WALL, DIN_X1 + WALL, y1, 0, TEX_CREAM))
     for y0, y1 in ((-DIN_Y, -COR_Y), (COR_Y, DIN_Y)):
         W(box(DIN_X0 - WALL, y0, Z - WALL, DIN_X0, y1, 0, TEX_CREAM))
     for x in range(DIN_X0 + 160, DIN_X1 - 100, 240):
         for s in (-1, 1):
+            if s > 0 and any(abs(x - gx) < 90 + GATE_W//2 + 16 for gx, _ in LGATES):
+                continue
             ya, yb = sorted((s*(DIN_Y - 4), s*DIN_Y))
             det(box(x - 90, ya, Z + 12, x + 90, yb, Z + 110, TEX_DOOR))
             det(box(x - 90, ya, Z + 120, x + 90, yb, Z + 140, TEX_GOLD))
@@ -870,16 +875,26 @@ CAR_Y0 = SH_Y0 + HEAD + 5 * FT
 CAR_L = 85 * FT
 
 
-def _sign_uv(gx):
+def _sign_uv(gx, zt=180):
     def uv(n):
         su, sv = 96/512, 24/128
         if n[1] < -0.5:
-            return "[1 0 0 %g] %g" % (-(gx - 48)/su, su), "[0 0 -1 %g] %g" % (180/sv, sv)
+            return "[1 0 0 %g] %g" % (-(gx - 48)/su, su), "[0 0 -1 %g] %g" % (zt/sv, sv)
     return uv
 
 
 for _gx, _n in GATES:
     FACEUV["gcs/track%d" % _n] = _sign_uv(_gx)
+
+# Lower-level track platforms (chamber 1 of the 60-session chain). Two gates in the dining
+# concourse's north wall open on sloped passages (1:5) down 8 ft to a second shed under the
+# upper one: same platform plan, lower and darker, ceiling just under the upper ballast pits.
+LGATES = ((-480, 108), (480, 112))
+LZ = LOW_Z - 8 * FT                        # lower platform top, -360
+LC = -PIT - WALL - 16                      # lower ceiling underside, -128
+LSH_Y0 = DIN_Y + WALL + 40 * FT            # lower shed south face
+for _gx, _n in LGATES:
+    FACEUV["gcs/track%d" % _n] = _sign_uv(_gx, LC + 28)
 
 
 def platforms(W, ents):
@@ -981,6 +996,69 @@ def platforms(W, ents):
         det(box(-190, y - 100, 146, -182, y + 100, 150, "gcs/fluor"))
         ents.append(ent("light", (-186, y, 120), _light="235 240 255 18"))
     ents.append(ent("func_brush", solids="".join(decor), targetname="plat_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
+def lower_tracks(W, ents):
+    decor = []
+    det = decor.append
+    T_TILE, T_EDGE, T_DARK, T_STEEL = "gcs/plat_tile", "gcs/plat_edge", "gcs/shed_dark", "gcs/steel"
+    Y0, Y1, Z0 = LSH_Y0, SH_Y1, LZ
+    W(box(-SH_X - WALL, Y0 - WALL, LC, SH_X + WALL, Y1 + WALL, LC + 16, T_DARK))
+    W(box(-SH_X - WALL, Y0, Z0 - PIT - WALL, -SH_X, Y1, LC, T_DARK))
+    W(box(SH_X, Y0, Z0 - PIT - WALL, SH_X + WALL, Y1, LC, T_DARK))
+    W(box(-SH_X - WALL, Y1, Z0 - PIT - WALL, SH_X + WALL, Y1 + WALL, LC, T_DARK))
+    W(box(-SH_X, Y0, Z0 - PIT - WALL, SH_X, Y0 + HEAD, Z0, T_TILE))
+    for x0, x1 in PLATS:
+        W(box(x0, Y0 + HEAD, Z0 - PIT - WALL, x1, Y1, Z0, T_TILE))
+    for x0, x1 in PITS:
+        W(box(x0, Y0 + HEAD, Z0 - PIT - WALL, x1, Y1, Z0 - PIT, "gcs/ballast"))
+    edges = [-SH_X - WALL] + [e for gx, _ in LGATES for e in (gx - GATE_W//2, gx + GATE_W//2)] + [SH_X + WALL]
+    for j in range(0, len(edges), 2):
+        W(box(edges[j], Y0 - WALL, Z0 - PIT - WALL, edges[j + 1], Y0, LC, T_DARK))
+    # Sloped passages from the dining concourse, cream walls, flat ceiling.
+    for gx, n in LGATES:
+        g0, g1 = gx - GATE_W//2, gx + GATE_W//2
+        W(xprism(ccw([(DIN_Y, LOW_Z), (Y0, Z0), (Y0, Z0 - WALL), (DIN_Y, LOW_Z - WALL)]), g0, g1, TEX_LOWF))
+        W(box(g0, DIN_Y + WALL, LC, g1, Y0 - WALL, LC + 16, TEX_CREAM))
+        for a, b in ((g0 - WALL, g0), (g1, g1 + WALL)):
+            W(box(a, DIN_Y + WALL, Z0 - WALL, b, Y0 - WALL, LC + 16, TEX_CREAM))
+        ents.append(ent("light", (gx, (DIN_Y + Y0)//2, LC - 24), _light="255 215 160 22"))
+        det(box(g0 - 10, DIN_Y - 4, LOW_Z, g0, DIN_Y, LC + 10, TEX_GOLD))
+        det(box(g1, DIN_Y - 4, LOW_Z, g1 + 10, DIN_Y, LC + 10, TEX_GOLD))
+        det(box(gx - 48, DIN_Y - 3, LC + 4, gx + 48, DIN_Y, LC + 28, "gcs/track%d" % n))
+        sy = Y0 + HEAD + 2 * FT
+        det(box(gx - 48, sy, Z0 + 156, gx + 48, sy + 3, Z0 + 180, "gcs/track%d" % n))
+        det(box(gx - 2, sy, Z0 + 180, gx + 2, sy + 3, LC, T_STEEL))
+    # Pit-end rails, bumpers, rails, yellow edges.
+    for x0, x1 in PITS:
+        y = Y0 + HEAD
+        det(box(x0, y - 2, Z0 + 40, x1, y + 2, Z0 + 44, TEX_GOLD))
+        for x in range(x0 + 4, x1, 96):
+            det(box(x - 1, y - 1, Z0, x + 1, y + 1, Z0 + 40, TEX_GOLD))
+    for t in TRACKS:
+        det(box(t - 40, Y0 + HEAD, Z0 - PIT, t + 40, Y0 + HEAD + 24, Z0 - 12, T_STEEL))
+        for r in (-30, 26):
+            det(box(t + r, Y0 + HEAD + 24, Z0 - PIT, t + r + 4, Y1, Z0 - PIT + 6, T_STEEL))
+    for x0, x1 in PLATS:
+        det(box(x0, Y0 + HEAD, Z0, x0 + 24, Y1, Z0 + 1, T_EDGE))
+        det(box(x1 - 24, Y0 + HEAD, Z0, x1, Y1, Z0 + 1, T_EDGE))
+    # Riveted columns in rows along the platforms and between tracks, low beams, a single
+    # fluorescent strip down each platform; dimmer and warmer than the upper shed.
+    H = LC - Z0
+    for y in range(Y0 + 30 * FT, Y1, 30 * FT):
+        det(box(-SH_X, y - 8, LC - 20, SH_X, y + 8, LC, T_STEEL))
+        for cx, z0 in ((-660, Z0), (0, Z0), (660, Z0), (-330, Z0 - PIT), (330, Z0 - PIT)):
+            det(box(cx - 10, y - 10, z0, cx + 10, y + 10, LC - 20, T_STEEL))
+    for x0, x1 in PLATS:
+        cx = (x0 + x1) // 2
+        det(box(cx - 4, Y0 + HEAD, LC - 28, cx + 4, Y1, LC - 22, "gcs/fluor"))
+        for y in range(Y0 + HEAD + 15 * FT, Y1, 40 * FT):
+            ents.append(ent("light", (cx, y, LC - 40), _light="230 235 250 35"))
+        ents.append(ent("env_cubemap", (cx, Y0 + 60 * FT, Z0 + 64)))
+    # A closed car standing on track 474.
+    det(box(414, Y0 + HEAD + 10 * FT, Z0 - PIT + 8, 534, Y0 + HEAD + 10 * FT + CAR_L, Z0 + 150, "gcs/train"))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="low_decor", Solidity="2",
                     disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
@@ -1089,7 +1167,7 @@ def build():
     O = 256
     X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, PY0 - 2*WALL - 128, SH_Y1+WALL+64, SKYZ+WALL+64
     X0, X1 = min(X0, EX0 - 2*WALL - 128), max(X1, EX1 + 2*WALL + 128)
-    ZB = LOW_Z - 2*WALL - 64
+    ZB = LZ - PIT - 2*WALL - 64
     W(box(X0, Y0, ZB, X1, Y1, ZB+64, NODRAW))
     W(box(X0, Y0, Z1, X1, Y1, Z1+64, NODRAW))
     W(box(X0, Y0-64, ZB, X1, Y0, Z1+64, NODRAW))
@@ -1118,6 +1196,7 @@ def build():
         W(box(gx - GATE_W//2, HY, GATE_H, gx + GATE_W//2, HY+WALL, SPRING, TEX_WALL))
     W(box(BD0, HY, BD_H, BD1, HY+WALL, SPRING, TEX_WALL))
     platforms(W, ents)
+    lower_tracks(W, ents)
     biltmore(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
