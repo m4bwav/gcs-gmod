@@ -109,3 +109,4 @@
 - 2026-11-26: session 19: Graybar painted vaults (gcs/gb_mural, tools/make_mural.py), texture only, 52,035 verts. A tile drawn in plan and mapped top-down per bay (FACEUV) puts its diagonals on a groin vault's groins with no per-face UV work.
 - 2026-11-26: session 20: Madison white panels and slat ceilings (tools/make_madison.py), texture only, 52,035 verts. A full compile of this map takes well under a minute of vvis/vrad here.
 - 2026-11-26: session 21: Madison terrazzo floor and departure screens, release 0.17.0 (52,091 verts). Python open(p,'w') on Windows writes CRLF into LF files: pass newline set to LF, or strip CR with sed before committing.
+- 2026-11-26: session 22: Lexington Passage blade sign (gcs/lex_sign, Arial Bold via PIL ImageFont, not the 5x7 font), 52,127 verts. Next: Market and Campbell textures.
