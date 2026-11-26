@@ -334,6 +334,54 @@ def lex_shop(name, seed):
     save(img, name)
 
 
+def mk_display():
+    # Grand Central Market bow window: lit market stalls behind the glass, tiered crates of
+    # fruit and vegetables, bread on racks, cheese wheels, a striped awning at the top.
+    # 1024 px = the 316 u window run, 512 px = 108 u (z 24..132).
+    rnd = random.Random(5)
+    W, H = 1024, 512
+    img = Image.new("RGB", (W, H))
+    d = ImageDraw.Draw(img)
+    for y in range(H):
+        t = y / H
+        d.line([(0, y), (W, y)], fill=(int(250 - 60*t), int(230 - 70*t), int(190 - 80*t)))
+    for i in range(0, W, 64):                           # awning stripes
+        d.rectangle([i, 0, i + 31, 70], fill=(40, 90, 60))
+        d.rectangle([i + 32, 0, i + 63, 70], fill=(235, 225, 200))
+    for i in range(0, W, 32):
+        d.pieslice([i, 54, i + 32, 86], 0, 180, fill=(40, 90, 60) if i % 64 == 0 else (235, 225, 200))
+    stalls = [(0, 260, "fruit"), (260, 520, "bread"), (520, 760, "fruit"), (760, 1024, "cheese")]
+    for a, b, kind in stalls:
+        d.rectangle([a + 6, 100, b - 6, 140], fill=(60, 45, 35))  # stall sign board
+        d.rectangle([a + 14, 108, b - 14, 132], fill=(200, 170, 90))
+        for r, y in enumerate((230, 330, 440)):          # three tiers
+            d.rectangle([a + 10, y, b - 10, y + 14], fill=(120, 85, 50))
+            x = a + 14
+            while x < b - 40:
+                w = rnd.randint(40, 60)
+                if kind == "fruit":
+                    d.rectangle([x, y - 10, x + w, y], fill=(150, 110, 60))
+                    c = rnd.choice([(200, 40, 30), (240, 170, 30), (90, 150, 40), (230, 210, 60),
+                                    (120, 40, 90), (240, 120, 40)])
+                    for k in range(w // 12):
+                        for j in range(2):
+                            cx, cy = x + 6 + k * 12, y - 16 - j * 10
+                            d.ellipse([cx - 6, cy - 6, cx + 6, cy + 6], fill=c)
+                elif kind == "bread":
+                    for k in range(w // 20):
+                        cx = x + 10 + k * 20
+                        d.ellipse([cx - 10, y - 18, cx + 10, y], fill=(190, 130, 60))
+                        d.line([(cx - 5, y - 12), (cx + 5, y - 8)], fill=(230, 190, 120), width=2)
+                else:
+                    d.ellipse([x, y - 30, x + w, y], fill=(240, 205, 100))
+                    d.rectangle([x, y - 15, x + w, y], fill=(225, 185, 80))
+                x += w + rnd.randint(4, 10)
+    for k in range(10):                                 # faint reflections
+        x = rnd.randint(0, W)
+        d.line([(x, H), (x + 120, 90)], fill=(255, 245, 230), width=2)
+    save(img, "mk_display")
+
+
 def gb_kiosk():
     # Graybar Passage newsstand kiosk: lit glass over racks of magazines, bronze frame and
     # counter. 512 px = 120 u wide, 512 px = 96 u high (kiosk wall).
@@ -381,3 +429,4 @@ lex_sign()
 lex_shop("lex_shop_n", 11)
 lex_shop("lex_shop_s", 23)
 gb_kiosk()
+mk_display()
