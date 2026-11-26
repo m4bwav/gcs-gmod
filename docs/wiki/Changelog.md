@@ -1,3 +1,8 @@
+## 0.17.1 (2026-11-26)
+- Lexington Passage: navy blade sign.
+- The Campbell: new surfaces (wood, panelled ceiling).
+- Grand Central Market: gold door sign, and the Root Chandelier (a model of silver branching roots with crystal drops) in the dome.
+
 ## 0.17.0 (2026-11-26)
 - Biltmore Room: split-flap lettering on the arrivals board.
 - Graybar Passage: painted vaults (pale sky, gold ribs on the groins, star wreaths).

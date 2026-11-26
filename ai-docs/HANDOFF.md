@@ -1,11 +1,11 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.17.0 released 2026-11-26: detail pass, Biltmore board, Graybar vaults, Madison; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 24)
+Status: in progress (0.17.1 released 2026-11-26: Market Root Chandelier and door sign, Campbell surfaces, Lexington blade sign; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
+Updated: 2026-11-26 (session 25)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 24 of 60 (started 2026-11-25)
-- Budget 2026-11-26 (vbspinfo, 0.17.0): unique verts 52,271/65,536 (79.8%, session 23), faces 48.0%, planes 23.7%, BSP 82.3 MB of 150 MB.
+- Chain: session 25 of 60 (started 2026-11-25)
+- Budget 2026-11-26 (vbspinfo, 0.17.1): unique verts 52,271/65,536 (79.8%), faces 31,471 (48.0%), planes 23.7%, BSP 85.6 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
 
@@ -158,7 +158,8 @@ Updated: 2026-11-26 (session 24)
 - Detail (session 23, 2026-11-26, not released yet): the Campbell matched to refs/photos/GCT_Campbell_1/_3: tools/make_campbell.py writes gcs/cb_wall (warm tan sandstone, was cream marble), cb_wain (dark oak wainscot, 4 ft run round the room with a gold cap, stops at the east arch), cb_ceil (painted ceiling panels, was shed_dark), cb_leaded (amber leaded window, UnlitGeneric). Grand Central Market: GRAND CENTRAL MARKET bronze band (make_board.py plaque(p=5), gcs/mk_sign, FACEUV _mk_sign_uv) in the passage door head, reads from both sides (lettering on 1 u skins: a band textured all round showed it mirrored on its underside). New camera mk_sign. 52,271 verts, BSP 82.3 MB.
 - Detail (session 24, 2026-11-26, not released yet): Grand Central Market dome now hangs the Root Chandelier (make_models.py root_chandelier: seeded branching root tubes in pale silver with crystal drops, ~25 ft across; material models/gcs/root), replacing the vh_chandelier copy. compare.py has a `chambers` set (Market, Lexington, Graybar, Madison refs) and skips shots that are missing. Full compile clean, 52,271 verts (model: no brush cost), BSP 85.6 MB, 146 fps, shots/20261126-1331 (compare_chambers.jpg).
 - ALL NINE CHAMBERS from the prompt are in (lower tracks, Lexington + Graybar, Market, Campbell, Transit store, One Vanderbilt link, Madison, Track 61, Hyatt).
-- NEXT (session 25): release 0.17.1 shipping sessions 22-24 (package.sh), then detail lane: Market door is a plain opening vs the real arched glazed storefront with gold lettering; run compare.py chambers with lex_in, gb_in, md_conc, md_esc shots; run compare.py against refs per area and fix the worst mismatch first (Lexington blade sign done session 22; check other door sills for the same dado-across-opening bug; Market and Campbell textures; Madison: colour-coded light (floor, panels, screens done); Graybar vaults done session 19; arrivals-board lettering done session 18); conversion pass 2 if verts pass 55k; Then the detail lane (compare.py) and conversion pass 2 (stair steps and balustrades, plat_decor, bilt_decor).
+- Release 0.17.1 (session 25, 2026-11-26): ships sessions 22-24 (Lexington blade sign, Campbell surfaces, Market door sign, Root Chandelier). Full compile clean, 52,271 verts, BSP 85.6 MB; nav reused from 08:13 (no floor changes since). Workshop updated with mk_dome preview; tag v0.17.1.
+- NEXT (session 26): detail lane: Market door is a plain opening vs the real arched glazed storefront with gold lettering; run compare.py chambers with lex_in, gb_in, md_conc, md_esc shots; run compare.py against refs per area and fix the worst mismatch first (Lexington blade sign done session 22; check other door sills for the same dado-across-opening bug; Market and Campbell textures; Madison: colour-coded light (floor, panels, screens done); Graybar vaults done session 19; arrivals-board lettering done session 18); conversion pass 2 if verts pass 55k; Then the detail lane (compare.py) and conversion pass 2 (stair steps and balustrades, plat_decor, bilt_decor).
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
