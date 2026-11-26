@@ -233,6 +233,64 @@ def track_signs():
         save(img, "track%d" % n)
 
 
+def text(d, word, cx, y, p, c):
+    x0 = cx - (len(word)*6 - 1)*p/2
+    for k, ch in enumerate(word):
+        if ch == " ":
+            continue
+        for cy, bits in enumerate(int(b, 16) for b in FONT[ch].split()):
+            for bx in range(5):
+                if bits >> (4 - bx) & 1:
+                    px, py = x0 + (k*6 + bx)*p, y + cy*p
+                    d.rectangle([px, py, px + p - 1, py + p - 1], fill=c)
+
+
+def plat_ads():
+    # Backlit platform posters (photo: Grand_Central_Station_tracks): 256x384 px drawn, stretched to 256x512 (power of two) = 72x144 u,
+    # invented campaigns (no real brands), a thin steel frame, bright as a light box.
+    ads = [("ad_hudson", ((40, 90, 150), (240, 180, 90)), ["HUDSON", "VALLEY"], "BY TRAIN", "hills"),
+           ("ad_show", ((90, 20, 60), (230, 60, 90)), ["TONIGHT", "ON 42"], "BROADWAY", "stars"),
+           ("ad_coffee", ((60, 35, 20), (200, 140, 70)), ["MORNING", "BLEND"], "TRACK SIDE", "cup"),
+           ("ad_city", ((20, 30, 50), (90, 170, 210)), ["NEW YORK", "AFTER 8"], "LATE TRAINS", "towers")]
+    rnd = random.Random(9)
+    for name, (c0, c1), head, tag, art in ads:
+        W, H = 256, 384
+        img = Image.new("RGB", (W, H))
+        d = ImageDraw.Draw(img)
+        for y in range(H):
+            t = y / H
+            d.line([(0, y), (W, y)], fill=tuple(int(a + (b - a)*t) for a, b in zip(c0, c1)))
+        if art == "hills":
+            d.ellipse([150, 60, 210, 120], fill=(250, 230, 160))
+            d.polygon([(0, 300), (70, 200), (140, 260), (200, 190), (256, 250), (256, 384), (0, 384)], fill=(40, 90, 50))
+            d.polygon([(0, 340), (100, 270), (256, 320), (256, 384), (0, 384)], fill=(60, 120, 60))
+        elif art == "stars":
+            for _ in range(40):
+                x, y = rnd.randint(0, W), rnd.randint(0, 220)
+                d.ellipse([x - 2, y - 2, x + 2, y + 2], fill=(255, 230, 160))
+            d.polygon([(128, 140), (60, 330), (196, 330)], fill=(250, 200, 80))
+        elif art == "cup":
+            d.rectangle([78, 190, 178, 300], fill=(240, 235, 225))
+            d.ellipse([170, 210, 210, 260], outline=(240, 235, 225), width=8)
+            for k in range(3):
+                d.line([(100 + k*25, 180), (110 + k*25, 140)], fill=(240, 235, 225), width=4)
+        else:
+            for x in range(0, W, 28):
+                h = rnd.randint(110, 240)
+                d.rectangle([x, H - h - 40, x + 22, H - 40], fill=(15, 20, 35))
+                for wy in range(H - h - 30, H - 50, 14):
+                    if rnd.random() < 0.5:
+                        d.rectangle([x + 5, wy, x + 9, wy + 5], fill=(250, 220, 130))
+        for i, word in enumerate(head):
+            text(d, word, W/2, 24 + i*44, 5, (255, 255, 250))
+        d.rectangle([0, H - 40, W, H], fill=(15, 15, 18))
+        text(d, tag, W/2, H - 30, 3, (240, 220, 120))
+        d.rectangle([0, 0, W-1, H-1], outline=(120, 122, 125), width=6)
+        save(img.resize((256, 512), Image.LANCZOS), name)
+        with open("src/materials/gcs/%s.vmt" % name, "w", newline="") as f:
+            f.write('"UnlitGeneric"\n{\n\t"$basetexture" "gcs/%s"\n\t"$surfaceprop" "glass"\n}\n' % name)
+
+
 def train_steel():
     # 512x512 stainless car side: brushed grey with fine horizontal streaks, riveted vertical
     # panel seams every 128 px (photo: Metro_North_M7a_Rainbow_Heart_Sticker_Grand_Central).
@@ -518,3 +576,4 @@ lex_shop("din_shop_s", 41, 768, 90)
 gb_kiosk()
 mk_display()
 ob_door()
+plat_ads()

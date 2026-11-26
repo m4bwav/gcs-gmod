@@ -1039,6 +1039,33 @@ def platforms(W, ents):
         for y in range(SH_Y0 + HEAD + 15 * FT, SH_Y1, 40 * FT):
             ents.append(ent("light", (cx, y, SH_H - 50), _light="235 240 255 45"))
         ents.append(ent("env_cubemap", (cx, SH_Y0 + 60 * FT, 64)))
+    # Backlit ad boxes (make_board.py plat_ads, 72x144 u, tiling from world 0 so every box
+    # starts on a multiple of 72): on both side walls between the beams, and one hanging over
+    # each platform head facing the gates, as in Grand_Central_Station_tracks.jpg.
+    ADS = ("gcs/ad_hudson", "gcs/ad_show", "gcs/ad_coffee", "gcs/ad_city")
+    for a in ADS:
+        FACEUV[a] = lambda n, s=72 / 256: (
+            ("[0 %d 0 0] %g" % (1 if n[0] > 0 else -1, s), "[0 0 -1 %g] %g" % (192 / s, s))
+            if abs(n[0]) > 0.5 else
+            ("[%d 0 0 0] %g" % (-1 if n[1] > 0 else 1, s), "[0 0 -1 %g] %g" % (192 / s, s)))
+    k = 0
+    for y in beams:
+        y0 = (y + 15 * FT - 36) // 72 * 72
+        if y0 + 72 > SH_Y1 - 20:
+            continue
+        for sx in (-1, 1):
+            xw = sx * SH_X
+            det(box(min(xw, xw - sx * 6), y0 - 4, 44, max(xw, xw - sx * 6), y0 + 76, 196, T_STEEL))
+            det(box(min(xw - sx * 6, xw - sx * 8), y0, 48, max(xw - sx * 6, xw - sx * 8), y0 + 72, 192,
+                    ADS[k % 4]))
+            k += 1
+    for (x0, x1), a in zip(PLATS, ADS[1:]):
+        bx = (x0 + 48) // 72 * 72 + 72                       # off-centre, clear of the sign
+        hy = SH_Y0 + HEAD + 6 * FT
+        det(box(bx - 4, hy - 1, 44, bx + 76, hy + 9, 196, T_STEEL))
+        det(box(bx, hy - 3, 48, bx + 72, hy + 11, 192, a))
+        for ox in (8, 64):
+            det(box(bx + ox - 1, hy + 3, 196, bx + ox + 1, hy + 5, SH_H, T_STEEL))
     for y in range(SH_Y0 + 40 * FT, SH_Y1, 80 * FT):
         for x in (-330, 330, -900, 900):
             ents.append(ent("light", (x, y, SH_H - 60), _light="200 210 230 12"))

@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "gcs/ad_city"
+	"$surfaceprop" "glass"
+}
