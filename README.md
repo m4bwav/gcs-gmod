@@ -65,6 +65,7 @@ Drawn from the map source by `tools/make_map.py`: walls and fixtures at chest he
 - Vanderbilt Hall (0.3.0): through a passage in the west bay of the south wall, a 200 x 64 ft hall with a coffered ceiling and gilded cornice, tall grilled windows, five tiered chandeliers, a pedimented east doorway and the 42nd Street vestibule with lit brass doors
 - Track platforms (0.4.0): three brass-framed gates (Tracks 29, 30, 31) in the north wall lead to a low train shed with three island platforms in rose tile with yellow edges, riveted steel columns, fluorescent strips, a brass railing round the track ends, and three Metro-North cars; one stands open to walk through
 - The exterior (0.5.0): out through the Vanderbilt vestibule onto 42nd Street: the facade with three great arched windows between paired columns, oval windows, the GRAND CENTRAL TERMINAL attic inscription, the clock under the Glory of Commerce group, a balustraded terrace with a stair, the Park Avenue Viaduct across the street, office towers, the MetLife tower behind, and open sky
+- Transit Museum store (0.12.0): through Vanderbilt Hall's east door, a small shop with a vintage car's cab end.
 - The Campbell (0.11.0): up on the west balcony, the old office-turned-bar with painted beams, a leaded window and a fireplace.
 - Grand Central Market (0.10.0): off Lexington Passage, a long market hall with counters down both sides under a chandelier dome.
 - Graybar Passage (0.9.0): north off Lexington Passage, groin-vaulted bays under brass chandeliers.

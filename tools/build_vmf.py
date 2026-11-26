@@ -515,6 +515,12 @@ VH_Y0 = VH_Y1 - 64 * FT                   # hall 200 x 64 ft (estimate)
 VH_X0, VH_X1 = -130 * FT, 70 * FT
 VH_H = 56 * FT
 VS_X0, VS_X1, VS_D = -40 * FT, -20 * FT, 24 * FT   # 42nd Street vestibule
+# Transit Museum store (chamber 5): through Vanderbilt Hall's pedimented east door (stand-in for
+# the real Shuttle Passage location; flagged). 40 x 30 ft, 14 ft: shelves, glass cases, a counter
+# and the cab end of a vintage subway car on display.
+TM_X0 = VH_X1 + WALL
+TM_X1 = TM_X0 + 40 * FT
+TM_H = 14 * FT
 
 
 def vanderbilt(W, ents):
@@ -525,7 +531,12 @@ def vanderbilt(W, ents):
     W(box(VH_X0, VH_Y0, -WALL, VH_X1, VH_Y1, 0, TEX_FLOOR))
     W(box(VH_X0, VH_Y0, VH_H, VH_X1, VH_Y1, VH_H + WALL, TEX_COFFER))
     W(box(VH_X0 - WALL, VH_Y0 - WALL, -WALL, VH_X0, VH_Y1 + WALL, VH_H + WALL, TEX_WALL))
-    W(box(VH_X1, VH_Y0 - WALL, -WALL, VH_X1 + WALL, VH_Y1 + WALL, VH_H + WALL, TEX_WALL))
+    # East wall, cut by the doorway to the Transit Museum store (TM_*).
+    _cy = (VH_Y0 + VH_Y1) // 2
+    W(box(VH_X1, VH_Y0 - WALL, -WALL, VH_X1 + WALL, _cy - 6 * FT, VH_H + WALL, TEX_WALL))
+    W(box(VH_X1, _cy + 6 * FT, -WALL, VH_X1 + WALL, VH_Y1 + WALL, VH_H + WALL, TEX_WALL))
+    W(box(VH_X1, _cy - 6 * FT, 11 * FT, VH_X1 + WALL, _cy + 6 * FT, VH_H + WALL, TEX_WALL))
+    W(box(VH_X1, _cy - 6 * FT, -WALL, VH_X1 + WALL, _cy + 6 * FT, 0, TEX_FLOOR))
     for (y0, y1), (g0, g1, gh) in (((VH_Y1, VH_Y1 + WALL), (VH_PX0, VH_PX1, VH_PH)),
                                    ((VH_Y0 - WALL, VH_Y0), (VS_X0, VS_X1, 20 * FT))):
         W(box(VH_X0, y0, -WALL, g0, y1, VH_H, TEX_WALL))
@@ -602,7 +613,6 @@ def vanderbilt(W, ents):
             det(box(ga, b[0], b[1], gb, b[2], b[3], TEX_GOLD))
     # East end: a doorway with a carved cream pediment, lit glass doors behind.
     ex, cy = VH_X1, (VH_Y0 + VH_Y1) // 2
-    det(box(ex - 10, cy - 6 * FT, 0, ex - 6, cy + 6 * FT, 11 * FT, TEX_DOOR))
     for y0, y1 in ((cy - 8 * FT, cy - 6 * FT), (cy + 6 * FT, cy + 8 * FT)):
         det(box(ex - 24, y0, 0, ex - 6, y1, 13 * FT, TEX_CREAM))
     det(box(ex - 30, cy - 9 * FT, 13 * FT, ex - 6, cy + 9 * FT, 15 * FT, TEX_CREAM))
@@ -1292,6 +1302,42 @@ def campbell(W, ents):
                     disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
+def transit_store(W, ents):
+    decor = []
+    det = decor.append
+    cy = (VH_Y0 + VH_Y1) // 2
+    x0, x1, y0, y1, h = TM_X0, TM_X1, cy - 15 * FT, cy + 15 * FT, TM_H
+    W(box(x0, y0 - WALL, -WALL, x1 + WALL, y1 + WALL, 0, "gcs/floor_low"))
+    W(box(x0, y0 - WALL, h, x1 + WALL, y1 + WALL, h + WALL, TEX_COFFER))
+    W(box(x0, y0 - WALL, 0, x1 + WALL, y0, h, TEX_CREAM))
+    W(box(x0, y1, 0, x1 + WALL, y1 + WALL, h, TEX_CREAM))
+    W(box(x1, y0, 0, x1 + WALL, y1, h, TEX_CREAM))
+    # Wall shelving (oak frame, lit backs), glass cases, the counter by the door.
+    for a, b in ((y0, y0 + 24), (y1 - 24, y1)):
+        for sx in range(x0 + 40, x1 - 60, 130):
+            det(box(sx, a, 0, sx + 110, b, 96, TEX_WOOD))
+            ga, gb = (b - 2, b) if a == y0 else (a, a + 2)
+            det(box(sx + 6, ga, 10, sx + 104, gb, 90, TEX_DOOR))
+    for k, yy in enumerate((cy - 90, cy + 90)):
+        det(box(x0 + 140, yy - 30, 0, x0 + 260, yy + 30, 34, TEX_WOOD))
+        det(box(x0 + 140, yy - 30, 34, x0 + 260, yy + 30, 52, "gcs/booth_glass"))
+    det(box(x0 + 40, y1 - 140, 0, x0 + 64, y1 - 40, 42, TEX_WOOD))
+    det(box(x0 + 36, y1 - 144, 42, x0 + 68, y1 - 36, 46, TEX_CREAM))
+    # Vintage car cab end on the east wall: steel body, dark windows, a red route sign.
+    det(box(x1 - 60, cy - 60, 0, x1, cy + 60, 150, "gcs/train"))
+    det(box(x1 - 62, cy - 50, 70, x1 - 60, cy - 6, 110, "gcs/vh_glass"))
+    det(box(x1 - 62, cy + 6, 70, x1 - 60, cy + 50, 110, "gcs/vh_glass"))
+    det(box(x1 - 62, cy - 20, 120, x1 - 60, cy + 20, 140, TEX_DOOR))
+    for x in range(x0 + 80, x1, 160):
+        for yy in (cy - 90, cy + 90):
+            det(box(x - 8, yy - 8, h - 14, x + 8, yy + 8, h, TEX_BULB))
+            ents.append(ent("light", (x, yy, h - 40), _light="255 225 190 80"))
+    ents.append(ent("env_cubemap", ((x0 + x1)//2, cy, 72)))
+    # func_detail, not func_brush: as a func_brush (tm_decor) it compiled and cast shadows but
+    # never drew in game (2026-11-26, cause not found). Small enough for the world model.
+    ents.append(ent("func_detail", solids="".join(decor)))
+
+
 # The Biltmore Room (area 6 extra): the old arrival room off the concourse's northwest corner
 # (photos: Biltmore_Room_at_Grand_Central_Terminal, MTA_Reopens_Biltmore_Room, the schedule board
 # and clock). Cream marble walls and floor, a beamed and coffered ceiling, dentil cornice, the
@@ -1431,6 +1477,7 @@ def build():
     graybar(W, ents)
     market(W, ents)
     campbell(W, ents)
+    transit_store(W, ents)
     biltmore(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.

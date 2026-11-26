@@ -94,3 +94,4 @@
 - 2026-11-25: chain session 5: Graybar Passage, 0.9.0 (51,435 verts). The 0.9.0 commit also holds the Market draft (market(), not in the 0.9.0 gma).
 - 2026-11-25: chain session 6: Grand Central Market, 0.10.0 (52,461 verts). Rule: never compile while nav.sh or shots.sh has GMod running (compile copies the BSP into garrysmod/maps).
 - 2026-11-25: chain session 7: the Campbell, 0.11.0 (52,843 verts).
+- 2026-11-26: chain session 8: Transit Museum store, 0.12.0. A func_brush decor entity (tm_decor) compiled and cast shadows but never drew; func_detail fixed it. Cause unknown.
