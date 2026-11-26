@@ -187,7 +187,7 @@ def ent(cls, origin=None, solids="", **kv):
 
 
 
-def arcade_bay(W, ents, sgn, xin, xout, c, z0, r, top, roof, ramp=False):
+def arcade_bay(W, ents, sgn, xin, xout, c, z0, r, top, roof, ramp=False, open_=False):
     """One arched opening in an end wall (z0..top, half-width r) and its lit passage.
     ramp: the opening leads to a ramp down to the dining concourse (lower_level builds it)."""
     xa, xb = sorted((xin, xout))
@@ -215,6 +215,12 @@ def arcade_bay(W, ents, sgn, xin, xout, c, z0, r, top, roof, ramp=False):
         corner = (c + r, top) if i < 4 else (c - r, top)
         ents.append(ent("func_detail", solids=xprism(ccw([corner, arc[i], arc[i+1]]), pa, pb, TEX_CREAM)))
     xback = xout + sgn*ARCH_D
+    lx = sgn*(HX + WALL + ARCH_D//2)
+    if open_:   # the back opens on a passage built elsewhere (lex_passage)
+        ents.append(ent("func_detail", solids=box(lx - 1, c - 1, top - 30, lx + 1, c + 1, top, TEX_GOLD)))
+        ents.append(ent("func_detail", solids=box(lx - 8, c - 8, top - 44, lx + 8, c + 8, top - 30, TEX_BULB)))
+        ents.append(ent("light", (lx, c, top - 60), _light="255 205 140 40"))
+        return
     ba, bb = sorted((xback, xback + sgn*WALL))
     W(box(ba, c - r - WALL, z0 - WALL, bb, c + r + WALL, top + WALL, TEX_DOOR))
     # Brass door frames: posts, transom bar and a header panel over the doors.
@@ -321,15 +327,15 @@ def lower_level(W, ents):
     # west side opens on a corridor back to the dining concourse, as the west ramps do.
     ex0, ex1, ey = -RAMP_XF, -RAMP_XF + EAST_D, RAMP_Y1
     W(box(ex0, -ey, Z - WALL, ex1, ey, Z, TEX_LOWF))
-    W(box(ex0, -ey, Z + H, ex1, ey, Z + H + WALL, TEX_COFFER))
-    W(box(ex1, -ey, Z - WALL, ex1 + WALL, ey, Z + H + WALL, TEX_CREAM))
+    W(box(ex0, -ey, Z + H, ex1, ey, 0, TEX_COFFER))     # tops at 0: Lexington Passage runs above
+    W(box(ex1, -ey, Z - WALL, ex1 + WALL, ey, 0, TEX_CREAM))
     for s in (-1, 1):
         ya, yb = sorted((s*ey, s*(ey + WALL)))
-        W(box(ex0, ya, Z - WALL, ex1 + WALL, yb, Z + H + WALL, TEX_CREAM))
+        W(box(ex0, ya, Z - WALL, ex1 + WALL, yb, 0, TEX_CREAM))
         # Wall between ramp foot and corridor, up to the landing ceiling.
         wa, wb = sorted((s*COR_Y, s*RAMP_Y0))
-        W(box(ex0 - WALL, wa, Z + H - 8, ex0, wb, Z + H + WALL, TEX_CREAM))
-    W(box(ex0 - WALL, -COR_Y, Z + H - 8, ex0, COR_Y, Z + H + WALL, TEX_CREAM))
+        W(box(ex0 - WALL, wa, Z + H - 8, ex0, wb, 0, TEX_CREAM))
+    W(box(ex0 - WALL, -COR_Y, Z + H - 8, ex0, COR_Y, 0, TEX_CREAM))
     # Brass-framed lit doors to the platforms (sealed until area 4) on the landing's east wall.
     for c in (-200, 0, 200):
         det(box(ex1 - 6, c - 60, Z, ex1, c + 60, Z + 132, TEX_GRID))
@@ -1032,8 +1038,8 @@ def lower_tracks(W, ents):
         det(box(g1, DIN_Y - 4, LOW_Z, g1 + 10, DIN_Y, LC + 10, TEX_GOLD))
         det(box(gx - 48, DIN_Y - 3, LC + 4, gx + 48, DIN_Y, LC + 28, "gcs/track%d" % n))
         sy = Y0 + HEAD + 2 * FT
-        det(box(gx - 48, sy, Z0 + 156, gx + 48, sy + 3, Z0 + 180, "gcs/track%d" % n))
-        det(box(gx - 2, sy, Z0 + 180, gx + 2, sy + 3, LC, T_STEEL))
+        det(box(gx - 48, sy, LC - 44, gx + 48, sy + 3, LC - 20, "gcs/track%d" % n))
+        det(box(gx - 2, sy, LC - 20, gx + 2, sy + 3, LC, T_STEEL))
     # Pit-end rails, bumpers, rails, yellow edges.
     for x0, x1 in PITS:
         y = Y0 + HEAD
@@ -1063,6 +1069,57 @@ def lower_tracks(W, ents):
     # A closed car standing on track 474.
     det(box(414, Y0 + HEAD + 10 * FT, Z0 - PIT + 8, 534, Y0 + HEAD + 10 * FT + CAR_L, Z0 + 150, "gcs/train"))
     ents.append(ent("func_brush", solids="".join(decor), targetname="low_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
+# Lexington Passage (chamber 2): the east floor arch's back opens on a shop-lined passage
+# running east under the Graybar Building to lit Lexington Avenue doors. Width and height are
+# estimates from photos (refs/SOURCES.md); shop fronts are lit glass under a dark sign band.
+LEX_X0 = HX + WALL + ARCH_D                # 1906, back of the east centre arch
+LEX_X1 = LEX_X0 + 200 * FT
+LEX_Y = 13 * FT                            # half-width 156: clear of the east ramp walls (|y| 168)
+LEX_H = 22 * FT
+
+
+def lex_passage(W, ents):
+    decor = []
+    det = decor.append
+    x0, x1, y, h = LEX_X0, LEX_X1, LEX_Y, LEX_H
+    r, top = ARCH_W // 2, ARCH_TOP
+    W(box(x0, -y - WALL, -WALL, x1, y + WALL, 0, TEX_FLOOR))
+    W(box(x0, -y - WALL, h, x1 + WALL, y + WALL, h + WALL, TEX_COFFER))
+    for s in (-1, 1):
+        ya, yb = sorted((s*y, s*(y + WALL)))
+        W(box(x0, ya, 0, x1, yb, h, TEX_CREAM))
+    # West wall round the arch opening, east wall with the Lexington doors.
+    W(box(x0, -y, 0, x0 + WALL, -r, h, TEX_CREAM))
+    W(box(x0, r, 0, x0 + WALL, y, h, TEX_CREAM))
+    W(box(x0, -r, top, x0 + WALL, r, h, TEX_CREAM))
+    W(box(x1, -y - WALL, -WALL, x1 + WALL, y + WALL, h, TEX_CREAM))
+    for c in (-84, 0, 84):
+        det(box(x1 - 6, c - 36, 0, x1, c + 36, 120, TEX_GRID))
+        det(box(x1 - 8, c - 30, 0, x1 - 6, c + 30, 114, TEX_DOOR))
+    det(box(x1 - 6, -130, 132, x1, 130, 168, TEX_GOLD))
+    # Dado, cornice, shop fronts (lit glass, brass frames, dark sign band) along both walls.
+    for s in (-1, 1):
+        ya, yb = sorted((s*(y - 4), s*y))
+        det(box(x0 + WALL, ya, 0, x1, yb, 36, TEX_TRIM))
+        ca, cb = sorted((s*(y - 10), s*y))
+        det(box(x0 + WALL, ca, h - 20, x1, cb, h - 8, TEX_GOLD))
+        for k in range(6):
+            sx = x0 + WALL + 160 + k*380
+            ga, gb = sorted((s*(y - 6), s*(y - 4)))
+            det(box(sx, ga, 12, sx + 220, gb, 120, TEX_DOOR))
+            fa, fb = sorted((s*(y - 8), s*(y - 4)))
+            det(box(sx - 8, fa, 0, sx, fb, 150, TEX_GOLD))
+            det(box(sx + 220, fa, 0, sx + 228, fb, 150, TEX_GOLD))
+            det(box(sx - 8, fa, 120, sx + 228, fb, 150, "gcs/shed_dark"))
+    for x in range(x0 + 300, x1 - 100, 480):
+        det(box(x - 1, -1, h - 30, x + 1, 1, h, TEX_GOLD))
+        det(box(x - 10, -10, h - 50, x + 10, 10, h - 30, TEX_BULB))
+        ents.append(ent("light", (x, 0, h - 70), _light="255 210 160 45"))
+    ents.append(ent("env_cubemap", ((x0 + x1)//2, 0, 72)))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="lex_decor", Solidity="2",
                     disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
@@ -1170,7 +1227,7 @@ def build():
     # Sealed outer hull (nodraw) so the interior can't leak while geometry is rough.
     O = 256
     X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, PY0 - 2*WALL - 128, SH_Y1+WALL+64, SKYZ+WALL+64
-    X0, X1 = min(X0, EX0 - 2*WALL - 128), max(X1, EX1 + 2*WALL + 128)
+    X0, X1 = min(X0, EX0 - 2*WALL - 128), max(X1, EX1 + 2*WALL + 128, LEX_X1 + WALL + 128)
     ZB = LZ - PIT - 2*WALL - 64
     W(box(X0, Y0, ZB, X1, Y1, ZB+64, NODRAW))
     W(box(X0, Y0, Z1, X1, Y1, Z1+64, NODRAW))
@@ -1201,6 +1258,7 @@ def build():
     W(box(BD0, HY, BD_H, BD1, HY+WALL, SPRING, TEX_WALL))
     platforms(W, ents)
     lower_tracks(W, ents)
+    lex_passage(W, ents)
     biltmore(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
@@ -1245,7 +1303,7 @@ def build():
                 W(box(xa, aedges[j], z0, xb, aedges[j+1], top, TEX_WALL))
             for c in centres:
                 arcade_bay(W, ents, sgn, xin, xout, c, z0, aw//2, top, min(WALL, BALC_Z - ARCH_TOP) if z0 == 0 else WALL,
-                           ramp=(z0 == 0 and c != 0))
+                           ramp=(z0 == 0 and c != 0), open_=(z0 == 0 and c == 0 and sgn > 0))
         W(box(xa, -HY, win_zc, xb, HY, CROWN+WALL, TEX_WALL))
         W(box(xa, -HY, win_z1, xb, -win_w//2, win_zc, TEX_WALL))
         W(box(xa, win_w//2, win_z1, xb, HY, win_zc, TEX_WALL))

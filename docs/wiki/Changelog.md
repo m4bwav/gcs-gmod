@@ -1,3 +1,8 @@
+## 0.8.0 (2026-11-25)
+- Lexington Passage: the doors behind the concourse's east floor arch now open on a 200 ft shop-lined passage (coffered ceiling, brass pendant lamps, lit shop fronts) ending at the Lexington Avenue doors.
+- Lower-level tracks detail: platforms raised for a 15 ft ceiling, gate lamps. 0.7.0 had shipped the earlier blockout build by mistake (a failed vbsp run went unnoticed); 0.8.0 carries the real one.
+- Nav mesh regenerated.
+
 ## 0.7.0 (2026-11-25)
 - Lower-level track platforms: TRACK 108 and TRACK 112 gates in the dining concourse's north wall lead down short sloped passages to a second train shed under the upper one, with three island platforms, six tracks, riveted columns, a low steel ceiling and a waiting car.
 - Nav mesh regenerated to cover the new level.
