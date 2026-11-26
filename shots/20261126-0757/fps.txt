@@ -1,0 +1,4 @@
+lex_in          147 fps
+gb_in           146 fps
+mk_door         146 fps
+hy_door         146 fps
