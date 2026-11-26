@@ -1079,6 +1079,25 @@ LEX_X0 = HX + WALL + ARCH_D                # 1906, back of the east centre arch
 LEX_X1 = LEX_X0 + 200 * FT
 LEX_Y = 13 * FT                            # half-width 156: clear of the east ramp walls (|y| 168)
 LEX_H = 22 * FT
+# Graybar Passage (chamber 2b): north off Lexington Passage, five groin-vaulted bays (photos:
+# GCT_Graybar_Passage, Graybar_Passage_mural): cream vaults, buff walls, a brass chandelier per
+# bay, glass kiosks down the middle, lit doors at the north end. 32 ft wide, crown 28 ft (estimates).
+GB_X0, GB_X1 = LEX_X0 + 84 * FT, LEX_X0 + 116 * FT
+GB_Y0 = LEX_Y + WALL
+GB_BAY, GB_N = 32 * FT, 5
+GB_Y1 = GB_Y0 + GB_N * GB_BAY
+GB_ZS, GB_RISE = 16 * FT, 12 * FT
+GB_TOP = GB_ZS + GB_RISE + 16
+# Grand Central Market (chamber 3): a long hall south of Lexington Passage, entered by a door at
+# its west end, Lexington Avenue doors at the east (photos: GCT_Market*, Grand_Central_Mart_Lex_Av).
+# 240 x 28 ft, 15 ft flat ceiling rising to a shallow centre dome with a chandelier, open counters
+# along both walls, drum pendants down the aisle (estimates). Starts east of the east ramp soffits.
+MK_X0, MK_X1 = 2720, 2720 + 240 * FT
+MK_Y1 = -LEX_Y - WALL                      # north face, Lexington Passage's south wall
+MK_Y0 = MK_Y1 - 28 * FT
+MK_H, MK_DH = 15 * FT, 21 * FT
+MK_DX0, MK_DX1 = (MK_X0 + MK_X1)//2 - 14 * FT, (MK_X0 + MK_X1)//2 + 14 * FT
+MK_D0, MK_D1, MK_DOOR_H = MK_X0 + 40, MK_X0 + 40 + 12 * FT, 14 * FT
 
 
 def lex_passage(W, ents):
@@ -1088,9 +1107,12 @@ def lex_passage(W, ents):
     r, top = ARCH_W // 2, ARCH_TOP
     W(box(x0, -y - WALL, -WALL, x1, y + WALL, 0, TEX_FLOOR))
     W(box(x0, -y - WALL, h, x1 + WALL, y + WALL, h + WALL, TEX_COFFER))
-    for s in (-1, 1):
-        ya, yb = sorted((s*y, s*(y + WALL)))
-        W(box(x0, ya, 0, x1, yb, h, TEX_CREAM))
+    W(box(x0, -y - WALL, 0, MK_D0, -y, h, TEX_CREAM))      # south wall, cut by the Market door
+    W(box(MK_D1, -y - WALL, 0, x1, -y, h, TEX_CREAM))
+    W(box(MK_D0, -y - WALL, MK_DOOR_H, MK_D1, -y, h, TEX_CREAM))
+    W(box(x0, y, 0, GB_X0, y + WALL, h, TEX_CREAM))        # north wall, cut by Graybar Passage
+    W(box(GB_X1, y, 0, x1, y + WALL, h, TEX_CREAM))
+    W(box(GB_X0, y, h, GB_X1, y + WALL, GB_TOP + WALL, TEX_CREAM))
     # West wall round the arch opening, east wall with the Lexington doors.
     W(box(x0, -y, 0, x0 + WALL, -r, h, TEX_CREAM))
     W(box(x0, r, 0, x0 + WALL, y, h, TEX_CREAM))
@@ -1108,6 +1130,10 @@ def lex_passage(W, ents):
         det(box(x0 + WALL, ca, h - 20, x1, cb, h - 8, TEX_GOLD))
         for k in range(6):
             sx = x0 + WALL + 160 + k*380
+            if s > 0 and sx < GB_X1 + 16 and sx + 228 > GB_X0 - 16:
+                continue
+            if s < 0 and sx < MK_D1 + 16 and sx + 228 > MK_D0 - 16:
+                continue
             ga, gb = sorted((s*(y - 6), s*(y - 4)))
             det(box(sx, ga, 12, sx + 220, gb, 120, TEX_DOOR))
             fa, fb = sorted((s*(y - 8), s*(y - 4)))
@@ -1120,6 +1146,89 @@ def lex_passage(W, ents):
         ents.append(ent("light", (x, 0, h - 70), _light="255 210 160 45"))
     ents.append(ent("env_cubemap", ((x0 + x1)//2, 0, 72)))
     ents.append(ent("func_brush", solids="".join(decor), targetname="lex_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
+def graybar(W, ents):
+    decor = []
+    det = decor.append
+    x0, x1, y0, y1 = GB_X0, GB_X1, GB_Y0, GB_Y1
+    cx = (x0 + x1) // 2
+    W(box(x0 - WALL, y0, -WALL, x1 + WALL, y1 + WALL, 0, TEX_FLOOR))
+    for a, b in ((x0 - WALL, x0), (x1, x1 + WALL)):
+        W(box(a, y0, 0, b, y1, GB_TOP + WALL, TEX_CREAM))
+    W(box(x0 - WALL, y1, 0, x1 + WALL, y1 + WALL, GB_TOP + WALL, TEX_CREAM))
+    for k in range(GB_N):
+        groin(W, x0, x1, y0 + k*GB_BAY, y0 + (k + 1)*GB_BAY, GB_ZS, GB_RISE, TEX_CREAM, n=6)
+    # Pilasters with gold capitals between bays, dado, lit doors north.
+    for k in range(GB_N + 1):
+        yk = y0 + k*GB_BAY
+        for a, b in ((x0, x0 + 12), (x1 - 12, x1)):
+            det(box(a, yk - 14, 0, b, yk + 14, GB_ZS - 16, TEX_CREAM))
+            det(box(a, yk - 18, GB_ZS - 16, b, yk + 18, GB_ZS, TEX_GOLD))
+    for a, b in ((x0, x0 + 4), (x1 - 4, x1)):
+        det(box(a, y0, 0, b, y1, 36, TEX_TRIM))
+    for c in (cx - 84, cx, cx + 84):
+        det(box(c - 36, y1 - 6, 0, c + 36, y1, 120, TEX_GRID))
+        det(box(c - 30, y1 - 8, 0, c + 30, y1 - 6, 114, TEX_DOOR))
+    # Glass kiosks in bays 2 and 4, a chandelier and a light per bay.
+    for k in (1, 3):
+        yc = y0 + k*GB_BAY + GB_BAY//2
+        det(box(cx - 48, yc - 60, 0, cx + 48, yc + 60, 96, "gcs/booth_glass"))
+        det(box(cx - 52, yc - 64, 96, cx + 52, yc + 64, 108, TEX_GOLD))
+    for k in range(GB_N):
+        yc = y0 + k*GB_BAY + GB_BAY//2
+        ents.append(ent("prop_static", (cx, yc, GB_ZS + GB_RISE - 110), model="models/gcs/vh_chandelier.mdl",
+                        angles="0 0 0", solid="0", disableshadows="1"))
+        ents.append(ent("light", (cx, yc, GB_ZS + 10), _light="255 210 160 55"))
+    ents.append(ent("env_cubemap", (cx, (y0 + y1)//2, 72)))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="gb_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
+def market(W, ents):
+    decor = []
+    det = decor.append
+    x0, x1, y0, y1, h, dh = MK_X0, MK_X1, MK_Y0, MK_Y1, MK_H, MK_DH
+    W(box(x0 - WALL, y0 - WALL, -WALL, x1 + WALL, y1, 0, "gcs/floor_low"))
+    W(box(x0 - WALL, y0 - WALL, 0, x1 + WALL, y0, dh + WALL, TEX_CREAM))
+    W(box(x0 - WALL, y0, 0, x0, y1, dh + WALL, TEX_CREAM))
+    W(box(LEX_X1 + WALL, y1, -WALL, x1 + WALL, y1 + WALL, dh + WALL, TEX_CREAM))
+    W(box(x1, y0, 0, x1 + WALL, y1, dh + WALL, TEX_CREAM))
+    # Flat ceiling either side of the dome bay, dome ceiling higher, step walls closing the gap.
+    W(box(x0, y0, h, MK_DX0, y1, h + WALL, TEX_COFFER))
+    W(box(MK_DX1, y0, h, x1, y1, h + WALL, TEX_COFFER))
+    W(box(MK_DX0, y0, dh, MK_DX1, y1, dh + WALL, TEX_COFFER))
+    W(box(MK_DX0 - WALL, y0, h + WALL, MK_DX0, y1, dh, TEX_CREAM))
+    W(box(MK_DX1, y0, h + WALL, MK_DX1 + WALL, y1, dh, TEX_CREAM))
+    W(box(x0, y1, h, x1, y1 + WALL, dh + WALL, TEX_CREAM))      # over the shared wall's top
+    # Door from the passage: gold frame both faces; street doors east.
+    for yy in (y1, -LEX_Y - 4):
+        det(box(MK_D0 - 10, yy, 0, MK_D0, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
+        det(box(MK_D1, yy, 0, MK_D1 + 10, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
+        det(box(MK_D0, yy, MK_DOOR_H, MK_D1, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
+    yc = (y0 + y1)//2
+    for c in (yc - 84, yc, yc + 84):
+        det(box(x1 - 6, c - 36, 0, x1, c + 36, 120, TEX_GRID))
+        det(box(x1 - 8, c - 30, 0, x1 - 6, c + 30, 114, TEX_DOOR))
+    # Counters along both walls (oak front, cream top) in runs with gaps, lit glass cases on them.
+    for a, b in ((y0, y0 + 40), (y1 - 40, y1)):
+        for cx in range(x0 + 120, x1 - 200, 300):
+            det(box(cx, a, 0, cx + 240, b, 40, TEX_WOOD))
+            det(box(cx - 2, a - 2 if a == y0 else a - 2, 40, cx + 242, b, 44, TEX_CREAM))
+            det(box(cx + 20, a + 8, 44, cx + 220, b - 8, 62, "gcs/booth_glass"))
+    # Drum pendants down the aisle and lights; chandelier under the dome.
+    for x in range(x0 + 150, x1 - 100, 240):
+        if MK_DX0 - 60 < x < MK_DX1 + 60:
+            continue
+        det(box(x - 1, yc - 1, h - 24, x + 1, yc + 1, h, TEX_GOLD))
+        det(box(x - 12, yc - 12, h - 40, x + 12, yc + 12, h - 24, TEX_BULB))
+        ents.append(ent("light", (x, yc, h - 60), _light="255 200 140 35"))
+    cxd = (MK_DX0 + MK_DX1)//2
+    ents.append(ent("prop_static", (cxd, yc, dh - 90), model="models/gcs/vh_chandelier.mdl", angles="0 0 0", solid="0", disableshadows="1"))
+    ents.append(ent("light", (cxd, yc, h - 20), _light="255 210 160 60"))
+    ents.append(ent("env_cubemap", (cxd, yc, 72)))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="mk_decor", Solidity="2",
                     disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
@@ -1227,7 +1336,7 @@ def build():
     # Sealed outer hull (nodraw) so the interior can't leak while geometry is rough.
     O = 256
     X0, X1, Y0, Y1, Z1 = OB_X0 - 128, -RAMP_XF + EAST_D + 2*WALL + 128, PY0 - 2*WALL - 128, SH_Y1+WALL+64, SKYZ+WALL+64
-    X0, X1 = min(X0, EX0 - 2*WALL - 128), max(X1, EX1 + 2*WALL + 128, LEX_X1 + WALL + 128)
+    X0, X1 = min(X0, EX0 - 2*WALL - 128), max(X1, EX1 + 2*WALL + 128, LEX_X1 + WALL + 128, MK_X1 + WALL + 128)
     ZB = LZ - PIT - 2*WALL - 64
     W(box(X0, Y0, ZB, X1, Y1, ZB+64, NODRAW))
     W(box(X0, Y0, Z1, X1, Y1, Z1+64, NODRAW))
@@ -1259,6 +1368,8 @@ def build():
     platforms(W, ents)
     lower_tracks(W, ents)
     lex_passage(W, ents)
+    graybar(W, ents)
+    market(W, ents)
     biltmore(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.

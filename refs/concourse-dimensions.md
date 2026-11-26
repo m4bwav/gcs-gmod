@@ -33,3 +33,11 @@ Secondary sources only; no HABS section or LPC report read yet (next: HABS NY-54
 - Entry: segmental (flattened) marble arch with incised black serif "LEXINGTON PASSAGE" above; pink-beige polished marble cladding on walls and pilasters, beige stone tile floor in large rectangles.
 - Shop fronts: continuous glazing in bronze/dark metal frames set flush in the marble, a dark louvre/vent band above each front; tenants' own signs inside the glass; navy blade sign with gold GCT monogram + "LEXINGTON PASSAGE" at the mouth; red EXIT boxes.
 - No Commons photo of the Lexington Ave street entrance itself was found.
+
+## Grand Central Market, blockout facts (2026-11-25, estimates from photos)
+- Hall: one long straight corridor-hall running east-west along the north side of 43rd St between the Lexington Passage end of the terminal and Lexington Ave; estimate about 240 ft (73 m) long, 25-30 ft (7.5-9 m) wide, flat ceiling about 14-16 ft (4.3-5 m), rising at the centre into a shallow oval dome/cove holding the bronze-and-crystal "tree root" chandelier (GCT_Market_2.jpg).
+- West (terminal) entrance: off the passage level behind a marble balustrade landing; a segmental-arched opening in buff marble with bronze-framed glass doors, carved serif "GRAND CENTRAL MARKET" above, and a hanging green dome-shaped sign with gold lettering (GCT_Market.jpg).
+- Street entrance: on Lexington Ave/43rd St, a tall glazed bay of bronze-framed doors under a marquee canopy with "GRAND CENTRAL MARKET" lettering, set in grey limestone with a bronze eagle above; navy vertical "MARKET" banners (GCT_Market_3.jpg).
+- Layout: a single central aisle about 8-10 ft wide; open vendor counters line both long walls (refrigerated glass display cases, wood-faced counters, shelves behind), no partitions between stalls (Grand_Central_Mart_Lex_Av_food_corridor_jeh.jpg).
+- Materials and colours: cream/buff plaster ceiling and soffits, buff marble at entrances, floor large beige-and-tan checker tile; warm yellow-amber light, vendor colours accents (blue, green, red).
+- Lamps: rows of hanging brushed-metal drum/cone pendants down the aisle, track spotlights along both counter lines, the chandelier at the dome; signage is per-vendor oval hanging signs (Zaro's, Ceriello) and painted boards.
