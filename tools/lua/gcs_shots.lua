@@ -47,6 +47,7 @@ local CAMS = {
   { "low_head",     Vector(-60, 1240, -248), Angle(0, 100, 0) },
   { "lex_door",     Vector(1350, 0, 64), Angle(0, 0, 0) },
   { "lex_in",       Vector(2000, -60, 64), Angle(0, 5, 0) },
+  { "lex_sign",     Vector(1790, 0, 64), Angle(-14, 0, 0) },
   { "lex_end",      Vector(4200, 60, 64), Angle(0, 182, 0) },
   { "gb_in",        Vector(3106, 100, 64), Angle(-8, 90, 0) },
   { "gb_up",        Vector(3106, 900, 64), Angle(-22, 90, 0) },

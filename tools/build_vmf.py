@@ -1222,6 +1222,16 @@ def lex_passage(W, ents):
         ents.append(ent("prop_static", (x, 0, h), model="models/gcs/lex_pendant.mdl",
                         angles="0 0 0", solid="0", disableshadows="1"))
         ents.append(ent("light", (x, 0, h - 70), _light="255 210 160 45"))
+    # Navy blade sign (make_board.py lex_sign) hung across the passage near the west end on two
+    # brass rods; both faces read left to right.
+    bx, bw, bz1 = x0 + 120, 60, h - 30
+    bz0 = bz1 - 30
+    FACEUV["gcs/lex_sign"] = lambda n, su=2 * bw / 1024, sv=30 / 256: (
+        ("[0 %d 0 %g] %g" % (-1 if n[0] < 0 else 1, bw / su, su), "[0 0 -1 %g] %g" % (bz1 / sv, sv))
+        if abs(n[0]) > 0.5 else None)
+    det(box(bx - 2, -bw, bz0, bx + 2, bw, bz1, "gcs/lex_sign"))
+    for yy in (-bw + 10, bw - 12):
+        det(box(bx - 1, yy, bz1, bx + 1, yy + 2, h, TEX_GOLD))
     ents.append(ent("env_cubemap", ((x0 + x1)//2, 0, 72)))
     ents.append(ent("func_brush", solids="".join(decor), targetname="lex_decor", Solidity="2",
                     disableshadows="1", vrad_brush_cast_shadows="1"))

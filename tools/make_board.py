@@ -271,6 +271,29 @@ def endwin_grid():
     print("wrote src/materials/gcs/endwin_grid.vtf")
 
 
+def lex_sign():
+    # Navy hanging blade sign at the west end of Lexington Passage (refs: Lexington_Passage.jpg):
+    # white Helvetica-like LEXINGTON AV, an arrow, and green 4 5 6 subway bullets. 512x128,
+    # mapped over a 120x30 u slab (build_vmf lexington), both faces read left to right.
+    from PIL import ImageFont
+    W, H = 1024, 256
+    img = Image.new("RGB", (W, H), (18, 34, 78))
+    d = ImageDraw.Draw(img)
+    d.rectangle([0, 0, W - 1, H - 1], outline=(230, 232, 236), width=6)
+    f = ImageFont.truetype("arialbd.ttf", 92)
+    fb = ImageFont.truetype("arialbd.ttf", 64)
+    d.text((40, 30), "Lexington Av", font=f, fill=(245, 245, 245))
+    d.text((40, 150), "Subway", font=fb, fill=(245, 245, 245))
+    for k, n in enumerate("456"):
+        cx, cy = 330 + k*96, 186
+        d.ellipse([cx - 40, cy - 40, cx + 40, cy + 40], fill=(0, 147, 60))
+        d.text((cx, cy), n, font=fb, fill=(255, 255, 255), anchor="mm")
+    ax, ay = 860, 186                                  # arrow pointing ahead (east)
+    d.polygon([(ax - 70, ay - 14), (ax + 10, ay - 14), (ax + 10, ay - 40), (ax + 70, ay),
+               (ax + 10, ay + 40), (ax + 10, ay + 14), (ax - 70, ay + 14)], fill=(245, 245, 245))
+    save(img, "lex_sign")
+
+
 board()
 flag()
 tickets()
@@ -281,3 +304,4 @@ train_steel()
 endwin_grid()
 arrivals()
 md_screen()
+lex_sign()
