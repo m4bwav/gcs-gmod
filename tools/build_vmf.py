@@ -1116,7 +1116,7 @@ MD_HEAD = 16 * FT
 LEX_X0 = HX + WALL + ARCH_D                # 1906, back of the east centre arch
 LEX_X1 = LEX_X0 + 200 * FT
 LEX_Y = 13 * FT                            # half-width 156: clear of the east ramp walls (|y| 168)
-LEX_H = 22 * FT
+LEX_H = 15 * FT                             # photos show 10-12 ft; 15 clears the 14 ft side doors
 # Graybar Passage (chamber 2b): north off Lexington Passage, five groin-vaulted bays (photos:
 # GCT_Graybar_Passage, Graybar_Passage_mural): cream vaults, buff walls, a brass chandelier per
 # bay, glass kiosks down the middle, lit doors at the north end. 32 ft wide, crown 28 ft (estimates).
@@ -1183,7 +1183,7 @@ def lex_passage(W, ents):
     # West wall round the arch opening, east wall with the Lexington doors.
     W(box(x0, -y, 0, x0 + WALL, -r, h, TEX_CREAM))
     W(box(x0, r, 0, x0 + WALL, y, h, TEX_CREAM))
-    W(box(x0, -r, top, x0 + WALL, r, h, TEX_CREAM))
+    W(box(x0, -r, min(top, h), x0 + WALL, r, max(top, h) + WALL, TEX_CREAM))   # header: passage lower than the arch
     W(box(x1, -y - WALL, -WALL, x1 + WALL, y + WALL, h, TEX_CREAM))
     for c in (-84, 0, 84):
         det(box(x1 - 6, c - 36, 0, x1, c + 36, 120, TEX_GRID))
@@ -1192,7 +1192,11 @@ def lex_passage(W, ents):
     # Dado, cornice, shop fronts (lit glass, brass frames, dark sign band) along both walls.
     for s in (-1, 1):
         ya, yb = sorted((s*(y - 4), s*y))
-        det(box(x0 + WALL, ya, 0, x1, yb, 36, TEX_TRIM))
+        gaps = ((GB_X0, GB_X1), (HY_D0, HY_D1)) if s > 0 else ((MK_D0 - 10, MK_D1 + 10),)
+        xa = x0 + WALL
+        for g0, g1 in gaps + ((x1, x1),):                  # dado stops at each door opening
+            det(box(xa, ya, 0, g0, yb, 36, TEX_TRIM))
+            xa = g1
         ca, cb = sorted((s*(y - 10), s*y))
         det(box(x0 + WALL, ca, h - 20, x1, cb, h - 8, TEX_GOLD))
         for k in range(6):

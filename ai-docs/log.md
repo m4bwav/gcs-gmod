@@ -100,3 +100,4 @@
 - 2026-11-26: chain session 10: conversion pass 1, end-window mullions to an alpha-tested grid texture: 53,494 -> 49,902 verts.
 - 2026-11-26: chain session 12: Track 61, 0.15.0 (51,613 verts).
 - 2026-11-26: chain session 13: Grand Hyatt entrance, 0.16.0 (51,937 verts). All nine chambers in. Second func_brush that compiled and cast shadows but never drew (hy_decor); func_detail again.
+- 2026-11-26: chain session 14: Lexington ceiling lowered to 15 ft; found the passage dado ran across three door openings as a 36 u ledge (blocked the Market and Hyatt doors); split it. Not released.
