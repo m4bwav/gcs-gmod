@@ -175,6 +175,9 @@ Updated: 2026-11-24
 - Light levels (after surfaces v2): window point 45, window spot 225, booth 25, chandeliers 18, vault fill 10.
 - An installed addon prints "FNaF SB Models are Pre-Caching" over the shots; harmless, ignore or launch with addons off later.
 
+## Grants
+- 2026-11-26, Mark: run this chain unattended with chainwright's chain_loop.py: --max-hours 24, no spending cap (the 5-hour usage window is the cap: wait out a limit with --limit-wait 1800 --max-waits 12), --max-sessions = sessions left. Started 2026-11-26 after session 13; log at ai-docs/notes/chain-loop.log.
+
 ## Waiting on Mark
 - Nothing.
 
