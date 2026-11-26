@@ -1,3 +1,9 @@
+## 0.18.0 (2026-11-26)
+- Grand Central Market: the passage door is a storefront with lit glass side lights.
+- Lexington Passage: shop windows with lit shelves of goods.
+- Grand Central Madison: mosaic mural, a lit shop band, floor bands, and stainless escalators with dark steps and black handrails.
+- Graybar Passage: grey ashlar stone walls, lit kiosks with bronze roofs.
+
 ## 0.17.1 (2026-11-26)
 - Lexington Passage: navy blade sign.
 - The Campbell: new surfaces (wood, panelled ceiling).

@@ -86,6 +86,10 @@ materials/gcs/gb_mural.vmt
 D:\m4bwa\Claude\Projects\Ai\gcs-gmod-s29\src\materials\gcs\gb_mural.vmt
 materials/gcs/gb_mural.vtf
 D:\m4bwa\Claude\Projects\Ai\gcs-gmod-s29\src\materials\gcs\gb_mural.vtf
+materials/gcs/gb_stone.vmt
+D:\m4bwa\Claude\Projects\Ai\gcs-gmod-s29\src\materials\gcs\gb_stone.vmt
+materials/gcs/gb_stone.vtf
+D:\m4bwa\Claude\Projects\Ai\gcs-gmod-s29\src\materials\gcs\gb_stone.vtf
 materials/gcs/gold.vmt
 D:\m4bwa\Claude\Projects\Ai\gcs-gmod-s29\src\materials\gcs\gold.vmt
 materials/gcs/guastavino.vmt

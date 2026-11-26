@@ -1260,8 +1260,8 @@ def graybar(W, ents):
     cx = (x0 + x1) // 2
     W(box(x0 - WALL, y0, -WALL, x1 + WALL, y1 + WALL, 0, TEX_FLOOR))
     for a, b in ((x0 - WALL, x0), (x1, x1 + WALL)):
-        W(box(a, y0, 0, b, y1, GB_TOP + WALL, TEX_CREAM))
-    W(box(x0 - WALL, y1, 0, x1 + WALL, y1 + WALL, GB_TOP + WALL, TEX_CREAM))
+        W(box(a, y0, 0, b, y1, GB_TOP + WALL, "gcs/gb_stone"))
+    W(box(x0 - WALL, y1, 0, x1 + WALL, y1 + WALL, GB_TOP + WALL, "gcs/gb_stone"))
     # Painted vaults: gcs/gb_mural (tools/make_mural.py) is drawn in plan, one tile per bay,
     # so it maps top-down on every vault face with the tile's diagonals on the groins.
     sc = GB_BAY / 512
@@ -1279,11 +1279,12 @@ def graybar(W, ents):
     for c in (cx - 84, cx, cx + 84):
         det(box(c - 36, y1 - 6, 0, c + 36, y1, 120, TEX_GRID))
         det(box(c - 30, y1 - 8, 0, c + 30, y1 - 6, 114, TEX_DOOR))
-    # Glass kiosks in bays 2 and 4, a chandelier and a light per bay.
+    # Lit glass kiosks with bronze roofs in bays 2 and 4, a chandelier and a light per bay.
     for k in (1, 3):
         yc = y0 + k*GB_BAY + GB_BAY//2
         det(box(cx - 48, yc - 60, 0, cx + 48, yc + 60, 96, "gcs/booth_glass"))
-        det(box(cx - 52, yc - 64, 96, cx + 52, yc + 64, 108, TEX_GOLD))
+        det(box(cx - 52, yc - 64, 96, cx + 52, yc + 64, 108, "gcs/bronze"))
+        ents.append(ent("light", (cx, yc, 80), _light="255 220 170 30"))
     for k in range(GB_N):
         yc = y0 + k*GB_BAY + GB_BAY//2
         ents.append(ent("prop_static", (cx, yc, GB_ZS + GB_RISE - 110), model="models/gcs/vh_chandelier.mdl",
