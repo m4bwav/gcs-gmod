@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "gcs/mk_display"
+	"$surfaceprop" "glass"
+}

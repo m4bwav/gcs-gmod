@@ -1340,8 +1340,12 @@ def market(W, ents):
     # sill and head following it; a brass guard rail on the floor in front.
     n, bow = 8, 16
     arc = [(wx0 + (wx1 - wx0) * i // n, wy + round(bow * math.sin(math.pi * i / n))) for i in range(n + 1)]
+    # Goods behind the glass (make_board.py mk_display): 1024 px over the run, read from the
+    # passage (+y faces: -x to the right).
+    FACEUV["gcs/mk_display"] = lambda n, su=(wx1 - wx0) / 1024, sv=108 / 512: (
+        "[-1 0 0 %g] %g" % (wx1 / su, su), "[0 0 -1 %g] %g" % (132 / sv, sv))
     for (ax, ay), (bx, by) in zip(arc, arc[1:]):
-        det(prism(ccw([(ax, ay), (bx, by), (bx, by + 2), (ax, ay + 2)]), 24, 132, TEX_DOOR))
+        det(prism(ccw([(ax, ay), (bx, by), (bx, by + 2), (ax, ay + 2)]), 24, 132, "gcs/mk_display"))
         det(prism(ccw([(ax, ay + 2), (bx, by + 2), (bx, by + 3), (ax, ay + 3)]), 24, 132, "gcs/booth_glass"))
         det(prism(ccw([(ax, wy), (bx, wy), (bx, by + 6), (ax, ay + 6)]), 0, 24, TEX_WOOD))
         det(prism(ccw([(ax, wy), (bx, wy), (bx, by + 6), (ax, ay + 6)]), 132, 140, TEX_GOLD))
