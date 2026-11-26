@@ -7,7 +7,11 @@ python tools/build_vmf.py
 python tools/make_models.py
 mkdir -p "$G/garrysmod/materials/gcs"
 cp src/materials/gcs/* "$G/garrysmod/materials/gcs/"
-"$G/bin/vbsp.exe" -game "$G/garrysmod" src/gm_grand_central 2>&1 | tail -15
+# vbsp's exit code is lost in a pipe and it can fail while an old BSP stays on disk: remove it first
+# and stop when vbsp reports a fatal error.
+rm -f src/gm_grand_central.bsp
+"$G/bin/vbsp.exe" -game "$G/garrysmod" src/gm_grand_central > src/vbsp.log 2>&1; tail -15 src/vbsp.log
+if [ ! -f src/gm_grand_central.bsp ] || grep -q -i -E "bad normal|leaked|too many" src/vbsp.log; then echo "vbsp FAILED: see src/vbsp.log"; exit 1; fi
 "$G/bin/vvis.exe" -game "$G/garrysmod" ${FAST:+-fast} src/gm_grand_central 2>&1 | tail -4
 "$G/bin/vrad.exe" -game "$G/garrysmod" ${FAST:+-fast} -both src/gm_grand_central 2>&1 | tail -4
 : > src/packlist.txt

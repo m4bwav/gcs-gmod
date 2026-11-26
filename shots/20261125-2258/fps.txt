@@ -1,0 +1,6 @@
+east_land       147 fps
+low_head        143 fps
+lex_door        147 fps
+lex_in          146 fps
+lex_end         147 fps
+low_long        146 fps

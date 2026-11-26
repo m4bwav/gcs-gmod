@@ -10,3 +10,4 @@ ask/*/server.log
 build/
 src/modelsrc/
 src/*.nav
+src/vbsp.log

@@ -25,3 +25,11 @@ Secondary sources only; no HABS section or LPC report read yet (next: HABS NY-54
 - Ceiling about 12-15 ft (3.7-4.5 m) above platform: the upper track deck's steel frame, dark riveted girders and concrete, columns at roughly 15-20 ft spacing along the platform edges.
 - Lighting: continuous linear fluorescent/LED strips along the platform centre, plus hanging blue-and-white Metro-North track and departure signs; walls dark grey concrete, white-painted soffits near gates.
 - Plan: RailUS_GCT_lowerTracksPlan.jpg (Wilgus, PD) shows the suburban-level loop and track fan.
+
+## Lexington and Graybar passages, blockout facts (2026-11-25, approximate, from photos)
+- Graybar Passage: runs north-south off the east end of the main concourse toward the Graybar Building; about 30-35 ft (9-10.5 m) wide, crown roughly 25-30 ft; a run of cross-vaulted (groined) bays split by wide flattened-arch ribs springing from pilasters with carved capitals (GCT_Graybar_Passage.jpg). Ceiling cream plaster; the painted mural vaults are the "Graybar Passage mural" refs.
+- Graybar walls: buff Botticino-like marble/stone in ashlar courses; floor warm tan terrazzo/marble, polished. Lamps: brass-and-glass chandeliers hung on long rods, one per bay, plus a large pierced bronze ring fixture. Free-standing glass-box retail kiosks with metal canopies sit mid-floor; small brass "GRAYBAR" plaque sign.
+- Lexington Passage: runs east from the concourse level toward Lexington Ave (Passageway_to_Lexington_ave_lines.jpg); about 20-25 ft (6-7.5 m) wide, low flat ceiling about 10-12 ft with shallow coffer/beam bands and recessed downlights plus small brass-rimmed glass pendant domes.
+- Entry: segmental (flattened) marble arch with incised black serif "LEXINGTON PASSAGE" above; pink-beige polished marble cladding on walls and pilasters, beige stone tile floor in large rectangles.
+- Shop fronts: continuous glazing in bronze/dark metal frames set flush in the marble, a dark louvre/vent band above each front; tenants' own signs inside the glass; navy blade sign with gold GCT monogram + "LEXINGTON PASSAGE" at the mouth; red EXIT boxes.
+- No Commons photo of the Lexington Ave street entrance itself was found.
