@@ -1173,7 +1173,8 @@ MK_Y1 = -LEX_Y - WALL                      # north face, Lexington Passage's sou
 MK_Y0 = MK_Y1 - 28 * FT
 MK_H, MK_DH = 15 * FT, 21 * FT
 MK_DX0, MK_DX1 = (MK_X0 + MK_X1)//2 - 14 * FT, (MK_X0 + MK_X1)//2 + 14 * FT
-MK_D0, MK_D1, MK_DOOR_H = MK_X0 + 40, MK_X0 + 40 + 12 * FT, 14 * FT
+MK_D0, MK_D1, MK_DOOR_H = MK_X0 + 120, MK_X0 + 120 + 12 * FT, 14 * FT
+MK_SL = 5 * FT                             # storefront side light width
 
 
 def lex_passage(W, ents):
@@ -1204,7 +1205,7 @@ def lex_passage(W, ents):
     # Dado, cornice, shop fronts (lit glass, brass frames, dark sign band) along both walls.
     for s in (-1, 1):
         ya, yb = sorted((s*(y - 4), s*y))
-        gaps = ((GB_X0, GB_X1), (HY_D0, HY_D1)) if s > 0 else ((MK_D0 - 10, MK_D1 + 10),)
+        gaps = ((GB_X0, GB_X1), (HY_D0, HY_D1)) if s > 0 else ((MK_D0 - 20 - MK_SL, MK_D1 + 20 + MK_SL),)
         xa = x0 + WALL
         for g0, g1 in gaps + ((x1, x1),):                  # dado stops at each door opening
             det(box(xa, ya, 0, g0, yb, 36, TEX_TRIM))
@@ -1217,7 +1218,7 @@ def lex_passage(W, ents):
                 continue
             if s > 0 and sx < HY_D1 + 16 and sx + 228 > HY_D0 - 16:
                 continue
-            if s < 0 and sx < MK_D1 + 16 and sx + 228 > MK_D0 - 16:
+            if s < 0 and sx < MK_D1 + 36 + MK_SL and sx + 228 > MK_D0 - 36 - MK_SL:
                 continue
             ga, gb = sorted((s*(y - 6), s*(y - 4)))
             det(box(sx, ga, 12, sx + 220, gb, 120, TEX_DOOR))
@@ -1309,10 +1310,32 @@ def market(W, ents):
         det(box(MK_D0 - 10, yy, 0, MK_D0, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
         det(box(MK_D1, yy, 0, MK_D1 + 10, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
         det(box(MK_D0, yy, MK_DOOR_H, MK_D1, yy + 4, MK_DOOR_H + 10, TEX_GOLD))
+    # Storefront: lit glass side lights in gold frames either side of the door, both faces
+    # (the real entrance is a glazed shop front; the 15 ft ceilings leave no room for its arch).
+    for ga, gb, fa, fb in ((-LEX_Y + 4, -LEX_Y + 6, -LEX_Y, -LEX_Y + 8), (y1 - 6, y1 - 4, y1 - 8, y1)):
+        for sa, sb in ((MK_D0 - 10 - MK_SL, MK_D0 - 10), (MK_D1 + 10, MK_D1 + 10 + MK_SL)):
+            det(box(sa, ga, 14, sb, gb, 144, TEX_DOOR))
+            det(box(sa, fa, 0, sb, fb, 14, TEX_GOLD))
+            det(box(sa, fa, 144, sb, fb, 156, TEX_GOLD))
+            det(box(sa + MK_SL//2 - 2, fa, 14, sa + MK_SL//2 + 2, fb, 144, TEX_GOLD))
+            o = sa - 10 if sa < MK_D0 else sb
+            det(box(o, fa, 0, o + 10, fb, 156, TEX_GOLD))
     # Lettering on 1 u skins only, so the band's underside stays plain gold.
     det(box(MK_D0, y1 + 1, MK_DOOR_H - 20, MK_D1, -LEX_Y - 1, MK_DOOR_H, TEX_GOLD))
     for a in (y1, -LEX_Y - 1):
         det(box(MK_D0, a, MK_DOOR_H - 20, MK_D1, a + 1, MK_DOOR_H, "gcs/mk_sign"))
+    # Storefront east of the door on the passage face: lit display window, gold frame, two mullions
+    # (the west side is taken by the next shop front).
+    wy, wx0, wx1 = -LEX_Y, MK_D1 + 24, MK_D1 + 340
+    det(box(wx0, wy, 24, wx1, wy + 2, 132, TEX_DOOR))
+    det(box(wx0, wy + 2, 24, wx1, wy + 3, 132, "gcs/booth_glass"))
+    det(box(wx0 - 8, wy, 0, wx1 + 8, wy + 6, 24, TEX_WOOD))
+    det(box(wx0 - 8, wy, 132, wx1 + 8, wy + 6, 140, TEX_GOLD))
+    for fx in (wx0 - 8, wx0 + 101, wx0 + 210, wx1):
+        det(box(fx, wy, 24, fx + 8 if fx in (wx0 - 8, wx1) else fx + 4, wy + 6, 132, TEX_GOLD))
+    # Name band above it at a whole sign width from the door band, so _mk_sign_uv tiles into place.
+    det(box(MK_D0 + 288, wy, MK_DOOR_H - 20, MK_D0 + 432, wy + 4, MK_DOOR_H, TEX_GOLD))
+    det(box(MK_D0 + 288, wy + 4, MK_DOOR_H - 20, MK_D0 + 432, wy + 5, MK_DOOR_H, "gcs/mk_sign"))
     yc = (y0 + y1)//2
     for c in (yc - 84, yc, yc + 84):
         det(box(x1 - 6, c - 36, 0, x1, c + 36, 120, TEX_GRID))
