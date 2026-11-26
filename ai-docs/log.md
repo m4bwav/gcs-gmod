@@ -125,3 +125,4 @@
 - 2026-11-26 session 32: Market window curved glass bay + mk_rail brass rail model; 52,999 verts; shots/20261126-1513.
 - 2026-11-26: Session 33: Market bow window goods texture (mk_display). Clean full compile, 52,999 verts, BSP 99.5 MB, shots/20261126-1521.
 - 2026-11-26: Session 34: platform cars got an M7 side texture (train_side, one material per car); 52,873 verts, shots/20261126-1551. Driver-started session.
+- 2026-11-26: Session 35: release 0.18.1 (sessions 31-34). Full compile clean, 52,873 verts, BSP 100.5 MB; shots/20261126-1558; Workshop 3845077025 updated; tag v0.18.1.
