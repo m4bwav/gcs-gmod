@@ -140,3 +140,4 @@
 - 2026-11-26: session 46 released 0.18.4 (sessions 44-45) from the session 45 BSP; Workshop updated, tag v0.18.4. package.sh reads src/*.bsp/.nav, which a fresh worktree lacks: copy them from garrysmod/maps first.
 - 2026-11-26: session 47: lunette texture now one 512x256 RGBA per lunette (carved tympanum + low glass, alpha = selfillum mask); FACEUV lambdas take per-lunette offsets as default args. shots/20261126-1737.
 - 2026-11-26: session 48: wall_ashlar darkened to the photo colour (HONEY 176,152,118). Tonemap exposure min has no visible effect in shots: fix brightness in textures/lights.
+- 2026-11-26 session 49: floor_marble and cream_marble darkened toward photo samples; texture only, 49,702 verts, shots/20261126-1756. Next: vault teal, end-window frames, release 0.18.5.

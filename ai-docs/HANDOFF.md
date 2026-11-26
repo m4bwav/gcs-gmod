@@ -1,10 +1,10 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.18.4 released 2026-11-26: cornice bulbs, lunette glass; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 48)
+Updated: 2026-11-26 (session 49)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 48 of 60 (started 2026-11-25)
+- Chain: session 49 of 60 (started 2026-11-25)
 - Budget 2026-11-26 (session 45): unique verts 49,702/65,536 (75.8%), faces 30,988 (47.3%), BSP 107.9 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
@@ -182,7 +182,8 @@ Updated: 2026-11-26 (session 48)
 - Release 0.18.4 (session 46, 2026-11-26): ships sessions 44-45. BSP reused from the session 45 full compile (vbspinfo: 49,702 verts, faces 30,988, 107.9 MB); nav reused from 0.18.0 (decor only). README, wiki Changelog, Workshop description and vault_up preview updated; tag v0.18.4. Level map unchanged.
 - Session 47 (2026-11-26): lunettes are now mostly carved tympanum like Grand_Central_Station_Flag_Ceiling.jpg: make_board.py lunette() is 512x256 RGBA (low glass arc with bronze grille, $selfillum on glass only via alpha; cream relief above: eagle with spread wings, garlands, cartouche, rosettes, a blurred height map shaded as lit from above), mapped once per lunette (FACEUV offsets from cx and SPRING). Texture only: 49,702 verts, faces 30,988, BSP 108.3 MB, 146 fps, shots/20261126-1737 (cmp_lunette.jpg, flag.jpg). Not released.
 - Session 48 (2026-11-26): concourse walls were washed-out pale cream (shot wall patch 198/158/107 vs photo 150/116/75). make_walls.py HONEY 228,208,172 -> 176,152,118: walls now read as honey-tan stone. Lowering the tonemap SetAutoExposureMin 0.5 -> 0.32 changed nothing in the shots (reverted): brightness is in the lightmaps and textures, not exposure. Texture only: 49,702 verts, faces 30,988, BSP 107.5 MB, 135-146 fps, shots/20261126-1750/compare.jpg. Not released.
-- NEXT (session 49): compare again; worst now: floor and end-wall/trim cream (cream_marble, floor) still far paler than the photos (same sample-and-scale method), then the vault teal (darker in photos), pointed lunette hoods.
+- Session 49 (2026-11-26): floor and cream marble darkened like the session 48 walls: make_floor.py BASE 196,178,168 -> 160,138,128 (photo 135,114,108), make_walls.py cream_marble 236,222,194 -> 196,180,152. Texture only: 49,702 verts, faces 30,988, BSP 107.5 MB, 146 fps, shots/20261126-1756/compare.jpg. Not released.
+- NEXT (session 50): compare again; worst now: the vault teal (darker and bluer in photos), end-window mullion frames too pale (photos: dark bronze grid with lit cream piers), balustrade tops still bright, pointed lunette hoods. Then release 0.18.5 (sessions 47-49).
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
