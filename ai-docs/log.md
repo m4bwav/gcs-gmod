@@ -145,3 +145,4 @@
 - 2026-11-26: session 51 (driver run): vault colour already matches photo; end-window lights cooled and dimmed; floor still ~2x photo brightness (bloom/fill next). shots/20261126-1810.
 - 2026-11-26: session 52: bloom 0.1, cooler chandelier fill, floor BASE 138,124,116; release 0.18.5 (sessions 47-52), Workshop updated, nav reused from GMod maps folder (src/*.nav is gitignored per worktree; copy it from garrysmod/maps before package.sh).
 - 2026-11-26: session 53: stair/balcony handrails moved from gcs/gold to a darker gcs/brass_rail; texture only, shots/20261126-1826.
+- 2026-11-26: Session 54: stairs/balustrades on new gcs/stair (dimmed cream marble); shots/20261126-1834.

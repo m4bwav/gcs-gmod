@@ -1,10 +1,10 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.18.5 released 2026-11-26: concourse colour pass; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 53)
+Updated: 2026-11-26 (session 54)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 53 of 60 (started 2026-11-25)
+- Chain: session 54 of 60 (started 2026-11-25)
 - Budget 2026-11-26 (session 45): unique verts 49,702/65,536 (75.8%), faces 30,988 (47.3%), BSP 107.9 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
@@ -187,7 +187,8 @@ Updated: 2026-11-26 (session 53)
 - Session 51 (2026-11-26): compare showed the vault already matches (shot 21,77,45 vs photo 16,73,46: no change). Warm, bright floor came from the end-window lights: the point light is now 240 244 255 45 (was 255 240 215 60) and the spot 235 240 255 65 (was 255 235 200 110). Floor 218,178,141 -> 201,172,148 (photo 110,102,99), walls 227,178,124 (photo 186,164,125). Full compile clean, 49,702 verts, faces 30,988, BSP 107.5 MB, 146 fps, shots/20261126-1810/compare.jpg. Not released.
 - Release 0.18.5 (session 52, 2026-11-26): ships sessions 47-52. Session 52: bloom SetBloomScale 0.25 -> 0.1, concourse chandelier lights 255 214 160 18 -> 245 228 205 12, make_floor.py BASE 160,138,128 -> 138,124,116. Floor now reads grey marble (crop 161,135,100 incl. wall edge). Full compile clean, 49,702 verts, faces 30,988, BSP 107.5 MB, 146 fps, shots/20261126-1818/compare.jpg. Nav reused (no floor change). Workshop, README, wiki Changelog updated; tag v0.18.5.
 - Session 53 (2026-11-26): stair handrails, newel caps and balcony handrails were glowing pale yellow (gcs/gold, $color 1.25/0.95/0.45). New gcs/brass_rail (metalwall001a, $color 0.62/0.47/0.24, weak envmap) as TEX_RAIL in build_vmf.py: they now read as dark worn brass. Texture only: 49,702 verts, faces 30,988, BSP 107.5 MB, 143-146 fps, shots/20261126-1826/before_after.jpg. Not released.
-- NEXT (session 54): stair treads and balustrade walls still brighter than the walls (sun shaft + cream); pointed lunette hoods; walls still slightly warm next to photos (stairs_west, floor_east); then pick the next worst compare mismatch in the lower/plat/chambers sets (`python tools/compare.py shots/<stamp> lower`).
+- Session 54 (2026-11-26): stair treads, balustrade walls and newels used the bright gcs/cream; new gcs/stair (cream_marble, $color 0.78/0.75/0.70) as TEX_STAIR in the staircase block of build_vmf.py, so the stairs now sit in the wall tone. Full compile clean, 49,702 verts, BSP 107.5 MB, 146 fps, shots/20261126-1834/compare.jpg. Not released.
+- NEXT (session 55): pointed lunette hoods; walls still slightly warm next to photos (stairs_west, floor_east); the photo end windows are taller with lit cornice bulbs over the piers; then pick the next worst compare mismatch in the lower/plat/chambers sets (`python tools/compare.py shots/<stamp> lower`).
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
