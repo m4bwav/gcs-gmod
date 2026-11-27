@@ -147,3 +147,4 @@
 - 2026-11-26: session 53: stair/balcony handrails moved from gcs/gold to a darker gcs/brass_rail; texture only, shots/20261126-1826.
 - 2026-11-26: Session 54: stairs/balustrades on new gcs/stair (dimmed cream marble); shots/20261126-1834.
 - 2026-11-26: Session 55: wall ashlar HONEY desaturated to 172,154,136; compile clean, 49,702 verts, shots/20261126-1846.
+- 2026-11-26: Session 56: Whispering Gallery lights raised and cooled (crown 120, fills 45); headless chain session, worktree ../gcs-gmod-s56.

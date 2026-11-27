@@ -1,10 +1,10 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.18.5 released 2026-11-26: concourse colour pass; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 55)
+Updated: 2026-11-26 (session 56)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 55 of 60 (started 2026-11-25)
+- Chain: session 56 of 60 (started 2026-11-25)
 - Budget 2026-11-26 (session 45): unique verts 49,702/65,536 (75.8%), faces 30,988 (47.3%), BSP 107.9 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
@@ -189,7 +189,8 @@ Updated: 2026-11-26 (session 55)
 - Session 53 (2026-11-26): stair handrails, newel caps and balcony handrails were glowing pale yellow (gcs/gold, $color 1.25/0.95/0.45). New gcs/brass_rail (metalwall001a, $color 0.62/0.47/0.24, weak envmap) as TEX_RAIL in build_vmf.py: they now read as dark worn brass. Texture only: 49,702 verts, faces 30,988, BSP 107.5 MB, 143-146 fps, shots/20261126-1826/before_after.jpg. Not released.
 - Session 54 (2026-11-26): stair treads, balustrade walls and newels used the bright gcs/cream; new gcs/stair (cream_marble, $color 0.78/0.75/0.70) as TEX_STAIR in the staircase block of build_vmf.py, so the stairs now sit in the wall tone. Full compile clean, 49,702 verts, BSP 107.5 MB, 146 fps, shots/20261126-1834/compare.jpg. Not released.
 - Session 55 (2026-11-26): concourse ashlar was too yellow next to the photos; make_walls.py HONEY 176,152,118 -> 172,154,136 (pink-beige). Texture only: full compile clean, 49,702 verts, faces 30,988, BSP 107.5 MB, 146 fps, shots/20261126-1846/compare.jpg. Not released.
-- NEXT (session 56): pointed lunette hoods; the photo end windows are taller with lit cornice bulbs over the piers; then pick the next worst compare mismatch in the lower/plat/chambers sets (`python tools/compare.py shots/<stamp> lower`).
+- Session 56 (2026-11-26): lower compare set (shots/20261126-1851/compare_lower.jpg): the Whispering Gallery was the worst match, dark against a bright cream photo. Gallery crown light 255 210 165 70 -> 250 230 205 120, four fills 25 -> 45 (250 232 210). Full compile clean, 49,702 verts, faces 30,988, BSP 107.5 MB, shots/20261126-1856/compare_lower.jpg. Not released.
+- NEXT (session 57): gallery floor still darker than the photo (TEX_LOWF), and the photo's west side is a full stone arch with the OYSTER BAR TO TRAINS sign, ours a small square door; then dining (booth columns/clock read fine) and the pointed lunette hoods / taller end windows left from session 56's list.
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

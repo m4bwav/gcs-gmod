@@ -417,9 +417,9 @@ def lower_level(W, ents):
     # One lamp at the crown and warm fill under each arch.
     det(box(gxc - 1, -1, zs + rise - 40, gxc + 1, 1, zs + rise + 2, TEX_GOLD))
     det(prism(ngon(gxc, 0, 10, 8, math.pi/8), zs + rise - 58, zs + rise - 40, TEX_BULB))
-    ents.append(ent("light", (round(gxc), 0, zs + rise - 76), _light="255 210 165 70"))
+    ents.append(ent("light", (round(gxc), 0, zs + rise - 76), _light="250 230 205 120"))
     for x, y in ((gxc, gy - 120), (gxc, -gy + 120), (gx0 + 120, 0), (gx1 - 120, 0)):
-        ents.append(ent("light", (round(x), y, Z + 90), _light="255 215 175 25"))
+        ents.append(ent("light", (round(x), y, Z + 90), _light="250 232 210 45"))
     ents.append(ent("env_cubemap", (round(gxc), 0, Z + 72)))
     # Oyster Bar entrance: bronze OYSTER BAR band in the head of the opening (the vault springs just above), oak door frames with a
     # transom bar and side lights, the doors themselves left open.
