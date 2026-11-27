@@ -100,10 +100,10 @@ def _mk_sign_uv(n):
 
 
 def _oysterbar_uv(n):
-    # OYSTER BAR band over the gallery's west opening, y -120..120, faces +x.
+    # OYSTER BAR band hung in the gallery's west arch, y -120..120, faces +x.
     su, sv = 240/1024, 20/64
     if n[0] > 0.5:
-        return "[0 1 0 %g] %g" % (120/su, su), "[0 0 -1 %g] %g" % ((LOW_Z + 120)/sv, sv)
+        return "[0 1 0 %g] %g" % (120/su, su), "[0 0 -1 %g] %g" % ((LOW_Z + 134)/sv, sv)
 
 
 FACEUV = {"gcs/facade_win": lambda n: ("[1 0 0 0] 0.375", "[0 0 -1 0] 0.5625"), "gcs/inscription": lambda n: _ext_uv(n, "ins"), "gcs/clock_out": lambda n: _ext_uv(n, "clock"),
@@ -380,9 +380,21 @@ def lower_level(W, ents):
     for s in (-1, 1):
         ya, yb = sorted((s*gy, s*(gy + WALL)))
         W(box(gx0 - WALL, ya, Z - WALL, gx1, yb, 64, TEX_PALE))
-    for y0, y1 in ((-gy, -120), (120, gy)):
+    # West side: a wide segmental stone arch into the Oyster Bar (session 58, photo), not a door.
+    aw, asp, ar = 216, Z + 84, 96
+    for y0, y1 in ((-gy, -aw), (aw, gy)):
         W(box(gx0 - WALL, y0, Z, gx0, y1, 64, TEX_PALE))
-    W(box(gx0 - WALL, -120, Z + 120, gx0, 120, 64, TEX_PALE))
+    for i in range(8):
+        t0, t1 = math.pi*i/8, math.pi*(i+1)/8
+        a = (round(aw*math.cos(t0)), round(asp + ar*math.sin(t0)))
+        b = (round(aw*math.cos(t1)), round(asp + ar*math.sin(t1)))
+        W(xprism(ccw([a, b, (b[0], 64), (a[0], 64)]), gx0 - WALL, gx0, TEX_PALE))
+        a2 = (round((aw+24)*math.cos(t0)), round(asp + (ar+24)*math.sin(t0)))
+        b2 = (round((aw+24)*math.cos(t1)), round(asp + (ar+24)*math.sin(t1)))
+        det(xprism(ccw([a, b, b2, a2]), gx0, gx0 + 6, TEX_CREAM))
+    for s in (-1, 1):
+        ya, yb = sorted((s*aw, s*(aw + 24)))
+        det(box(gx0, ya, Z, gx0 + 6, yb, asp, TEX_CREAM))
     zs, rise = Z + 10*FT, 9*FT
     groin(W, gx0, gx1, -gy, gy, zs, rise, TEX_PALE)
     # Cream stone ribs: a band of the arch profile 16 u deep along each wall face.
@@ -422,22 +434,10 @@ def lower_level(W, ents):
     for x, y in ((gxc, gy - 120), (gxc, -gy + 120), (gx0 + 120, 0), (gx1 - 120, 0)):
         ents.append(ent("light", (round(x), y, Z + 90), _light="250 232 210 45"))
     ents.append(ent("env_cubemap", (round(gxc), 0, Z + 72)))
-    # Oyster Bar entrance: bronze OYSTER BAR band in the head of the opening (the vault springs just above), oak door frames with a
-    # transom bar and side lights, the doors themselves left open.
-    det(box(gx0 - 8, -120, Z + 100, gx0 + 3, 120, Z + 120, "gcs/oysterbar"))
-    det(box(gx0 - 8, -124, Z + 97, gx0 + 5, 124, Z + 100, TEX_GOLD))
-    for y0 in (-120, 104, -84, 76):
-        det(box(gx0 - WALL, y0, Z, gx0 + 2, y0 + (16 if abs(y0) > 100 else 8), Z + 120, TEX_WOOD))
-    det(box(gx0 - WALL, -120, Z + 92, gx0 + 2, 120, Z + 100, TEX_WOOD))
-    for ya, yb in ((-104, -84), (84, 104)):
-        det(box(gx0 - 34, ya, Z, gx0 - 30, yb, Z + 92, "gcs/ob_lead"))
-    # The two door leaves stand open into the bar against the jambs: oak with a leaded light of
-    # octagon quarries (make_board.py ob_door, mapped once over each 72 x 92 u face).
-    dx0 = gx0 - WALL - 72
-    FACEUV["gcs/ob_door"] = lambda n, su=72/256, sv=92/512: None if abs(n[1]) < 0.5 else (
-        "[1 0 0 %g] %g" % (-dx0/su, su), "[0 0 -1 %g] %g" % ((Z + 92)/sv, sv))
-    for s in (-1, 1):
-        det(box(dx0, s*76 - (3 if s > 0 else 0), Z, dx0 + 72, s*76 + (0 if s > 0 else 3), Z + 92, "gcs/ob_door"))
+    # OYSTER BAR band hung in the arch on two brass rods.
+    det(box(gx0 - 4, -120, asp + 30, gx0 + 4, 120, asp + 50, "gcs/oysterbar"))
+    for y in (-100, 100):
+        det(box(gx0 - 1, y - 1, asp + 50, gx0 + 1, y + 1, asp + ar - 4, TEX_GOLD))
 
     # Oyster Bar: 4 x 4 bays of shallow Guastavino groins on piers; a long oak counter.
     bx, by = 288, 240

@@ -1,0 +1,2 @@
+ob_entry        147 fps
+ob_counter      147 fps
