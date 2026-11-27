@@ -1960,10 +1960,10 @@ def build():
                 ents.append(ent("func_detail", solids=xprism(ccw([corner, arc[i], arc[i+1]]), xa, xb, TEX_WALL)))
         for c in centres:
             ents.append(ent("light", (sgn*(HX+WALL+96), c, (win_z0+win_z1)/2),
-                            _light="255 240 215 60", _quadratic_attn="0", _linear_attn="1", _fifty_percent_distance="900", _zero_percent_distance="2400"))
+                            _light="240 244 255 45", _quadratic_attn="0", _linear_attn="1", _fifty_percent_distance="900", _zero_percent_distance="2400"))
             ents.append(ent("light_spot", (sgn*(HX+WALL+150), c, win_z1-40),
                             angles="-38 %d 0" % (180 if sgn > 0 else 0), pitch="-38",
-                            _light="255 235 200 110", _inner_cone="30", _cone="65", _exponent="1",
+                            _light="235 240 255 65", _inner_cone="30", _cone="65", _exponent="1",
                             _distance="0", _fifty_percent_distance="2600", _zero_percent_distance="5200"))
 
         # Sun shafts: one additive beam per window, falling inward at the spotlight pitch.
