@@ -15,6 +15,12 @@ Goal: `gm_penn_station`, a Garry's Mod map of New York's Penn Station, built the
 5. Exterior: Seventh Avenue colonnade, eagles, street.
 6. Extras: dining room, lunch room, Moynihan Train Hall, nav mesh.
 
+## Keep going (read first)
+A "session" is one unit of work, not the end of the conversation. When an item finishes, bump the session number and start the next item in the same conversation. Hand over only at a stop point or when context runs low. In an interactive session, then start chainwright's driver (`chain_loop.py --go`, bounds in HANDOFF.md). A session started by the driver (headless `claude -p`, or a `chain_loop.py` process is running) never starts another driver: it finishes its item, updates HANDOFF.md and ends.
+
+## Unattended runs
+A headless session ends when its turn ends, and background jobs die with it. Run compiles, nav, shots and packaging in the foreground (under the 10-minute tool timeout; split long chains), never in the background, and don't end the turn while one runs. Before finishing, commit and push your branch even if the work is unfinished, and name it in HANDOFF.md. A leftover worktree from an earlier session means resume it, unless a gmod/vbsp/vrad process is actually running. Never run two compile or shots jobs at once.
+
 ## Budget rules from GCT (vbsp's hard caps)
 65,536 unique vertices is the limit you hit first. Use textures for grids and lettering, MDL models for props and repeated ornament (capitals, coffers if needed, eagles), one func_brush per area for decor, and vbspinfo after every compile. Plan for the waiting room's columns and coffers to be models from day one. 150 MB file budget, 60 fps on a mid-range PC.
 
