@@ -141,3 +141,4 @@
 - 2026-11-26: session 47: lunette texture now one 512x256 RGBA per lunette (carved tympanum + low glass, alpha = selfillum mask); FACEUV lambdas take per-lunette offsets as default args. shots/20261126-1737.
 - 2026-11-26: session 48: wall_ashlar darkened to the photo colour (HONEY 176,152,118). Tonemap exposure min has no visible effect in shots: fix brightness in textures/lights.
 - 2026-11-26 session 49: floor_marble and cream_marble darkened toward photo samples; texture only, 49,702 verts, shots/20261126-1756. Next: vault teal, end-window frames, release 0.18.5.
+- 2026-11-26: session 50 (driver run): window glass texture darkened, bronze muntins; full compile clean, 49,702 verts, shots/20261126-1803. Python on Windows writes /tmp to D:/tmp, Git Bash /tmp is elsewhere: use explicit paths for temp crops.
