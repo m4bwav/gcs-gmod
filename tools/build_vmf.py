@@ -29,6 +29,7 @@ TEX_TRIM = "gcs/trim"
 TEX_GLOW = "gcs/window_glow"
 TEX_GOLD = "gcs/gold"
 TEX_RAIL = "gcs/brass_rail"          # darker worn brass for stair and balcony handrails
+TEX_STAIR = "gcs/stair"              # cream marble dimmed for the stair treads and balustrades
 TEX_GRID = "gcs/mullion"
 TEX_DIM = "gcs/window_dim"
 TEX_GLASS = "gcs/window_glass"  # pale pane grid for the big windows
@@ -2095,16 +2096,16 @@ def build():
             for k in range(steps):
                 xs = sgn*(HX-BALC_D) - sgn*(steps-k)*run
                 xa, xb = sorted((xs, xs+sgn*run))
-                ents.append(ent("func_detail", solids=box(xa, y0, 0, xb, y1, (k+1)*rise, TEX_CREAM)))
+                ents.append(ent("func_detail", solids=box(xa, y0, 0, xb, y1, (k+1)*rise, TEX_STAIR)))
             # Solid cream balustrades on both sides with a brass handrail, newel at the foot.
             xf, xt = sgn*(HX-BALC_D) - sgn*steps*run, sgn*(HX-BALC_D)
             for ya, yb in ((y0-18, y0), (y1, y1+18)):
                 wall = [(xf, 0), (xt, 0), (xt, BALC_Z+42), (xf, 42)]
                 rail = [(xf, 42), (xt, BALC_Z+42), (xt, BALC_Z+46), (xf, 46)]
-                ents.append(ent("func_detail", solids=yprism(ccw(wall), ya, yb, TEX_CREAM)))
+                ents.append(ent("func_detail", solids=yprism(ccw(wall), ya, yb, TEX_STAIR)))
                 ents.append(ent("func_detail", solids=yprism(ccw(rail), ya-2, yb+2, TEX_RAIL)))
                 na, nb = sorted((xf, xf-sgn*24))
-                ents.append(ent("func_detail", solids=box(na, ya-3, 0, nb, yb+3, 54, TEX_CREAM)))
+                ents.append(ent("func_detail", solids=box(na, ya-3, 0, nb, yb+3, 54, TEX_STAIR)))
                 ents.append(ent("func_detail", solids=box(na+4, ya+1, 54, nb-4, yb-1, 66, TEX_RAIL)))
 
     # Information booth with the four-faced clock above it.
