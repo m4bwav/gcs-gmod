@@ -33,7 +33,7 @@ def save(rgb, name):
 
 
 # Ashlar: 8 courses, 3 blocks per course, alternate courses offset by half a block.
-HONEY = np.array([176, 152, 118], float)  # was 228 208 172; session 48 matched GCT_Main_Concourse wall patch
+HONEY = np.array([172, 154, 136], float)  # session 55: less yellow, toward the photos' pink-beige (was 176 152 118)
 COURSES, BLOCKS = 8, 4
 img = np.zeros((N, N, 3))
 ch, bw = N // COURSES, N // BLOCKS
