@@ -1,3 +1,8 @@
+## 0.19.0 (2026-11-26)
+- Main Concourse: wall stone less yellow, closer to the photos.
+- Whispering Gallery: brighter, cooler lights and a lighter floor; its west side opens into the Oyster Bar through a wide stone arch with the OYSTER BAR band hung in it.
+- Nav mesh rebuilt (1,495 areas).
+
 ## 0.18.5 (2026-11-26)
 - Concourse colour pass against photos: carved tympanum relief over the lunette glass, honey-tan walls and darker cream marble, grey floor marble, dark bronze window muntins, cooler and dimmer end-window light and chandelier fill, lower bloom.
 

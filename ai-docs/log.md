@@ -150,3 +150,4 @@
 - 2026-11-26: Session 56: Whispering Gallery lights raised and cooled (crown 120, fills 45); headless chain session, worktree ../gcs-gmod-s56.
 - 2026-11-26: Session 57: Whispering Gallery floor got its own lighter material gcs/floor_gal (TEX_GALF). Clean full compile, shots/20261126-1904. Worktree ../gcs-gmod-s57.
 - 2026-11-26: Session 58: gallery west door replaced by a wide stone arch with the OYSTER BAR sign hung in it (photo match). 49,703 verts. shots/20261126-1915.
+- 2026-11-26: Session 59: final release 0.19.0 (sessions 53-58), nav rebuilt 1,495 areas, Status finished, notes/lessons-for-penn.md. Chain ends at 59 of 60; the driver's stop check reads Status: finished. Next: Penn chain.
