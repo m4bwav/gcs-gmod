@@ -230920,7 +230920,7 @@ entity
 {
 	"id" "23121"
 	"classname" "light"
-	"_light" "255 240 215 60"
+	"_light" "240 244 255 45"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -230933,7 +230933,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 0 0"
 	"pitch" "-38"
-	"_light" "255 235 200 110"
+	"_light" "235 240 255 65"
 	"_inner_cone" "30"
 	"_cone" "65"
 	"_exponent" "1"
@@ -230946,7 +230946,7 @@ entity
 {
 	"id" "23123"
 	"classname" "light"
-	"_light" "255 240 215 60"
+	"_light" "240 244 255 45"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -230959,7 +230959,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 0 0"
 	"pitch" "-38"
-	"_light" "255 235 200 110"
+	"_light" "235 240 255 65"
 	"_inner_cone" "30"
 	"_cone" "65"
 	"_exponent" "1"
@@ -230972,7 +230972,7 @@ entity
 {
 	"id" "23125"
 	"classname" "light"
-	"_light" "255 240 215 60"
+	"_light" "240 244 255 45"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -230985,7 +230985,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 0 0"
 	"pitch" "-38"
-	"_light" "255 235 200 110"
+	"_light" "235 240 255 65"
 	"_inner_cone" "30"
 	"_cone" "65"
 	"_exponent" "1"
@@ -245731,7 +245731,7 @@ entity
 {
 	"id" "24998"
 	"classname" "light"
-	"_light" "255 240 215 60"
+	"_light" "240 244 255 45"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -245744,7 +245744,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 180 0"
 	"pitch" "-38"
-	"_light" "255 235 200 110"
+	"_light" "235 240 255 65"
 	"_inner_cone" "30"
 	"_cone" "65"
 	"_exponent" "1"
@@ -245757,7 +245757,7 @@ entity
 {
 	"id" "25000"
 	"classname" "light"
-	"_light" "255 240 215 60"
+	"_light" "240 244 255 45"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -245770,7 +245770,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 180 0"
 	"pitch" "-38"
-	"_light" "255 235 200 110"
+	"_light" "235 240 255 65"
 	"_inner_cone" "30"
 	"_cone" "65"
 	"_exponent" "1"
@@ -245783,7 +245783,7 @@ entity
 {
 	"id" "25002"
 	"classname" "light"
-	"_light" "255 240 215 60"
+	"_light" "240 244 255 45"
 	"_quadratic_attn" "0"
 	"_linear_attn" "1"
 	"_fifty_percent_distance" "900"
@@ -245796,7 +245796,7 @@ entity
 	"classname" "light_spot"
 	"angles" "-38 180 0"
 	"pitch" "-38"
-	"_light" "255 235 200 110"
+	"_light" "235 240 255 65"
 	"_inner_cone" "30"
 	"_cone" "65"
 	"_exponent" "1"
@@ -343814,7 +343814,7 @@ entity
 {
 	"id" "35442"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "-1350 -600 320"
 }
 entity
@@ -343830,7 +343830,7 @@ entity
 {
 	"id" "35444"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "-1350 600 320"
 }
 entity
@@ -343853,7 +343853,7 @@ entity
 {
 	"id" "35447"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "-900 -600 320"
 }
 entity
@@ -343869,7 +343869,7 @@ entity
 {
 	"id" "35449"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "-900 600 320"
 }
 entity
@@ -343892,7 +343892,7 @@ entity
 {
 	"id" "35452"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "-450 -600 320"
 }
 entity
@@ -343908,7 +343908,7 @@ entity
 {
 	"id" "35454"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "-450 600 320"
 }
 entity
@@ -343931,7 +343931,7 @@ entity
 {
 	"id" "35457"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "0 -600 320"
 }
 entity
@@ -343947,7 +343947,7 @@ entity
 {
 	"id" "35459"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "0 600 320"
 }
 entity
@@ -343970,7 +343970,7 @@ entity
 {
 	"id" "35462"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "450 -600 320"
 }
 entity
@@ -343986,7 +343986,7 @@ entity
 {
 	"id" "35464"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "450 600 320"
 }
 entity
@@ -344009,7 +344009,7 @@ entity
 {
 	"id" "35467"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "900 -600 320"
 }
 entity
@@ -344025,7 +344025,7 @@ entity
 {
 	"id" "35469"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "900 600 320"
 }
 entity
@@ -344048,7 +344048,7 @@ entity
 {
 	"id" "35472"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "1350 -600 320"
 }
 entity
@@ -344064,7 +344064,7 @@ entity
 {
 	"id" "35474"
 	"classname" "light"
-	"_light" "255 214 160 18"
+	"_light" "245 228 205 12"
 	"origin" "1350 600 320"
 }
 entity
@@ -344091,7 +344091,7 @@ entity
 	{
 		"OnMapSpawn" "tonemap,SetAutoExposureMin,0.5,0,-1"
 		"OnMapSpawn" "tonemap,SetAutoExposureMax,1.2,0,-1"
-		"OnMapSpawn" "tonemap,SetBloomScale,0.25,0,-1"
+		"OnMapSpawn" "tonemap,SetBloomScale,0.1,0,-1"
 	}
 }
 entity

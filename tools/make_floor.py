@@ -7,7 +7,7 @@ from PIL import Image
 from srctools import vtf
 
 N, SLABS, SEED = 512, 2, 7
-BASE = np.array([160, 138, 128], float)      # photo floor (135,114,108) lifted less; session 49 (was 196 178 168)
+BASE = np.array([138, 124, 116], float)      # photo floor (135,114,108); session 52 (was 160 138 128, 196 178 168)
 rng = np.random.default_rng(SEED)
 
 
