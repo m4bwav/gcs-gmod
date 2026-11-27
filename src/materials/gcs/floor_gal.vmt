@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "gcs/floor_marble"
+	"$color" "[1.0 0.92 0.86]"
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[0.12 0.12 0.12]"
+	"$surfaceprop" "tile"
+}
