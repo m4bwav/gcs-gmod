@@ -28,6 +28,7 @@ TEX_VAULT = "gcs/vault"
 TEX_TRIM = "gcs/trim"
 TEX_GLOW = "gcs/window_glow"
 TEX_GOLD = "gcs/gold"
+TEX_RAIL = "gcs/brass_rail"          # darker worn brass for stair and balcony handrails
 TEX_GRID = "gcs/mullion"
 TEX_DIM = "gcs/window_dim"
 TEX_GLASS = "gcs/window_glass"  # pale pane grid for the big windows
@@ -2077,7 +2078,7 @@ def build():
         for y0, y1 in ((-HY, -24*FT), (24*FT, HY)):
             # Cream marble parapet with a brass handrail on top, like the stair balustrades.
             ents.append(ent("func_detail", solids=box(ra, y0, BALC_Z, rb, y1, BALC_Z+42, TEX_CREAM)))
-            ents.append(ent("func_detail", solids=box(ra-2, y0, BALC_Z+42, rb+2, y1, BALC_Z+46, TEX_GOLD)))
+            ents.append(ent("func_detail", solids=box(ra-2, y0, BALC_Z+42, rb+2, y1, BALC_Z+46, TEX_RAIL)))
         # Ceiling lamps under the balcony so the floor arcade and stair sides aren't black.
         lx = sgn*(HX - BALC_D//2)
         for ly in (-3*HY//4, -HY//4, HY//4, 3*HY//4):
@@ -2101,10 +2102,10 @@ def build():
                 wall = [(xf, 0), (xt, 0), (xt, BALC_Z+42), (xf, 42)]
                 rail = [(xf, 42), (xt, BALC_Z+42), (xt, BALC_Z+46), (xf, 46)]
                 ents.append(ent("func_detail", solids=yprism(ccw(wall), ya, yb, TEX_CREAM)))
-                ents.append(ent("func_detail", solids=yprism(ccw(rail), ya-2, yb+2, TEX_GOLD)))
+                ents.append(ent("func_detail", solids=yprism(ccw(rail), ya-2, yb+2, TEX_RAIL)))
                 na, nb = sorted((xf, xf-sgn*24))
                 ents.append(ent("func_detail", solids=box(na, ya-3, 0, nb, yb+3, 54, TEX_CREAM)))
-                ents.append(ent("func_detail", solids=box(na+4, ya+1, 54, nb-4, yb-1, 66, TEX_GOLD)))
+                ents.append(ent("func_detail", solids=box(na+4, ya+1, 54, nb-4, yb-1, 66, TEX_RAIL)))
 
     # Information booth with the four-faced clock above it.
     # Booth: cream marble base, dark glass with brass posts, gold cornice; the clock sits
