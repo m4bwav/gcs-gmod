@@ -1,11 +1,11 @@
 # HANDOFF: gm_grand_central
 
-Status: in progress (0.18.5 released 2026-11-26: concourse colour pass; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 58)
+Status: finished (0.19.0 released 2026-11-26, final release of the 60-session chain; all nine planned chambers in; Workshop 3845077025). Next: the Penn Station chain.
+Updated: 2026-11-26 (session 59)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 58 of 60 (started 2026-11-25)
-- Budget 2026-11-26 (session 45): unique verts 49,702/65,536 (75.8%), faces 30,988 (47.3%), BSP 107.9 MB of 150 MB.
+- Chain: session 59 of 60 (finished early: every chamber is in, detail lane only has small polish left) (started 2026-11-25)
+- Budget 2026-11-26 (session 59, final): unique verts 49,703/65,536 (75.8%), faces 31,000 (47.3%), BSP 107.5 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
 
@@ -192,7 +192,8 @@ Updated: 2026-11-26 (session 58)
 - Session 56 (2026-11-26): lower compare set (shots/20261126-1851/compare_lower.jpg): the Whispering Gallery was the worst match, dark against a bright cream photo. Gallery crown light 255 210 165 70 -> 250 230 205 120, four fills 25 -> 45 (250 232 210). Full compile clean, 49,702 verts, faces 30,988, BSP 107.5 MB, shots/20261126-1856/compare_lower.jpg. Not released.
 - Session 57 (2026-11-26): Whispering Gallery floor was darker than the photo; new gcs/floor_gal (floor_marble, $color 1.0/0.92/0.86, envmaptint 0.12) as TEX_GALF on the gallery floor brush only (rest of the lower level keeps TEX_LOWF). Full compile clean, 49,702 verts, faces 30,988, BSP 107.5 MB, shots/20261126-1904/compare_lower.jpg. Shot ran at 20 fps (whisper cam only; no second GMod seen; recheck next full shots). Not released.
 - Session 58 (2026-11-26): Whispering Gallery west side is now a wide segmental stone arch (half-width 216 u, spring Z+84, rise 96) with a cream archivolt and jambs, in place of the small square oak door screen; the OYSTER BAR band hangs in the arch on two brass rods (doors, transom and side lights removed). Full compile clean, 49,703 verts, faces 31,000, BSP 107.5 MB, 146 fps, shots/20261126-1915/s58.jpg (whisper + ob_entry). Nav not rebuilt (floor unchanged, opening wider). Not released.
-- NEXT (session 59): dining and the pointed lunette hoods / taller end windows from session 56's list if one session allows; otherwise go straight to the final release. Session 60 at the latest: final release (ships 53-58+), rebuild nav, Status: finished, notes/lessons-for-penn.md, hand over to the Penn chain.
+- Release 0.19.0 (session 59, 2026-11-26): final release, ships sessions 53-58. Full compile clean, 49,703 verts, faces 31,000, BSP 107.5 MB; nav rebuilt (1,495 areas, 1.0 MB); shots/20261126-2023 (140-147 fps); README, wiki (pushed), Workshop (gma, description, 2 previews), tag v0.19.0 with the .gma. notes/lessons-for-penn.md written. Status: finished.
+- NEXT: the Penn Station chain, ai-docs/plans/2026-11-25-penn-gmod-60x-continue-prompt.md. Leftover Grand Central polish (optional, not scheduled): dining detail, pointed lunette hoods / taller end windows, the open items listed above.
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.

@@ -1,0 +1,4 @@
+west_balcony    140 fps
+floor_east      147 fps
+whisper         146 fps
+ob_entry        147 fps
