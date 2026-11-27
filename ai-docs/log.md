@@ -148,3 +148,4 @@
 - 2026-11-26: Session 54: stairs/balustrades on new gcs/stair (dimmed cream marble); shots/20261126-1834.
 - 2026-11-26: Session 55: wall ashlar HONEY desaturated to 172,154,136; compile clean, 49,702 verts, shots/20261126-1846.
 - 2026-11-26: Session 56: Whispering Gallery lights raised and cooled (crown 120, fills 45); headless chain session, worktree ../gcs-gmod-s56.
+- 2026-11-26: Session 57: Whispering Gallery floor got its own lighter material gcs/floor_gal (TEX_GALF). Clean full compile, shots/20261126-1904. Worktree ../gcs-gmod-s57.

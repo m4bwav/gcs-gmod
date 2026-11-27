@@ -265,6 +265,7 @@ TEX_TILE = "gcs/guastavino"
 TEX_WOOD = "gcs/wood"
 TEX_PALE = "gcs/guastavino_pale"   # Whispering Gallery glaze
 TEX_LOWF = "gcs/floor_low"         # darker mauve-grey tile floor of the lower level
+TEX_GALF = "gcs/floor_gal"         # Whispering Gallery floor, lighter and warmer (session 57, photo)
 
 
 def groin(W, x0, x1, y0, y1, zs, rise, tex, n=8):
@@ -375,7 +376,7 @@ def lower_level(W, ents):
     # Whispering Gallery: a low groin vault of pale Guastavino tile where four arches meet,
     # each opening framed by a cream stone arch, brass handrails along the walls.
     gx0, gx1, gy = GAL_X0, RAMP_XF, RAMP_Y1
-    W(box(gx0, -gy, Z - WALL, gx1, gy, Z, TEX_LOWF))
+    W(box(gx0, -gy, Z - WALL, gx1, gy, Z, TEX_GALF))
     for s in (-1, 1):
         ya, yb = sorted((s*gy, s*(gy + WALL)))
         W(box(gx0 - WALL, ya, Z - WALL, gx1, yb, 64, TEX_PALE))
