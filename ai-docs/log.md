@@ -142,3 +142,4 @@
 - 2026-11-26: session 48: wall_ashlar darkened to the photo colour (HONEY 176,152,118). Tonemap exposure min has no visible effect in shots: fix brightness in textures/lights.
 - 2026-11-26 session 49: floor_marble and cream_marble darkened toward photo samples; texture only, 49,702 verts, shots/20261126-1756. Next: vault teal, end-window frames, release 0.18.5.
 - 2026-11-26: session 50 (driver run): window glass texture darkened, bronze muntins; full compile clean, 49,702 verts, shots/20261126-1803. Python on Windows writes /tmp to D:/tmp, Git Bash /tmp is elsewhere: use explicit paths for temp crops.
+- 2026-11-26: session 51 (driver run): vault colour already matches photo; end-window lights cooled and dimmed; floor still ~2x photo brightness (bloom/fill next). shots/20261126-1810.

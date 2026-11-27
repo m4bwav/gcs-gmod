@@ -1,10 +1,10 @@
 # HANDOFF: gm_grand_central
 
 Status: in progress (0.18.4 released 2026-11-26: cornice bulbs, lunette glass; all nine planned chambers in; Workshop 3845077025, GitHub releases per version)
-Updated: 2026-11-26 (session 50)
+Updated: 2026-11-26 (session 51)
 
 - Prompt: plans/2026-11-25-gcs-gmod-60x-continue-prompt.md (60-session chain; then plans/2026-11-25-penn-gmod-60x-continue-prompt.md)
-- Chain: session 50 of 60 (started 2026-11-25)
+- Chain: session 51 of 60 (started 2026-11-25)
 - Budget 2026-11-26 (session 45): unique verts 49,702/65,536 (75.8%), faces 30,988 (47.3%), BSP 107.9 MB of 150 MB.
 - Plan: plans/gcs-gmod-plan.md
 - Garry's Mod: D:/SteamLibrary/steamapps/common/GarrysMod; vbsp, vvis, vrad, bspzip, gmad, gmpublish are in its bin/.
@@ -184,7 +184,8 @@ Updated: 2026-11-26 (session 50)
 - Session 48 (2026-11-26): concourse walls were washed-out pale cream (shot wall patch 198/158/107 vs photo 150/116/75). make_walls.py HONEY 228,208,172 -> 176,152,118: walls now read as honey-tan stone. Lowering the tonemap SetAutoExposureMin 0.5 -> 0.32 changed nothing in the shots (reverted): brightness is in the lightmaps and textures, not exposure. Texture only: 49,702 verts, faces 30,988, BSP 107.5 MB, 135-146 fps, shots/20261126-1750/compare.jpg. Not released.
 - Session 49 (2026-11-26): floor and cream marble darkened like the session 48 walls: make_floor.py BASE 196,178,168 -> 160,138,128 (photo 135,114,108), make_walls.py cream_marble 236,222,194 -> 196,180,152. Texture only: 49,702 verts, faces 30,988, BSP 107.5 MB, 146 fps, shots/20261126-1756/compare.jpg. Not released.
 - Session 50 (2026-11-26): concourse window glass matched to photos: make_window.py muntins 40,42,44 -> dark bronze 46,38,28 and twice as thick (12 px per 64 px pane cell), panes 196..210 -> cooler, dimmer 150,166,182. Texture only: 49,702 verts, faces 30,988, BSP 107.5 MB, 147 fps, shots/20261126-1803/compare.jpg. Not released.
-- NEXT (session 51): compare again; still off: vault teal (darker, bluer), balustrade tops too bright, the whole scene too warm/yellow against the photos' neutral daylight, pointed lunette hoods. Then release 0.18.5 (sessions 47-50).
+- Session 51 (2026-11-26): compare showed the vault already matches (shot 21,77,45 vs photo 16,73,46: no change). Warm, bright floor came from the end-window lights: the point light is now 240 244 255 45 (was 255 240 215 60) and the spot 235 240 255 65 (was 255 235 200 110). Floor 218,178,141 -> 201,172,148 (photo 110,102,99), walls 227,178,124 (photo 186,164,125). Full compile clean, 49,702 verts, faces 30,988, BSP 107.5 MB, 146 fps, shots/20261126-1810/compare.jpg. Not released.
+- NEXT (session 52): the rest of the brightness is HDR bloom and fill: try env_tonemap_controller SetBloomScale lower and the vault fill/chandelier lights (18) cooler and dimmer, then darken floor_marble again if still >150; balustrade tops too bright; pointed lunette hoods. Then release 0.18.5 (sessions 47-51).
 - Platform polish (optional): ads/light boxes on the shed walls, platform-end tunnels, real track numbers, a polywright M7 model instead of brush cars. Optional Vanderbilt polish: big rosette ceiling panels, pilasters between windows.
 - 2026-11-23 Mark: chain 20 sessions building the areas joined to the concourse (plan areas 2-6) with images, maps and models; update README, wiki, Workshop and release after each area. Start: area 2, dining concourse below the main floor via the ramps (find a floor plan and photos first; open a ramp opening in the concourse).
 - Fold tools/workshop_update.py and the gmad/gmpublish route into modwright (its repo, worktree, tests, PR) - modwright has no GMod publishing guidance.
