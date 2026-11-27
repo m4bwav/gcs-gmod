@@ -144,3 +144,4 @@
 - 2026-11-26: session 50 (driver run): window glass texture darkened, bronze muntins; full compile clean, 49,702 verts, shots/20261126-1803. Python on Windows writes /tmp to D:/tmp, Git Bash /tmp is elsewhere: use explicit paths for temp crops.
 - 2026-11-26: session 51 (driver run): vault colour already matches photo; end-window lights cooled and dimmed; floor still ~2x photo brightness (bloom/fill next). shots/20261126-1810.
 - 2026-11-26: session 52: bloom 0.1, cooler chandelier fill, floor BASE 138,124,116; release 0.18.5 (sessions 47-52), Workshop updated, nav reused from GMod maps folder (src/*.nav is gitignored per worktree; copy it from garrysmod/maps before package.sh).
+- 2026-11-26: session 53: stair/balcony handrails moved from gcs/gold to a darker gcs/brass_rail; texture only, shots/20261126-1826.
