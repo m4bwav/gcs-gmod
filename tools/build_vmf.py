@@ -2207,7 +2207,7 @@ def build():
             zc = 32*FT
             # Model (tools/make_models.py): rod, drum, two tiers of globes, finial; no brush vertices.
             ents.append(ent("prop_static", (x, y, zc), model="models/gcs/chandelier.mdl", angles="0 0 0", solid="0"))
-            ents.append(ent("light", (x, y, zc-64), _light="255 214 160 18"))
+            ents.append(ent("light", (x, y, zc-64), _light="245 228 205 12"))
         ents.append(ent("light", (x, 0, SPRING+300), _light="160 200 210 10"))
 
     ents.append(ent("env_tonemap_controller", (0, 0, 64), targetname="tonemap"))
@@ -2216,7 +2216,7 @@ def build():
         '\tconnections\n\t{\n'
         '\t\t"OnMapSpawn" "tonemap,SetAutoExposureMin,0.5,0,-1"\n'
         '\t\t"OnMapSpawn" "tonemap,SetAutoExposureMax,1.2,0,-1"\n'
-        '\t\t"OnMapSpawn" "tonemap,SetBloomScale,0.25,0,-1"\n\t}\n}\n'))
+        '\t\t"OnMapSpawn" "tonemap,SetBloomScale,0.1,0,-1"\n\t}\n}\n'))
     ents.append(ent("info_player_start", (-HX+BALC_D//2, 0, BALC_Z+8), angles="0 0 0"))
     ents.append(ent("info_player_start", (0, -400, 8), angles="0 90 0"))
     ents.append(ent("env_cubemap", (0, 0, 200)))

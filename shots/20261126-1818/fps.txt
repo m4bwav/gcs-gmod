@@ -1,0 +1,6 @@
+west_balcony    131 fps
+floor_east      146 fps
+booth           146 fps
+vault_up        146 fps
+east_balcony    146 fps
+stairs_west     146 fps
