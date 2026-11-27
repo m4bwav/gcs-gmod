@@ -146,3 +146,4 @@
 - 2026-11-26: session 52: bloom 0.1, cooler chandelier fill, floor BASE 138,124,116; release 0.18.5 (sessions 47-52), Workshop updated, nav reused from GMod maps folder (src/*.nav is gitignored per worktree; copy it from garrysmod/maps before package.sh).
 - 2026-11-26: session 53: stair/balcony handrails moved from gcs/gold to a darker gcs/brass_rail; texture only, shots/20261126-1826.
 - 2026-11-26: Session 54: stairs/balustrades on new gcs/stair (dimmed cream marble); shots/20261126-1834.
+- 2026-11-26: Session 55: wall ashlar HONEY desaturated to 172,154,136; compile clean, 49,702 verts, shots/20261126-1846.
