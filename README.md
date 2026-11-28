@@ -67,6 +67,7 @@ Drawn from the map source by `tools/make_map.py`: walls and fixtures at chest he
 - The exterior (0.5.0): out through the Vanderbilt vestibule onto 42nd Street: the facade with three great arched windows between paired columns, oval windows, the GRAND CENTRAL TERMINAL attic inscription, the clock under the Glory of Commerce group, a balustraded terrace with a stair, the Park Avenue Viaduct across the street, office towers, the MetLife tower behind, and open sky
 - Grand Hyatt entrance (0.16.0): up a short stair from Lexington Passage, a glass-roofed atrium lobby with a fountain.
 - Detail pass (0.17.1): Lexington blade sign, Campbell surfaces, Market door sign and Root Chandelier.
+- Escalators (0.20.0): a pair of MetLife escalators along the north wall rises from the concourse floor to the east balcony, and the One Vanderbilt and Grand Central Madison escalators now move: stand on one and it carries you up or down, or walk against it.
 - Detail pass (0.19.0): pink-beige concourse stone, a brighter Whispering Gallery with a lighter floor, and a wide stone arch from the gallery into the Oyster Bar.
 - Detail pass (0.18.5): carved eagle tympanums in the lunettes, honey-tan walls, grey floor marble, bronze-barred window glass and cooler, dimmer daylight in the concourse, closer to the photos.
 - Detail pass (0.18.4): a row of lit bulbs along the concourse cornice, grilled blue-grey glass in the vault lunettes.

@@ -1,3 +1,10 @@
+## 0.20.0 (2026-11-28)
+- Main Concourse: MetLife escalators (one up, one down) along the north wall east of the Track 31 gate, from the floor to the east balcony, with a METLIFE BUILDING 45 ST sign at the foot.
+- Moving escalators: the MetLife pair, the One Vanderbilt link and both runs of Grand Central Madison carry a standing player at about 100 units/s, with scrolling steps; walking against them works.
+- One Vanderbilt link: a 19-unit lip at the top of the escalator is gone.
+- No moving walkways: the real terminal has none.
+- Nav mesh rebuilt (1,547 areas).
+
 ## 0.19.0 (2026-11-26)
 - Main Concourse: wall stone less yellow, closer to the photos.
 - Whispering Gallery: brighter, cooler lights and a lighter floor; its west side opens into the Oyster Bar through a wide stone arch with the OYSTER BAR band hung in it.

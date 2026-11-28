@@ -1546,6 +1546,17 @@ def transit_store(W, ents):
                     disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
+def esc_push(ents, solids, yaw):
+    """trigger_push that carries a standing player along an escalator lane: horizontal push at
+    100 u/s (yaw), the slope turns it into the climb or descent (tools/walk.sh tests it)."""
+    ents.append(ent("trigger_push", solids=solids, pushdir="0 %d 0" % yaw, speed="100", spawnflags="1",
+                    StartDisabled="0", targetname="esc_push"))
+
+
+# Moving treads that run along y (Madison): u along +y so the step lines cross the lane.
+FACEUV["gcs/esc_yp"] = FACEUV["gcs/esc_yn"] = lambda n: (("[0 1 0 0] 0.25", "[1 0 0 0] 0.25") if abs(n[2]) > 0.5 else None)
+
+
 def vanderbilt_link(W, ents):
     decor = []
     det = decor.append
@@ -1571,8 +1582,14 @@ def vanderbilt_link(W, ents):
     for yc in (-y + 8, 0, y - 8):
         rail(yc, 6, 0, 36, "gcs/steel")
         rail(yc, 4, 36, 42, TEX_GOLD)
+    # Moving lanes (release 0.20.0): scrolling treads and a push per lane; north lane up, south down.
+    for ya, yb, mat, yaw in ((6, y - 14, "gcs/esc_xn", 180), (-y + 14, -6, "gcs/esc_xp", 0)):
+        det(yprism(ccw([(LK_E, 0), (LK_W, zt), (LK_W, zt + 1), (LK_E, 1)]), ya, yb, mat))
+        esc_push(ents, yprism(ccw([(LK_E, 0), (LK_W, zt), (LK_W, zt + 80), (LK_E, 80)]), ya, yb, "tools/tooltrigger")
+                 + box(LK_E, ya, 0, LK_E + 32, yb, 80, "tools/tooltrigger")
+                 + box(LK_W - 32, ya, zt, LK_W, yb, zt + 80, "tools/tooltrigger"), yaw)
     det(box(LK_E - 40, -y, 0, LK_E, y, 2, TEX_GOLD))
-    det(box(LK_W, -y, zt, LK_W + 40, y, zt + 2, TEX_GOLD))
+    det(box(LK_W - 40, -y, zt, LK_W, y, zt + 2, TEX_GOLD))   # on the lobby floor (was on the slope: a 19 u lip)
     # West glass wall: big glazed panel, lit doors below, a bronze band.
     det(box(x0, -ly + 40, zt + 150, x0 + 4, ly - 40, top - 40, "gcs/window_glass"))
     for cy in (-150, -50, 50, 150):
@@ -1624,6 +1641,13 @@ def madison(W, ents):
         for xc in (x0 + 8, x0 + 112, x0 + 216, x0 + 320, x1 - 8):
             det(xprism(ccw([(ya, za), (yb, zb_), (yb, zb_ + 36), (ya, za + 36)]), xc - 6, xc + 6, "gcs/md_steel"))
             det(xprism(ccw([(ya, za + 36), (yb, zb_ + 36), (yb, zb_ + 42), (ya, za + 42)]), xc - 4, xc + 4, "gcs/md_rail"))
+        trig = "tools/tooltrigger"
+        for la, lb, mat, yaw in ((x0 + 14, x0 + 210, "gcs/esc_yn", 270), (x0 + 222, x1 - 14, "gcs/esc_yp", 90)):
+            for k0 in (la, (la + lb) // 2 + 6):
+                k1 = k0 + (lb - la) // 2 - 6 if k0 == la else lb
+                det(xprism(ccw([(ya, za), (yb, zb_), (yb, zb_ + 1), (ya, za + 1)]), k0, k1, mat))
+            esc_push(ents, xprism(ccw([(ya, za), (yb, zb_), (yb, zb_ + 80), (ya, za + 80)]), la, lb, trig)
+                     + box(la, ya, za, lb, ya + 32, za + 80, trig) + box(la, yb - 32, zb_, lb, yb, zb_ + 80, trig), yaw)
         mid = (x0 + x1) // 2
         det(xprism(ccw([(ya, za + hd - 8), (yb, zb_ + hd - 8), (yb, zb_ + hd), (ya, za + hd)]), mid - 40, mid + 40, "gcs/fluor"))
         for k in range(1, 5):
@@ -1852,6 +1876,61 @@ def biltmore(W, ents):
                     disableshadows="1", vrad_brush_cast_shadows="1"))
 
 
+# MetLife escalators (release 0.20.0): the real pair rises from the concourse's north side to the
+# MetLife Building and 45th St. Here they run along the north wall, east of the Track 31 gate,
+# rising east at 30 degrees from the floor to the east balcony (which they join through a gap in
+# its parapet); a lit sign at the foot. Treads scroll (gcs/esc_xp, esc_xn); a trigger_push per lane
+# carries a standing player at 100 u/s. Ruling: the real run lies behind the north wall.
+ESC_XF, ESC_XT = HX - BALC_D - 540, HX - BALC_D     # foot and head of the slope (846, 1386)
+ESC_UP, ESC_DN = (590, 638), (506, 554)               # lane tread y spans: up lane by the wall
+ESC_Y0, ESC_Y1 = ESC_DN[0] - 10, ESC_UP[1] + 10       # outer balustrade faces
+
+
+def _esc_sign_uv(n, sy0, sy1, sz):
+    su, sv = (sy1 - sy0) / 1024, 20 / 64
+    if abs(n[0]) < 0.5:
+        return None
+    u = "[0 -1 0 %g] %g" % (sy1 / su, su) if n[0] < 0 else "[0 1 0 %g] %g" % (-sy0 / su, su)
+    return u, "[0 0 -1 %g] %g" % ((sz + 20) / sv, sv)
+
+
+def metlife_escalators(W, ents):
+    decor = []
+    det = decor.append
+    xf, xt, zt = ESC_XF, ESC_XT, BALC_Z
+    steel, rail = "gcs/md_steel", "gcs/md_rail"
+    slope = lambda lo, hi: ccw([(xf, lo), (xt, zt + lo), (xt, zt + hi), (xf, hi)])
+    # Truss under both lanes, in brushed steel.
+    det(yprism(ccw([(xf, 0), (xt, 0), (xt, zt)]), ESC_Y0, ESC_Y1, steel))
+    for (y0, y1), mat, push in ((ESC_UP, "gcs/esc_xp", "0 0 0"), (ESC_DN, "gcs/esc_xn", "0 180 0")):
+        det(yprism(slope(-8, 0), y0, y1, mat))
+        det(box(xf - 40, y0, 0, xf, y1, 1, steel))          # comb plates
+        det(box(xt, y0, zt, xt + 40, y1, zt + 1, steel))
+        for ya, yb in ((y0 - 10, y0), (y1, y1 + 10)):
+            det(yprism(slope(0, 36), ya, yb, steel))
+            det(yprism(slope(36, 40), ya - 1, yb + 1, rail))
+            det(box(xf - 48, ya, 0, xf, yb, 36, steel))
+            det(box(xf - 52, ya - 1, 36, xf, yb + 1, 40, rail))
+            det(box(xt, ya, zt, xt + 48, yb, zt + 36, steel))
+            det(box(xt, ya - 1, zt + 36, xt + 52, yb + 1, zt + 40, rail))
+        trig = "tools/tooltrigger"
+        sol = (yprism(slope(0, 80), y0, y1, trig) + box(xf - 32, y0, 0, xf, y1, 80, trig)
+               + box(xt, y0, zt, xt + 32, y1, zt + 80, trig))
+        ents.append(ent("trigger_push", solids=sol, pushdir=push, speed="100", spawnflags="1",
+                        StartDisabled="0", targetname="esc_push"))
+    # Sign band over the foot on two brass posts, read from both sides.
+    sx, sy0, sy1, sz = xf - 60, ESC_Y0 - 6, ESC_Y1 + 6, 100
+    FACEUV["gcs/esc_sign"] = lambda n: _esc_sign_uv(n, sy0, sy1, sz)
+    det(box(sx - 1, sy0, sz, sx + 1, sy1, sz + 20, "gcs/esc_sign"))
+    for y in (sy0 - 4, sy1):
+        det(box(sx - 2, y, 0, sx + 2, y + 4, sz + 22, TEX_RAIL))
+    for x in (xf + 120, (xf + xt) // 2, xt - 100):
+        ents.append(ent("light", (x, (ESC_Y0 + ESC_Y1) // 2, (x - xf) * zt // (xt - xf) + 110),
+                        _light="250 235 210 30"))
+    ents.append(ent("func_brush", solids="".join(decor), targetname="esc_decor", Solidity="2",
+                    disableshadows="1", vrad_brush_cast_shadows="1"))
+
+
 def build():
     world, ents = [], []
     W = world.append
@@ -1900,6 +1979,7 @@ def build():
     track61(W, ents)
     hyatt(W, ents)
     biltmore(W, ents)
+    metlife_escalators(W, ents)
 
     # Barrel vault, segmented flattened half-ellipse around the x axis.
     # The inner faces carry the zodiac mural (2048x1024) once: u along x, v along the arc.
@@ -2077,7 +2157,8 @@ def build():
         ents.append(ent("func_detail", solids=box(xa, -HY, BALC_Z-24, xb, HY, BALC_Z, TEX_CREAM)))
         rx = sgn*(HX-BALC_D)
         ra, rb = sorted((rx, rx+sgn*-16))
-        for y0, y1 in ((-HY, -24*FT), (24*FT, HY)):
+        segs = ((-HY, -24*FT), (24*FT, ESC_Y0 - 4), (ESC_Y1 + 4, HY)) if sgn > 0 else ((-HY, -24*FT), (24*FT, HY))
+        for y0, y1 in segs:   # east balcony: gap in the north parapet for the MetLife escalators
             # Cream marble parapet with a brass handrail on top, like the stair balustrades.
             ents.append(ent("func_detail", solids=box(ra, y0, BALC_Z, rb, y1, BALC_Z+42, TEX_CREAM)))
             ents.append(ent("func_detail", solids=box(ra-2, y0, BALC_Z+42, rb+2, y1, BALC_Z+46, TEX_RAIL)))
