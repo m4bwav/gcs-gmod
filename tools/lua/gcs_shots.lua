@@ -91,6 +91,8 @@ local CAMS = {
   { "bilt_door",    Vector(-1320, 600, 72), Angle(-2, 90, 0) },
   { "biltmore",     Vector(-1560, 940, 90), Angle(-10, 70, 0) },
   { "bilt_board",   Vector(-1360, 1200, 100), Angle(-4, 90, 0) },
+  { "esc_foot",     Vector(560, 280, 80), Angle(-10, 30, 0) },
+  { "esc_top",      Vector(1560, 380, 390), Angle(16, 168, 0) },
   { "pershing_in",  Vector(-2076, -3900, 64), Angle(-2, -90, 0) },
 }
 if want ~= "go" then

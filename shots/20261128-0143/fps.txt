@@ -1,0 +1,6 @@
+floor_east      597 fps
+vl_esc          866 fps
+md_esc          874 fps
+esc_foot        665 fps
+esc_top         612 fps
+esc_side        725 fps
